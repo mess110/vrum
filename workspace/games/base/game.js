@@ -1,17 +1,6 @@
 Config.instance.engine.debug = true
 Config.instance.window.showStatsOnStart = true
 
-AfterEffects.prototype.effects = function () {
-  const effectBloom = new (THREE.BloomPass)(1.25)
-  const effectCopy = new (THREE.ShaderPass)(THREE.CopyShader)
-  effectCopy.renderToScreen = true
-  var composer = new (THREE.EffectComposer)(Hodler.get('renderer'))
-  composer.addPass(this.renderModel)
-  composer.addPass(effectBloom)
-  composer.addPass(effectCopy)
-  this.composer = composer
-}
-
 class Box extends THREE.Mesh {
   constructor() {
     var geometry = new THREE.BoxGeometry( 0.4, 0.4, 0.4 )
@@ -46,4 +35,6 @@ Persist.default('name', 'player1')
 console.log(Persist.get('name'))
 
 Engine.start(loadingScene)
+
+AfterEffects.prototype.effects = AfterEffects.bloomFilm
 // Hodler.get('afterEffects').enable()

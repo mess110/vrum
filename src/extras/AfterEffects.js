@@ -1,10 +1,13 @@
 // Used to generate after effects and enable/disable on a scene/camera basis
-// Overwrite the effects method to get the required effect
+//
+// Example usage:
+//
+//   Hodler.get('afterEffects').enable()
+//
 class AfterEffects {
   constructor() {
     this.enabled = false
     this.renderModel = new (THREE.RenderPass)(undefined, undefined) // scene, camera
-    this.effects()
   }
 
   render(tpf) {
@@ -12,15 +15,19 @@ class AfterEffects {
     this.composer.render(tpf)
   }
 
-  effects() {
-    const effectBloom = new (THREE.BloomPass)(1.25)
-    const effectCopy = new (THREE.ShaderPass)(THREE.CopyShader)
-    effectCopy.renderToScreen = true
-    var composer = new (THREE.EffectComposer)(Hodler.get('renderer'))
-    composer.addPass(this.renderModel)
-    composer.addPass(effectBloom)
-    composer.addPass(effectCopy)
-    this.composer = composer
+  enable() {
+    this.updateCamAndScene()
+    this.composer = new THREE.EffectComposer(Hodler.get('renderer'))
+    this.effects()
+    this.enabled = true
+  }
+
+  disable() {
+    this.enabled = false
+  }
+
+  toggle() {
+    this.enabled ? this.disable() : this.enable()
   }
 
   updateCamAndScene() {
@@ -28,12 +35,34 @@ class AfterEffects {
     this.renderModel.scene = Hodler.get('scene')
   }
 
-  enable() {
-    this.updateCamAndScene()
-    this.enabled = true
+  // Override this method with the desired effect. See AfterEffects.bloomFilm for
+  // more details.
+  effects() {
   }
 
-  disable() {
-    this.enabled = false
+  // These are methods which pre-define different effects
+  //
+  // Example usage:
+  //
+  //   AfterEffects.prototype.effects = AfterEffects.bloomFilm
+
+  static bloomFilm() {
+    const effectBloom = new THREE.BloomPass(1, 5, 1.0, 2048)
+    const effectFilm = new THREE.FilmPass(0.15, 0.95, 2048, false)
+    effectFilm.renderToScreen = true
+
+    this.composer.addPass(this.renderModel)
+    this.composer.addPass(effectBloom)
+    this.composer.addPass(effectFilm)
+  }
+
+  static bloomCopy() {
+    const effectBloom = new (THREE.BloomPass)(1.25)
+    const effectCopy = new (THREE.ShaderPass)(THREE.CopyShader)
+    effectCopy.renderToScreen = true
+
+    this.composer.addPass(this.renderModel)
+    this.composer.addPass(effectBloom)
+    this.composer.addPass(effectCopy)
   }
 }
