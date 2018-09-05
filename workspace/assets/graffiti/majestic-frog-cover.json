@@ -22,10 +22,10 @@
       "strokeLineWidth": 7,
       "font": "40px Helvetica",
       "asset": {
-        "key": "frogs-1422219_640.jpg",
-        "libPath": "workspace/lib/textures/frogs-1422219_640.jpg"
+        "key": "screenshot.png",
+        "libPath": "workspace/lib/textures/screenshot.png"
       },
-      "key": "frogs-1422219_640",
+      "key": "screenshot",
       "angle": 0
     },
     {
