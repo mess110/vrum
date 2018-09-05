@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+var colors = require('colors');
 var concat = require('concat-files');
 var fs = require('fs')
 var UglifyJS = require('uglify-es');
@@ -11,7 +12,8 @@ function getFilesizeInBytes(filename) {
 }
 
 function printFileSize(filename) {
-  console.log("Built " + filename + " (" + getFilesizeInBytes(filename) + " MB)")
+  var output = "success ".green + filename + " (" + getFilesizeInBytes(filename) + " MB)"
+  console.log(output)
 }
 
 console.log("Building vrum.js and vrum.min.js")

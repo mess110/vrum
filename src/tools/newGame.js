@@ -1,3 +1,5 @@
 #!/usr/bin/env node
 
-console.log('TODO: make a new game')
+var colors = require('colors');
+
+console.log('TODO: make a new game'.red)
