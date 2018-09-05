@@ -4,9 +4,17 @@ Game engine based on three.js
 
 ## Getting started
 
+To run the examples or the tests:
+
 ```
 yarn install
 yarn serve
+```
+
+To make your own game in a new folder with vrum.js packed:
+
+```
+yarn new_game
 ```
 
 ## Exporting from Blender
@@ -17,6 +25,8 @@ blender addon.
 
 * [Download the exporter](https://github.com/KhronosGroup/glTF-Blender-Exporter/archive/master.zip)
 * unzip `scripts/addons/io_scene_gltf2` to `~/.config/blender/VERSION/scripts/addons/`
+* enable the addon from Blender User Preferences
+* export to glb as it packs all the resources in 1 file
 
 ## Features
 

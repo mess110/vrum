@@ -14,6 +14,8 @@ function printFileSize(filename) {
   console.log("Built " + filename + " (" + getFilesizeInBytes(filename) + " MB)")
 }
 
+console.log("Building vrum.js and vrum.min.js")
+
 var dependencies = fs.readFileSync('workspace/dependencies.html', 'utf-8')
   .split('\n')
   .filter(Boolean)
