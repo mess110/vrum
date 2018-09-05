@@ -1,0 +1,71 @@
+{
+  "clearColor": "#ffffff",
+  "width": 640,
+  "height": 309,
+  "plane": {
+    "width": 6.4,
+    "height": 3.09,
+    "wSegments": 1,
+    "hSegments": 1,
+    "color": "#ff0000",
+    "class": "PlaneBufferGeometry"
+  },
+  "kind": "graffiti",
+  "items": [
+    {
+      "type": "image",
+      "text": "Overlay text",
+      "x": 0,
+      "y": 0,
+      "fillStyle": "#000000",
+      "fillLineWidth": 1,
+      "strokeLineWidth": 7,
+      "font": "40px Helvetica",
+      "asset": {
+        "key": "frogs-1422219_640.jpg",
+        "libPath": "workspace/lib/textures/frogs-1422219_640.jpg"
+      },
+      "key": "frogs-1422219_640",
+      "angle": 0
+    },
+    {
+      "type": "image",
+      "text": "or images",
+      "x": 0,
+      "y": 0,
+      "fillStyle": "#000000",
+      "font": "20px Helvetica",
+      "fillLineWidth": 1,
+      "strokeLineWidth": 7,
+      "asset": {
+        "key": "black-faded-border.png",
+        "libPath": "workspace/lib/textures/black-faded-border.png"
+      },
+      "key": "black-faded-border",
+      "angle": 0
+    },
+    {
+      "type": "text",
+      "text": "The Majestic Frog",
+      "fillStyle": "white",
+      "fillLineWidth": 1,
+      "strokeLineWidth": 7,
+      "strokeStyle": "#fe3d3d",
+      "font": "40px Helvetica",
+      "x": 9,
+      "y": 295
+    },
+    {
+      "type": "bezier",
+      "text": "Original Swing Album",
+      "fillStyle": "white",
+      "fillLineWidth": 2,
+      "strokeLineWidth": 7,
+      "font": "30px Helvetica",
+      "x": 112,
+      "y": -117,
+      "curve": "20,157.2,130.02,100.0,150.5,246.2,492,176.3",
+      "letterPadding": 7
+    }
+  ]
+}
