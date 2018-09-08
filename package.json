@@ -5,9 +5,12 @@
   "license": "MIT",
   "scripts": {
     "postinstall": "yarn build",
-    "serve": "./node_modules/http-server/bin/http-server -c-1",
+    "http": "./node_modules/http-server/bin/http-server -c-1 -o",
+    "https": "./node_modules/http-server/bin/http-server -c-1 -S -C cert.pem -o",
+    "genkey": "openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout key.pem -out cert.pem",
     "build": "node src/tools/build.js",
-    "new_game": "node src/tools/newGame.js"
+    "new_game": "node src/tools/newGame.js",
+    "start": "node src/tools/help.js"
   },
   "dependencies": {
     "@tweenjs/tween.js": "^17.2.0",

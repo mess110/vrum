@@ -1,4 +1,8 @@
 node_modules/
 yarn-error.log
+
 vrum.js
 vrum.min.js
+
+cert.pem
+key.pem
