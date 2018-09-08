@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-var colors = require('colors');
-var concat = require('concat-files');
-var fs = require('fs')
-var UglifyJS = require('uglify-es');
+const colors = require('colors');
+const concat = require('concat-files');
+const fs = require('fs')
+const UglifyJS = require('uglify-es');
 
 function getFilesizeInBytes(filename) {
   const stats = fs.statSync(filename)

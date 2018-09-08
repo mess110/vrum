@@ -21,7 +21,7 @@ class LoadingScene extends Scene {
       { type: 'image', path: '/workspace/assets/textures/smokeparticle.png' },
       { type: 'image', path: '/workspace/assets/textures/sprite-explosion2.png' },
       { type: 'image', path: '/workspace/assets/textures/black-faded-border.png' },
-      { type: 'image', path: '/workspace/assets/textures/screenshot.png' },
+      { type: 'image', path: '/workspace/assets/textures/vrum.png' },
       { type: 'image', path: '/workspace/assets/textures/grass.png' },
       { type: 'json',  path: '/workspace/assets/particles/particle.json' },
       { type: 'json',  path: '/workspace/assets/graffiti/majestic-frog-cover.json' },

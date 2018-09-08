@@ -22,10 +22,10 @@
       "strokeLineWidth": 7,
       "font": "40px Helvetica",
       "asset": {
-        "key": "screenshot.png",
-        "libPath": "workspace/lib/textures/screenshot.png"
+        "key": "vrum.png",
+        "libPath": "workspace/lib/textures/vrum.png"
       },
-      "key": "screenshot",
+      "key": "vrum",
       "angle": 0
     },
     {

@@ -82,7 +82,7 @@ class AssetManager {
   }
 
   load(asset) {
-    const key = this._getAssetKey(asset)
+    const key = AssetManager.getAssetKey(asset)
     if (key in this.data) {
       console.warn("key " + key + " is already loaded. Skipping")
       this.loadingManager.onLoad()
@@ -123,7 +123,7 @@ class AssetManager {
     }
   }
 
-  _getAssetKey(asset) {
+  static getAssetKey(asset) {
     if (isBlank(asset.path)) {
       throw 'missing asset.path'
     }

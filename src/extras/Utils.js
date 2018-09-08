@@ -107,8 +107,8 @@ class Utils {
         node.add(model);
       }
     }
-        // model.updateMatrix()
-        // singleGeometry.merge(model.geometry, model.matrix)
+    // model.updateMatrix()
+    // singleGeometry.merge(model.geometry, model.matrix)
 
     // new THREE.Mesh(singleGeometry, mat)
     return node;
@@ -194,7 +194,7 @@ class Utils {
         map: AssetManager.get(options.map),
         side: THREE.DoubleSide});
     } else if (options.material != null) {
-      ({ material } = options);
+      material = options.material
     } else {
       material = new (THREE.MeshBasicMaterial)({
         color: options.color,
@@ -288,6 +288,14 @@ class Utils {
       Hodler.add('orbitControls', orbitControls)
     }
     return orbitControls
+  }
+
+  static getCenterPoint(mesh) {
+    var geometry = mesh.geometry;
+    geometry.computeBoundingBox();
+    var center = geometry.boundingBox.getCenter();
+    mesh.localToWorld( center );
+    return center;
   }
 
   static toggleStereoEffect() {

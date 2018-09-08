@@ -1,12 +1,13 @@
 class MainScene extends Scene {
   init(options) {
-    this.chicken = AssetManager.get('chicken.json')
-    this.chicken.scale.setScalar(4)
-    this.add(this.chicken)
-
-    this.chicken.animations[2].play()
-
     this.add(new THREE.AmbientLight(0xffffff))
+    this.model = Utils.plane({ map: 'vrum.png', width: 6.4, height: 3.68 })
+    this.add(this.model)
+  }
+
+  tick(tpf) {
+    this.model.rotation.x += tpf
+    this.model.rotation.y += tpf
   }
 }
 
@@ -14,20 +15,14 @@ class LoadingScene extends MainScene {
   init(options) {
     var geometry = new THREE.BoxGeometry( 1, 1, 1 )
     var material = new THREE.MeshBasicMaterial({ color: 'red' })
-    this.cube = new THREE.Mesh(geometry, material)
-    this.add(this.cube)
+    this.model = new THREE.Mesh(geometry, material)
+    this.add(this.model)
 
     AssetManager.loadAssets([
-      { type: 'model', path: '/workspace/assets/models/chicken.json' },
-      { type: 'image', path: '/workspace/assets/models/chicken.png' },
+      { type: 'image', path: 'vrum.png' },
     ], function () {
       Engine.switchScene(Hodler.get('mainScene'))
     })
-  }
-
-  tick(tpf) {
-    this.cube.rotation.x += tpf
-    this.cube.rotation.y += tpf
   }
 }
 
@@ -38,5 +33,5 @@ Hodler.add('mainScene', mainScene)
 Engine.start(loadingScene)
 
 let camera = Hodler.get('camera');
-camera.position.set(0, 0, 7)
+camera.position.set(0, 0, 10)
 camera.lookAt(new THREE.Vector3(0,0,0))
