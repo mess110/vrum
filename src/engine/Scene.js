@@ -33,8 +33,8 @@ class Scene extends THREE.Scene {
 
   _tickAnimations(tpf) {
     this.traverse(function (obj) {
-      if ('animationMixer' in obj) {
-        obj.animationMixer.update(tpf)
+      if (obj.animations instanceof Animations) {
+        obj.animations.tick(tpf)
       }
     })
   }

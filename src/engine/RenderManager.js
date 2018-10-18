@@ -27,6 +27,7 @@ class RenderManager {
   static initRenderer() {
     var rendererType = (Utils.webgl() ? THREE.WebGLRenderer : PolyfillRenderer)
     var renderer = new rendererType(Config.instance.renderer)
+    renderer.gammaOutput = Config.instance.renderer.gammaOutput
     renderer.setClearColor(Config.instance.renderer.clearColor, Config.instance.renderer.clearAlpha)
     renderer.setSize(window.innerWidth, window.innerHeight)
     return renderer

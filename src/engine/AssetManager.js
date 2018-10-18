@@ -52,6 +52,9 @@ class AssetManager {
   // TODO: find out if this is still true
   static _hack(mesh) {
     const materials = [];
+    if (mesh.material === undefined) {
+      return mesh
+    }
     for (let mat of Array.from(mesh.material)) {
       const clone = mat.clone();
       if (clone.map != null) {
@@ -68,7 +71,7 @@ class AssetManager {
 
   static clone(key) {
     let target = this.get(key).clone()
-    AssetManager.initAnimations(target)
+    Animations.init(target)
     return this._hack(target)
   }
 
@@ -133,22 +136,13 @@ class AssetManager {
   loadJSONModel(key, value) {
     this.jsonLoader.load(value, function(geometry, materials) {
       var mesh = new THREE.SkinnedMesh(geometry, materials)
-      AssetManager.initAnimations(mesh)
+      Animations.init(mesh)
 
       materials.forEach(function (material) {
         material.skinning = true
       })
 
       AssetManager.set(key, mesh)
-    })
-  }
-
-  static initAnimations(mesh) {
-    mesh.animations = []
-    mesh.animationMixer = new THREE.AnimationMixer(mesh)
-    mesh.geometry.animations.forEach(function(animation) {
-      var anim = mesh.animationMixer.clipAction(animation)
-      mesh.animations.push(anim)
     })
   }
 
@@ -203,15 +197,8 @@ class AssetManager {
   loadGLTFModel(key, value) {
     this.gltfLoader.load(value, function (gltf) {
       var model = gltf.scene
-      model.animations = []
-      model.animationMixer = new THREE.AnimationMixer(model)
-      gltf.animations.forEach(function (animation) {
-        var anim = model.animationMixer.clipAction(animation)
-        model.animations.push(anim)
-      })
-
+      Animations.init(model, gltf)
       model.skinnedMesh = model.children.first().children.first()
-
       AssetManager.set(key, model)
     })
   }

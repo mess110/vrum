@@ -19,6 +19,7 @@ class Config {
       alpha: true, // AKA transparent background
       logarithmicDepthBuffer: false,
 
+      gammaOutput: false, // useful when gltf objects are dark
       clearColor: 0x000000,
       clearAlpha: 1,
     }
