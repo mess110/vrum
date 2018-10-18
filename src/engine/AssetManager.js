@@ -25,9 +25,9 @@ class AssetManager {
   static loadAssets(assets, callback) {
     if (callback !== undefined && callback !== null) {
       AssetManager.instance.loadingManager.onLoad = function () {
-        if (AssetManager.instance.hasFinishedLoading()) {
+        // if (AssetManager.instance.hasFinishedLoading()) {
           callback()
-        }
+        // }
       }
     }
     // TODO: check for future key clashes
