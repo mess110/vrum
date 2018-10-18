@@ -38,7 +38,7 @@ class Scene1 extends Scene {
 
     this.add(mesh)
     mesh.position.set(2, 2, -2)
-    mesh.animations[1].play()
+    mesh.animations.play(1)
     mesh.shadowCastAndNotReceive()
 
     this.forest = Utils.forest({
@@ -52,19 +52,21 @@ class Scene1 extends Scene {
     this.forest.position.set(5, -3, -7)
     this.forest.traverse(function (e) {
       if (e instanceof THREE.SkinnedMesh) {
-        e.animations[Utils.random(0, 7)].play()
+        e.animations.play(Utils.random(0, 7))
       }
     })
     this.add(this.forest)
+
+    this.water = new Water({ map: 'waternormals.jpg', width: 9, height: 9, water: { alpha: 0.8 } })
+    this.water.position.set(9.5, -3, 0)
+    this.add(this.water)
 
     this.terrain = Terrain.fromJson(AssetManager.get('terrain.json'))
     this.terrain.shadowReceive()
     this.terrain.position.set(10, -4, 0)
     this.add(this.terrain)
 
-    this.water = new Water({ map: 'waternormals.jpg', width: 9, height: 9, water: { alpha: 0.8 } })
-    this.water.position.set(9.5, -3, 0)
-    this.add(this.water)
+    // this.terrain.material = this.water.water.material
 
     mesh.setSkin('chicken_black.jpeg')
     mesh.scale.set(4, 4, 4)
@@ -83,7 +85,7 @@ class Scene1 extends Scene {
     let orbit = Utils.toggleOrbitControls()
     orbit.maxPolarAngle = Math.PI * 0.495;
 
-    this.spawner = setInterval(function () {
+    this.setInterval(() => {
       PoolManager.spawn(Box)
     }, 1000)
 
@@ -132,7 +134,7 @@ class Scene1 extends Scene {
     fadeOut.start()
 
     var panda = AssetManager.get('panda.glb')
-    panda.animations[1].play()
+    panda.animations.play(1)
     panda.shadowCastAndNotReceive()
     panda.scale.setScalar(0.2)
     panda.position.set(-3, 0, 3)
@@ -148,7 +150,6 @@ class Scene1 extends Scene {
 
   uninit() {
     Utils.toggleOrbitControls()
-    clearInterval(this.spawner)
   }
 
   tick(tpf) {

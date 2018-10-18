@@ -89,9 +89,9 @@ blender addon.
 * [ ] VR
 * [ ] walker
 * [ ] a lot of points geometry
-* [ ] fine animation controls
+* [x] fine animation controls
 * [ ] generate load_assets_file.json
-* [ ] handle timeout/interval clear on uninit scene
+* [x] handle timeout/interval clear on uninit scene (this.setInterval/this.setTimeout)
 * [ ] attach to bone scaled
 * [ ] physics
 * [ ] socket.io

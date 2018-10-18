@@ -3,6 +3,8 @@ class Scene extends THREE.Scene {
     super()
     this.uptime = 0
     this.initialized = false
+    this.intervals = []
+    this.timeouts = []
   }
 
   init(options) {
@@ -10,6 +12,8 @@ class Scene extends THREE.Scene {
 
   _fullInit(options) {
     this.initialized = true
+    this.intervals = []
+    this.timeouts = []
     this.init(options)
   }
 
@@ -19,6 +23,12 @@ class Scene extends THREE.Scene {
   _fullUninit() {
     this.initialized = false
     this.removeAllChildren()
+    this.intervals.forEach((interval) => {
+      clearInterval(interval)
+    })
+    this.timeouts.forEach((timeout) => {
+      clearTimeout(timeout)
+    })
     this.uninit()
   }
 
@@ -44,4 +54,12 @@ class Scene extends THREE.Scene {
   doMouseEvent(event, raycaster) {}
 
   doKeyboardEvent(event) {}
+
+  setInterval(func, time) {
+    this.intervals.push(setInterval(func, time))
+  }
+
+  setTimeout(func, time) {
+    this.timeouts.push(setTimeout(func, time))
+  }
 }

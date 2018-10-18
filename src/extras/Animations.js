@@ -36,6 +36,7 @@ class Animations {
     if (isBlank(options.loop)) { options.loop = true }
     if (isBlank(options.reverse)) { options.reverse = false }
     if (isBlank(options.timeScale)) { options.timeScale = 1 }
+    if (isBlank(options.weight)) { options.weight = 1 }
     if (isBlank(options.stopAll)) { options.stopAll = true }
     if (isBlank(options.stopAllExceptions)) { options.stopAllExceptions = this.stopAllExceptions }
 
@@ -43,6 +44,7 @@ class Animations {
 
     let animation = this.get(options.name)
     animation.setEffectiveTimeScale(options.timeScale)
+    animation.setEffectiveWeight(options.weight)
 
     if (options.loop) {
       animation.clampWhenFinished = false
