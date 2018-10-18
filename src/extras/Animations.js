@@ -2,6 +2,7 @@ class Animations {
   constructor(mixer, animations) {
     this.animations = animations
     this.mixer = mixer
+    this.stopAllExceptions = []
   }
 
   names() {
@@ -35,7 +36,8 @@ class Animations {
     if (isBlank(options.loop)) { options.loop = true }
     if (isBlank(options.reverse)) { options.reverse = false }
     if (isBlank(options.timeScale)) { options.timeScale = 1 }
-    if (isBlank(options.callback)) { options.callback = () => {} }
+    if (isBlank(options.stopAll)) { options.stopAll = true }
+    if (isBlank(options.stopAllExceptions)) { options.stopAllExceptions = this.stopAllExceptions }
 
     if (options.reverse) { options.timeScale *= -1 }
 
@@ -61,7 +63,7 @@ class Animations {
     }
 
     let duration = (animation._clip.duration / Math.abs(animation._effectiveTimeScale)) * 1000
-    this.stopAll()
+    if (options.stopAll) { this.stopAll(options.stopAllExceptions) }
     animation.play()
 
     if (options.reverse && options.loop == false) {
@@ -73,9 +75,12 @@ class Animations {
     return animation
   }
 
-  stopAll() {
+  stopAll(exceptions) {
     this.animations.forEach((animation) => {
-      animation.stop()
+      if (!(exceptions.includes(animation._clip.name) ||
+          exceptions.includes(this.animations.indexOf(animation)))) {
+        animation.stop()
+      }
     })
   }
 
