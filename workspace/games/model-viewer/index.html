@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+
+        <title>vrum.js engine</title>
+        <style>
+            html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden }
+            canvas { width: 100%; height: 100% }
+            .button { text-align: center; cursor: pointer; margin: 2px; text-decoration: underline }
+            .button2 { position: relative; cursor: pointer; margin: 2px; text-decoration: underline }
+            .panel { background-color: white; }
+            .control { width: 50%; float: right }
+        </style>
+    </head>
+    <body>
+        <link rel="import" href="/workspace/dependencies.html">
+
+        <div id="animationControls" class="panel" style="position: absolute; right: 0px; top: 0px; display: none">
+            <div style="padding-left: 16px; padding-right: 16px">
+                <p><input id="stopAll" type="checkbox" checked/> Stop All</p>
+                <p><input id="loop" type="checkbox" checked/> Loop</p>
+                <p><input id="reverse" type="checkbox" /> Reverse</p>
+                <p>weight<input class="control" id="weight" type="text" value="1"/></p>
+                <p>timescale <input class="control" id="timeScale" type="text" value="1"/></p>
+            </div>
+            <div style="padding-left: 16px; padding-right: 16px">
+            <div id="animations">
+            </div>
+            </div>
+        </div>
+
+        <div id="modelControls" class="panel" style="width: 100%; position: absolute; bottom: 0px; display: none;">
+            <div style="padding: 16px; display: flex; flex-direction: column;">
+                <div style="display: flex; padding-bottom: 16px">
+                    <div style="width: 60%">
+                        <input id="inputUrl" type="text" style="width: 100%">
+                    </div>
+                    <div style="width: 20%">
+                        <input id="scale" type="text" value="1" style="width: 80%; margin-left: 16px">
+                    </div>
+                    <div style="width: 20%">
+                        <p class="button" onclick="loadModel()">load</p>
+                    </div>
+                </div>
+                <div style="display: flex;">
+                    <div style="width: 80%" id="lastModels">
+                    </div>
+                    <div style="width: 20%">
+                        <p class="button" onclick="toggleWireframe()">toggle wireframe</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="scene.js"></script>
+        <script src="utils.js"></script>
+        <script src="main.js"></script>
+    </body>
+</html>

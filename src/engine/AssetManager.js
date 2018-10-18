@@ -25,15 +25,18 @@ class AssetManager {
   static loadAssets(assets, callback) {
     if (callback !== undefined && callback !== null) {
       AssetManager.instance.loadingManager.onLoad = function () {
-        // if (AssetManager.instance.hasFinishedLoading()) {
-          callback()
-        // }
+        callback()
       }
     }
     // TODO: check for future key clashes
+    let allAssetsAlreadyLoaded = true
     Array.from([].concat(assets)).forEach(function (asset) {
-      AssetManager.instance.load(asset)
+      let isLoading = AssetManager.instance.load(asset)
+      if (isLoading) { allAssetsAlreadyLoaded = false }
     })
+    if (allAssetsAlreadyLoaded) {
+      callback()
+    }
   }
 
   static set(key, value) {
@@ -79,17 +82,12 @@ class AssetManager {
     return key in AssetManager.instance.data
   }
 
-  hasFinishedLoading() {
-    let data = this.data
-    return !Object.keys(this.data).filter((item) => data[item] === null).any()
-  }
-
   load(asset) {
     const key = AssetManager.getAssetKey(asset)
     if (key in this.data) {
       console.warn("key " + key + " is already loaded. Skipping")
-      this.loadingManager.onLoad()
-      return
+      // this.loadingManager.onLoad()
+      return false
     }
     this.data[key] = null
     switch (asset.type) {
@@ -108,6 +106,7 @@ class AssetManager {
       default:
         throw 'unknown asset type ' + asset.type
     }
+    return true
   }
 
   _loadGenericModel(key, asset) {

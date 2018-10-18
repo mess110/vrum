@@ -56,6 +56,15 @@ class FadeModifier extends BaseModifier {
   }
 }
 
+class WeightModifier extends BaseModifier {
+  constructor(subject, fromWeight, toWeight, duration) {
+    super({ x: fromWeight }, { x: toWeight }, duration, TWEEN.Easing.Exponential.Out)
+    this.onUpdate(function (obj) {
+      subject.setEffectiveWeight(obj.x)
+    })
+  }
+}
+
 class ScaleModifier extends BaseModifier {
   constructor(subject, fromScale, toScale, duration) {
     subject.x = fromScale

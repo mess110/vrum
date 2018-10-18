@@ -1,7 +1,7 @@
 class MainScene extends Scene {
   init(options) {
     this.add(new THREE.AmbientLight(0xffffff))
-    this.model = Utils.plane({ map: 'vrum.png', width: 6.4, height: 3.68 })
+    this.model = Utils.plane({ map: 'vrum.png', width: 6.4, height: 3.65 })
     this.add(this.model)
   }
 

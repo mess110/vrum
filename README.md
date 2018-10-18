@@ -85,11 +85,13 @@ blender addon.
 * [x] on screen console
 * [x] forest generator
 * [x] clone loaded objects instead of direct use
+* [ ] set shadowMap.width and height of all lights
 * [ ] on screen controls
 * [ ] VR
 * [ ] walker
 * [ ] a lot of points geometry
 * [x] fine animation controls
+* [ ] tween between animation weights
 * [ ] generate load_assets_file.json
 * [x] handle timeout/interval clear on uninit scene (this.setInterval/this.setTimeout)
 * [ ] attach to bone scaled

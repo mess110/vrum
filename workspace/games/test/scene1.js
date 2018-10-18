@@ -116,7 +116,10 @@ class Scene1 extends Scene {
     this.mirror.position.set(5, 3, -10)
     this.add(this.mirror)
 
-    var text = new BaseText({ text: 'hello', fillStyle: 'blue' })
+    var text = new BaseText({
+      text: 'hello', fillStyle: 'blue',
+      canvasW: 1024, canvasH: 1024,
+      font: '128px Helvetica'})
     text.position.set(0, 0, 4)
     this.add(text)
 
@@ -150,6 +153,8 @@ class Scene1 extends Scene {
 
   uninit() {
     Utils.toggleOrbitControls()
+    Utils.toggleShadowCameraHelpers()
+    Utils.toggleShadows()
   }
 
   tick(tpf) {

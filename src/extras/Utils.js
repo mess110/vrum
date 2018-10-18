@@ -142,7 +142,7 @@ class Utils {
   }
 
   static webgl() {
-    return Detector.webgl
+    return WEBGL.isWebGLAvailable()
   }
 
   // Sets the cursor

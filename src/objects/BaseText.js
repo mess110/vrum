@@ -10,7 +10,7 @@ class BaseText extends THREE.Mesh {
     var margin = options.margin;
     var lineHeight = options.lineHeight;
     var align = options.align;
-    var font = options.font;
+    var font = options.font || '16px Helvetica';
     var fillStyle = options.fillStyle;
     var fillLineWidth = options.fillLineWidth;
     var strokeStyle = options.strokeStyle;

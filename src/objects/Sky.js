@@ -21,6 +21,7 @@ class Sky extends THREE.Sky {
     this.material.uniforms.mieDirectionalG.value = 0.8
 
     this.light = new THREE.DirectionalLight(0xffffff, 0.8)
+    this.setLightShadowMapSize(512, 512)
     this.cameraHelper = new THREE.CameraHelper(this.light.shadow.camera)
     this.cameraHelper.visible = false
 
@@ -48,6 +49,11 @@ class Sky extends THREE.Sky {
 
     var position = new THREE.Vector3(x, y, z)
     this.material.uniforms.sunPosition.value = this.light.position.copy(this.light.position)
+  }
+
+  setLightShadowMapSize(width, height) {
+    this.light.shadow.mapSize.width = width
+    this.light.shadow.mapSize.height = height
   }
 
   addToScene(scene) {
