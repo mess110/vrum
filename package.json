@@ -24,7 +24,6 @@
     "three": "^0.97.0",
     "threex.dynamictexture": "jeromeetienne/threex.dynamictexture",
     "threex.keyboardstate": "jeromeetienne/threex.keyboardstate",
-    "threex.rendererstats": "jeromeetienne/threex.rendererstats",
     "threex.volumetricspotlight": "jeromeetienne/threex.volumetricspotlight",
     "threex.windowresize": "jeromeetienne/threex.windowresize"
   },

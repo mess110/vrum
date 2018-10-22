@@ -211,10 +211,6 @@ threex.keyboardstate@jeromeetienne/threex.keyboardstate:
   version "0.0.0"
   resolved "https://codeload.github.com/jeromeetienne/threex.keyboardstate/tar.gz/51fd77fdd87eeed064db643693d393cf21afa45d"
 
-threex.rendererstats@jeromeetienne/threex.rendererstats:
-  version "0.0.0"
-  resolved "https://codeload.github.com/jeromeetienne/threex.rendererstats/tar.gz/eb43b05b83f03014efa3b6d35cfff41eddae8df8"
-
 threex.volumetricspotlight@jeromeetienne/threex.volumetricspotlight:
   version "0.0.0"
   resolved "https://codeload.github.com/jeromeetienne/threex.volumetricspotlight/tar.gz/3bf43f2749ff208ef486165954845ee3cc3fbc31"
