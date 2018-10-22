@@ -1,7 +1,15 @@
-// Used as a dummy renderer if WebGL is not supported.
+// Displays a message if WebGL is not supported.
 //
-// Override the makeDomElement method to change the HTML of the object show on screen.
-// The object has the id coffee-engine-dom so you can modify it from CSS.
+// To help customize the message there are 2 relevant ids:
+//
+//  * vrum-webgl-warning-container
+//  * vrum-webgl-warning-text
+//
+// For more detailed customizations, you can override
+//
+//  * makeDomElement
+//  * makeContainerElement
+//
 class PolyfillRenderer extends THREE.WebGLRenderer {
   constructor(parameters) {
     super(parameters)
@@ -10,8 +18,9 @@ class PolyfillRenderer extends THREE.WebGLRenderer {
 
   render(scene, camera) {}
 
-  static makeDomElement() {
+  static makeContainerElement() {
     const element = document.createElement('div')
+    element.setAttribute('id', 'vrum-webgl-warning-container')
     element.style.display = 'flex'
     element.style.position = 'absolute'
     element.style.width = '100%'
@@ -20,9 +29,15 @@ class PolyfillRenderer extends THREE.WebGLRenderer {
     element.style['text-align'] = 'center'
     element.style['background-color'] = 'black'
     element.style['color'] = 'white'
-    // element.style['z-index'] = Utils.CE_UI_Z_INDEX * 10
+    element.style['z-index'] = Config.instance.ui.zIndex.noWebGL
+    return element;
+  }
+
+  static makeDomElement() {
+    let element = this.makeContainerElement()
 
     const text = document.createElement('div')
+    text.setAttribute('id', 'vrum-webgl-warning-text')
     text.style.width = '100%'
     text.innerHTML = 'WebGL not supported'
     element.append(text)

@@ -1,5 +1,5 @@
 class Engine {
-  constructor(scene) {
+  constructor() {
     this.running = false
     this.frameIndex = null
     this.uptime = 0
@@ -10,17 +10,17 @@ class Engine {
     this.tick = this.tick.bind(this)
   }
 
-  static start(scene) {
+  static start(scene, cam) {
     Hodler.add('scene', scene)
 
     var renderer = RenderManager.initRenderer()
     Hodler.add('rendererDefault', renderer)
     Hodler.add('renderer', renderer)
 
-    var camera = RenderManager.initCamera()
+    var camera = RenderManager.initCamera(cam)
     Hodler.add('camera', camera)
 
-    var engine = new Engine(scene)
+    var engine = new Engine()
     Hodler.instance.add('engine', engine)
 
     var afterEffects = new AfterEffects()
@@ -28,6 +28,7 @@ class Engine {
 
     scene._fullInit()
     engine.start()
+    return engine
   }
 
   static switchScene(scene) {

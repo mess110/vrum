@@ -34,7 +34,14 @@ class Config {
       duration: 1000
     }
     this.ui = {
-      zIndex: 100000
+      zIndex: {
+        noWebGL:     1000000,
+        dom:           10000,
+        fade:          20000,
+        orientation:   30000,
+        stats:        100000,
+        console:      200000
+      }
     }
     this.recorder = {
       verbose: false,

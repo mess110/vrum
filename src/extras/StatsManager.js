@@ -22,11 +22,13 @@ var StatsManager = (function() {
   
         // @nodoc
         constructor() {
-          this.fpsStats = new Stats()
-          var fpsStats = this.fpsStats
+          var fpsStats = new Stats()
+          fpsStats.domElement.style['z-index'] = ''
+          this.fpsStats = fpsStats
           this.rendererStats = new THREEx.RendererStats();
 
           this.container = document.createElement('div')
+          this.container.style['z-index'] = Config.instance.ui.zIndex.stats
           this.container.style.position = 'absolute'
           this.container.style.top = '0px'
           this.container.style.left = '0px'

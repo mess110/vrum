@@ -35,10 +35,10 @@ blender addon.
 * [x] toggle fullscreen
 * [x] keyboard/mouse/touch input
 * [x] keyboard long pressed
-* [x] no webgl warning
+* [x] [warn if webgl not available](src/extras/PolyfillRenderer.js)
 * [x] auto-resize
 * [x] fade between scenes
-* [x] config
+* [x] [config](src/engine/Config.js)
 * [x] change opacity of objects
 * [x] tween objects around
 * [x] modifiers - predefined tweens
