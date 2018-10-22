@@ -32,8 +32,9 @@ class Engine {
   }
 
   static switchScene(scene) {
-    // TODO: disable input
     var duration = 1000
+    var engine = Hodler.get('engine')
+    engine.inputManager.disable()
 
     Utils.fade({ type: 'in', duration: duration })
     Utils.delay(function () {
@@ -43,9 +44,9 @@ class Engine {
       }
       Hodler.add('scene', scene)
       scene._fullInit()
-      var engine = Hodler.get('engine')
       Hodler.get('afterEffects').updateCamAndScene()
       Utils.fade({ type: 'out', duration: duration })
+      engine.inputManager.enable()
     }, duration)
   }
 
