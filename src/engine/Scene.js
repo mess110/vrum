@@ -49,6 +49,12 @@ class Scene extends THREE.Scene {
     })
   }
 
+  getCamera() {
+    let camera = Hodler.get('camera')
+    if (isBlank(camera)) { throw 'camera is blank' }
+    return camera
+  }
+
   tick(tpf) {}
 
   doMouseEvent(event, raycaster) {}

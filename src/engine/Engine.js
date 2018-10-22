@@ -10,14 +10,14 @@ class Engine {
     this.tick = this.tick.bind(this)
   }
 
-  static start(scene, cam) {
+  static start(scene) {
     Hodler.add('scene', scene)
 
     var renderer = RenderManager.initRenderer()
     Hodler.add('rendererDefault', renderer)
     Hodler.add('renderer', renderer)
 
-    var camera = RenderManager.initCamera(cam)
+    var camera = RenderManager.initCamera()
     Hodler.add('camera', camera)
 
     var engine = new Engine()

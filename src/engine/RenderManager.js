@@ -37,11 +37,9 @@ class RenderManager {
     return renderer
   }
 
-  static initCamera(cameraType) {
-    if (isBlank(cameraType)) { cameraType = THREE.PerspectiveCamera }
-
+  static initCamera() {
     const size = Hodler.get('renderer').getSize()
-    var camera = new cameraType(Config.instance.camera.fov, size.width / size.height, Config.instance.camera.near, Config.instance.camera.far)
+    var camera = new THREE.PerspectiveCamera(Config.instance.camera.fov, size.width / size.height, Config.instance.camera.near, Config.instance.camera.far)
     return camera
   }
 
