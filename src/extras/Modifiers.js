@@ -16,6 +16,7 @@ class BaseModifier extends TWEEN.Tween {
 
     if (duration == null) { duration = 1000 }
     if (easing == null) { easing = TWEEN.Easing.Linear.None }
+    this.easing(easing);
 
     this.to(target, duration)
         .onStart(function () {
