@@ -19,6 +19,7 @@
     "howler": "1.1.29",
     "html2canvas": "^1.0.0-alpha.12",
     "ocean": "jbouny/ocean",
+    "qrcodejs": "davidshimjs/qrcodejs",
     "shader-particle-engine": "squarefeet/ShaderParticleEngine",
     "stats.js": "mrdoob/stats.js",
     "three": "^0.97.0",
