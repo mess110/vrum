@@ -48,6 +48,15 @@ class MeshNetwork {
     return this.socket.id
   }
 
+  getAllIds() {
+    let id = this.getId()
+    let allIds = [id]
+    this.getPeers().forEach(function (peer) {
+      allIds.push(discoveryClient.parse({id: id}, peer, '{}').from)
+    })
+    return allIds
+  }
+
   handlePeer(peer) {
     peer.on('connect', function () {
       MeshNetwork.instance.onConnect(peer)

@@ -18,9 +18,9 @@ function getParameterByName(name, url) {
 
 // Parse data and format it nicely as json
 function parse(socket, peer, data) {
-    var string = new TextDecoder("utf-8").decode(data)
-    var json = JSON.parse(string)
-    var from = peer.cmKey.split(',')
+    let string = data instanceof Uint8Array ? new TextDecoder("utf-8").decode(data) : data
+    let json = JSON.parse(string)
+    let from = peer.cmKey.split(',')
     from.remove(socket.id)
     json.from = from.first()
     json.cmKey = peer.cmKey
