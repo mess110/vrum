@@ -240,7 +240,7 @@ Number.prototype.endsWith = function(s) {
   return this.toString().endsWith(s)
 }
 
-isBlank = function (o) {
+const isBlank = function (o) {
   return o === undefined || o === null
 }
 

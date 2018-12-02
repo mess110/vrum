@@ -28,6 +28,7 @@ class MeshNetwork {
     this.host = host
     this.room = room
     this.socket = this.cm.connect(this.host, this.room)
+    return this.socket
   }
 
   emit(data) {
@@ -36,6 +37,15 @@ class MeshNetwork {
 
   send(data, peer) {
     this.cm.send(data, peer)
+  }
+
+  getPeers() {
+    return this.cm.peers
+  }
+
+  getId() {
+    if (isBlank(this.socket)) { throw 'Not connected. Must call connect() first.' }
+    return this.socket.id
   }
 
   handlePeer(peer) {
