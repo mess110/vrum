@@ -245,7 +245,7 @@ isBlank = function (o) {
 }
 
 console.ce = function(message) {
-  if ((typeof Config !== 'undefined' && Config !== null) && !Config.get().debug) {
+  if ((typeof Config !== 'undefined' && Config !== null) && !Config.instance.engine.debug) {
     return
   }
   console.log(message)
