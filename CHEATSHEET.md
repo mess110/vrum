@@ -30,13 +30,8 @@ See [src/extras/HighScoreManager.js](src/extras/HighScoreManager.js) for more in
 
 ## Mesh Networking
 
-```
-let mn = MeshNetwork.instance
-
-mn.connect('https://46.101.185.106', 'room')
-mn.onClose = function () {
-    console.log('closed')
-}
-```
-
 See [src/extras/MeshNetwork.js](src/extras/MeshNetwork.js) for more info.
+
+## Virtual Joystick
+
+See [src/extras/VirtualController.js](src/extras/VirtualController.js) for more info.

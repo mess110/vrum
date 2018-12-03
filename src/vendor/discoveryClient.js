@@ -20,7 +20,7 @@ function getParameterByName(name, url) {
 function parse(socket, peer, data) {
     let string = data instanceof Uint8Array ? new TextDecoder("utf-8").decode(data) : data
     let json = JSON.parse(string)
-    let from = peer.cmKey.split(',')
+    let from = peer.cmKey.split(Mesh.CM_KEY_SPLIT_CHAR)
     from.remove(socket.id)
     json.from = from.first()
     json.cmKey = peer.cmKey
@@ -13237,7 +13237,7 @@ let io = require('socket.io-client');
 let SimplePeer = require('simple-peer');
 
 // Holds all the peer connections
-module.exports = class Mesh {
+class Mesh {
 
   constructor(handlePeerCallback, iceServers) {
     this.iceServers = iceServers;
@@ -13358,13 +13358,18 @@ module.exports = class Mesh {
   //   [ { url: 'stun:stun.l.google.com:19302' } ]);
   // cm.connect('/', 'room');
   //
-  connect (url, roomId, stream = false) {
+  connect (url, roomId, stream = false, cCallback = function () {}, dcCallback = function () {}) {
     var socket = io.connect(url);
     var cm = this;
 
     socket.on('connect', function() {
       console.info('Connected - ' + socket.id);
+      cCallback()
       socket.emit('joinRoom', { roomId: roomId })
+    });
+
+    socket.on('disconnect', function() {
+      dcCallback()
     });
 
     socket.on('addPeer', function (data) {
@@ -13383,7 +13388,7 @@ module.exports = class Mesh {
         });
       }, stream)
 
-      peer.cmKey = [data.initiator, data.signer].sort().join();
+      peer.cmKey = [data.initiator, data.signer].sort().join(Mesh.CM_KEY_SPLIT_CHAR);
 
       if (initiator === false) {
         peer.signal(data.signal);
@@ -13392,7 +13397,7 @@ module.exports = class Mesh {
 
     socket.on('seal', function (data) {
       for (let peer of cm.peers) {
-        let cmKey = [data.initiator, data.signer].sort().join();
+        let cmKey = [data.initiator, data.signer].sort().join(Mesh.CM_KEY_SPLIT_CHAR);
         if (peer.cmKey === cmKey) {
           peer.signal(data.signal);
         }
@@ -13400,7 +13405,7 @@ module.exports = class Mesh {
     });
 
     socket.on('removePeer', function (data) {
-      let cmKey = [socket.id, data.id].sort().join();
+      let cmKey = [socket.id, data.id].sort().join(Mesh.CM_KEY_SPLIT_CHAR);
       console.info('Removing peer ' + cmKey);
       cm.peers = cm.peers.filter(function (peer) { return peer.cmKey != cmKey });
     });
@@ -13409,6 +13414,9 @@ module.exports = class Mesh {
   }
 }
 
+Mesh.CM_KEY_SPLIT_CHAR = '_'
+
+module.exports = Mesh
 
 },{"simple-peer":55,"socket.io-client":59}],77:[function(require,module,exports){
 // Can be used to continously ping the clients so they don't DC

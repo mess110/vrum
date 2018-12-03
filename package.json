@@ -9,6 +9,7 @@
     "https": "./node_modules/http-server/bin/http-server -c-1 -S -C cert.pem -o",
     "genkey": "openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout key.pem -out cert.pem",
     "build": "node src/tools/build.js",
+    "deploy": "gh-pages -d build",
     "new_game": "node src/tools/newGame.js",
     "start": "node src/tools/help.js"
   },
@@ -16,6 +17,7 @@
     "@tweenjs/tween.js": "^17.2.0",
     "ccapture.js": "^1.1.0",
     "file-saver": "^1.3.8",
+    "gh-pages": "^2.0.1",
     "howler": "1.1.29",
     "html2canvas": "^1.0.0-alpha.12",
     "ocean": "jbouny/ocean",
@@ -26,7 +28,8 @@
     "threex.dynamictexture": "jeromeetienne/threex.dynamictexture",
     "threex.keyboardstate": "jeromeetienne/threex.keyboardstate",
     "threex.volumetricspotlight": "jeromeetienne/threex.volumetricspotlight",
-    "threex.windowresize": "jeromeetienne/threex.windowresize"
+    "threex.windowresize": "jeromeetienne/threex.windowresize",
+    "virtualjoystick.js": "jeromeetienne/virtualjoystick.js"
   },
   "devDependencies": {
     "colors": "^1.3.2",

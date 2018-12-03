@@ -89,7 +89,7 @@ See [CHEATSHEET.md](CHEATSHEET.md) for example usage.
 * [x] clone loaded objects instead of direct use
 * [x] qr code generator
 * [ ] set shadowMap.width and height of all lights
-* [ ] on screen controls
+* [x] on screen controls
 * [ ] VR
 * [ ] walker
 * [ ] a lot of points geometry

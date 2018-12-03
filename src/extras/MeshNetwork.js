@@ -4,31 +4,73 @@
  *
  * A sample server is hosted here:
  *
- * https://46.101.185.106/rooms.json
+ * https://mesh.opinie-publica.ro/rooms.json
  *
  * Example usage:
  *
  *    let mn = MeshNetwork.instance
  *
- *    mn.connect('https://46.101.185.106', 'room')
- *    mn.onClose = function () {
+ *    mn.connect('https://mesh.opinie-publica.ro', 'room', { audio: false, video: false })
+ *    mn.onData = function(peer, data) {
+ *      console.log(`${data.from}: ${JSON.stringify(data)}`)
+ *    }
+ *    mn.onClose = function (peer) {
  *        console.log('closed')
  *    }
  *
  */
 class MeshNetwork {
   constructor() {
+    this.container = document.body
     this.cm = new discoveryClient.Mesh(
       this.handlePeer,
       [ { url: 'stun:stun.l.google.com:19302' } ]
     )
   }
 
-  connect(host, room) {
+  connect(host, room, options) {
     this.host = host
     this.room = room
-    this.socket = this.cm.connect(this.host, this.room)
+    if (isBlank(options)) { options = {} }
+    if (isBlank(options.video)) { options.video = false }
+    if (isBlank(options.audio)) { options.audio = false }
+    if (isBlank(options.cCallback)) { options.cCallback = function () {} }
+    if (isBlank(options.dcCallback)) { options.dcCallback = function () {} }
+    this.options = options
+
+    let mn = MeshNetwork.instance
+
+    if (options.video || options.audio) {
+      navigator.mediaDevices.getUserMedia(options).then(function(stream) {
+        let video = MeshNetwork.findOrCreateVideoStream('self', stream)
+        mn.container.append(video)
+        mn.socket = mn.cm.connect(host, room, stream, options.cCallback, options.dcCallback)
+      }).catch(function (error) {
+        mn.onError(undefined, error)
+      })
+    } else {
+      mn.socket = mn.cm.connect(host, room, false, options.cCallback, options.dcCallback)
+    }
+
     return this.socket
+  }
+
+  disconnect() {
+    this.getPeers().forEach(function (peer) {
+      peer.destroy()
+    })
+    this.cm.peers = []
+    let video = document.querySelector(`#video-self`)
+    if (!isBlank(video)) {
+      video.pause()
+      mn.container.removeChild(video)
+    }
+    this.socket.close()
+  }
+
+  reconnect() {
+    this.disconnect()
+    this.connect(this.host, this.room, this.options)
   }
 
   emit(data) {
@@ -57,19 +99,54 @@ class MeshNetwork {
     return allIds
   }
 
+  static findOrCreateVideoStream(id, stream) {
+    let video = MeshNetwork.findOrCreateVideo(id)
+    video.src = window.URL.createObjectURL(stream)
+    video.play()
+    return video
+  }
+
+  static findOrCreateVideo(id) {
+    let v = document.querySelector(`#video-${id}`)
+    if (isBlank(v)) {
+      v = document.createElement('video')
+      v.setAttribute('id', `video-${id}`)
+      v.setAttribute('class', 'vrum-video')
+    }
+    return v
+  }
+
+  static isMaster() {
+    return discoveryClient.getParameterByName('isMaster') == 'true'
+  }
+
+  static getRoomId(roomName) {
+    if (isBlank(roomName)) { roomName = 'room' }
+    return discoveryClient.getParameterByName(roomName)
+  }
+
   handlePeer(peer) {
+    let mn = MeshNetwork.instance
+
     peer.on('connect', function () {
-      MeshNetwork.instance.onConnect(peer)
+      mn.onConnect(peer)
     })
     peer.on('data', function (data) {
-      var json = discoveryClient.parse(MeshNetwork.instance.socket, peer, data)
-      MeshNetwork.instance.onData(json)
+      var json = discoveryClient.parse(mn.socket, peer, data)
+      mn.onData(peer, json)
+    })
+    peer.on('stream', function (stream) {
+      let video = MeshNetwork.findOrCreateVideoStream(peer.cmKey, stream)
+      mn.container.append(video)
+      mn.onStream(peer, stream)
     })
     peer.on('error', function (error) {
-      MeshNetwork.instance.onError(error)
+      mn.onError(peer, error)
     })
     peer.on('close', function () {
-      MeshNetwork.instance.onClose()
+      let video = document.querySelector(`#video-${peer.cmKey}`)
+      if (!isBlank(video)) { mn.container.removeChild(video) }
+      mn.onClose(peer)
     })
   }
 
@@ -77,15 +154,19 @@ class MeshNetwork {
     console.log('Connected with cmKey ' + peer.cmKey)
   }
 
-  onData(data) {
+  onData(peer, data) {
     console.log(`${data.from}: ${JSON.stringify(data)}`)
   }
 
-  onError(error) {
+  onStream(peer, stream) {
+  }
+
+  // peer can be undefined
+  onError(peer, error) {
     console.error(error)
   }
 
-  onClose() {
+  onClose(peer) {
   }
 }
 
