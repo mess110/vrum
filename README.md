@@ -88,17 +88,17 @@ See [CHEATSHEET.md](CHEATSHEET.md) for example usage.
 * [x] forest generator
 * [x] clone loaded objects instead of direct use
 * [x] qr code generator
-* [ ] set shadowMap.width and height of all lights
 * [x] on screen controls
+* [x] fine animation controls
+* [x] handle timeout/interval clear on uninit scene (this.setInterval/this.setTimeout)
+* [x] mesh networking
+* [x] game pad controller game
+* [ ] set shadowMap.width and height of all lights
 * [ ] VR
 * [ ] walker
 * [ ] a lot of points geometry
-* [x] fine animation controls
 * [ ] tween between animation weights
 * [ ] generate load_assets_file.json
-* [x] handle timeout/interval clear on uninit scene (this.setInterval/this.setTimeout)
 * [ ] attach to bone scaled
 * [ ] physics
-* [ ] socket.io
-* [ ] peer2peer
 * [ ] pause rendering on blur (implement own timeout affected by rendering)

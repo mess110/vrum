@@ -84,6 +84,7 @@ class ControllerScene extends Scene {
       let scene = Hodler.get('scene')
       let joystick = scene.vc.joystick1
 
+      // TODO: instead of emit, figure out who master is and send only to master
       MeshNetwork.instance.emit({
         action: 'stick',
         dX: joystick.deltaX(),
