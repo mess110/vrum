@@ -38,8 +38,7 @@ class Animations {
   }
 
   play(name, options) {
-    if (isBlank(options.name)) { options.name = name }
-    this._parseOptions(options)
+    options = this._parseOptions(name, options)
 
     let animation = this.get(options.name)
     animation.setEffectiveTimeScale(options.timeScale)
@@ -118,8 +117,9 @@ class Animations {
     }, toDuration - transitionDuration)
   }
 
-  _parseOptions(options) {
+  _parseOptions(name, options) {
     if (isBlank(options)) { options = {} }
+    if (isBlank(options.name)) { options.name = name }
     if (isBlank(options.loop)) { options.loop = true }
     if (isBlank(options.reverse)) { options.reverse = false }
     if (isBlank(options.timeScale)) { options.timeScale = 1 }
@@ -129,6 +129,7 @@ class Animations {
     if (options.reverse) { options.timeScale *= -1 }
     // options.stopAllExceptions.push(options.name)
     // if (options.loop) { options.stopAllExceptions.push(options.name) }
+    return options
   }
 
   getDuration(target) {
