@@ -50,7 +50,7 @@ const excludedExtensions = [
 // The pinger is responsible for keeping the server alive
 // Makes the browser call the ping.json endpoint every x seconds
 const injectPinger = (indexPath) => {
-  let pinger = '<script charset="utf-8">setInterval(() => { fetch("/ping.json") }, 5000)</script>'
+  let pinger = '<script charset="utf-8">setInterval(() => { fetch("/ping.json").catch((err) => { alert("sandbox disconnected"); window.close(); }) }, 14 * 1000)</script>'
 
   // TODO check for index.html
   let lines = fs.readFileSync(indexPath, 'utf-8').split('\n')

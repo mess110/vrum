@@ -91,7 +91,7 @@ portfinder.getPort({port: 8000, stopPort: 8999}, (err, port) => {
     root: path.join(__dirname),
     index: 'index.html',
     port: process.env.PORT || port,
-    pingGrace: 10 // seconds server will not close after receiveing a ping
+    pingGrace: 60 // seconds server will not close after receiveing a ping
   };
 
   require('http').createServer((request, response) => {
