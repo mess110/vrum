@@ -72,7 +72,7 @@ const init = (config) => {
     console.log(`  ${file}`);
   })
 
-  pkgOpen(baseUrl)
+  pkgOpen(baseUrl + 'index.html')
 
   // If we don't receive a ping within the grace period, we exit
   setInterval(() => {
