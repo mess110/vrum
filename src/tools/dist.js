@@ -74,7 +74,6 @@ const injectPinger = (htmlPath) => {
 console.log('Welcome to vrum.js game distributor!'.green)
 
 rl.question('Game full path: '.yellow, (gamePath) => {
-  gamePath = "/home/kiki/pr0n/vrum/workspace/games/fript"
   let gameName = gamePath.split('/')[gamePath.split('/').length-1]
   let repoPath = path.join(__dirname, '..', '..')
   let destPath = path.join(repoPath, 'tmp')
