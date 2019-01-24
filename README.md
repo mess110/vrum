@@ -8,14 +8,11 @@ To run the examples or the tests:
 
 ```
 yarn install
-yarn serve
+yarn help
+yarn http
 ```
 
-To make your own game in a new folder with vrum.js packed:
-
-```
-yarn new_game
-```
+See [CHEATSHEET.md](CHEATSHEET.md) for example usage.
 
 ## Exporting from Blender
 
@@ -29,8 +26,6 @@ blender addon.
 * export to glb as it packs all the resources in 1 file
 
 ## Features
-
-See [CHEATSHEET.md](CHEATSHEET.md) for example usage.
 
 * [x] engine framework
 * [x] after effects with composer
@@ -93,6 +88,7 @@ See [CHEATSHEET.md](CHEATSHEET.md) for example usage.
 * [x] handle timeout/interval clear on uninit scene (this.setInterval/this.setTimeout)
 * [x] mesh networking
 * [x] game pad controller game
+* [x] build app for linux/mac/windows
 * [ ] set shadowMap.width and height of all lights
 * [ ] VR
 * [ ] walker

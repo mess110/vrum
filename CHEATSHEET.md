@@ -1,5 +1,19 @@
 # CHEATSHEET
 
+## Distribute the app on linux/mac/windows
+
+```
+yarn dist
+```
+
+## Create a new game from the template
+
+To make your own game in a new folder with vrum.js packed:
+
+```
+yarn new_game
+```
+
 ## Warn if webgl not available
 
 Happens automatically with the help of [src/extras/PolyfillRenderer.js](src/extras/PolyfillRenderer.js)
