@@ -1,5 +1,10 @@
 #!/usr/bin/env node
 
+// Handles building of vrum.js and vrum.min.js
+//
+// Each script tag in 'workspace/dependencies.html' gets read and appended
+// to a file. That file is then minified
+
 const colors = require('colors');
 const concat = require('concat-files');
 const fs = require('fs')

@@ -53,7 +53,7 @@ const injectPinger = (indexPath) => {
   let pinger = '<script charset="utf-8">setInterval(() => { fetch("/ping.json") }, 5000)</script>'
 
   // TODO check for index.html
-  var lines = fs.readFileSync(indexPath, 'utf-8').split('\n')
+  let lines = fs.readFileSync(indexPath, 'utf-8').split('\n')
   let lineIndex = 0
   let foundIndex = undefined
   lines.forEach((line) => {

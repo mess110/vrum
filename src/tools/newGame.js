@@ -1,5 +1,10 @@
 #!/usr/bin/env node
 
+// Creates a new game using workspace/games/project as a template
+//
+// 1. copies the template to the destination folder
+// 2. copies vrum.js
+
 const colors = require('colors');
 const ncp = require('ncp').ncp;
 const fs = require('fs')
@@ -32,7 +37,6 @@ rl.question('Game name: '.yellow, (name) => {
     console.error(`Game '${name}' already exists`.red)
     process.exit(1)
   }
-
 
   ncp('workspace/games/project', fullPath, function (err) {
     if (err) {
