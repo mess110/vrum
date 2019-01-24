@@ -10,6 +10,8 @@
     "genkey": "openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout key.pem -out cert.pem",
     "build": "node src/tools/build.js",
     "deploy": "gh-pages -d build",
+    "dist": "yarn clean:tmp && node src/tools/dist.js && cd tmp && yarn install && cd .. && yarn clean:tmp",
+    "clean:tmp": "rm -rf ./tmp",
     "new_game": "node src/tools/newGame.js",
     "start": "node src/tools/help.js"
   },
@@ -17,7 +19,6 @@
     "@tweenjs/tween.js": "^17.2.0",
     "ccapture.js": "^1.1.0",
     "file-saver": "^1.3.8",
-    "gh-pages": "^2.0.1",
     "howler": "1.1.29",
     "html2canvas": "^1.0.0-alpha.12",
     "ocean": "jbouny/ocean",
@@ -34,7 +35,8 @@
   "devDependencies": {
     "colors": "^1.3.2",
     "concat-files": "^0.1.1",
-    "http-server": "^0.11.1",
+    "gh-pages": "^2.0.1",
+    "glob": "^7.1.3",
     "ncp": "^2.0.0",
     "uglify-es": "^3.3.9"
   }
