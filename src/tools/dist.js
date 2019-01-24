@@ -3,11 +3,13 @@
 // Prepare a game for distribution
 //
 // 1. copies the game to a tmp directory
-// 2. copies vrum-http.js to the tmp directory
-// 3. creates a list of assets (*.html, *.css, *.js, assets etc)
-// 4. injects the pinger
-// 5. sets app name and assets in package.json
-// 6. writes the package.json in the tmp directory
+// 2. renames index.html to index_game.html
+// 3. copies vrum-http.js to the tmp directory
+// 4. copies sandbox index.html to the tmp directory
+// 5. creates a list of assets (*.html, *.css, *.js, assets etc)
+// 6. injects the pinger
+// 7. sets app name and assets in package.json
+// 8. writes the package.json in the tmp directory
 //
 // The actual packaging happens with the help of the newly created package.json
 // See `yarn build` for more info
@@ -81,7 +83,7 @@ rl.question('Game full path: '.yellow, (gamePath) => {
   let vrumHttpPath = path.join(sandboxPath, 'http.js')
   let sandboxIndexPath = path.join(sandboxPath, 'index.html')
   let indexPath = path.join(destPath, 'index.html')
-  let gameIndexPath = path.join(destPath, `index_game.html`)
+  let gameIndexPath = path.join(destPath, 'index_game.html')
 
   if (!fs.existsSync(gamePath)) {
     console.error(`'${gamePath}' does not exist`.red)
