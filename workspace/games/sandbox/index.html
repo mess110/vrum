@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+
+        <title>welcome</title>
+        <!-- https://codepen.io/P1N2O/pen/pyBNzX -->
+        <style>
+html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden }
+body {
+    background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+    background-size: 400% 400%;
+    -webkit-animation: Gradient 15s ease infinite;
+    -moz-animation: Gradient 15s ease infinite;
+    animation: Gradient 15s ease infinite;
+}
+
+                        @-webkit-keyframes Gradient {
+                            0% {
+                                background-position: 0% 50%
+                            }
+                            50% {
+                                background-position: 100% 50%
+                            }
+                            100% {
+                                background-position: 0% 50%
+                            }
+                        }
+
+                        @-moz-keyframes Gradient {
+                            0% {
+                                background-position: 0% 50%
+                            }
+                            50% {
+                                background-position: 100% 50%
+                            }
+                            100% {
+                                background-position: 0% 50%
+                            }
+                        }
+
+                        @keyframes Gradient {
+                            0% {
+                                background-position: 0% 50%
+                            }
+                            50% {
+                                background-position: 100% 50%
+                            }
+                            100% {
+                                background-position: 0% 50%
+                            }
+                        }
+
+
+                        .container {
+                            display: block;
+                            position: relative;
+                            margin-bottom: 12px;
+                            cursor: pointer;
+                            -webkit-user-select: none;
+                            -moz-user-select: none;
+                            -ms-user-select: none;
+                            user-select: none;
+                            text-align: left;
+                        }
+
+                        /* Hide the browser's default checkbox */
+                        .container input {
+                            position: absolute;
+                            opacity: 0;
+                            cursor: pointer;
+                            height: 0;
+                            width: 0;
+                        }
+
+                        /* Create a custom checkbox */
+                        .checkmark {
+                            position: absolute;
+                            top: 0;
+                            right: 0;
+                            height: 25px;
+                            width: 25px;
+                            background-color: #eee;
+                        }
+
+                        /* On mouse-over, add a grey background color */
+                        .container:hover input ~ .checkmark {
+                            background-color: #ccc;
+                        }
+
+                        /* When the checkbox is checked, add a blue background */
+                        .container input:checked ~ .checkmark {
+                            background-color: #aaa;
+                        }
+
+                        /* Create the checkmark/indicator (hidden when not checked) */
+                        .checkmark:after {
+                            content: "";
+                            position: absolute;
+                            display: none;
+                        }
+
+                        /* Show the checkmark when checked */
+                        .container input:checked ~ .checkmark:after {
+                            display: block;
+                        }
+
+                        /* Style the checkmark/indicator */
+                        .container .checkmark:after {
+                            left: 9px;
+                            top: 5px;
+                            width: 5px;
+                            height: 10px;
+                            border: solid white;
+                            border-width: 0 3px 3px 0;
+                            -webkit-transform: rotate(45deg);
+                            -ms-transform: rotate(45deg);
+                            transform: rotate(45deg);
+                        }
+
+                        .flex-container {
+                            height: 100%;
+                            padding: 0;
+                            margin: 0;
+                            display: -webkit-box;
+                            display: -moz-box;
+                            display: -ms-flexbox;
+                            display: -webkit-flex;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        }
+                        .row {
+                            width: auto;
+                        }
+                        .flex-item {
+                            cursor: pointer;
+                            padding: 10px;
+                            margin: 10px;
+                            line-height: 20px;
+                            color: white;
+                            font-weight: bold;
+                            font-size: 2em;
+                            text-align: center;
+                            color: #fff;
+                        }
+        </style>
+    </head>
+    <body>
+        <script charset="utf-8">
+            let newHtml = undefined
+            fetch('index_game.html').then((response) => { return response.text() }).then((html) => {
+                newHtml = html
+            }).catch((error) => {
+                console.error(error)
+            })
+
+            const repeatUntilStarts = () => {
+                console.log('Preparing to start')
+                if (!start()) {
+                    setTimeout(repeatUntilStarts, 100)
+                }
+            }
+
+            const start = () => {
+                if (newHtml === undefined) {
+                    return false
+                }
+
+                let fullscreen = document.getElementById('fullscreen').checked
+                let sound = document.getElementById('sound').checked
+
+                document.open();
+                document.write(newHtml);
+                document.close();
+                window.history.pushState({}, null, 'index_game.html');
+
+                Persist.set('sound', sound)
+                if (fullscreen) {
+                    Utils.toggleFullscreen()
+                }
+
+                return true
+            }
+
+            const vrum = () => {
+                window.location.href = 'https://github.com/mess110/vrum'
+            }
+        </script>
+        <div class="flex-container">
+            <div class="row">
+                <div class="flex-item" onclick="vrum()" style="padding-bottom: 50px;">vrum.js engine</div>
+                <div class="flex-item">
+                    <label class="container">sound
+                        <input id="sound" type="checkbox" checked="checked">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <div class="flex-item">
+                    <label class="container">fullscreen
+                        <input id="fullscreen" type="checkbox" checked="checked">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <div class="flex-item" onclick="repeatUntilStarts()" style="padding-top: 50px;">start</div>
+            </div>
+        </div>
+
+        <script src="vrum.min.js"></script>
+    </body>
+</html>

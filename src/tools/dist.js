@@ -27,7 +27,7 @@ const rl = readline.createInterface({
 let packageJson = {
   "name": "vrum",
   "version": "1.0.0",
-  "bin": "vrum-http.js",
+  "bin": "http.js",
   "scripts": {
     "postinstall": "pkg . --targets=node10-linux-x64,node10-macos-x64,node10-win-x64 --out-path=../dist/"
   },
@@ -49,11 +49,11 @@ const excludedExtensions = [
 
 // The pinger is responsible for keeping the server alive
 // Makes the browser call the ping.json endpoint every x seconds
-const injectPinger = (indexPath) => {
-  let pinger = '<script charset="utf-8">setInterval(() => { fetch("/ping.json").catch((err) => { alert("sandbox disconnected"); window.close(); }) }, 14 * 1000)</script>'
+const injectPinger = (htmlPath) => {
+  let pinger = '<script charset="utf-8">const vrumPinger = () => { fetch("/ping.json").catch((err) => { alert("sandbox disconnected"); window.close(); }) }; vrumPinger(); setInterval(vrumPinger, 14000)</script>'
 
   // TODO check for index.html
-  let lines = fs.readFileSync(indexPath, 'utf-8').split('\n')
+  let lines = fs.readFileSync(htmlPath, 'utf-8').split('\n')
   let lineIndex = 0
   let foundIndex = undefined
   lines.forEach((line) => {
@@ -64,7 +64,7 @@ const injectPinger = (indexPath) => {
   })
   if (foundIndex !== undefined) {
     lines.splice(foundIndex, 0, pinger);
-    fs.writeFileSync(indexPath, lines.join('\n'))
+    fs.writeFileSync(htmlPath, lines.join('\n'))
     console.warn("pinger succesfully injected")
   } else {
     console.warn("pinger not injected")
@@ -74,11 +74,15 @@ const injectPinger = (indexPath) => {
 console.log('Welcome to vrum.js game distributor!'.green)
 
 rl.question('Game full path: '.yellow, (gamePath) => {
+  gamePath = "/home/kiki/pr0n/vrum/workspace/games/fript"
   let gameName = gamePath.split('/')[gamePath.split('/').length-1]
   let repoPath = path.join(__dirname, '..', '..')
   let destPath = path.join(repoPath, 'tmp')
-  let vrumHttpPath = path.join(repoPath, 'src', 'tools', 'vrum-http.js')
+  let sandboxPath = path.join(repoPath, 'workspace', 'games', 'sandbox')
+  let vrumHttpPath = path.join(sandboxPath, 'http.js')
+  let sandboxIndexPath = path.join(sandboxPath, 'index.html')
   let indexPath = path.join(destPath, 'index.html')
+  let gameIndexPath = path.join(destPath, `index_game.html`)
 
   if (!fs.existsSync(gamePath)) {
     console.error(`'${gamePath}' does not exist`.red)
@@ -93,7 +97,11 @@ rl.question('Game full path: '.yellow, (gamePath) => {
   // copy game folder
   ncp(gamePath, destPath, (err) => {
     // copy http for exe
-    ncp(vrumHttpPath, path.join(destPath, 'vrum-http.js'), (err) => {
+    ncp(vrumHttpPath, path.join(destPath, 'http.js'), (err) => {
+
+      fs.writeFileSync(gameIndexPath, fs.readFileSync(indexPath, 'utf-8'))
+      fs.writeFileSync(indexPath, fs.readFileSync(sandboxIndexPath, 'utf-8'))
+
       // create list of assets
       // all scripts are included as assets
       glob(path.join(destPath, '**/*'), {}, (err, assets) => {
@@ -104,6 +112,7 @@ rl.question('Game full path: '.yellow, (gamePath) => {
         assets = assets.map((e) => { return e.replace(destPath + '/', '') })
 
         injectPinger(indexPath)
+        injectPinger(gameIndexPath)
 
         packageJson.name = gameName
         packageJson.pkg.assets = assets
