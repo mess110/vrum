@@ -153,13 +153,12 @@ class Animations {
   }
 
   static init(model, gltf) {
-    let mixer, src_animations
+    let src_animations
     let animations = []
+    let mixer = new THREE.AnimationMixer(model)
     if (gltf !== undefined) {
-      mixer = new THREE.AnimationMixer(model)
       src_animations = gltf.animations
     } else {
-      mixer = new THREE.AnimationMixer(model)
       if (model.geometry !== undefined) {
         src_animations = model.geometry.animations
       } else {

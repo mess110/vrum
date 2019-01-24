@@ -411,6 +411,18 @@ THREE.Object3D.prototype.removeAllChildren = function () {
   }
 }
 
+traverseBones = function (boneName, mesh) {
+  let added = false
+  this.traverse(function(object) {
+      if (added) { return }
+      if (object instanceof THREE.Bone && (object.name === boneName)) {
+        added = true
+        object.add(mesh)
+      }
+  })
+  return added
+}
+
 // attach a mesh to a bone
 //
 // @param [String] boneName
@@ -421,15 +433,13 @@ THREE.Object3D.prototype.removeAllChildren = function () {
 // so we don't add it twice
 THREE.Object3D.prototype.attachToBone = function (boneName, mesh) {
   let added = false;
-  if (this instanceof THREE.SkinnedMesh) {
-    return this.traverse(function(object) {
-      if (added) { return; }
-      if (object instanceof THREE.Bone && (object.name === boneName)) {
-        added = true;
-        return object.add(mesh);
-      }
-    });
-  }
+  return this.traverse(function(object) {
+    if (added) { return; }
+    if (object instanceof THREE.Bone && (object.name === boneName)) {
+      added = true;
+      return object.add(mesh);
+    }
+  });
 }
 
 // detach a mesh from a bone
@@ -437,13 +447,12 @@ THREE.Object3D.prototype.attachToBone = function (boneName, mesh) {
 // @param [String] boneName
 // @param [Mesh] mesh
 THREE.Object3D.prototype.detachFromBone = function (boneName, mesh) {
-  if (this instanceof THREE.SkinnedMesh) {
-    return this.traverse(function(object) {
-      if (object instanceof THREE.Bone && (object.name === boneName)) {
-        return object.remove(mesh);
-      }
-    });
-  }
+  // if (this instanceof THREE.SkinnedMesh) {
+  return this.traverse(function(object) {
+    if (object instanceof THREE.Bone && (object.name === boneName)) {
+      return object.remove(mesh);
+    }
+  });
 }
 
 setSkinHelper = function (material, key) {

@@ -74,7 +74,11 @@ class AssetManager {
 
   static clone(key) {
     let target = this.get(key).clone()
+    target.animations = undefined
     Animations.init(target)
+    if (key == 'mole.gltf') {
+      console.log(target)
+    }
     return this._hack(target)
   }
 
