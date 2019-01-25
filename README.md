@@ -89,8 +89,9 @@ blender addon.
 * [x] mesh networking
 * [x] game pad controller game
 * [x] distribute app for linux/mac/windows
+* [ ] warn user when building with dependencies.html
 * [ ] publish to gh-pages
-* [ ] build before publish/distribute and copy vrum.min.js
+* [x] build before publish/distribute and copy vrum.min.js
 * [ ] set shadowMap.width and height of all lights
 * [ ] tutorials
 * [ ] VR

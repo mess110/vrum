@@ -16,15 +16,13 @@
 
 const colors = require('colors');
 const fs = require('fs')
-const readline = require('readline');
 const ncp = require('ncp').ncp;
 const path = require('path')
 const glob = require('glob');
-
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
+const rl = require('./common').readline
+const injectHTML = require('./common').injectHTML
+const checkForLinkImportDependencies = require('./common').checkForLinkImportDependencies
+const cp = require('./common').cp
 
 let packageJson = {
   "name": "vrum",
@@ -48,26 +46,6 @@ const excludedExtensions = [
   '.blend', '.blend1', '.blend2', '.blend3', '.blend4', '.blend5',
   '.xcf'
 ]
-
-const injectHTML = (htmlPath, injectString) => {
-  // TODO check for index.html
-  let lines = fs.readFileSync(htmlPath, 'utf-8').split('\n')
-  let lineIndex = 0
-  let foundIndex = undefined
-  lines.forEach((line) => {
-    if (line.indexOf('</body>') !== -1) {
-      foundIndex = lineIndex
-    }
-    lineIndex += 1
-  })
-  if (foundIndex !== undefined) {
-    lines.splice(foundIndex, 0, injectString);
-    fs.writeFileSync(htmlPath, lines.join('\n'))
-    console.warn("succesfully injected")
-  } else {
-    console.warn("not injected")
-  }
-}
 
 console.log('Welcome to vrum.js game distributor!'.green)
 
@@ -94,47 +72,51 @@ rl.question('Game full path: '.yellow, (gamePath) => {
   console.log(`cp gamePath destPath`)
   ncp(gamePath, destPath, (err) => {
 
+    console.log('cp vrum.js destPath')
+    cp(path.join(repoPath, 'vrum.min.js'), path.join(destPath, 'vrum.min.js'))
+
     console.log('cp sandbox/http.js destPath')
-    ncp(vrumHttpPath, path.join(destPath, 'http.js'), (err) => {
+    cp(vrumHttpPath, path.join(destPath, 'http.js'))
 
-      console.log('cp index.html game_index.html')
-      fs.writeFileSync(gameIndexPath, fs.readFileSync(indexPath, 'utf-8'))
+    checkForLinkImportDependencies(indexPath)
 
-      console.log('cp sandbox/index.html index.html')
-      fs.writeFileSync(indexPath, fs.readFileSync(sandboxIndexPath, 'utf-8'))
+    console.log('cp index.html game_index.html')
+    cp(indexPath, gameIndexPath)
 
-      // all scripts are included as assets
-      console.log('creating scripts and assets list')
-      glob(path.join(destPath, '**/*'), {}, (err, assets) => {
-        console.log('excluding directories')
-        assets = assets.filter(x => !fs.lstatSync(x).isDirectory())
+    console.log('cp sandbox/index.html index.html')
+    cp(sandboxIndexPath, indexPath)
 
-        console.log('excluding invalid extensions')
-        excludedExtensions.forEach((ext) => {
-          assets = assets.filter(x => !x.endsWith(ext))
-        })
+    // all scripts are included as assets
+    console.log('creating scripts and assets list')
+    glob(path.join(destPath, '**/*'), {}, (err, assets) => {
+      console.log('excluding directories')
+      assets = assets.filter(x => !fs.lstatSync(x).isDirectory())
 
-        console.log('removing absolute path')
-        assets = assets.map((e) => { return e.replace(destPath + '/', '') })
-
-        console.log('injecting pinger')
-        let pinger = '<script charset="utf-8">Utils.initSandboxPinger()</script>'
-        injectHTML(indexPath, pinger)
-        injectHTML(gameIndexPath, pinger)
-
-        console.log('injecting popStarter')
-        let popStater = '<script charset="utf-8">Utils.initPopStateReload()</script>'
-        injectHTML(gameIndexPath, popStater)
-
-        packageJson.name = gameName
-        packageJson.pkg.assets = assets
-
-        console.log(packageJson)
-
-        console.log('writing package.json')
-        fs.writeFileSync(path.join(destPath, 'package.json'), JSON.stringify(packageJson));
-        rl.close()
+      console.log('excluding invalid extensions')
+      excludedExtensions.forEach((ext) => {
+        assets = assets.filter(x => !x.endsWith(ext))
       })
+
+      console.log('removing absolute path')
+      assets = assets.map((e) => { return e.replace(destPath + '/', '') })
+
+      console.log('injecting pinger')
+      let pinger = '<script charset="utf-8">Utils.initSandboxPinger()</script>'
+      injectHTML(indexPath, pinger)
+      injectHTML(gameIndexPath, pinger)
+
+      console.log('injecting popStarter')
+      let popStater = '<script charset="utf-8">Utils.initPopStateReload()</script>'
+      injectHTML(gameIndexPath, popStater)
+
+      packageJson.name = gameName
+      packageJson.pkg.assets = assets
+
+      console.log(packageJson)
+
+      console.log('writing package.json')
+      fs.writeFileSync(path.join(destPath, 'package.json'), JSON.stringify(packageJson));
+      rl.close()
     })
   })
 })

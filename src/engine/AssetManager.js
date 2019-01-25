@@ -218,10 +218,10 @@ class AssetManager {
 
   loadGLTFModel(key, value) {
     this.gltfLoader.load(value, function (gltf) {
-      var model = gltf
+      // var model = gltf
       // Animations.init(model, gltf)
       // model.skinnedMesh = model.children.first().children.first()
-      AssetManager.set(key, model)
+      AssetManager.set(key, gltf)
     })
   }
 

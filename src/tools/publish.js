@@ -3,19 +3,19 @@
 const ghpages = require('gh-pages');
 const colors = require('colors');
 const fs = require('fs')
-const readline = require('readline');
+const rl = require('./common').readline;
 const path = require('path')
+const checkForLinkImportDependencies = require('./common').checkForLinkImportDependencies
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
-
+console.log('Welcome to vrum.js gh-pages publisher!'.green)
 // TODO: which folder
 // which repo, get url
 
 let repoRoot = ''
 let repoUrl = '' // TODO: get from .git/config
+
+let indexPath = path.join(repoRoot, 'index.html')
+checkForLinkImportDependencies(indexPath)
 
 options = {
   branch: 'gh-pages',

@@ -8,12 +8,8 @@
 const colors = require('colors');
 const ncp = require('ncp').ncp;
 const fs = require('fs')
-const readline = require('readline');
-
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
+const rl = require('./common').readline
+const cp = require('./common').cp
 
 console.log('Welcome to vrum.js new game creator!')
 
@@ -43,12 +39,7 @@ rl.question('Game name: '.yellow, (name) => {
       console.error('Could not copy workspace/games/project'.red)
       process.exit(1)
     }
-    ncp('vrum.min.js', `${fullPath}/vrum.min.js`, function (err) {
-      if (err) {
-        console.error('Could not copy vrum.min.js to game folder'.red)
-        process.exit(1)
-      }
-      console.log(`Game '${name}' sucessfully created in '${fullPath}'`.green)
-    })
+    cp('vrum.min.js', `${fullPath}/vrum.min.js`)
+    console.log(`Game '${name}' sucessfully created in '${fullPath}'`.green)
   });
 });
