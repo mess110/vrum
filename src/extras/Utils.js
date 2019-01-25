@@ -25,6 +25,7 @@ class Utils {
 
     window.vrumPinger = () => {
       fetch("/ping.json").catch((err) => {
+        clearInterval(window.vrumPingerInterval)
         alert("sandbox disconnected");
         // hack to allow closing the window
         window.open('','_self').close();
@@ -32,7 +33,7 @@ class Utils {
     }
 
     window.vrumPinger()
-    setInterval(window.vrumPinger, 14000)
+    window.vrumPingerInterval = setInterval(window.vrumPinger, 14000)
   }
 
   // When back button is pressed, reload the page
