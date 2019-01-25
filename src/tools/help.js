@@ -17,4 +17,5 @@ Commands:
 
   * new_game  - create a new game
   * dist      - compiles a game to linux/mac/windows executable
+  * publish   - publish a repo with gh-pages
 `)

@@ -88,8 +88,11 @@ blender addon.
 * [x] handle timeout/interval clear on uninit scene (this.setInterval/this.setTimeout)
 * [x] mesh networking
 * [x] game pad controller game
-* [x] build app for linux/mac/windows
+* [x] distribute app for linux/mac/windows
+* [ ] publish to gh-pages
+* [ ] build before publish/distribute and copy vrum.min.js
 * [ ] set shadowMap.width and height of all lights
+* [ ] tutorials
 * [ ] VR
 * [ ] walker
 * [ ] a lot of points geometry

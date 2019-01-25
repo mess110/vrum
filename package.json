@@ -9,7 +9,7 @@
     "https": "http-server -c-1 -S -C cert.pem -o",
     "genkey": "openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout key.pem -out cert.pem",
     "build": "node src/tools/build.js",
-    "deploy": "gh-pages -d build",
+    "publish": "node src/tools/publish.js",
     "dist": "yarn clean:tmp && node src/tools/dist.js && cd tmp && yarn install && cd .. && yarn clean:tmp",
     "clean:tmp": "rm -rf ./tmp",
     "new_game": "node src/tools/newGame.js",
