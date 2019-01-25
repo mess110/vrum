@@ -17,6 +17,31 @@ class Utils {
     return new THREE.MeshBasicMaterial({map: texture, transparent: true}); // , side: THREE.DoubleSide)
   }
 
+  // Ping the server every 14 seconds so it doesn't close
+  static initSandboxPinger() {
+    if (typeof window.vrumPinger !== 'undefined') {
+      return
+    }
+
+    window.vrumPinger = () => {
+      fetch("/ping.json").catch((err) => {
+        alert("sandbox disconnected");
+        // hack to allow closing the window
+        window.open('','_self').close();
+      })
+    }
+
+    window.vrumPinger()
+    setInterval(window.vrumPinger, 14000)
+  }
+
+  // When back button is pressed, reload the page
+  static initPopStateReload() {
+    window.onpopstate = (e) => {
+      location.reload()
+    }
+  }
+
   // generate a forest of JsonModelManager
   //
   // @example

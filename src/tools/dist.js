@@ -49,11 +49,7 @@ const excludedExtensions = [
   '.xcf'
 ]
 
-// The pinger is responsible for keeping the server alive
-// Makes the browser call the ping.json endpoint every x seconds
-const injectPinger = (htmlPath) => {
-  let pinger = '<script charset="utf-8">const vrumPinger = () => { fetch("/ping.json").catch((err) => { alert("sandbox disconnected"); window.close(); }) }; vrumPinger(); setInterval(vrumPinger, 14000)</script>'
-
+const injectHTML = (htmlPath, injectString) => {
   // TODO check for index.html
   let lines = fs.readFileSync(htmlPath, 'utf-8').split('\n')
   let lineIndex = 0
@@ -65,11 +61,11 @@ const injectPinger = (htmlPath) => {
     lineIndex += 1
   })
   if (foundIndex !== undefined) {
-    lines.splice(foundIndex, 0, pinger);
+    lines.splice(foundIndex, 0, injectString);
     fs.writeFileSync(htmlPath, lines.join('\n'))
-    console.warn("pinger succesfully injected")
+    console.warn("succesfully injected")
   } else {
-    console.warn("pinger not injected")
+    console.warn("not injected")
   }
 }
 
@@ -95,31 +91,47 @@ rl.question('Game full path: '.yellow, (gamePath) => {
     process.exit(1);
   }
 
-  // copy game folder
+  console.log(`cp gamePath destPath`)
   ncp(gamePath, destPath, (err) => {
-    // copy http for exe
+
+    console.log('cp sandbox/http.js destPath')
     ncp(vrumHttpPath, path.join(destPath, 'http.js'), (err) => {
 
+      console.log('cp index.html game_index.html')
       fs.writeFileSync(gameIndexPath, fs.readFileSync(indexPath, 'utf-8'))
+
+      console.log('cp sandbox/index.html index.html')
       fs.writeFileSync(indexPath, fs.readFileSync(sandboxIndexPath, 'utf-8'))
 
-      // create list of assets
       // all scripts are included as assets
+      console.log('creating scripts and assets list')
       glob(path.join(destPath, '**/*'), {}, (err, assets) => {
+        console.log('excluding directories')
         assets = assets.filter(x => !fs.lstatSync(x).isDirectory())
+
+        console.log('excluding invalid extensions')
         excludedExtensions.forEach((ext) => {
           assets = assets.filter(x => !x.endsWith(ext))
         })
+
+        console.log('removing absolute path')
         assets = assets.map((e) => { return e.replace(destPath + '/', '') })
 
-        injectPinger(indexPath)
-        injectPinger(gameIndexPath)
+        console.log('injecting pinger')
+        let pinger = '<script charset="utf-8">Utils.initSandboxPinger()</script>'
+        injectHTML(indexPath, pinger)
+        injectHTML(gameIndexPath, pinger)
+
+        console.log('injecting popStarter')
+        let popStater = '<script charset="utf-8">Utils.initPopStateReload()</script>'
+        injectHTML(gameIndexPath, popStater)
 
         packageJson.name = gameName
         packageJson.pkg.assets = assets
 
         console.log(packageJson)
 
+        console.log('writing package.json')
         fs.writeFileSync(path.join(destPath, 'package.json'), JSON.stringify(packageJson));
         rl.close()
       })
