@@ -54,16 +54,12 @@ class AssetManager {
   //
   // TODO: find out if this is still true
   static _hack(mesh) {
-    const materials = [];
+    let materials = [];
     if (mesh.material === undefined) {
       return mesh
     }
     for (let mat of Array.from(mesh.material)) {
-      const clone = mat.clone();
-      if (clone.map != null) {
-        clone.map = clone.map.clone();
-        clone.map.needsUpdate = true;
-      }
+      let clone = AssetManager.updateMaterialAndMap(mat)
       materials.push(clone);
     }
 
@@ -71,13 +67,32 @@ class AssetManager {
     return mesh;
   }
 
+  static updateMaterialAndMap(material) {
+    let clone = material.clone()
+    clone.needsUpdate = true
+    if (clone.map != null) {
+      clone.map = clone.map.clone()
+      clone.map.needsUpdate = true
+    }
+    return clone
+  }
 
   static clone(key) {
-    let target = this.get(key).clone()
-    target.animations = undefined
-    Animations.init(target)
-    if (key == 'mole.gltf') {
-      console.log(target)
+    let model = this.get(key)
+    let modelType = AssetManager._getModelTypeFromKey(key)
+    let target
+
+    if (modelType == 'gltf' || modelType == 'glb') {
+      target = cloneGltf(model).scene
+      target.traverse((e) => {
+        if (typeof e.material !== 'undefined') {
+          e.material = AssetManager.updateMaterialAndMap(e.material)
+        }
+      })
+      Animations.init(target, model)
+    } else {
+      target = model.clone()
+      Animations.init(target)
     }
     return this._hack(target)
   }
@@ -114,7 +129,7 @@ class AssetManager {
   }
 
   _loadGenericModel(key, asset) {
-    switch (asset.path.split('.').last()) {
+    switch (AssetManager._getModelTypeFromKey(key)) {
       case 'json':
         this.loadJSONModel(key, asset.path)
         break
@@ -127,6 +142,10 @@ class AssetManager {
       default:
         throw `unknown model format ${asset.path}`
     }
+  }
+
+  static _getModelTypeFromKey(key) {
+    return key.split('.').last()
   }
 
   static getAssetKey(asset) {
@@ -169,7 +188,7 @@ class AssetManager {
 
   loadJSON(key, value) {
     this.loadingManager.itemStart(value)
-    const request = new XMLHttpRequest;
+    let request = new XMLHttpRequest;
     request.open('GET', value, true);
 
     request.onload = function() {
@@ -199,9 +218,9 @@ class AssetManager {
 
   loadGLTFModel(key, value) {
     this.gltfLoader.load(value, function (gltf) {
-      var model = gltf.scene
-      Animations.init(model, gltf)
-      model.skinnedMesh = model.children.first().children.first()
+      var model = gltf
+      // Animations.init(model, gltf)
+      // model.skinnedMesh = model.children.first().children.first()
       AssetManager.set(key, model)
     })
   }

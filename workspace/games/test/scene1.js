@@ -136,14 +136,21 @@ class Scene1 extends Scene {
     fadeIn.chain(fadeOut)
     fadeOut.start()
 
-    var panda = AssetManager.get('panda.glb')
+    var panda = AssetManager.clone('panda.glb')
     panda.animations.play(1)
     panda.shadowCastAndNotReceive()
     panda.scale.setScalar(0.2)
     panda.position.set(-3, 0, 3)
-    // panda.setSkin('chicken_black.jpeg')
     this.add(panda)
     this.panda = panda
+
+    var panda2 = AssetManager.clone('panda.glb')
+    panda2.animations.play(1)
+    panda2.shadowCastAndNotReceive()
+    panda2.scale.setScalar(0.2)
+    panda2.position.set(-5, 0, 3)
+    panda2.setSkin('chicken_black.jpeg')
+    this.add(panda2)
 
     Utils.toggleShadowCameraHelpers()
     Utils.toggleShadows()
