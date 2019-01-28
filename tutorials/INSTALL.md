@@ -73,24 +73,21 @@ It should look something like this:
 
 ## Create a new game
 
+The template from which the game is built can be found in `workspace/games/project`.
+
 ```
 yarn new_game
 ```
 
 When prompted, specify a name for your game. It will initially be created in
 `workspace/games/` under the game name of your choosing. It contains all the
-source code needed to run/develop the game.
-
-The template from which the game is build found in `workspace/games/project`.
-
-As mentioned previously, I will call this game fript.
+source code needed to run/develop the game. As mentioned previously, I will call
+this game fript.
 
 The code is rather easy to understand. There is an index.html file which needs
 to be opened in the browser, a game.js file which is included by index.html and
-a picture.
-
-In index.html, the main noteworthy thing is how vrum.js is imported. There are 2
-ways:
+a picture. In index.html, the main noteworthy thing is how vrum.js is imported.
+There are 2 ways:
 
 * link import which aids development by using the source code from vrum repo
 * vrum.min.js which is a "compiled" version of the engine
@@ -98,8 +95,6 @@ ways:
 You should only use one of these methods as they do the same thing. When deploying,
 you NEED to use the 2nd one. Main reasoning for this is that we don't want to deploy
 all the source code of vrum.js as several files. One is enough.
-
-Check out `yarn build` if you want to know more about how vrum.js is built.
 
 game.js contains 2 scenes to help you get started with scene management.
 
