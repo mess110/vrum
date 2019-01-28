@@ -7,14 +7,11 @@ and I am using assets made by me. We will call our game: fript
 ## About
 
 vrum.js is a bunch of code which aims to help the development of cross platform
-games.
+games. Think of it as a game engine based on three.js. It started off as a card game
+similar to Hearthstone which I never finished. I did however extract a game
+engine out of it.
 
-Think of it as a game engine based on three.js
-
-It started off as a card game similar to Hearthstone which I never ended up
-finishing, but I extracted a game engine out of it.
-
-I ended up using it a bunch in Ludum Dare (and not only) and made a few games:
+I used it in Ludum Dare (but not only) and made a few games:
 
 * http://mess110.github.io/html-games/ld/040/index.html
 * http://mess110.github.io/html-games/ld/ld-30-connected-worlds/
@@ -22,9 +19,9 @@ I ended up using it a bunch in Ludum Dare (and not only) and made a few games:
 * http://mess110.github.io/html-games/crossy-road/
 * http://mess110.github.io/html-games/stage/
 
-It changed quite a bit over time, looking in the source code might not be of much
-help. I also feel the API got decently stable and I want to gather feedback from
-different people, so I am writing this tutorial.
+The engine changed quite a bit over time. Looking in the source code might not be
+of much help. I also feel the API got decently stable and I want to gather feedback
+from different people, so I am writing this tutorial.
 
 I learned about game development by making crappy games. Hopefully, I learned
 enough to also make good ones in the future. Here are some of the game engines
