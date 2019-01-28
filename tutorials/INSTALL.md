@@ -72,7 +72,7 @@ of vrum.js features.
 
 It should look something like this:
 
-![should look like](workspace/games/project/vrum.png)
+![should look like](/workspace/games/project/vrum.png)
 
 ## Create a new game
 
@@ -112,4 +112,4 @@ yarn http # if you closed it
 
 and open `http://127.0.0.1:8080/workspace/games/YOUR_GAME_NAME` in a browser
 
-This is your starting template. [Lets load some assets](tutorials/ASSETS.md)
+This is your starting template. [Lets load some assets](/tutorials/ASSETS.md)
