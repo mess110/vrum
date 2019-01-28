@@ -63,11 +63,8 @@ yarn http
 ```
 
 Now open `http://127.0.0.1:8080/workspace/games/test/` in a decent browser.
-
 You should see quite a chaotic scene with a log going on. Its testing a bunch
-of vrum.js features.
-
-It should look something like this:
+of vrum.js features. It should look something like this:
 
 ![should look like](/workspace/games/project/vrum.png)
 
@@ -96,12 +93,8 @@ You should only use one of these methods as they do the same thing. When deployi
 you NEED to use the 2nd one. Main reasoning for this is that we don't want to deploy
 all the source code of vrum.js as several files. One is enough.
 
-game.js contains 2 scenes to help you get started with scene management.
-
-```
-yarn http # if you closed it
-```
-
-and open `http://127.0.0.1:8080/workspace/games/YOUR_GAME_NAME` in a browser
+game.js contains 2 scenes to help you get started with scene management. Open
+`http://127.0.0.1:8080/workspace/games/YOUR_GAME_NAME` in a browser to test your
+game.
 
 This is your starting template. [Lets load some assets](/tutorials/ASSETS.md)

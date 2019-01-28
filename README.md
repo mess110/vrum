@@ -2,15 +2,13 @@
 
 Game engine based on three.js
 
-## Tutorial
-
 ```
 yarn install
 yarn help
 yarn http
 ```
 
-See [CHEATSHEET.md](CHEATSHEET.md) for example usage.
+## Tutorial
 
 <!--ts-->
    * [Installation](tutorials/INSTALL.md)
