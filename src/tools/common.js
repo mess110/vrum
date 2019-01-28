@@ -44,9 +44,25 @@ const checkForLinkImportDependencies = (filePath) => {
   })
 }
 
+const existsCheck = (pathString) => {
+  if (!fs.existsSync(pathString)) {
+    console.error(`'${pathString}' does not exist`.red)
+    process.exit(1);
+  }
+}
+
+const isDirectoryCheck = (pathString) => {
+  if (!fs.lstatSync(pathString).isDirectory()) {
+    console.error(`'${pathString}' is not a directory`.red)
+    process.exit(2);
+  }
+}
+
 module.exports = {
   readline: rl,
   injectHTML: injectHTML,
   checkForLinkImportDependencies: checkForLinkImportDependencies,
+  existsCheck: existsCheck,
+  isDirectoryCheck: isDirectoryCheck,
   cp: cp,
 }

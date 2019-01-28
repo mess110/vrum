@@ -19,10 +19,8 @@ const fs = require('fs')
 const ncp = require('ncp').ncp;
 const path = require('path')
 const glob = require('glob');
-const rl = require('./common').readline
-const injectHTML = require('./common').injectHTML
-const checkForLinkImportDependencies = require('./common').checkForLinkImportDependencies
-const cp = require('./common').cp
+const common = require('./common')
+const rl = common.readline
 
 let packageJson = {
   "name": "vrum",
@@ -51,40 +49,33 @@ console.log('Welcome to vrum.js game distributor!'.green)
 
 rl.question('Game full path: '.yellow, (gamePath) => {
   let gameName = gamePath.split('/')[gamePath.split('/').length-1]
-  let repoPath = path.join(__dirname, '..', '..')
-  let destPath = path.join(repoPath, 'tmp')
-  let sandboxPath = path.join(repoPath, 'workspace', 'games', 'sandbox')
+  let vrumRepoPath = path.join(__dirname, '..', '..')
+  let destPath = path.join(vrumRepoPath, 'tmp')
+  let sandboxPath = path.join(vrumRepoPath, 'workspace', 'games', 'sandbox')
   let vrumHttpPath = path.join(sandboxPath, 'http.js')
   let sandboxIndexPath = path.join(sandboxPath, 'index.html')
   let indexPath = path.join(destPath, 'index.html')
   let gameIndexPath = path.join(destPath, 'index_game.html')
 
-  if (!fs.existsSync(gamePath)) {
-    console.error(`'${gamePath}' does not exist`.red)
-    rl.close()
-    process.exit(1);
-  } else if (!fs.lstatSync(gamePath).isDirectory()) {
-    console.error(`'${gamePath}' is not a directory`.red)
-    rl.close()
-    process.exit(1);
-  }
+  common.existsCheck(gamePath)
+  common.isDirectoryCheck(gamePath)
 
   console.log(`cp gamePath destPath`)
   ncp(gamePath, destPath, (err) => {
 
     console.log('cp vrum.js destPath')
-    cp(path.join(repoPath, 'vrum.min.js'), path.join(destPath, 'vrum.min.js'))
+    common.cp(path.join(vrumRepoPath, 'vrum.min.js'), path.join(destPath, 'vrum.min.js'))
 
     console.log('cp sandbox/http.js destPath')
-    cp(vrumHttpPath, path.join(destPath, 'http.js'))
+    common.cp(vrumHttpPath, path.join(destPath, 'http.js'))
 
-    checkForLinkImportDependencies(indexPath)
+    common.checkForLinkImportDependencies(indexPath)
 
     console.log('cp index.html game_index.html')
-    cp(indexPath, gameIndexPath)
+    common.cp(indexPath, gameIndexPath)
 
     console.log('cp sandbox/index.html index.html')
-    cp(sandboxIndexPath, indexPath)
+    common.cp(sandboxIndexPath, indexPath)
 
     // all scripts are included as assets
     console.log('creating scripts and assets list')
@@ -102,12 +93,12 @@ rl.question('Game full path: '.yellow, (gamePath) => {
 
       console.log('injecting pinger')
       let pinger = '<script charset="utf-8">Utils.initSandboxPinger()</script>'
-      injectHTML(indexPath, pinger)
-      injectHTML(gameIndexPath, pinger)
+      common.injectHTML(indexPath, pinger)
+      common.injectHTML(gameIndexPath, pinger)
 
       console.log('injecting popStarter')
       let popStater = '<script charset="utf-8">Utils.initPopStateReload()</script>'
-      injectHTML(gameIndexPath, popStater)
+      common.injectHTML(gameIndexPath, popStater)
 
       packageJson.name = gameName
       packageJson.pkg.assets = assets

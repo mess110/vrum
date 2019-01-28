@@ -3,24 +3,45 @@
 const ghpages = require('gh-pages');
 const colors = require('colors');
 const fs = require('fs')
-const rl = require('./common').readline;
 const path = require('path')
-const checkForLinkImportDependencies = require('./common').checkForLinkImportDependencies
+const common = require('./common')
+const rl = require('./common').readline;
 
 console.log('Welcome to vrum.js gh-pages publisher!'.green)
-// TODO: which folder
-// which repo, get url
 
-let repoRoot = ''
-let repoUrl = '' // TODO: get from .git/config
+rl.question('Game full path: '.yellow, (gamePath) => {
+  let dotConfigPath = path.join(gamePath, '.git', 'config')
+  let vrumRepoPath = path.join(__dirname, '..', '..')
 
-let indexPath = path.join(repoRoot, 'index.html')
-checkForLinkImportDependencies(indexPath)
+  common.existsCheck(gamePath)
+  common.isDirectoryCheck(gamePath)
+  common.existsCheck(dotConfigPath)
 
-options = {
-  branch: 'gh-pages',
-  repo: 'https://example.com/other/repo.git'
-}
-ghpages.publish(repoRoot, options, function(err) {
-  console.log('done')
-});
+  let lines = fs.readFileSync(dotConfigPath, 'utf-8').split('\n')
+  let repoUrl
+  lines.forEach((line) => {
+    if (line.indexOf('url = ') !== -1) {
+      repoUrl = line.split(' ').pop()
+    }
+  })
+
+  if (repoUrl === undefined) {
+    console.error(`Could not for url in ${dotConfigPath}`)
+    process.exit(10)
+  }
+
+  let indexPath = path.join(gamePath, 'index.html')
+  common.checkForLinkImportDependencies(indexPath)
+
+  common.cp(path.join(vrumRepoPath, 'vrum.min.js'), path.join(gamePath, 'vrum.min.js'))
+
+  console.log(`Found ${repoUrl}`)
+  options = {
+    branch: 'gh-pages',
+    repo: repoUrl
+  }
+  ghpages.publish(gamePath, options, function(err) {
+    console.log('done')
+    rl.close()
+  });
+})

@@ -1,9 +1,10 @@
 # CHEATSHEET
 
-## Distribute the app on linux/mac/windows
+## Distribute the app
 
 ```
-yarn dist
+yarn dist:exe # for linux/mac/windows
+yarn dist:web # for gh-pages publish
 ```
 
 ## Create a new game from the template

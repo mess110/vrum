@@ -9,8 +9,8 @@
     "https": "http-server -c-1 -S -C cert.pem -o",
     "genkey": "openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout key.pem -out cert.pem",
     "build": "node src/tools/build.js",
-    "publish": "yarn build && node src/tools/publish.js",
-    "dist": "yarn build && yarn clean:tmp && node src/tools/dist.js && cd tmp && yarn install && cd .. && yarn clean:tmp",
+    "dist:exe": "yarn build && yarn clean:tmp && node src/tools/dist.js && cd tmp && yarn install && cd .. && yarn clean:tmp",
+    "dist:web": "yarn build && node src/tools/publish.js",
     "clean:tmp": "rm -rf ./tmp",
     "new_game": "node src/tools/newGame.js",
     "start": "node src/tools/help.js"
