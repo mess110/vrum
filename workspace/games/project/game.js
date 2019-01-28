@@ -26,12 +26,11 @@ class LoadingScene extends MainScene {
     AssetManager.loadAssets([
       { type: 'image', path: 'vrum.png' },
     ], function () {
+      let mainScene = new MainScene()
       Engine.switchScene(mainScene)
     })
   }
 }
 
 let loadingScene = new LoadingScene()
-let mainScene = new MainScene()
-
 Engine.start(loadingScene)

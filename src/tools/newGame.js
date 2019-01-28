@@ -29,6 +29,11 @@ rl.question('Game name: '.yellow, (name) => {
     process.exit(1)
   }
 
+  if (name.search(/^[a-zA-Z0-9-_]+$/) == -1) {
+    console.error('Invalid name. Only alpha, numeric, - and _ characters allowed')
+    process.exit(1)
+  }
+
   if (fs.existsSync(fullPath)) {
     console.error(`Game '${name}' already exists`.red)
     process.exit(1)
