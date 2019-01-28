@@ -1,4 +1,4 @@
-# CHEATSHEET
+# Cheatsheet
 
 ## Distribute the app
 
@@ -14,6 +14,17 @@ To make your own game in a new folder with vrum.js packed:
 ```
 yarn new_game
 ```
+
+## Exporting from Blender
+
+To export to glTF, the recommended format by three.js, you need to install the
+[glTF-Blender-Exporter](https://github.com/KhronosGroup/glTF-Blender-Exporter)
+blender addon.
+
+* [Download the exporter](https://github.com/KhronosGroup/glTF-Blender-Exporter/archive/master.zip)
+* unzip `scripts/addons/io_scene_gltf2` to `~/.config/blender/VERSION/scripts/addons/`
+* enable the addon from Blender User Preferences
+* export to glb as it packs all the resources in 1 file
 
 ## Warn if webgl not available
 
