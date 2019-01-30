@@ -24,6 +24,7 @@ class LoadingScene extends MainScene {
     let geometry = new THREE.BoxGeometry( 1, 1, 1 )
     let material = new THREE.MeshBasicMaterial({ color: 'red' })
     this.model = new THREE.Mesh(geometry, material)
+    this.model.setWireframe(true)
     this.add(this.model)
 
     AssetManager.loadAssets([

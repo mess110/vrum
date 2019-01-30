@@ -102,3 +102,10 @@ var text = new BaseText({
 text.position.set(0, 0, 4)
 this.add(text)
 ```
+
+## Wireframe
+
+```
+scene.setWireframe(true)
+model.setWireframe(true)
+```

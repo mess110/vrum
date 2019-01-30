@@ -75,13 +75,16 @@ Once all assets are loaded we switch to the main scene. The game should not star
 right away. That might surprise the player. Instead, lets show some text and wait
 for input. We can store the state of the game in a variable which we change
 if the correct key is pressed in `doKeyboardEvent`. We could also show an image
-which gives the user information about keybindings.
+which gives the user information about keybindings. We add our assets as well.
 
 ```
-var text = new BaseText({
+let text = new BaseText({
   text: 'Press <Enter> to start', fillStyle: 'blue',
   canvasW: 1024, canvasH: 1024,
   font: '64px Helvetica'})
 text.position.set(0, 0, 4)
 this.add(text)
+
+let player = AssetManager.clone('player.gltf')
+this.add(player)
 ```
