@@ -12,7 +12,9 @@ yarn http
 
 <!--ts-->
    * [Installation](tutorials/INSTALL.md)
-      * [New game from template](tutorials/INSTALL.md)
+   * Concepts
+      * [Scenes](tutorials/SCENES.md)
+      * [Assets](tutorials/ASSETS.md)
    * [Cheatsheet](tutorials/CHEATSHEET.md)
    * [Distribute](tutorials/DISTRIBUTE.md)
 <!--te-->

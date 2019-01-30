@@ -97,4 +97,4 @@ game.js contains 2 scenes to help you get started with scene management. Open
 `http://127.0.0.1:8080/workspace/games/YOUR_GAME_NAME` in a browser to test your
 game.
 
-This is your starting template. [Lets load some assets](/tutorials/ASSETS.md)
+This is your starting template. [Lets talk about scenes](/tutorials/SCENES.md)

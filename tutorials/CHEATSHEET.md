@@ -61,3 +61,44 @@ See [src/extras/MeshNetwork.js](src/extras/MeshNetwork.js) for more info.
 ## Virtual Joystick
 
 See [src/extras/VirtualController.js](src/extras/VirtualController.js) for more info.
+
+## Sound
+
+Once sounds are loaded, you can use the `SoundManager` class to play sounds.
+
+```
+SoundManager.play('orchestra.wav')
+SoundManager.pause('orchestra.wav')
+SoundManager.stop('orchestra.wav')
+SoundManager.fadeIn('orchestra.wav', 1)
+SoundManager.fadeOut('orchestra.wav', 0)
+SoundManager.volume('orchestra.wav', 0.5)
+SoundManager.volumeAll('orchestra.wav', 0.5)
+SoundManager.looping('orchestra.wav', true)
+```
+
+For background music, we have a Playlist which can be used to loop music.
+
+```
+playlist = new Playlist(['shotgun.wav', 'hit.mp3'])
+playlist.play()
+SoundManager.pause(playlist.getPlayingKey())
+```
+
+## Sky
+
+```
+this.sky = new Sky();
+this.sky.addToScene(this)
+```
+
+## Text
+
+```
+var text = new BaseText({
+  text: 'Press <Enter> to start', fillStyle: 'blue',
+  canvasW: 1024, canvasH: 1024,
+  font: '64px Helvetica'})
+text.position.set(0, 0, 4)
+this.add(text)
+```

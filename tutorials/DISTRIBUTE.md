@@ -48,3 +48,7 @@ can find it in the github pages section of your repo settings page.
 Example: [https://github.com/mess110/vrum/settings](https://github.com/mess110/vrum/settings)
 
 gg
+
+## Android
+
+TODO: but basically use a WebView

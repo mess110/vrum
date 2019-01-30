@@ -1,3 +1,8 @@
+// var text = new BaseText({
+//   text: 'Press <Enter> to start', fillStyle: 'blue',
+//   canvasW: 1024, canvasH: 1024,
+//   font: '64px Helvetica'})
+// text.position.set(0, 0, 4)
 class BaseText extends THREE.Mesh {
   constructor(options) {
     if (options == null) { options = {}; }

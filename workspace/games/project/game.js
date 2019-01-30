@@ -6,9 +6,12 @@ class MainScene extends Scene {
     this.add(this.model)
   }
 
-  tick(tpf) {
-    this.model.rotation.x += tpf / 2
-    this.model.rotation.y += tpf / 2
+  doMouseEvent(event, raycaster) {
+    console.log(`${event.type} ${event.which} ${event.x}:${event.y} ${event.wheelDelta}`)
+  }
+
+  doKeyboardEvent(event) {
+    console.log(`${event.type} ${event.code} (${event.which})`)
   }
 }
 
@@ -29,6 +32,11 @@ class LoadingScene extends MainScene {
       let mainScene = new MainScene()
       Engine.switchScene(mainScene)
     })
+  }
+
+  tick(tpf) {
+    this.model.rotation.x += tpf / 2
+    this.model.rotation.y += tpf / 2
   }
 }
 

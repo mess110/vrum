@@ -4,6 +4,18 @@
  * DS206: Consider reworking classes to avoid initClass
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
+ *
+ * Example:
+ *
+ *   SoundManager.play('orchestra.wav')
+ *   SoundManager.pause('orchestra.wav')
+ *   SoundManager.stop('orchestra.wav')
+ *   SoundManager.fadeIn('orchestra.wav', 1)
+ *   SoundManager.fadeOut('orchestra.wav', 0)
+ *   SoundManager.volume('orchestra.wav', 0.5)
+ *   SoundManager.volumeAll('orchestra.wav', 0.5)
+ *   SoundManager.looping('orchestra.wav', true)
+ *
  */
 // @nodoc
 var SoundManager = (function() {

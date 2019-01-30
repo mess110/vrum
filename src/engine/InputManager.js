@@ -57,6 +57,11 @@ class InputManager {
     Hodler.get('scene').doKeyboardEvent(event)
   }
 
+  // @nodoc
+  wheelHandler(event) {
+    Hodler.get('engine').inputManager.mouseHandler(event)
+  }
+
   _changeEventListener(which) {
     var renderer = Hodler.get('renderer')
     renderer.domElement[which + "EventListener"]("mouseup", this.mouseHandler, false)
@@ -70,6 +75,8 @@ class InputManager {
     renderer.domElement[which + "EventListener"]("touchmove", this.touchHandler, false)
     renderer.domElement[which + "EventListener"]("touchend", this.touchHandler, false)
     renderer.domElement[which + "EventListener"]("touchcancel", this.touchHandler, false)
+
+    renderer.domElement[which + "EventListener"]("wheel", this.wheelHandler, false)
   }
 
   // @nodoc
