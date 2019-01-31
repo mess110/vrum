@@ -39,6 +39,10 @@ class BaseModifier extends TWEEN.Tween {
     return super.repeat(amount)
   }
 
+  easing(easing) {
+    return super.easing(easing)
+  }
+
   delay(amount) {
     return super.delay(amount)
   }
@@ -48,9 +52,10 @@ class BaseModifier extends TWEEN.Tween {
   }
 }
 
+// NOTE: chaining does not work with fade modifier
 class FadeModifier extends BaseModifier {
   constructor(subject, fromAlpha, toAlpha, duration) {
-    super({ x: fromAlpha}, { x: toAlpha }, duration, TWEEN.Easing.Exponential.Out)
+    super({ x: fromAlpha}, { x: toAlpha }, duration, TWEEN.Easing.Linear.None)
     this.onUpdate(function (obj) {
       subject.setOpacity(obj.x)
     })

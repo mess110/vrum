@@ -10,6 +10,7 @@ class LoadingScene extends Scene {
     camera.lookAt(new THREE.Vector3(0,0,0))
 
     AssetManager.loadAssets([
+      { type: 'font',  path: '/workspace/assets/fonts/luckiest-guy' },
       { type: 'model', path: '/workspace/assets/models/chicken.json' },
       { type: 'model', path: '/workspace/assets/models/chicken.json' },
       { type: 'model', path: '/workspace/assets/models/panda.glb' },

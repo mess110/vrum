@@ -119,7 +119,7 @@ class Scene1 extends Scene {
     var text = new BaseText({
       text: 'hello', fillStyle: 'blue',
       canvasW: 1024, canvasH: 1024,
-      font: '128px Helvetica'})
+      font: '128px luckiest-guy'})
     text.position.set(0, 0, 4)
     this.add(text)
 
@@ -129,12 +129,14 @@ class Scene1 extends Scene {
     down.chain(up)
     up.start()
 
-    // TODO: fix insta fade problem
-    var fadeOut = new FadeModifier(text, 1, 0.2, 1000)
-    var fadeIn = new FadeModifier(text, 0.2, 1, 1000)
-    fadeOut.chain(fadeIn)
-    fadeIn.chain(fadeOut)
-    fadeOut.start()
+    let duration = 3000
+    this.setInterval(() => {
+      let fadeOut = new FadeModifier(text, 1, 0.1, duration)
+      let fadeIn = new FadeModifier(text, 0.1, 1, duration)
+        .delay(duration)
+      fadeOut.start()
+      fadeIn.start()
+    }, duration * 2)
 
     var panda = AssetManager.clone('panda.glb')
     panda.animations.play(1)
