@@ -19,6 +19,7 @@
     "@tweenjs/tween.js": "^17.2.0",
     "ccapture.js": "^1.1.0",
     "file-saver": "^1.3.8",
+    "fontfaceobserver": "^2.1.0",
     "howler": "1.1.29",
     "html2canvas": "^1.0.0-alpha.12",
     "ocean": "jbouny/ocean",
@@ -37,8 +38,8 @@
     "concat-files": "^0.1.1",
     "gh-pages": "^2.0.1",
     "glob": "^7.1.3",
-    "ncp": "^2.0.0",
     "http-server": "^0.11.1",
+    "ncp": "^2.0.0",
     "uglify-es": "^3.3.9"
   },
   "engines": {

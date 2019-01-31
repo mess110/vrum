@@ -210,6 +210,9 @@ class Utils {
       if (options.width == null) { options.width = Utils.PLANE_DEFAULT_WIDTH; }
       if (options.height == null) { options.height = Utils.PLANE_DEFAULT_HEIGHT; }
     }
+    if (options.transparent == null) { options.transparent = false }
+    if (options.side == null) { options.side = THREE.DoubleSide }
+    if (options.opacity == null) { options.opacity = 1 }
     if (options.wSegments == null) { options.wSegments = Utils.PLANE_DEFAULT_W_SEGMENTS; }
     if (options.hSegments == null) { options.hSegments = Utils.PLANE_DEFAULT_H_SEGMENTS; }
     if (options.color == null) { options.color = Utils.PLANE_DEFAULT_COLOR; }
@@ -218,13 +221,17 @@ class Utils {
     if (options.map != null) {
       material = new (THREE.MeshBasicMaterial)({
         map: AssetManager.get(options.map),
-        side: THREE.DoubleSide});
+        transparent: options.transparent,
+        opacity: options.opacity,
+        side: options.side});
     } else if (options.material != null) {
       material = options.material
     } else {
       material = new (THREE.MeshBasicMaterial)({
         color: options.color,
-        side: THREE.DoubleSide});
+        transparent: options.transparent,
+        opacity: options.opacity,
+        side: options.side});
     }
 
     const geometry = new (THREE[options.class])(options.width, options.height, options.wSegments, options.hSegments);
@@ -304,6 +311,33 @@ class Utils {
 
   static setWireframe(value) {
     Hodler.get('scene').setWireframe(value)
+  }
+
+  // adds a script element to the head which loads all font types
+  // as long as they are named correctly
+  static addFontStyle(path) {
+    let name = path.split('/').last()
+    let css = `
+@font-face {
+  font-family: '${name}';
+  src: url('${path}.eot');
+  src: url('${path}.eot?#iefix') format('embedded-opentype'), url('${path}.woff2') format('woff2'), url('${path}.woff') format('woff'), url('${path}.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+`
+    let head = document.head || document.getElementsByTagName('head')[0]
+    let style = document.createElement('style')
+
+    style.type = 'text/css';
+    if (style.styleSheet){
+      // This is required for IE8 and below.
+      style.styleSheet.cssText = css;
+    } else {
+      style.appendChild(document.createTextNode(css));
+    }
+
+    head.appendChild(style);
   }
 
   // orbit.maxPolarAngle = Math.PI * 0.495

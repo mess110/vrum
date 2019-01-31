@@ -94,11 +94,19 @@ this.sky.addToScene(this)
 
 ## Text
 
+Send the path to the font without the extension. This will take care of
+adding the css import statements as well.
+
 ```
+AssetManager.loadAssets([
+  { type: 'font', path: 'assets/luckiest-guy' },
+], function () {
+})
+
 var text = new BaseText({
   text: 'Press <Enter> to start', fillStyle: 'blue',
   canvasW: 1024, canvasH: 1024,
-  font: '64px Helvetica'})
+  font: '64px luckiest-guy'})
 text.position.set(0, 0, 4)
 this.add(text)
 ```

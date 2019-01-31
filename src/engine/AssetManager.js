@@ -122,6 +122,9 @@ class AssetManager {
       case 'json':
         this.loadJSON(key, asset.path)
         break;
+      case 'font':
+        this.loadFont(key, asset.path)
+        break;
       default:
         throw 'unknown asset type ' + asset.type
     }
@@ -168,6 +171,22 @@ class AssetManager {
     })
   }
 
+  loadFont(key, value) {
+    this.loadingManager.itemStart(key)
+    let font = new FontFaceObserver(key, {
+      weight: 400
+    });
+    Utils.addFontStyle(value)
+
+    font.load().then(function () {
+      AssetManager.set(key, value)
+      AssetManager.instance.loadingManager.itemEnd(key)
+    }, function () {
+      console.error(`Font '${key}' is not available`);
+      AssetManager.instance.loadingManager.itemEnd(key)
+    });
+  }
+
   loadSound(key, value) {
     this.loadingManager.itemStart(value)
     let howl = new Howl({
@@ -176,7 +195,7 @@ class AssetManager {
       urls: [value],
       format: [key.split('.').last()],
       onloaderror: function (e) {
-        console.log(e)
+        console.error(e)
       },
       onload: function () {
         AssetManager.set(key, howl)
