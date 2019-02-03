@@ -10,7 +10,7 @@ class Engine {
     this.tick = this.tick.bind(this)
   }
 
-  static start(scene) {
+  static start(scene, assets) {
     Hodler.add('scene', scene)
 
     var renderer = RenderManager.initRenderer()
@@ -26,28 +26,33 @@ class Engine {
     var afterEffects = new AfterEffects()
     Hodler.add('afterEffects', afterEffects)
 
-    scene._fullInit()
-    engine.start()
+    AssetManager.loadAssets(assets, () => {
+      Utils.fade({ type: 'out', duration: 1000})
+      scene._fullInit()
+      engine.start()
+    })
     return engine
   }
 
-  static switchScene(scene) {
-    var duration = 1000
-    var engine = Hodler.get('engine')
-    engine.inputManager.disable()
+  static switch(scene, assets) {
+    AssetManager.loadAssets(assets, () => {
+      var duration = 1000
+      var engine = Hodler.get('engine')
+      engine.inputManager.disable()
 
-    Utils.fade({ type: 'in', duration: duration })
-    Utils.delay(function () {
-      var oldScene = Hodler.get('scene')
-      if (oldScene !== null) {
-        oldScene._fullUninit()
-      }
-      Hodler.add('scene', scene)
-      scene._fullInit()
-      Hodler.get('afterEffects').updateCamAndScene()
-      Utils.fade({ type: 'out', duration: duration })
-      engine.inputManager.enable()
-    }, duration)
+      Utils.fade({ type: 'in', duration: duration })
+      Utils.delay(function () {
+        var oldScene = Hodler.get('scene')
+        if (oldScene !== null) {
+          oldScene._fullUninit()
+        }
+        Hodler.add('scene', scene)
+        scene._fullInit()
+        Hodler.get('afterEffects').updateCamAndScene()
+        Utils.fade({ type: 'out', duration: duration })
+        engine.inputManager.enable()
+      }, duration)
+    })
   }
 
   start() {

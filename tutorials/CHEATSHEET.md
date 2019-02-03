@@ -117,3 +117,43 @@ this.add(text)
 scene.setWireframe(true)
 model.setWireframe(true)
 ```
+
+## Scene/loading management
+
+Load assets. Once loading is done, start the specified scene
+
+```
+Engine.start(new LoadingScene(), [
+  { type: 'image', path: 'vrum.png' },
+])
+```
+
+Load assets. Once loading is done, switch to the specified scene
+
+```
+Engine.switch(new GameScene(), [
+  { type: 'image', path: 'vrum.png' },
+])
+```
+
+Example with custom loading screen (don't forget to set the camera if you
+custmoize)
+
+```
+class LoadingScene extends Scene {
+  init(options) {
+    // setTimeout is used to not skip the first fade in
+    this.setTimeout(() => {
+      Engine.switch(new GameScene(), [
+        // assets used in the game
+        { type: 'image', path: 'vrum.png' },
+      ])
+    }, 1000)
+  }
+}
+
+Engine.start(new LoadingScene(), [
+  // assets used in the loading screen
+  { type: 'image', path: 'vrum.png' },
+])
+```

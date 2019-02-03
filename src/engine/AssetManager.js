@@ -23,8 +23,10 @@ class AssetManager {
   }
 
   static loadAssets(assets, callback) {
+    if (isBlank(assets)) { assets = [] }
+
     if (callback !== undefined && callback !== null) {
-      AssetManager.instance.loadingManager.onLoad = function () {
+      AssetManager.instance.loadingManager.onLoad = () => {
         callback()
       }
     }

@@ -9,11 +9,9 @@ class LoadingScene extends MainScene {
     light.position.set(0, 10, 10)
     this.add(light)
 
-    AssetManager.loadAssets([
+    Engine.switch(Hodler.get('mainScene'), [
       { type: 'image', path: 'vrum.png' },
-    ], function () {
-      Engine.switchScene(Hodler.get('mainScene'))
-    })
+    ])
   }
 
   tick(tpf) {
