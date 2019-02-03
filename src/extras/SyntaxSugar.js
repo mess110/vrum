@@ -423,6 +423,16 @@ traverseBones = function (boneName, mesh) {
   return added
 }
 
+THREE.Object3D.prototype.getBoneNames = function () {
+  let bones = []
+  this.traverse(function(object) {
+    if (object instanceof THREE.Bone) {
+      bones.push(object.name)
+    }
+  });
+  return bones
+}
+
 // attach a mesh to a bone
 //
 // @param [String] boneName
