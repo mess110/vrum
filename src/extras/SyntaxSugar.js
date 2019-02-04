@@ -441,12 +441,15 @@ THREE.Object3D.prototype.getBoneNames = function () {
 // between 71 and 72, for some reason there is always another bone
 // with the same name. That is why we keep track of added,
 // so we don't add it twice
-THREE.Object3D.prototype.attachToBone = function (boneName, mesh) {
+THREE.Object3D.prototype.attachToBone = function (boneName, mesh, scale) {
+  if (isBlank(scale)) { scale = 1 }
+  if (isBlank(mesh)) { throw 'mesh to attach is blank' }
   let added = false;
   return this.traverse(function(object) {
     if (added) { return; }
     if (object instanceof THREE.Bone && (object.name === boneName)) {
       added = true;
+      mesh.scale.set(scale, scale, scale)
       return object.add(mesh);
     }
   });

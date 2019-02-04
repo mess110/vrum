@@ -30,16 +30,20 @@ class Scene1 extends Scene {
     this.add(this.tree)
 
     var armor = new Box()
-    armor.scale.set(0.2, 0.2, 0.2)
 
     Utils.setCursor('../../assets/textures/hand.png')
 
     let mesh = AssetManager.get('chicken.json')
-
-    this.add(mesh)
+    mesh.setSkin('chicken_black.jpeg')
+    mesh.scale.set(4, 4, 4)
     mesh.position.set(2, 2, -2)
     mesh.animations.play(1)
     mesh.shadowCastAndNotReceive()
+    this.add(mesh)
+
+    mesh.attachToBone('Neck', armor)
+    mesh.detachFromBone('Neck', armor)
+    mesh.attachToBone('Neck', armor, 0.2)
 
     this.forest = Utils.forest({
       items: [
@@ -67,11 +71,6 @@ class Scene1 extends Scene {
     this.add(this.terrain)
 
     // this.terrain.material = this.water.water.material
-
-    mesh.setSkin('chicken_black.jpeg')
-    mesh.scale.set(4, 4, 4)
-    mesh.attachToBone('Neck', armor)
-    // mesh.detachFromBone('Neck', armor)
 
     this.add(new THREE.AmbientLight(0xffffff, 0.3))
 

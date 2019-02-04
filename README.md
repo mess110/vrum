@@ -47,7 +47,7 @@ yarn http
 * [x] take screenshots
 * [x] record videos
 * [x] pool manager
-* [x] attach object to bone
+* [x] attach object to bone (scale support)
 * [x] load images
 * [x] load sounds
 * [x] load json models
@@ -94,6 +94,5 @@ yarn http
 * [ ] a lot of points geometry
 * [ ] tween between animation weights
 * [ ] generate load_assets_file.json
-* [ ] attach to bone scaled
 * [ ] physics
 * [ ] pause rendering on blur (implement own timeout affected by rendering)
