@@ -27,7 +27,7 @@ let packageJson = {
   "version": "1.0.0",
   "bin": "http.js",
   "scripts": {
-    "postinstall": "pkg . --targets=node10-linux-x64,node10-macos-x64,node10-win-x64 --out-path=../dist/"
+    "postinstall": `pkg . --targets=node10-linux-x64,node10-macos-x64,node10-win-x64 --out-path=../${common.distFolder}`
   },
   "pkg": {
     "assets": [],
@@ -64,7 +64,7 @@ rl.question('Game full path: '.yellow, (gamePath) => {
   ncp(gamePath, destPath, (err) => {
 
     console.log('cp vrum.js destPath')
-    common.cp(path.join(vrumRepoPath, 'vrum.min.js'), path.join(destPath, 'vrum.min.js'))
+    common.cp(path.join(vrumRepoPath, common.distFolder, 'vrum.min.js'), path.join(destPath, 'vrum.min.js'))
 
     console.log('cp sandbox/http.js destPath')
     common.cp(vrumHttpPath, path.join(destPath, 'http.js'))

@@ -9,6 +9,8 @@ const colors = require('colors');
 const concat = require('concat-files');
 const fs = require('fs')
 const UglifyJS = require('uglify-es');
+const path = require('path')
+const common = require('./common')
 
 function getFilesizeInBytes(filename) {
   const stats = fs.statSync(filename)
@@ -36,8 +38,11 @@ var dependencies = fs.readFileSync('workspace/dependencies.html', 'utf-8')
     }
   })
 
-var outputPath = 'vrum.js'
-var outputPathMin = 'vrum.min.js'
+if (!fs.existsSync(common.distFolder)){
+    fs.mkdirSync(common.distFolder);
+}
+var outputPath = path.join(common.distFolder, 'vrum.js')
+var outputPathMin = path.join(common.distFolder, 'vrum.min.js')
 
 concat(dependencies, outputPath, (err) => {
   if (err) throw err
@@ -50,4 +55,5 @@ concat(dependencies, outputPath, (err) => {
   fs.writeFileSync(outputPathMin, file.code)
 
   printFileSize(outputPathMin)
+  process.exit(0)
 })

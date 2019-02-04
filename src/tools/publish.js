@@ -33,7 +33,7 @@ rl.question('Game full path: '.yellow, (gamePath) => {
   let indexPath = path.join(gamePath, 'index.html')
   common.checkForLinkImportDependencies(indexPath)
 
-  common.cp(path.join(vrumRepoPath, 'vrum.min.js'), path.join(gamePath, 'vrum.min.js'))
+  common.cp(path.join(vrumRepoPath, common.distFolder, 'vrum.min.js'), path.join(gamePath, 'vrum.min.js'))
 
   console.log(`Found ${repoUrl}`)
   options = {

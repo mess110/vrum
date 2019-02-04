@@ -65,4 +65,5 @@ module.exports = {
   existsCheck: existsCheck,
   isDirectoryCheck: isDirectoryCheck,
   cp: cp,
+  distFolder: './dist',
 }
