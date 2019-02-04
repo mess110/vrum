@@ -111,6 +111,13 @@ text.position.set(0, 0, 4)
 this.add(text)
 ```
 
+```
+* {
+  font-family: 'luckiest-guy', sans-serif;
+  font-size: 2em;
+}
+```
+
 ## Wireframe
 
 ```
