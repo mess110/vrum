@@ -66,11 +66,13 @@ const init = (config) => {
   fs.readdirSync(config.root).forEach(file => {
     console.log(`  ${file}`);
   })
-  console.log('Assets:')
   const assetsDir = path.join(config.root, 'assets')
-  fs.readdirSync(assetsDir).forEach(file => {
-    console.log(`  ${file}`);
-  })
+  if (fs.existsSync(assetsDir) && fs.lstatSync(assetsDir).isDirectory()) {
+    console.log('Assets:')
+    fs.readdirSync(assetsDir).forEach(file => {
+      console.log(`  ${file}`);
+    })
+  }
 
   pkgOpen(baseUrl + 'index.html')
 
