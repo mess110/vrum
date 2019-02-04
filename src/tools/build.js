@@ -2,7 +2,7 @@
 
 // Handles building of vrum.js and vrum.min.js
 //
-// Each script tag in 'workspace/dependencies.html' gets read and appended
+// Each script tag in 'src/tools/dependencies.dev.js' gets read and appended
 // to a file. That file is then minified
 
 const colors = require('colors');
@@ -25,11 +25,11 @@ function printFileSize(filename) {
 
 console.log("Building vrum.js and vrum.min.js")
 
-var dependencies = fs.readFileSync('workspace/dependencies.html', 'utf-8')
+var dependencies = fs.readFileSync('src/tools/dependencies.dev.js', 'utf-8')
   .split('\n')
   .filter(Boolean)
-  .map((e) => e.replace('<script src="', ''))
-  .map((e) => e.replace('"></script>', ''))
+  .filter((e) => e.startsWith('  "'))
+  .map((e) => e.substr(3).slice(0, -2))
   .map((e) => {
     if (e[0] == '/') {
       return e.substr(1);
@@ -37,6 +37,7 @@ var dependencies = fs.readFileSync('workspace/dependencies.html', 'utf-8')
       return e.substr(9)
     }
   })
+dependencies.splice(0, 0, 'src/tools/dependencies.dist.js')
 
 if (!fs.existsSync(common.distFolder)){
     fs.mkdirSync(common.distFolder);

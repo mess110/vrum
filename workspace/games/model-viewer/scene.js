@@ -33,11 +33,12 @@ class MainScene extends Scene {
     scene.remove(scene.model)
 
     const key = AssetManager.getAssetKey({ path: path })
-    let newModel = AssetManager.get(key)
+    let newModel = AssetManager.clone(key)
     if (isBlank(newModel)) {
       throw `Asset ${path} with key ${key} is blank`
     }
 
+    console.log(newModel)
     newModel.shadowCastAndNotReceive()
     scene.model = newModel
     scene.add(newModel)

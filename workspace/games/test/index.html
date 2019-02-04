@@ -11,12 +11,15 @@
         </style>
     </head>
     <body>
-        <link rel="import" href="/workspace/dependencies.html">
-        <!-- <script src="/vrum.min.js"></script> -->
-
-        <script src="scene1.js"></script>
-        <script src="scene2.js"></script>
-        <script src="loadingScene.js"></script>
-        <script src="game.js"></script>
+        <script src="/src/tools/dependencies.dev.js"></script>
+        <!-- <script src="vrum.min.js"></script> -->
+        <script>
+            loadVrumScripts([
+                'scene1.js',
+                'scene2.js',
+                'loadingScene.js',
+                'game.js',
+            ])
+        </script>
     </body>
 </html>

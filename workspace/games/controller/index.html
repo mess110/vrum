@@ -18,8 +18,12 @@
             </svg>
         </div>
 
-        <link rel="import" href="/workspace/dependencies.html">
-
-        <script src="game.js"></script>
+        <script src="/src/tools/dependencies.dev.js"></script>
+        <!-- <script src="vrum.min.js"></script> -->
+        <script>
+            loadVrumScripts([
+                'game.js',
+            ])
+        </script>
     </body>
 </html>

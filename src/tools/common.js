@@ -35,9 +35,9 @@ const cp = (srcPath, destPath) => {
 const checkForLinkImportDependencies = (filePath) => {
   let lines = fs.readFileSync(filePath, 'utf-8').split('\n')
   lines.forEach((line) => {
-    if (line.indexOf('<link rel="import" href="/workspace/dependencies.html">') !== -1) {
+    if (line.indexOf('<script src="/src/tools/dependencies.dev.js"></script>') !== -1) {
       if (line.indexOf('<!--') === -1) {
-        console.error(`'workspace/dependencies.html' detected in '${filePath}' import 'vrum.min.js' instead`)
+        console.error(`'src/tools/dependencies.dev.js' detected in '${filePath}' import 'vrum.min.js' instead`)
         process.exit(1);
       }
     }
@@ -65,5 +65,5 @@ module.exports = {
   existsCheck: existsCheck,
   isDirectoryCheck: isDirectoryCheck,
   cp: cp,
-  distFolder: './dist',
+  distFolder: '.',
 }

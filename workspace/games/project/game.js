@@ -23,5 +23,6 @@ class GameScene extends Scene {
 }
 
 Engine.start(new GameScene(), [
-  { type: 'image', path: 'vrum.png' },
+  { type: 'font', path: 'assets/luckiest-guy' },
+  { type: 'image', path: 'assets/vrum.png' },
 ])

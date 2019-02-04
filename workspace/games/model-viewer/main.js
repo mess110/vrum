@@ -3,7 +3,11 @@ Config.instance.engine.debug = true
 
 let wireframe = false
 
-Persist.defaultJson('lastModels', ['/workspace/games/brawl/assets/wizard-lizard.gltf'])
+Persist.defaultJson('lastModels', [
+  '/workspace/assets/models/chicken.json',
+  '/workspace/assets/models/skeleton.json',
+  '/workspace/assets/models/panda.glb',
+])
 updateLastModels()
 stopPropagation()
 

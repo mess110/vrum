@@ -27,7 +27,7 @@ let packageJson = {
   "version": "1.0.0",
   "bin": "http.js",
   "scripts": {
-    "postinstall": `pkg . --targets=node10-linux-x64,node10-macos-x64,node10-win-x64 --out-path=../${common.distFolder}`
+    "postinstall": `pkg . --targets=node10-linux-x64,node10-macos-x64,node10-win-x64 --out-path=../dist`
   },
   "pkg": {
     "assets": [],

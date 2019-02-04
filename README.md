@@ -86,6 +86,7 @@ yarn http
 * [x] warn user when building with dependencies.html
 * [x] distribute app with gh-pages publish
 * [x] build before publish/distribute and copy vrum.min.js
+* [ ] html icon
 * [ ] set shadowMap.width and height of all lights
 * [ ] tutorials
 * [ ] VR
