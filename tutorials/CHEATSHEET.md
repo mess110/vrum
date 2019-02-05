@@ -4,11 +4,11 @@
 
 Warn if webgl not available
 
-Happens automatically with the help of [src/extras/PolyfillRenderer.js](src/extras/PolyfillRenderer.js)
+Happens automatically with the help of [/src/extras/PolyfillRenderer.js](src/extras/PolyfillRenderer.js)
 
 ## Config
 
-See [src/engine/Config.js](src/engine/Config.js) comments for details
+See [/src/engine/Config.js](/src/engine/Config.js) comments for details
 
 ```
 Config.window.resize = true
@@ -29,15 +29,15 @@ are not that important when prototyping the game.
 
 After you register and api_key and secret you can `HighScoreManager.addScore` or `HighScoreManager.getScores(20)`
 
-See [src/extras/HighScoreManager.js](src/extras/HighScoreManager.js) for more info.
+See [/src/extras/HighScoreManager.js](/src/extras/HighScoreManager.js) for more info.
 
 ## MeshNetwork
 
-See [src/extras/MeshNetwork.js](src/extras/MeshNetwork.js) for more info.
+See [/src/extras/MeshNetwork.js](/src/extras/MeshNetwork.js) for more info.
 
 ## VirtualJoystick
 
-See [src/extras/VirtualController.js](src/extras/VirtualController.js) for more info.
+See [/src/extras/VirtualController.js](/src/extras/VirtualController.js) for more info.
 
 ## Sound
 
@@ -192,7 +192,7 @@ the other content.
 You can persist data on the client in Local Storage with the help of Persist.
 It supports defeault values, prefixing and different primitives.
 
-See [/src/extras/Persist.js] for more info.
+See [/src/extras/Persist.js](/src/extras/Persist.js) for more info.
 
 ## OrbitControls
 

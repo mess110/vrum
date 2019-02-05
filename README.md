@@ -88,6 +88,8 @@ yarn http
 * [x] fog
 * [x] text
 * [x] grid helper
+* [x] high score manager (backed by https://json.northpole.ro)
+* [x] mesh networking
 
 ## Undocumented features
 
@@ -109,7 +111,6 @@ yarn http
 * [x] graffiti generator (layered painting)
 * [x] lightning bolt
 * [x] volumetric spotlight
-* [x] high score manager (backed by https://json.northpole.ro)
 * [x] bundle assets
 * [x] shadows
 * [x] light helpers
@@ -120,7 +121,6 @@ yarn http
 * [x] qr code generator
 * [x] on screen controls
 * [x] fine animation controls
-* [x] mesh networking
 * [x] game pad controller game
 * [ ] set shadowMap.width and height of all lights
 * [ ] tutorials
