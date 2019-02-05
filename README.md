@@ -11,11 +11,29 @@ yarn http
 ## Tutorial
 
 <!--ts-->
-   * [Installation](tutorials/INSTALL.md)
-   * Concepts
-      * [Scenes](tutorials/SCENES.md)
-      * [Assets](tutorials/ASSETS.md)
+   * [About](tutorials/INSTALL.md#About)
+   * [Install](tutorials/INSTALL.md#Install)
+   * [Test](tutorials/INSTALL.md#Test)
+   * [Create a new game](tutorials/INSTALL.md#Createa a new game)
+   * [Assets](tutorials/ASSETS.md)
+       * [AssetManager](tutorials/ASSETS.md#AssetManager)
+       * [Engine helpers](tutorials/ASSETS.md#Engine helpers)
+   * [Scenes](tutorials/SCENES.md)
+       * [Scene management](tutorials/CHEATSHEET.md#Scene management)
    * [Cheatsheet](tutorials/CHEATSHEET.md)
+       * [No WebGL](tutorials/CHEATSHEET.md#NoWebGL)
+       * [Config](tutorials/CHEATSHEET.md#Config)
+       * [QRCode](tutorials/CHEATSHEET.md#QRCode)
+       * [Highscores](tutorials/CHEATSHEET.md#Highscores)
+       * [MeshNetwork](tutorials/CHEATSHEET.md#Mesh Network)
+       * [Virtual Joystick](tutorials/CHEATSHEET.md#Virtual Joystick)
+       * [Sound](tutorials/CHEATSHEET.md#Sound)
+       * [Sky](tutorials/CHEATSHEET.md#Sky)
+       * [Text](tutorials/CHEATSHEET.md#Text)
+       * [Wireframe](tutorials/CHEATSHEET.md#Wireframe)
+       * [Screenshot](tutorials/CHEATSHEET.md#Screenshot)
+       * [Record video](tutorials/CHEATSHEET.md#Record video)
+   * [Blender](tutorials/BLENDER.md)
    * [Distribute](tutorials/DISTRIBUTE.md)
 <!--te-->
 
@@ -23,7 +41,7 @@ yarn http
 
 * [x] engine framework
 * [x] after effects with composer
-* [x] toggle fullscreen
+* [x] toggle fullscreen - documented
 * [x] keyboard/mouse/touch input
 * [x] keyboard long pressed
 * [x] warn if webgl not available

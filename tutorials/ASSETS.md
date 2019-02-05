@@ -1,8 +1,5 @@
 # Assets
 
-Please follow [the previous tutorial](/tutorials/SCENES.md) if you want to know how
-to navigate scenes.
-
 vrum.js supports all the asset types supported by THREE.JS but it has a helper
 for only a subet of them:
 
@@ -10,6 +7,7 @@ for only a subet of them:
 * sounds
 * json objects
 * gltf/glb/json models
+* fonts
 
 ## AssetManager
 
@@ -17,6 +15,7 @@ Assets can be loaded though the `AssetManager` class.
 
 ```
 AssetManager.loadAssets([
+  { type: 'font', path: '/workspace/assets/fonts/luckies-guy' },
   { type: 'model', path: '/workspace/assets/models/chicken.json' },
   { type: 'model', path: '/workspace/assets/models/panda.glb' },
   { type: 'image', path: '/workspace/assets/models/chicken.png' },
@@ -29,13 +28,21 @@ AssetManager.loadAssets([
   { type: 'json',  path: '/workspace/assets/terrains/terrain.json' },
   { type: 'sound', path: '/workspace/assets/sounds/hit.wav' },
   { type: 'sound', path: '/workspace/assets/sounds/SuperHero_original.ogg' },
-], function () {
-  Engine.switchScene(otherScene)
-})
+], callback)
 ```
 
-In `otherScene`, 3D Models should be cloned `let chicken = AssetManager.clone('chicken.json')`,
-you can get models/images/json/sound with `let texture = AssetManager.get('chicken.png')` and
+`loadAssets` expects an array of dicts, each dict needs to have 2 keys:
+type and path. Type `model` loads json/gltf/glb objects and instantiates
+the correct THREE objects. Type `json` loads as a json object. Type `image`
+is loaded and served as Texture. Type `sound` is added to `SoundManager`.
+Type `font` adds the css to load the font-face
+
+3D Models should be cloned so we can modify them independently.
+
+`let chicken = AssetManager.clone('chicken.json')`
+
+You can get models/images/json/sound with
+`let texture = AssetManager.get('chicken.png')` and
 play sounds though [SoundManager](/tutorials/CHEATSHEET.md#Sound).
 
 ```
@@ -58,33 +65,21 @@ model.animations.play('wiggle', { stopAll: false })
 model.animations.play('tongue', { stopAll: false })
 ```
 
-For the core of our game we need:
+## Engine helpers
 
-* hat model - with interchangable skin
-* player model - with walk, chop and carry animations
-* table - to chop on
-* sink - to wash in
-* fryer - to cook in
-* trashcan
-* food source - with different skins for different food
-* food
-* plate
-* floor
-
-Once all assets are loaded we switch to the main scene. The game should not start
-right away. That might surprise the player. Instead, lets show some text and wait
-for input. We can store the state of the game in a variable which we change
-if the correct key is pressed in `doKeyboardEvent`. We could also show an image
-which gives the user information about keybindings. We add our assets as well.
+2 helpers are provided for loading assets. They load the assets and once
+they finish loading, they switch to the specified scene. This combo can
+be used to create nice loading screens.
 
 ```
-let text = new BaseText({
-  text: 'Press <Enter> to start', fillStyle: 'blue',
-  canvasW: 1024, canvasH: 1024,
-  font: '64px Helvetica'})
-text.position.set(0, 0, 4)
-this.add(text)
+Engine.start(new GameScene(), [
+  { type: 'font', path: 'assets/luckiest-guy' },
+  { type: 'image', path: 'assets/vrum.png' },
+])
+```
 
-let player = AssetManager.clone('player.gltf')
-this.add(player)
+```
+Engine.switch(new MainScene(), [
+  { type: 'image', path: 'assets/floor.png' },
+])
 ```

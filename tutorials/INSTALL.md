@@ -1,9 +1,5 @@
 # vrum.js tutorial
 
-These tutorials will teach you how to build an Overcooked clone. Please note,
-I am only doing this for educational purposes. Also, all the code is open-source
-and I am using assets made by me. We will call our game: fript
-
 ## About
 
 vrum.js is a bunch of code which aims to help the development of cross platform
@@ -53,7 +49,6 @@ yarn install
 
 This should create a folder called vrum and install node.js dependencies.
 
-
 ## Test
 
 Are we ready to go? Lets check:
@@ -78,23 +73,30 @@ yarn new_game
 
 When prompted, specify a name for your game. It will initially be created in
 `workspace/games/` under the game name of your choosing. It contains all the
-source code needed to run/develop the game. As mentioned previously, I will call
-this game fript.
+source code needed to run/develop the game.
 
 The code is rather easy to understand. There is an index.html file which needs
-to be opened in the browser, a game.js file which is included by index.html and
-a picture. In index.html, the main noteworthy thing is how vrum.js is imported.
+to be opened in the browser and a game.js file which is included by index.html.
+In index.html, the main noteworthy thing is how vrum.js is imported.
 There are 2 ways:
 
-* link import which aids development by using the source code from vrum repo
-* vrum.min.js which is a "compiled" version of the engine
+* load /src/tools/dependencies.dev.js
+* load vrum.min.js which is a "compiled" version of all the files loaded from
+/src/tools/dependencies.dev.js
 
-You should only use one of these methods as they do the same thing. When deploying,
-you NEED to use the 2nd one. Main reasoning for this is that we don't want to deploy
-all the source code of vrum.js as several files. One is enough.
+You should only use one of these methods as they do the same thing. When
+deploying, you NEED to use the 2nd one. Main reasoning for this is that we
+don't want to deploy all the source code of vrum.js as several files.
+One is enough.
 
-game.js contains 2 scenes to help you get started with scene management. Open
-`http://127.0.0.1:8080/workspace/games/YOUR_GAME_NAME` in a browser to test your
-game.
+```
+loadVrumScripts([
+  'game.js'
+])
+```
 
-This is your starting template. [Lets talk about scenes](/tutorials/SCENES.md)
+Makes sure all the assets are loaded in order. In the case of
+dependencies.dev.js, it loads each source file in order.
+
+Open `http://127.0.0.1:8080/workspace/games/YOUR_GAME_NAME` in a browser to
+test your game.
