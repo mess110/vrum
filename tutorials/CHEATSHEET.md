@@ -31,11 +31,11 @@ After you register and api_key and secret you can `HighScoreManager.addScore` or
 
 See [src/extras/HighScoreManager.js](src/extras/HighScoreManager.js) for more info.
 
-## Mesh Networking
+## MeshNetwork
 
 See [src/extras/MeshNetwork.js](src/extras/MeshNetwork.js) for more info.
 
-## Virtual Joystick
+## VirtualJoystick
 
 See [src/extras/VirtualController.js](src/extras/VirtualController.js) for more info.
 
@@ -102,7 +102,7 @@ scene.setWireframe(true)
 model.setWireframe(true)
 ```
 
-## Scene management
+## SceneManagement
 
 Scene loading/management. Load assets. Once loading is done, start the
 specified scene
@@ -149,7 +149,7 @@ Engine.start(new LoadingScene(), [
 Utils.screenshot()
 ```
 
-## Record video
+## RecordVideo
 
 ```
 VideoRecorderManager.start()

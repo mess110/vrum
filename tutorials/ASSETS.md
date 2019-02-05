@@ -65,7 +65,7 @@ model.animations.play('wiggle', { stopAll: false })
 model.animations.play('tongue', { stopAll: false })
 ```
 
-## Engine helpers
+## EngineHelpers
 
 2 helpers are provided for loading assets. They load the assets and once
 they finish loading, they switch to the specified scene. This combo can

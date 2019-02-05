@@ -63,9 +63,10 @@ of vrum.js features. It should look something like this:
 
 ![should look like](/workspace/games/project/vrum.png)
 
-## Create a new game
+## NewGame
 
-The template from which the game is built can be found in `workspace/games/project`.
+Create a new game. The template from which the game is built can be found in
+`workspace/games/project`.
 
 ```
 yarn new_game
