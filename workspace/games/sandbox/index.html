@@ -174,15 +174,17 @@ body {
 
         <script src="/vrum.min.js"></script>
         <script>
+let newHtml = undefined
+
 AssetManager.loadAssets([
     { type: 'font', path: 'assets/luckiest-guy' },
-], () => {})
-
-let newHtml = undefined
-fetch('index_game.html').then((response) => { return response.text() }).then((html) => {
-    newHtml = html
-}).catch((error) => {
-    console.error(error)
+], () => {
+    fetch('index_game.html').then((response) => { return response.text() }).then((html) => {
+        newHtml = html
+    }).catch((error) => {
+        console.error("Could not fetch index_game.html")
+        console.error(error)
+    })
 })
 
 const repeatUntilStarts = () => {
