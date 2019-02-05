@@ -12,11 +12,13 @@
             .button2 { position: relative; cursor: pointer; margin: 2px; text-decoration: underline }
             .panel { background-color: white; }
             .control { width: 50%; float: right }
+            #recordButton, #screenshot { cursor: pointer; }
         </style>
     </head>
     <body>
         <div id="animationControls" class="panel" style="position: absolute; right: 0px; top: 0px; display: none">
             <div style="padding-left: 16px; padding-right: 16px">
+                <p><span id="recordButton">⏺️ Record</span><span id="screenshot" style="float: right">📷 Screenshot</span></p>
                 <p><input id="stopAll" type="checkbox" checked/> Stop All</p>
                 <p><input id="loop" type="checkbox" checked/> Loop</p>
                 <p><input id="reverse" type="checkbox" /> Reverse</p>
@@ -33,7 +35,7 @@
             <div style="padding: 16px; display: flex; flex-direction: column;">
                 <div style="display: flex; padding-bottom: 16px">
                     <div style="width: 60%">
-                        <input id="inputUrl" type="text" style="width: 100%">
+                        <input id="inputUrl" type="text" style="width: 100%" placeholder="Asset path on disk">
                     </div>
                     <div style="width: 20%">
                         <input id="scale" type="text" value="1" style="width: 80%; margin-left: 16px">

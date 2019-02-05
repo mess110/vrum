@@ -10,20 +10,20 @@ var VideoRecorderManager = (function() {
   let instance = undefined;
   VideoRecorderManager = class VideoRecorderManager {
     static initClass() {
-  
+
       instance = null;
-  
+
       Singleton.VideoRecorderManager = class VideoRecorderManager {
-  
+
         constructor() {
           this.recording = false;
         }
-  
+
         capture(domElement) {
           if (this.recording === false) { return; }
           this.recorder.capture(domElement);
         }
-  
+
         start() {
           if (this.recorder == null) {
             this.recorder = new CCapture(Config.instance.recorder);
@@ -31,11 +31,15 @@ var VideoRecorderManager = (function() {
           this.recorder.start();
           this.recording = true;
         }
-  
+
         stop() {
           this.recorder.stop();
           this.recording = false;
           this.recorder.save()
+        }
+
+        isRecording() {
+          return this.recording
         }
       };
     }
@@ -50,6 +54,10 @@ var VideoRecorderManager = (function() {
 
     static stop() {
       this.get().stop();
+    }
+
+    static isRecording() {
+      return this.get().isRecording()
     }
 
     static capture(domElement) {

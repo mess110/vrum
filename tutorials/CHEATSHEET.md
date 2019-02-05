@@ -164,3 +164,17 @@ Engine.start(new LoadingScene(), [
   { type: 'image', path: 'vrum.png' },
 ])
 ```
+
+## Take a screenshot
+
+```
+Utils.screenshot()
+```
+
+## Record video
+
+```
+VideoRecorderManager.start()
+VideoRecorderManager.isRunning()
+VideoRecorderManager.stop()
+```

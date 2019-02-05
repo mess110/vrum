@@ -24,6 +24,22 @@ class MainScene extends Scene {
 
     document.querySelector('#modelControls').style.display = ''
     document.querySelector('#animationControls').style.display = ''
+
+    let recordButton = document.querySelector('#recordButton')
+    recordButton.addEventListener('click', (event) => {
+      if (VideoRecorderManager.isRecording()) {
+        recordButton.textContent = '⏺️ Record'
+        VideoRecorderManager.stop()
+      } else {
+        recordButton.textContent = '⏹️ Stop'
+        VideoRecorderManager.start()
+      }
+    })
+
+    let screenshotButton = document.querySelector('#screenshot')
+    screenshotButton.addEventListener('click', (event) => {
+      Utils.screenshot()
+    })
   }
 
   addModelToScene(path, scale) {

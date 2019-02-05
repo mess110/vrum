@@ -7,6 +7,7 @@ Persist.defaultJson('lastModels', [
   '/workspace/assets/models/chicken.json',
   '/workspace/assets/models/skeleton.json',
   '/workspace/assets/models/panda.glb',
+  '/workspace/assets/models/button.glb',
 ])
 updateLastModels()
 stopPropagation()
