@@ -1,6 +1,6 @@
-# vrum
+# ![vrum.js icon](workspace/games/project/assets/favicon.ico) vrum
 
-![vrum.js icon](workspace/games/project/assets/favicon.ico) Game engine based on three.js
+Game engine based on three.js
 
 ```
 yarn install
