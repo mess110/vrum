@@ -14,7 +14,7 @@ class BaseModifier extends TWEEN.Tween {
   constructor(subject, target, duration, easing) {
     super(subject)
 
-    if (duration == null) { duration = 1000 }
+    if (duration == null) { duration = Config.instance.modifiers.duration }
     if (easing == null) { easing = TWEEN.Easing.Linear.None }
     this.easing(easing);
 

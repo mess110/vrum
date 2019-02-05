@@ -36,7 +36,7 @@ class Engine {
 
   static switch(scene, assets) {
     AssetManager.loadAssets(assets, () => {
-      var duration = 1000
+      var duration = Config.instance.fade.duration
       var engine = Hodler.get('engine')
       engine.inputManager.disable()
 

@@ -102,47 +102,6 @@ scene.setWireframe(true)
 model.setWireframe(true)
 ```
 
-## SceneManagement
-
-Scene loading/management. Load assets. Once loading is done, start the
-specified scene
-
-```
-Engine.start(new LoadingScene(), [
-  { type: 'image', path: 'vrum.png' },
-])
-```
-
-Load assets. Once loading is done, switch to the specified scene
-
-```
-Engine.switch(new GameScene(), [
-  { type: 'image', path: 'vrum.png' },
-])
-```
-
-Example with custom loading screen (don't forget to set the camera if you
-custmoize)
-
-```
-class LoadingScene extends Scene {
-  init(options) {
-    // setTimeout is used to not skip the first fade in
-    this.setTimeout(() => {
-      Engine.switch(new GameScene(), [
-        // assets used in the game
-        { type: 'image', path: 'vrum.png' },
-      ])
-    }, 1000)
-  }
-}
-
-Engine.start(new LoadingScene(), [
-  // assets used in the loading screen
-  { type: 'image', path: 'vrum.png' },
-])
-```
-
 ## Screenshot
 
 ```
@@ -155,4 +114,114 @@ Utils.screenshot()
 VideoRecorderManager.start()
 VideoRecorderManager.isRunning()
 VideoRecorderManager.stop()
+```
+
+## Fullscreen
+
+Note: requires an event started by a user action not a script. It is a browser
+limitation.
+
+```
+Utils.toggleFullscreen()
+```
+
+## Opacity
+
+Opacity ranges from 0 (transparent) to 1 (opaque) and can be applied
+recursively to all the object children as well as the object
+
+```
+let obj = new THREE.Object3D()
+obj.setOpacity(0, true)
+```
+
+## DebugStats
+
+Add a panel in the top left corner showing FPS, MB used, geometries textures
+etc.
+
+```
+Config.instance.window.showStatsOnStart = true
+```
+
+## AnaglyphEffect
+
+If you want to use your red/cyan 3d glasses
+
+```
+Utils.toggleAnaglyphEffect()
+```
+
+NOTE: Doesn't work together with StereoEffect
+
+## StereoEffect
+
+If you want to use a VR headset
+
+```
+Utils.toggleStereoEffect()
+```
+
+NOTE: doesn't work together with AnaglyphEffect
+
+## AdjustRendererSize
+
+You can adjust the renderer size with
+
+```
+engine.renderManager.setWidthHeight({ width: 320, height: 240 })
+```
+
+## Orientation
+
+You can enforce a required screen orientation. Valid values are:
+
+* all
+* landscape
+* portrait
+
+```
+Utils.orientation('landscape')
+```
+
+An screen informing the user to rotate the screen will appear over all
+the other content.
+
+## Persist
+
+You can persist data on the client in Local Storage with the help of Persist.
+It supports defeault values, prefixing and different primitives.
+
+See [/src/extras/Persist.js] for more info.
+
+## OrbitControls
+
+Sometimes you just want to be able to rotate around to inspect things.
+Move the mouse, zoom etc.
+
+```
+Utils.toggleOrbitControls()
+```
+
+## SetSkin
+
+The skin of a loaded model can be changed. Just make sure both the model and
+the new skin have been loaded with the AssetManager
+
+```
+let chicken = AssetManager.clone('chicken.glb')
+chicken.setSkin('chicken_black.png')
+```
+
+## Fog
+
+```
+scene.fog = Helper.fog('white', 0, 500)
+```
+
+## Grid
+
+```
+grid = Utils.grid({ size: 10, step: 1, color: 0xffffff})
+scene.add(grid)
 ```

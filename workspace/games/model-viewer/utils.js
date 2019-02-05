@@ -1,13 +1,10 @@
 class LoadingScene extends MainScene {
   init(options) {
-    var geometry = new THREE.BoxGeometry( 1, 1, 1 )
-    var material = new THREE.MeshLambertMaterial({ color: 'red' })
+    let geometry = new THREE.BoxGeometry( 1, 1, 1 )
+    let material = new THREE.MeshBasicMaterial({ color: 'red' })
     this.model = new THREE.Mesh(geometry, material)
+    this.model.setWireframe(true)
     this.add(this.model)
-
-    var light = new THREE.PointLight(0xFFFFFF, 1, 100)
-    light.position.set(0, 10, 10)
-    this.add(light)
 
     Engine.switch(Hodler.get('mainScene'), [
       { type: 'image', path: 'vrum.png' },
@@ -20,21 +17,21 @@ class LoadingScene extends MainScene {
   }
 }
 
-var stopPropagation = function (event) {
+const stopPropagation = function (event) {
   let stopIt = (event) => { event.stopPropagation() }
   document.querySelectorAll('input[type=text]').forEach((e) => {
     e.addEventListener('keydown', stopIt)
   })
 }
 
-var loadModel = function (url) {
+const loadModel = function (url) {
   let inputUrl = document.querySelector('#inputUrl')
   let scale = parseFloat(document.querySelector('#scale').value)
   if (!isBlank(url)) {
     inputUrl.value = url
   }
   Hodler.get('mainScene').loadModel(inputUrl.value, scale)
-  var lastModels = Persist.getJson('lastModels')
+  const lastModels = Persist.getJson('lastModels')
   if (!lastModels.includes(inputUrl.value)) {
     lastModels.insert(0, inputUrl.value)
     while (lastModels.size() > 8) {
@@ -45,13 +42,13 @@ var loadModel = function (url) {
   }
 }
 
-var updateLastModels = () => {
-  var lastModels = Persist.getJson('lastModels')
-  var element = document.querySelector('#lastModels')
+const updateLastModels = () => {
+  const lastModels = Persist.getJson('lastModels')
+  const element = document.querySelector('#lastModels')
   element.innerHTML = ''
 
   lastModels.forEach((e) => {
-    var button = document.createElement('span')
+    const button = document.createElement('span')
     button.className = 'button'
     button.setAttribute('onclick', `loadModel('${e}')`)
     button.innerHTML = AssetManager.getAssetKey({ path: e })
@@ -59,7 +56,7 @@ var updateLastModels = () => {
   })
 }
 
-var toggleWireframe = function () {
+const toggleWireframe = function () {
   wireframe = !wireframe
   Utils.setWireframe(wireframe)
 }

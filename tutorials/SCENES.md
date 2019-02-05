@@ -49,6 +49,8 @@ class GameScene extends Scene {
 }
 ```
 
+## Input
+
 The scene is also responsible for handling user input. Mouse events are fired
 for all mouse and touch events, touch is transformed to click. A
 [Raycaster](https://threejs.org/docs/#api/en/core/Raycaster)
@@ -71,6 +73,7 @@ class GameScene extends Scene {
   }
 
   doMouseEvent(event, raycaster) {
+    console.log(`${event.type} ${event.which} ${event.x}:${event.y} ${event.wheelDelta}`)
     if (event.type == 'mousedown') {
       console.log(raycaster.intersectObjects(this.children))
     }
@@ -81,3 +84,55 @@ class GameScene extends Scene {
   }
 }
 ```
+
+## SceneManagement
+
+Scene loading/management. Load assets. Once loading is done, start the
+specified scene
+
+```
+Engine.start(new LoadingScene(), [
+  { type: 'image', path: 'vrum.png' },
+])
+```
+
+Load assets. Once loading is done, switch to the specified scene
+
+```
+Engine.switch(new GameScene(), [
+  { type: 'image', path: 'vrum.png' },
+])
+```
+
+Example with custom loading screen (don't forget to set the camera if you
+custmoize)
+
+```
+class LoadingScene extends Scene {
+  init(options) {
+    // setTimeout is used to not skip the first fade in
+    this.setTimeout(() => {
+      Engine.switch(new GameScene(), [
+        // assets used in the game
+        { type: 'image', path: 'vrum.png' },
+      ])
+    }, Config.instance.fade.duration)
+  }
+}
+
+Engine.start(new LoadingScene(), [
+  // assets used in the loading screen
+  { type: 'image', path: 'vrum.png' },
+])
+```
+
+## Fade
+
+Switching between scenes automatically triggers scene fade transitions
+
+```
+Utils.fade({type: 'in'})}
+Utils.fade({type: 'out'})}
+```
+
+It can be customised in `Config` variables.

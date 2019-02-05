@@ -64,6 +64,10 @@ class Config {
       // Scene transition fade duration
       duration: 1000
     }
+    this.modifiers = {
+      // Default modifier duration
+      duration: 1000
+    }
     this.ui = {
       // Order in which html elements are layered
       zIndex: {

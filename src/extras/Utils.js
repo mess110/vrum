@@ -787,7 +787,6 @@ Utils.WATER_DEFAULT_WATER_COLOR = '#001e0f';
 Utils.WATER_DEFAULT_ALPHA = 1.0;
 Utils.CE_BUTTON_POSITIONS = ['top-right', 'bottom-right', 'top-left', 'bottom-left'];
 Utils.CE_BUTTON_TYPES = ['fullscreen', 'reinit'];
-Utils.CE_UI_Z_INDEX = 1000;
 Utils.ORIENTATIONS = ['all', 'landscape', 'portrait'];
 Utils.FADE_COLOR = 'black';
 Utils.FADE_DEFAULT_DURATION = 1000;

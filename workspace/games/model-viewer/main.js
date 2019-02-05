@@ -19,5 +19,5 @@ Hodler.add('mainScene', mainScene)
 Engine.start(loadingScene)
 
 let camera = Hodler.get('camera');
-camera.position.set(0, 2, 5)
+camera.position.set(0, 4, 10)
 camera.lookAt(new THREE.Vector3(0,0,0))
