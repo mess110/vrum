@@ -1,6 +1,5 @@
 // this.sky = new Sky();
-// this.add(this.sky);
-// this.add(this.sky.light)
+// this.sky.addToScene(scene)
 // this.sky.updateSun(this.sky.distance, this.sky.inclination, this.sky.azimuth)
 class Sky extends THREE.Sky {
   constructor() {

@@ -2,6 +2,7 @@ class BaseParticle extends THREE.Object3D {
   constructor(input) {
     super()
 
+
     let jsonInput;
     this.groups = [];
 

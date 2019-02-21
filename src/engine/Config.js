@@ -1,7 +1,7 @@
 // Example usage:
 //
-// Config.window.resize = true
-// Config.renderer.alpha = false
+// Config.instance.window.resize = true
+// Config.instance.renderer.alpha = false
 class Config {
   constructor() {
     this.engine = {

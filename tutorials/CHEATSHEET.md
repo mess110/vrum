@@ -65,9 +65,14 @@ SoundManager.pause(playlist.getPlayingKey())
 ## Sky
 
 ```
-this.sky = new Sky();
+this.sky = new Sky()
 this.sky.addToScene(this)
 ```
+
+Day/night cycle can be managed with the `updateSun` function
+
+Also see [/src/objects/Sky.js](/src/objects/Sky.js) for details
+Also see [/src/objects/SkyBox.js](/src/objects/SkyBox.js) for details
 
 ## Text
 
@@ -225,3 +230,31 @@ scene.fog = Helper.fog('white', 0, 500)
 grid = Utils.grid({ size: 10, step: 1, color: 0xffffff})
 scene.add(grid)
 ```
+
+## Water
+
+See [/src/objects/Water.js](/src/objects/Water.js) for details
+
+## Tree
+
+See [/src/objects/Tree.js](/src/objects/Tree.js) for details
+
+## LightningBolt
+
+See [/src/objects/LightningBolt.js](/src/objects/LightningBolt.js) for details
+
+## VirtualController
+
+Checkout [/workspace/games/controller/](/workspace/games/controller) for example usage.
+
+See [/src/extras/VirtualController.js](/src/extras/VirtualController.js) for details
+
+## PoolManager
+
+Helps you make bullets or endless monsters by reusing instantiated objects.
+
+See [/src/extras/PoolManager.js](/src/extras/PoolManager.js) for details
+
+## Camera
+
+See [Camera](https://threejs.org/docs/#api/en/cameras/OrthographicCamera)

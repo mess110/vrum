@@ -47,6 +47,11 @@ yarn http
        * [Set Skin](tutorials/CHEATSHEET.md#SetSkin)
        * [Fog](tutorials/CHEATSHEET.md#Fog)
        * [Grid](tutorials/CHEATSHEET.md#Grid)
+       * [Water](tutorials/CHEATSHEET.md#Water)
+       * [Tree](tutorials/CHEATSHEET.md#Tree)
+       * [LightningBolt](tutorials/CHEATSHEET.md#LightningBolt)
+       * [VirtualController](tutorials/CHEATSHEET.md#VirtualController)
+       * [PoolManager](tutorials/CHEATSHEET.md#PoolManager)
    * [Blender](tutorials/BLENDER.md)
    * [Distribute](tutorials/DISTRIBUTE.md)
 <!--te-->
@@ -90,12 +95,17 @@ yarn http
 * [x] grid helper
 * [x] high score manager (backed by https://json.northpole.ro)
 * [x] mesh networking
+* [x] water
+* [x] procedural tree
+* [x] day/night cycle
+* [x] lightning bolt
+* [x] on screen controls
+* [x] pool manager
 
 ## Undocumented features
 
 * [x] tween objects around
 * [x] modifiers - predefined tweens
-* [x] pool manager
 * [x] attach object to bone (scale support)
 * [x] load images
 * [x] load sounds
@@ -104,12 +114,8 @@ yarn http
 * [x] load glb models
 * [x] load json files
 * [x] load shaders
-* [x] procedural tree
-* [x] water
-* [x] day/night cycle
 * [x] particle system
 * [x] graffiti generator (layered painting)
-* [x] lightning bolt
 * [x] volumetric spotlight
 * [x] bundle assets
 * [x] shadows
@@ -119,7 +125,6 @@ yarn http
 * [x] on screen console
 * [x] forest generator
 * [x] qr code generator
-* [x] on screen controls
 * [x] fine animation controls
 * [x] game pad controller game
 * [ ] set shadowMap.width and height of all lights

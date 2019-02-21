@@ -33,7 +33,7 @@ class Scene1 extends Scene {
 
     Utils.setCursor('../../assets/textures/hand.png')
 
-    let mesh = AssetManager.get('chicken.json')
+    let mesh = AssetManager.clone('chicken.json')
     mesh.setSkin('chicken_black.jpeg')
     mesh.scale.set(4, 4, 4)
     mesh.position.set(2, 2, -2)
