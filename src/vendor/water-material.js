@@ -350,7 +350,7 @@ THREE.Water.prototype.render = function (isTempTexture) {
     this.renderer.render(this.scene, this.mirrorCamera, renderTexture, true);
     
     this.material.visible = true;
-    this.material.uniforms.mirrorSampler.value = renderTexture;
+    this.material.uniforms.mirrorSampler.value = renderTexture.texture;
   }
 
 };
