@@ -16,8 +16,8 @@ Assets can be loaded though the `AssetManager` class.
 ```
 AssetManager.loadAssets([
   { type: 'font', path: '/workspace/assets/fonts/luckies-guy' },
-  { type: 'model', path: '/workspace/assets/models/chicken.json' },
   { type: 'model', path: '/workspace/assets/models/panda.glb' },
+  { type: 'image', path: '/workspace/assets/models/chicken.gltf' },
   { type: 'image', path: '/workspace/assets/models/chicken.png' },
   { type: 'image', path: '/workspace/assets/textures/heightmap3.png' },
   { type: 'image', path: '/workspace/assets/textures/waternormals.jpg' },
@@ -32,14 +32,14 @@ AssetManager.loadAssets([
 ```
 
 `loadAssets` expects an array of dicts, each dict needs to have 2 keys:
-type and path. Type `model` loads json/gltf/glb objects and instantiates
+type and path. Type `model` loads gltf/glb objects and instantiates
 the correct THREE objects. Type `json` loads as a json object. Type `image`
 is loaded and served as Texture. Type `sound` is added to `SoundManager`.
 Type `font` adds the css to load the font-face
 
 3D Models should be cloned so we can modify them independently.
 
-`let chicken = AssetManager.clone('chicken.json')`
+`let chicken = AssetManager.clone('chicken.gltf')`
 
 You can get models/images/json/sound with
 `let texture = AssetManager.get('chicken.png')` and

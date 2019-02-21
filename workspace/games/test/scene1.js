@@ -33,22 +33,22 @@ class Scene1 extends Scene {
 
     Utils.setCursor('../../assets/textures/hand.png')
 
-    let mesh = AssetManager.clone('chicken.json')
+    let mesh = AssetManager.clone('chicken.gltf')
     mesh.setSkin('chicken_black.jpeg')
     mesh.scale.set(4, 4, 4)
     mesh.position.set(2, 2, -2)
-    mesh.animations.play(1)
+    mesh.animations.play('die')
     mesh.shadowCastAndNotReceive()
     this.add(mesh)
 
-    mesh.attachToBone('Neck', armor)
-    mesh.detachFromBone('Neck', armor)
-    mesh.attachToBone('Neck', armor, 0.2)
+    mesh.attachToBone('chicken-skeleton_Neck', armor)
+    mesh.detachFromBone('chicken-skeleton_Neck', armor)
+    mesh.attachToBone('chicken-skeleton_Neck', armor, 0.2)
 
     this.forest = Utils.forest({
       items: [
         {
-          type: 'chicken.json',
+          type: 'chicken.gltf',
           count: 20,
         }
       ]
@@ -56,6 +56,9 @@ class Scene1 extends Scene {
     this.forest.position.set(5, -3, -7)
     this.forest.traverse(function (e) {
       if (e instanceof THREE.SkinnedMesh) {
+        // e.animations.play(Utils.random(0, 7))
+      }
+      if (e instanceof THREE.Scene) {
         e.animations.play(Utils.random(0, 7))
       }
     })

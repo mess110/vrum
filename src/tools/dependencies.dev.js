@@ -15,10 +15,10 @@ let VRUM_DEPENDS = [
   "/node_modules/threex.keyboardstate/threex.keyboardstate.js",
   "/node_modules/threex.dynamictexture/threex.dynamictexture.js",
   "/node_modules/virtualjoystick.js/virtualjoystick.js",
-  "/node_modules/ocean/water-material.js",
   "/node_modules/shader-particle-engine/build/SPE.js",
 
   "/node_modules/three/examples/js/loaders/GLTFLoader.js",
+  "/node_modules/three/examples/js/loaders/deprecated/LegacyJSONLoader.js",
 
   "/node_modules/three/examples/js/controls/OrbitControls.js",
   "/node_modules/three/examples/js/controls/PointerLockControls.js",
@@ -50,6 +50,7 @@ let VRUM_DEPENDS = [
 
   "../../../src/vendor/threex.rendererstats.js",
   "../../../src/vendor/discoveryClient.js",
+  "../../../src/vendor/water-material.js",
 
   "../../../src/extras/jnorthpole.js",
   "../../../src/extras/SyntaxSugar.js",

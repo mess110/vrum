@@ -11,8 +11,8 @@ class LoadingScene extends Scene {
 
     Engine.switch(Hodler.get('scene1'), [
       { type: 'font',  path: '/workspace/assets/fonts/luckiest-guy' },
-      { type: 'model', path: '/workspace/assets/models/chicken.json' },
-      { type: 'model', path: '/workspace/assets/models/chicken.json' },
+      { type: 'model', path: '/workspace/assets/models/chicken.gltf' },
+      { type: 'model', path: '/workspace/assets/models/chicken.gltf' },
       { type: 'model', path: '/workspace/assets/models/panda.glb' },
       { type: 'image', path: '/workspace/assets/models/chicken.png' },
       { type: 'image', path: '/workspace/assets/textures/chicken_black.jpeg' },

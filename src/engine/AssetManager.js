@@ -16,7 +16,6 @@ class AssetManager {
     }
 
     this.loadingManager = loadingManager
-    this.jsonLoader = new THREE.JSONLoader(loadingManager)
     this.gltfLoader = new THREE.GLTFLoader(loadingManager)
     this.textureLoader = new THREE.TextureLoader(loadingManager)
     this.data = {}
@@ -135,9 +134,6 @@ class AssetManager {
 
   _loadGenericModel(key, asset) {
     switch (AssetManager._getModelTypeFromKey(key)) {
-      case 'json':
-        this.loadJSONModel(key, asset.path)
-        break
       case 'glb':
         this.loadGLTFModel(key, asset.path)
         break
@@ -158,19 +154,6 @@ class AssetManager {
       throw 'missing asset.path'
     }
     return asset.path.split('/').last()
-  }
-
-  loadJSONModel(key, value) {
-    this.jsonLoader.load(value, function(geometry, materials) {
-      var mesh = new THREE.SkinnedMesh(geometry, materials)
-      Animations.init(mesh)
-
-      materials.forEach(function (material) {
-        material.skinning = true
-      })
-
-      AssetManager.set(key, mesh)
-    })
   }
 
   loadFont(key, value) {

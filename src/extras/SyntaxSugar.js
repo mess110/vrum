@@ -471,8 +471,10 @@ THREE.Object3D.prototype.detachFromBone = function (boneName, mesh) {
 setSkinHelper = function (material, key) {
   if (Array.isArray(material)) {
     material[0].map = AssetManager.get(key)
+    material[0].needsUpdate = true
   } else {
     material.map = AssetManager.get(key)
+    material.needsUpdate = true
   }
 }
 
@@ -480,7 +482,7 @@ THREE.Object3D.prototype.setSkin = function (key) {
   if (!AssetManager.hasKey(key)) {
     throw 'key ' + key + ' not found'
   }
-  if (this.material !== undefined && this.material !== null) {
+  if (!isBlank(this.material)) {
     setSkinHelper(this.material, key)
   } else {
     this.traverse(function (obj) {
