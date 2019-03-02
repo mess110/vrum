@@ -92,7 +92,8 @@ class Scene1 extends Scene {
     }, 1000)
 
 
-    this.explosion = new BaseParticle(AssetManager.get('particle.json').particle)
+    let jsonParticleData = AssetManager.get('particle.json').particle
+    this.explosion = new BaseParticle(jsonParticleData)
     this.explosion.position.set(-30, -10, -200)
     this.add(this.explosion)
 

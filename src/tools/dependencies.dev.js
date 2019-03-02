@@ -93,6 +93,10 @@ let VRUM_DEPENDS = [
   "../../../src/engine/Engine.js",
 ]
 
+let VRUM_DEV_ONLY_DEPENDS = [
+  "../../../src/vendor/live.js" // this needs to be the last script or it won't live reload
+]
+
 const loadVrumScriptsWithDepends = (items) => {
   const loadScript = (url, callback) => {
     var element = document.body;
@@ -116,5 +120,5 @@ const loadVrumScriptsWithDepends = (items) => {
 }
 
 const loadVrumScripts = (items) => {
-  loadVrumScriptsWithDepends(VRUM_DEPENDS.concat(items))
+  loadVrumScriptsWithDepends(VRUM_DEPENDS.concat(items).concat(VRUM_DEV_ONLY_DEPENDS))
 }

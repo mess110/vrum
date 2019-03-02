@@ -127,6 +127,7 @@ yarn http
 * [x] qr code generator
 * [x] fine animation controls
 * [x] game pad controller game
+* [x] live reload
 * [ ] set shadowMap.width and height of all lights
 * [ ] tutorials
 * [ ] VR
