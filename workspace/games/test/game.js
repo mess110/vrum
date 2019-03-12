@@ -30,6 +30,8 @@ var scene1 = new Scene1()
 Hodler.add('scene1', scene1)
 var scene2 = new Scene2()
 Hodler.add('scene2', scene2)
+var scene3 = new Scene3()
+Hodler.add('scene3', scene3)
 var loadingScene = new LoadingScene()
 
 Persist.default('name', 'player1')

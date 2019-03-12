@@ -9,13 +9,15 @@
 // Handle object pooling for BaseModel classes
 //
 // @example
-//   PoolManager.on 'spawn', Card, (item) ->
-//     pos = Helper.random(-5, 5)
-//     item.mesh.position.set pos, pos, pos
-//     SceneManager.currentScene().scene.add item.mesh
 //
-//   PoolManager.onRelease Card, (item) ->
-//     SceneManager.currentScene().scene.remove item.mesh
+//   PoolManager.on('spawn', Pillar, (item) => {
+//     item.position.set(0, 0, 0)
+//     Hodler.get('scene').add(item)
+//   })
+//
+//   PoolManager.on('release', Pillar, (item) => {
+//     Hodler.get('scene').remove(item)
+//   })
 //
 //   item = PoolManager.spawn(Card)
 //   PoolManager.release(item)
@@ -25,6 +27,7 @@
 //   PoolManager.spawn Card, {}
 //   PoolManager.onSpawn Card, (item, options) ->
 //     # do stuff
+//
 //
 var PoolManager = (function() {
   let instance = undefined;

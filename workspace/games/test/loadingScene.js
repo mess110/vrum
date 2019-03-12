@@ -9,7 +9,7 @@ class LoadingScene extends Scene {
     camera.position.set(0, 10, 15)
     camera.lookAt(new THREE.Vector3(0,0,0))
 
-    Engine.switch(Hodler.get('scene1'), [
+    Engine.switch(Hodler.get('scene3'), [
       { type: 'font',  path: '/workspace/assets/fonts/luckiest-guy' },
       { type: 'model', path: '/workspace/assets/models/chicken.gltf' },
       { type: 'model', path: '/workspace/assets/models/chicken.gltf' },
