@@ -29,6 +29,8 @@ class RTSCamera {
   }
 
   tick(tpf) {
+    if (!this.oc.enabled) { return }
+
     this.uptime += tpf
     this.oc.update()
 
@@ -46,6 +48,8 @@ class RTSCamera {
   }
 
   doMouseEvent(event) {
+    if (!this.oc.enabled) { return }
+
     if (event.type == 'mousemove') {
       this.lastY = event.y
       this.lastX = event.x

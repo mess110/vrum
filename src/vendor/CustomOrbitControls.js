@@ -46,6 +46,7 @@ THREE.CustomOrbitControls = function ( object, domElement ) {
 	// Set to true to enable damping (inertia)
 	// If damping is enabled, you must call controls.update() in your animation loop
 	this.enableDamping = false;
+  this.zoomDampingFactor = 0.1;
 	this.dampingFactor = 0.25;
 
 	// This option actually enables dollying in and out; left as "zoom" for backwards compatibility.
@@ -132,6 +133,8 @@ THREE.CustomOrbitControls = function ( object, domElement ) {
 
 		var offset = new THREE.Vector3();
 
+    var zoom = object.zoom;
+
 		// so camera.up is the orbit axis
 		var quat = new THREE.Quaternion().setFromUnitVectors( object.up, new THREE.Vector3( 0, 1, 0 ) );
 		var quatInverse = quat.clone().inverse();
@@ -169,7 +172,8 @@ THREE.CustomOrbitControls = function ( object, domElement ) {
 			spherical.makeSafe();
 
 
-			spherical.radius *= scale;
+			// spherical.radius *= scale;
+      spherical.radius *= ( 1 + distanceDelta );
 
 			// restrict radius to be between desired limits
 			spherical.radius = Math.max( scope.minDistance, Math.min( scope.maxDistance, spherical.radius ) );
@@ -186,16 +190,30 @@ THREE.CustomOrbitControls = function ( object, domElement ) {
 
 			scope.object.lookAt( scope.target );
 
+      if ( Math.abs( orthographicZoomDelta ) > EPS ) {
+        zoom = Math.min( scope.maxZoom, Math.max( scope.minZoom, scope.object.zoom * ( 1 - orthographicZoomDelta ) ) );
+        if ( zoom !== scope.object.zoom ) {
+          scope.object.zoom = zoom;
+          scope.object.updateProjectionMatrix();
+          zoomChanged = true;
+        }
+      }
+
 			if ( scope.enableDamping === true ) {
 
 				sphericalDelta.theta *= ( 1 - scope.dampingFactor );
 				sphericalDelta.phi *= ( 1 - scope.dampingFactor );
+
+        distanceDelta *= ( 1 - scope.zoomDampingFactor );
+        orthographicZoomDelta *= ( 1 - scope.zoomDampingFactor );
 
 				panOffset.multiplyScalar( 1 - scope.dampingFactor );
 
 			} else {
 
 				sphericalDelta.set( 0, 0, 0 );
+        distanceDelta = 0;
+        orthographicZoomDelta = 0;
 
 				panOffset.set( 0, 0, 0 );
 
@@ -262,6 +280,9 @@ THREE.CustomOrbitControls = function ( object, domElement ) {
 
 	var EPS = 0.000001;
 
+  var distanceDelta = 0;
+  var orthographicZoomDelta = 0;
+
 	// current position in spherical coordinates
 	var spherical = new THREE.Spherical();
 	var sphericalDelta = new THREE.Spherical();
@@ -281,6 +302,10 @@ THREE.CustomOrbitControls = function ( object, domElement ) {
 	var dollyStart = new THREE.Vector2();
 	var dollyEnd = new THREE.Vector2();
 	var dollyDelta = new THREE.Vector2();
+
+  var zoomStart = new THREE.Vector2();
+  var zoomEnd = new THREE.Vector2();
+  var zoomDelta = new THREE.Vector2();
 
 	function getAutoRotationAngle() {
 
@@ -387,6 +412,16 @@ THREE.CustomOrbitControls = function ( object, domElement ) {
 
 	}();
 
+  function assignZoom( zoomValue ) {
+    if ( scope.object instanceof THREE.PerspectiveCamera ) {
+      distanceDelta = zoomValue;
+    } else if ( scope.object instanceof THREE.OrthographicCamera ) {
+      orthographicZoomDelta = zoomValue;
+    } else {
+      zoomStart.set( event.clientX, event.clientY );
+    }
+  }
+
 	function dollyIn( dollyScale ) {
 
 		if ( scope.object.isPerspectiveCamera ) {
@@ -481,23 +516,13 @@ THREE.CustomOrbitControls = function ( object, domElement ) {
 
 		//console.log( 'handleMouseMoveDolly' );
 
-		dollyEnd.set( event.clientX, event.clientY );
+    zoomEnd.set( event.clientX, event.clientY );
+    zoomDelta.subVectors( zoomEnd, zoomStart );
+    var zoomSign = zoomDelta.y < 0 ? -1 : zoomDelta.y > 0 ? 1 : 0;
+    assignZoom( ( 1 - Math.pow( 0.95, scope.zoomSpeed ) ) * zoomSign );
+    zoomStart.copy( zoomEnd );
 
-		dollyDelta.subVectors( dollyEnd, dollyStart );
-
-		if ( dollyDelta.y > 0 ) {
-
-			dollyIn( getZoomScale() );
-
-		} else if ( dollyDelta.y < 0 ) {
-
-			dollyOut( getZoomScale() );
-
-		}
-
-		dollyStart.copy( dollyEnd );
-
-		scope.update();
+    scope.update();
 
 	}
 
@@ -527,15 +552,8 @@ THREE.CustomOrbitControls = function ( object, domElement ) {
 
 		// console.log( 'handleMouseWheel' );
 
-		if ( event.deltaY < 0 ) {
-
-			dollyOut( getZoomScale() );
-
-		} else if ( event.deltaY > 0 ) {
-
-			dollyIn( getZoomScale() );
-
-		}
+    var zoomSign = event.deltaY < 0 ? -1 : event.deltaY > 0 ? 1 : 0;
+    assignZoom( ( 1 - Math.pow( 0.95, scope.zoomSpeed ) ) * zoomSign );
 
 		scope.update();
 
@@ -596,7 +614,7 @@ THREE.CustomOrbitControls = function ( object, domElement ) {
 
 			var distance = Math.sqrt( dx * dx + dy * dy );
 
-			dollyStart.set( 0, distance );
+      zoomStart.set( 0, distance );
 
 		}
 
@@ -642,13 +660,11 @@ THREE.CustomOrbitControls = function ( object, domElement ) {
 
 			var distance = Math.sqrt( dx * dx + dy * dy );
 
-			dollyEnd.set( 0, distance );
-
-			dollyDelta.set( 0, Math.pow( dollyEnd.y / dollyStart.y, scope.zoomSpeed ) );
-
-			dollyIn( dollyDelta.y );
-
-			dollyStart.copy( dollyEnd );
+      zoomEnd.set( 0, distance );
+      zoomDelta.subVectors( zoomEnd, zoomStart );
+      var zoomSign = zoomDelta.y > 0 ? -1 : zoomDelta.y < 0 ? 1 : 0;
+      assignZoom( ( 1 - Math.pow( 0.95, scope.zoomSpeed ) ) * zoomSign );
+      zoomStart.copy( zoomEnd );
 
 		}
 

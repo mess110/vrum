@@ -84,8 +84,9 @@ class Scene1 extends Scene {
     this.spotLight.addToScene(this)
     this.spotLight.lookAt(new (THREE.Vector3)(0, 0, 0))
 
-    let orbit = Utils.toggleOrbitControls()
-    orbit.maxPolarAngle = Math.PI * 0.495;
+    // let orbit = Utils.toggleOrbitControls()
+    // orbit.maxPolarAngle = Math.PI * 0.495;
+    this.rtsCam = new RTSCamera()
 
     this.setInterval(() => {
       PoolManager.spawn(Box)
@@ -170,6 +171,8 @@ class Scene1 extends Scene {
   }
 
   tick(tpf) {
+    this.rtsCam.tick(tpf)
+
     this.cube.rotation.x += 0.01
     this.cube.rotation.y += 0.01
 
@@ -197,6 +200,8 @@ class Scene1 extends Scene {
   }
 
   doMouseEvent(event, raycaster) {
+    this.rtsCam.doMouseEvent(event)
+
     if (event.type == 'mousedown') {
       console.log(raycaster.intersectObjects(this.children))
     }
