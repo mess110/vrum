@@ -51,11 +51,16 @@ yarn http
        * [Water](tutorials/CHEATSHEET.md#Water)
        * [Tree](tutorials/CHEATSHEET.md#Tree)
        * [LightningBolt](tutorials/CHEATSHEET.md#LightningBolt)
+       * [SpotLight](tutorials/CHEATSHEET.md#SpotLight)
        * [VirtualController](tutorials/CHEATSHEET.md#VirtualController)
        * [PoolManager](tutorials/CHEATSHEET.md#PoolManager)
        * [RTSCamera](tutorials/CHEATSHEET.md#RTSCamera)
    * [Blender](tutorials/BLENDER.md)
    * [Distribute](tutorials/DISTRIBUTE.md)
+      * [Webserver](tutorials/DISTRIBUTE.md#Executable)
+      * [Executable](tutorials/DISTRIBUTE.md#Executable)
+      * [GithubPages](tutorials/DISTRIBUTE.md#GithubPages)
+      * [LiveReload](tutorials/DISTRIBUTE.md#LiveReload)
 <!--te-->
 
 ## Features
@@ -104,22 +109,22 @@ yarn http
 * [x] on screen controls
 * [x] pool manager
 * [x] RTSCamera
+* [x] live reload
+* [x] load images
+* [x] load sounds
+* [x] load gltf models
+* [x] load glb models
+* [x] volumetric spotlight
 
 ## Undocumented features
 
+* [x] load json files (terrain/particles/shaders/graffiti)
+* [x] load shaders
 * [x] tween objects around
 * [x] modifiers - predefined tweens
 * [x] attach object to bone (scale support)
-* [x] load images
-* [x] load sounds
-* [x] load json models
-* [x] load gltf models
-* [x] load glb models
-* [x] load json files
-* [x] load shaders
 * [x] particle system
 * [x] graffiti generator (layered painting)
-* [x] volumetric spotlight
 * [x] bundle assets
 * [x] shadows
 * [x] light helpers
@@ -130,9 +135,7 @@ yarn http
 * [x] qr code generator
 * [x] fine animation controls
 * [x] game pad controller game
-* [x] live reload
 * [ ] set shadowMap.width and height of all lights
-* [ ] tutorials
 * [ ] VR
 * [ ] walker
 * [ ] a lot of points geometry

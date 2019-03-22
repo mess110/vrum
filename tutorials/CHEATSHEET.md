@@ -253,6 +253,18 @@ See [/src/objects/Tree.js](/src/objects/Tree.js) for details
 
 See [/src/objects/LightningBolt.js](/src/objects/LightningBolt.js) for details
 
+## SpotLight
+
+VolumetricSpotLight
+
+```
+//                       (x, y, z, r1, r2, height)
+spotLight = new SpotLight(0, 10, 0, 0.1, 2.5, 5)
+spotLight.addToScene(scene)
+spotLight.lookAt(new (THREE.Vector3)(0, 0, 0))
+spotLight.setColor('white')
+```
+
 ## VirtualController
 
 Checkout [/workspace/games/controller/](/workspace/games/controller) for example usage.

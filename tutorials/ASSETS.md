@@ -5,7 +5,7 @@ for only a subet of them:
 
 * images
 * sounds
-* json objects
+* json objects (particles/shaders/terrain/paintings)
 * gltf/glb/json models
 * fonts
 

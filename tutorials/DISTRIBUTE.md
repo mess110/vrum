@@ -13,15 +13,16 @@ There are several ways to distribute your app:
 * build it as an executable
 * deploy it to github pages
 
-## Serve it from a webserver
+## Webserver
 
-Won't go over this step in too much detail, but in the end, we have some html, js
-and css files. If we setup paths correctly, we can just serve all the files
-from a webserver. Doesn't really matter which one.
+Serve it from a webserver. Won't go over this step in too much detail, but in
+the end, we have some html, js and css files. If we setup paths correctly, we
+can just serve all the files from a webserver. Doesn't really matter which one.
 
-## Build it as an executable
+## Executable
 
-For this, you need the vrum repo. Go to the root of the repo and run
+To build an executable, you need the vrum repo. Go to the root of the repo and
+run:
 
 ```
 yarn dist:exe
@@ -31,9 +32,10 @@ Input the path to the source code. A bunch of text and warnings will fly on scre
 but the end result should be a folder called `dist` which contains different
 executables for different platforms: linux, mac, windows
 
-## Deploy it to Github Pages
+## GithubPages
 
-For this, you need the vrum repo and the game as a git repo. Run:
+To deploy to Github Pages, you need the vrum repo and the game as a git repo.
+Run:
 
 ```
 yarn dist:web
@@ -52,3 +54,9 @@ gg
 ## Android
 
 TODO: but basically use a WebView
+
+## LiveReload
+
+When running in development mode, we also add [live.js](http://livejs.com/) to
+the list of dependencies so you don't have to reload the page when you save
+your files.
