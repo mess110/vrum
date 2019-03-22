@@ -8,6 +8,8 @@ class RTSCamera {
   constructor() {
     let oc = Utils.toggleOrbitControls()
     oc.enableDamping = true
+    oc.minDistance = 3
+    oc.maxDistance = 50
     oc.minPolarAngle = 0.2;
     oc.maxPolarAngle = 1.4;
     oc.dampingFactor = 0.07;
