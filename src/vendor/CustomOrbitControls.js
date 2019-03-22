@@ -98,6 +98,12 @@ THREE.CustomOrbitControls = function ( object, domElement ) {
 
 	};
 
+  this.getState = function () {
+
+    return state;
+
+  }
+
 	this.saveState = function () {
 
 		scope.target0.copy( scope.target );
@@ -568,6 +574,8 @@ THREE.CustomOrbitControls = function ( object, domElement ) {
 		}
 
 	}
+
+  this.handleKeyDown = handleKeyDown
 
 	function handleTouchStartRotate( event ) {
 

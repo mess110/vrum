@@ -51,6 +51,7 @@ let VRUM_DEPENDS = [
   "../../../src/vendor/threex.rendererstats.js",
   "../../../src/vendor/discoveryClient.js",
   "../../../src/vendor/water-material.js",
+  "../../../src/vendor/CustomOrbitControls.js",
 
   "../../../src/extras/jnorthpole.js",
   "../../../src/extras/SyntaxSugar.js",

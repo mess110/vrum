@@ -340,8 +340,9 @@ class Utils {
     head.appendChild(style);
   }
 
-  // orbit.maxPolarAngle = Math.PI * 0.495
-  static toggleOrbitControls() {
+  static toggleOrbitControls(target) {
+    if (![THREE.OrbitControls, THREE.CustomOrbitControls].includes(target)) { target = THREE.OrbitControls }
+
     var orbitControls = Hodler.get('orbitControls')
     if (orbitControls !== null && orbitControls !== undefined) {
       orbitControls.dispose()
@@ -350,7 +351,7 @@ class Utils {
       var camera = Hodler.get('camera')
       var renderer = Hodler.get('renderer')
 
-      var orbitControls = new (THREE.OrbitControls)(camera, renderer.domElement)
+      var orbitControls = new (target)(camera, renderer.domElement)
       Hodler.add('orbitControls', orbitControls)
     }
     return orbitControls

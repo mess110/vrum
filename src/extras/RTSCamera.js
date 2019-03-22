@@ -6,7 +6,7 @@
 //
 class RTSCamera {
   constructor() {
-    let oc = Utils.toggleOrbitControls()
+    let oc = Utils.toggleOrbitControls(THREE.CustomOrbitControls)
     oc.enableDamping = true
     oc.minDistance = 3
     oc.maxDistance = 50
@@ -21,54 +21,27 @@ class RTSCamera {
     this.uptime = 0.0
     this.lastTime = 0.0
 
-    this.size = Hodler.get('renderer').getSize()
+    this.size = this.getSize()
     this.lastX = this.size.width / 2
     this.lastY = this.size.height / 2
+
+    this.delay = 0.05
   }
 
   tick(tpf) {
     this.uptime += tpf
     this.oc.update()
 
+    if (Config.instance.window.resize) {
+      this.size = this.getSize()
+    }
+
     if (this.lastTime > this.uptime) {
       return
     }
 
-    if (Utils.isMobileOrTablet()) {
-      return
-    }
-    let delay = 0.05
-    if (this.lastY < this.size.height / 6) {
-      this.oc.handleKeyDown({
-        'keyCode': this.oc.keys.UP,
-        'preventDefault': () => {
-          this.lastTime = this.uptime + delay
-        }
-      })
-    }
-    if (this.lastY > (this.size.height / 6) * 5) {
-      this.oc.handleKeyDown({
-        'keyCode': this.oc.keys.BOTTOM,
-        'preventDefault': () => {
-          this.lastTime = this.uptime + delay
-        }
-      })
-    }
-    if (this.lastX < this.size.width / 6) {
-      this.oc.handleKeyDown({
-        'keyCode': this.oc.keys.LEFT,
-        'preventDefault': () => {
-          this.lastTime = this.uptime + delay
-        }
-      })
-    }
-    if (this.lastX > (this.size.width / 6) * 5) {
-      this.oc.handleKeyDown({
-        'keyCode': this.oc.keys.RIGHT,
-        'preventDefault': () => {
-          this.lastTime = this.uptime + delay
-        }
-      })
+    if (!Utils.isMobileOrTablet()) {
+      this.edgePan()
     }
   }
 
@@ -77,6 +50,45 @@ class RTSCamera {
       this.lastY = event.y
       this.lastX = event.x
     }
+  }
+
+  edgePan() {
+    if (this.lastY < this.size.height / 6) {
+      this.oc.handleKeyDown({
+        'keyCode': this.oc.keys.UP,
+        'preventDefault': () => {
+          this.lastTime = this.uptime + this.delay
+        }
+      })
+    }
+    if (this.lastY > (this.size.height / 6) * 5) {
+      this.oc.handleKeyDown({
+        'keyCode': this.oc.keys.BOTTOM,
+        'preventDefault': () => {
+          this.lastTime = this.uptime + this.delay
+        }
+      })
+    }
+    if (this.lastX < this.size.width / 6) {
+      this.oc.handleKeyDown({
+        'keyCode': this.oc.keys.LEFT,
+        'preventDefault': () => {
+          this.lastTime = this.uptime + this.delay
+        }
+      })
+    }
+    if (this.lastX > (this.size.width / 6) * 5) {
+      this.oc.handleKeyDown({
+        'keyCode': this.oc.keys.RIGHT,
+        'preventDefault': () => {
+          this.lastTime = this.uptime + this.delay
+        }
+      })
+    }
+  }
+
+  getSize() {
+    return Hodler.get('renderer').getSize()
   }
 
   getState() {
