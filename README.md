@@ -53,6 +53,7 @@ yarn http
        * [LightningBolt](tutorials/CHEATSHEET.md#LightningBolt)
        * [VirtualController](tutorials/CHEATSHEET.md#VirtualController)
        * [PoolManager](tutorials/CHEATSHEET.md#PoolManager)
+       * [RTSCamera](tutorials/CHEATSHEET.md#RTSCamera)
    * [Blender](tutorials/BLENDER.md)
    * [Distribute](tutorials/DISTRIBUTE.md)
 <!--te-->
@@ -102,6 +103,7 @@ yarn http
 * [x] lightning bolt
 * [x] on screen controls
 * [x] pool manager
+* [x] RTSCamera
 
 ## Undocumented features
 

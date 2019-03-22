@@ -268,3 +268,12 @@ See [/src/extras/PoolManager.js](/src/extras/PoolManager.js) for details
 ## Camera
 
 See [Camera](https://threejs.org/docs/#api/en/cameras/OrthographicCamera)
+
+## RTSCamera
+
+```
+this.rtsCam = new RTSCamera()
+this.rtsCam.tick(tpf)
+this.rtsCam.doMouseEvent(event)
+this.rtsCam.isStatic() // returns true if camera is not doing anything
+```
