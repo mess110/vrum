@@ -276,6 +276,8 @@ THREE.CustomOrbitControls = function ( object, domElement ) {
 
 	var STATE = { NONE: - 1, ROTATE: 0, DOLLY: 1, PAN: 2, TOUCH_ROTATE: 3, TOUCH_DOLLY_PAN: 4 };
 
+  this.STATE = STATE
+
 	var state = STATE.NONE;
 
 	var EPS = 0.000001;

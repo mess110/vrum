@@ -3,6 +3,7 @@
 //   this.rtsCam = new RTSCamera()
 //   this.rtsCam.tick(tpf)
 //   this.rtsCam.doMouseEvent(event)
+//   this.rtsCam.toggle()
 //
 class RTSCamera {
   constructor() {
@@ -16,8 +17,8 @@ class RTSCamera {
     oc.zoomDampingFactor = 0.1;
     oc.rotateSpeed = 0.05;
     oc.panSpeed = 0.5
-    oc.keyPanSpeed = 20
-    oc.enableRotate = false
+    oc.keyPanSpeed = 10
+    oc.enableRotate = true
 
     this.enabled = true
     this.oc = oc
@@ -28,7 +29,7 @@ class RTSCamera {
     this.lastX = this.size.width / 2
     this.lastY = this.size.height / 2
 
-    this.delay = 0.05
+    this.delaySeconds = 0.05
   }
 
   toggle() {
@@ -66,11 +67,15 @@ class RTSCamera {
   }
 
   edgePan() {
+    if (this.isRotating()) {
+      return
+    }
+
     if (this.lastY < this.size.height / 6) {
       this.oc.handleKeyDown({
         'keyCode': this.oc.keys.UP,
         'preventDefault': () => {
-          this.lastTime = this.uptime + this.delay
+          this.lastTime = this.uptime + this.delaySeconds
         }
       })
     }
@@ -78,7 +83,7 @@ class RTSCamera {
       this.oc.handleKeyDown({
         'keyCode': this.oc.keys.BOTTOM,
         'preventDefault': () => {
-          this.lastTime = this.uptime + this.delay
+          this.lastTime = this.uptime + this.delaySeconds
         }
       })
     }
@@ -86,7 +91,7 @@ class RTSCamera {
       this.oc.handleKeyDown({
         'keyCode': this.oc.keys.LEFT,
         'preventDefault': () => {
-          this.lastTime = this.uptime + this.delay
+          this.lastTime = this.uptime + this.delaySeconds
         }
       })
     }
@@ -94,7 +99,7 @@ class RTSCamera {
       this.oc.handleKeyDown({
         'keyCode': this.oc.keys.RIGHT,
         'preventDefault': () => {
-          this.lastTime = this.uptime + this.delay
+          this.lastTime = this.uptime + this.delaySeconds
         }
       })
     }
@@ -109,6 +114,10 @@ class RTSCamera {
   }
 
   isStatic() {
-    return this.getState() === -1
+    return this.getState() === this.oc.STATE.NONE
+  }
+
+  isRotating() {
+    return this.getState() === this.oc.STATE.ROTATE
   }
 }
