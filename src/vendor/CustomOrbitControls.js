@@ -53,6 +53,7 @@ THREE.CustomOrbitControls = function ( object, domElement ) {
 	// Set to false to disable zooming
 	this.enableZoom = true;
 	this.zoomSpeed = 1.0;
+  this.zoomSensitivity = 150 // number of pixels needed to be considered a zoom
 
 	// Set to false to disable rotating
 	this.enableRotate = true;
@@ -171,8 +172,6 @@ THREE.CustomOrbitControls = function ( object, domElement ) {
 
 			spherical.makeSafe();
 
-
-			// spherical.radius *= scale;
       spherical.radius *= ( 1 + distanceDelta );
 
 			// restrict radius to be between desired limits
@@ -655,6 +654,8 @@ THREE.CustomOrbitControls = function ( object, domElement ) {
 
 		//console.log( 'handleTouchMoveDollyPan' );
 
+    var zooming = false
+
 		if ( scope.enableZoom ) {
 
 			var dx = event.touches[ 0 ].pageX - event.touches[ 1 ].pageX;
@@ -662,15 +663,18 @@ THREE.CustomOrbitControls = function ( object, domElement ) {
 
 			var distance = Math.sqrt( dx * dx + dy * dy );
 
-      zoomEnd.set( 0, distance );
-      zoomDelta.subVectors( zoomEnd, zoomStart );
-      var zoomSign = zoomDelta.y > 0 ? -1 : zoomDelta.y < 0 ? 1 : 0;
-      assignZoom( ( 1 - Math.pow( 0.95, scope.zoomSpeed ) ) * zoomSign );
-      zoomStart.copy( zoomEnd );
+      if (distance > scope.zoomSensitivity) {
+        zooming = true
+        zoomEnd.set( 0, distance );
+        zoomDelta.subVectors( zoomEnd, zoomStart );
+        var zoomSign = zoomDelta.y > 0 ? -1 : zoomDelta.y < 0 ? 1 : 0;
+        assignZoom( ( 1 - Math.pow( 0.95, scope.zoomSpeed ) ) * zoomSign );
+        zoomStart.copy( zoomEnd );
+      }
 
 		}
 
-		if ( scope.enablePan ) {
+		if ( scope.enablePan && !zooming) {
 
 			var x = 0.5 * ( event.touches[ 0 ].pageX + event.touches[ 1 ].pageX );
 			var y = 0.5 * ( event.touches[ 0 ].pageY + event.touches[ 1 ].pageY );

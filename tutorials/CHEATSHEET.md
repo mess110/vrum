@@ -90,6 +90,7 @@ var text = new BaseText({
   canvasW: 1024, canvasH: 1024,
   font: '64px luckiest-guy'})
 text.position.set(0, 0, 4)
+text.setText('hello')
 this.add(text)
 ```
 

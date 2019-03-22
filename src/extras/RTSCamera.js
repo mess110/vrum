@@ -1,3 +1,5 @@
+// Remember to check oc.zoomSensitivity
+//
 // Example usage:
 //
 //   this.rtsCam = new RTSCamera()
@@ -7,6 +9,8 @@
 //
 class RTSCamera {
   constructor() {
+    this.touch = Utils.isMobileOrTablet()
+
     let oc = Utils.toggleOrbitControls(THREE.CustomOrbitControls)
     oc.enableDamping = true
     oc.minDistance = 3
@@ -18,7 +22,8 @@ class RTSCamera {
     oc.rotateSpeed = 0.05;
     oc.panSpeed = 0.5
     oc.keyPanSpeed = 10
-    oc.enableRotate = true
+    oc.enableRotate = false
+    oc.zoomSensitivity = 150 // number of pixels needed to be considered zoom
 
     this.enabled = true
     this.oc = oc
@@ -42,7 +47,6 @@ class RTSCamera {
     if (!this.enabled) { return }
 
     this.uptime += tpf
-    this.oc.update()
 
     if (Config.instance.window.resize) {
       this.size = this.getSize()
@@ -52,9 +56,10 @@ class RTSCamera {
       return
     }
 
-    if (!Utils.isMobileOrTablet()) {
+    if (!this.touch) {
       this.edgePan()
     }
+    this.oc.update()
   }
 
   doMouseEvent(event) {
