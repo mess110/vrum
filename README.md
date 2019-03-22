@@ -42,6 +42,7 @@ yarn http
        * [StereoEffect](tutorials/CHEATSHEET.md#StereoEffect)
        * [Adjust renderer size](tutorials/CHEATSHEET.md#AdjustRendererSize)
        * [Orientation](tutorials/CHEATSHEET.md#Orientation)
+       * [Mobile](tutorials/CHEATSHEET.md#Mobile)
        * [Persist](tutorials/CHEATSHEET.md#Persist)
        * [OrbitControls](tutorials/CHEATSHEET.md#OrbitControls)
        * [Set Skin](tutorials/CHEATSHEET.md#SetSkin)

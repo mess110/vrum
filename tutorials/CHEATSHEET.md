@@ -192,6 +192,16 @@ Utils.orientation('landscape')
 An screen informing the user to rotate the screen will appear over all
 the other content.
 
+## Mobile
+
+There are 2 helpers which can identify if you are on a pc/mobile device. They
+return true/false
+
+```
+Utils.isMobile()
+Utils.isMobileOrTablet()
+```
+
 ## Persist
 
 You can persist data on the client in Local Storage with the help of Persist.
