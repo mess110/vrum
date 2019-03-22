@@ -346,7 +346,6 @@ class Utils {
     var orbitControls = Hodler.get('orbitControls')
     if (orbitControls !== null && orbitControls !== undefined) {
       orbitControls.dispose()
-      // orbitControls.enabled = false
       Hodler.add('orbitControls', undefined)
     } else {
       var camera = Hodler.get('camera')
