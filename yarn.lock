@@ -54,6 +54,10 @@ brace-expansion@^1.1.7:
     balanced-match "^1.0.0"
     concat-map "0.0.1"
 
+camera-controls@yomotsu/camera-controls:
+  version "1.11.1"
+  resolved "https://codeload.github.com/yomotsu/camera-controls/tar.gz/98746a7e0f060052b2e4b15b6c34169723ef78a5"
+
 ccapture.js@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/ccapture.js/-/ccapture.js-1.1.0.tgz#ac4030e8b43847e305242d784abf284d2313beff"

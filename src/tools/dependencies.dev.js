@@ -9,6 +9,7 @@ let VRUM_DEPENDS = [
   "/node_modules/ccapture.js/build/CCapture.all.min.js",
   "/node_modules/qrcodejs/qrcode.js",
   "/node_modules/fontfaceobserver/fontfaceobserver.standalone.js",
+  "/node_modules/camera-controls/dist/camera-controls.js",
 
   "/node_modules/threex.windowresize/threex.windowresize.js",
   "/node_modules/threex.volumetricspotlight/threex.volumetricspotlightmaterial.js",
@@ -70,6 +71,7 @@ let VRUM_DEPENDS = [
   "../../../src/extras/Animations.js",
   "../../../src/extras/Utils.js",
   "../../../src/extras/RTSCamera.js",
+  "../../../src/extras/RTSCamera2.js",
   "../../../src/extras/ShaderMaterial.js",
   "../../../src/extras/VideoRecorderManager.js",
   "../../../src/extras/VirtualController.js",
