@@ -29,7 +29,7 @@ var dependencies = fs.readFileSync('src/tools/dependencies.dev.js', 'utf-8')
   .split('\n')
   .filter(Boolean)
   .filter((e) => e.startsWith('  "'))
-  .map((e) => e.substr(3).slice(0, -2))
+  .map((e) => e.substr(3).split(',')[0].slice(0, -1))
   .map((e) => {
     if (e[0] == '/') {
       return e.substr(1);

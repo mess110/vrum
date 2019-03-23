@@ -92,11 +92,11 @@ let VRUM_DEPENDS = [
   "../../../src/engine/Scene.js",
   "../../../src/engine/InputManager.js",
   "../../../src/engine/RenderManager.js",
-  "../../../src/engine/Engine.js",
+  "../../../src/engine/Engine.js", // last element needs a comma
 ]
 
 let VRUM_DEV_ONLY_DEPENDS = [
-  "../../../src/vendor/live.js" // this needs to be the last script or it won't live reload
+  "../../../src/vendor/live.js", // this needs to be the last script or it won't live reload
 ]
 
 const loadVrumScriptsWithDepends = (items) => {
