@@ -75,10 +75,10 @@ You can load JSON files. Some JSON files contain metadata to help you build
 different objects like particles, shaders, terrain and paintings. Look into
 [/workspace/assets/](/workspace/assets/) to check the sample objects out.
 
-* [/tutorials/CHEATSHEET.md#Terrain]
-* [/tutorials/CHEATSHEET.md#Particles]
-* [/tutorials/CHEATSHEET.md#Shaders]
-* [/tutorials/CHEATSHEET.md#Graffiti]
+* [Terrain](/tutorials/CHEATSHEET.md#Terrain)
+* [Particles](/tutorials/CHEATSHEET.md#Particles)
+* [Shaders](/tutorials/CHEATSHEET.md#Shaders)
+* [Graffiti](/tutorials/CHEATSHEET.md#Graffiti)
 
 ```
 let json = AssetManager.clone('terrain.json')
