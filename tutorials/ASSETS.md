@@ -45,6 +45,10 @@ You can get models/images/json/sound with
 `let texture = AssetManager.get('chicken.png')` and
 play sounds though [SoundManager](/tutorials/CHEATSHEET.md#Sound).
 
+## Models
+
+Models should use the clone method so they can be moved independently.
+
 ```
 let hat = AssetManager.clone('hat.gltf')
 hat.position.set(0, 0.9, 0)
@@ -63,6 +67,22 @@ model.animations.play('idle', { stopAll: false })
 model.animations.play('walk', { stopAll: false, weight: 0 })
 model.animations.play('wiggle', { stopAll: false })
 model.animations.play('tongue', { stopAll: false })
+```
+
+## JSON
+
+You can load JSON files. Some JSON files contain metadata to help you build
+different objects like particles, shaders, terrain and paintings. Look into
+[/workspace/assets/](/workspace/assets/) to check the sample objects out.
+
+* [/tutorials/CHEATSHEET.md#Terrain]
+* [/tutorials/CHEATSHEET.md#Particles]
+* [/tutorials/CHEATSHEET.md#Shaders]
+* [/tutorials/CHEATSHEET.md#Graffiti]
+
+```
+let json = AssetManager.clone('terrain.json')
+// with
 ```
 
 ## EngineHelpers

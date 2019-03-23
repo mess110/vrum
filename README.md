@@ -17,6 +17,8 @@ yarn http
    * [New game](tutorials/INSTALL.md#NewGame)
    * [Assets](tutorials/ASSETS.md)
        * [AssetManager](tutorials/ASSETS.md#AssetManager)
+       * [Models](tutorials/ASSETS.md#Models)
+       * [JSON](tutorials/ASSETS.md#JSON)
        * [Engine helpers](tutorials/ASSETS.md#EngineHelpers)
    * [Scenes](tutorials/SCENES.md)
        * [Input](tutorials/SCENES.md#Input)
@@ -53,9 +55,14 @@ yarn http
        * [Tree](tutorials/CHEATSHEET.md#Tree)
        * [LightningBolt](tutorials/CHEATSHEET.md#LightningBolt)
        * [SpotLight](tutorials/CHEATSHEET.md#SpotLight)
+       * [LightHelpers](tutorials/CHEATSHEET.md#LightHelpers)
        * [VirtualController](tutorials/CHEATSHEET.md#VirtualController)
        * [PoolManager](tutorials/CHEATSHEET.md#PoolManager)
        * [RTSCamera](tutorials/CHEATSHEET.md#RTSCamera)
+       * [Terrain](tutorials/CHEATSHEET.md#Terrain)
+       * [Particles](tutorials/CHEATSHEET.md#Particles)
+       * [Shaders](tutorials/CHEATSHEET.md#Shaders)
+       * [Graffiti](tutorials/CHEATSHEET.md#Graffiti)
    * [Blender](tutorials/BLENDER.md)
    * [Distribute](tutorials/DISTRIBUTE.md)
       * [Webserver](tutorials/DISTRIBUTE.md#Executable)
@@ -117,24 +124,24 @@ yarn http
 * [x] load glb models
 * [x] volumetric spotlight
 * [x] scene editor
+* [x] load json files (terrain/particles/shaders/graffiti)
+* [x] load shaders
+* [x] particle system
+* [x] graffiti generator (layered painting)
+* [x] light helpers
+* [x] terrain with heightmap
+* [x] qr code generator
 
 ## Undocumented features
 
-* [x] load json files (terrain/particles/shaders/graffiti)
-* [x] load shaders
 * [x] tween objects around
 * [x] modifiers - predefined tweens
 * [x] attach object to bone (scale support)
-* [x] particle system
-* [x] graffiti generator (layered painting)
 * [x] bundle assets
 * [x] shadows
-* [x] light helpers
 * [x] mirror
-* [x] terrain with heightmap
 * [x] on screen console
 * [x] forest generator
-* [x] qr code generator
 * [x] fine animation controls
 * [x] game pad controller game
 * [ ] set shadowMap.width and height of all lights

@@ -281,6 +281,14 @@ spotLight.lookAt(new (THREE.Vector3)(0, 0, 0))
 spotLight.setColor('white')
 ```
 
+## LightHelpers
+
+```
+Utils.toggleShadowCameraHelpers()
+```
+
+This will add wireframe objects around lights so they can be seen better.
+
 ## VirtualController
 
 Checkout [/workspace/games/controller/](/workspace/games/controller) for example usage.
@@ -313,4 +321,51 @@ this.rtsCam.oc.panBoundRectangle = new THREE.Vector4(-10, 10, -10, 10)
 // y - right most point
 // z - top most point
 // w - bottom most point
+```
+
+## Terrain
+
+```
+this.terrain = Terrain.fromJson(AssetManager.get('terrain.json'))
+this.terrain.shadowReceive()
+this.add(this.terrain)
+```
+
+## Particles
+
+```
+let jsonParticleData = AssetManager.get('particle.json').particle
+this.explosion = new BaseParticle(jsonParticleData)
+this.add(this.explosion)
+
+this.explosion.tick(tpf)
+```
+
+
+## Shaders
+
+```
+let material = new ShaderMaterial('basic_shader.json', function (tpf) {
+  this.uniforms.time.value += tpf * 2
+})
+material.tick(tpf)
+```
+
+```
+let material = new ShaderMaterial('dissolve_shader.json', function (tpf) {
+  if (this.uniforms.dissolve.value > 1) {
+    this.uniforms.dissolve.value = 0
+  }
+  this.uniforms.dissolve.value += tpf
+})
+material.tick(tpf)
+```
+
+## Graffiti
+
+Art generator or graffiti
+
+```
+this.art = Utils.graffiti(AssetManager.get('majestic-frog-cover.json'))
+this.add(this.art)
 ```

@@ -1,12 +1,12 @@
 // Example usage:
 //
-// var material = new ShaderMaterial('basic_shader.json', function (tpf) {
+// let material = new ShaderMaterial('basic_shader.json', function (tpf) {
 //   this.uniforms.time.value += tpf * 2
 // })
 // material.tick(tpf)
 //
 //
-// var material = new ShaderMaterial('dissolve_shader.json', function (tpf) {
+// let material = new ShaderMaterial('dissolve_shader.json', function (tpf) {
 //   if (this.uniforms.dissolve.value > 1) {
 //     this.uniforms.dissolve.value = 0
 //   }
