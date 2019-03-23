@@ -25,12 +25,12 @@ class RTSCamera {
     oc.minPolarAngle = 0.2;
     oc.maxPolarAngle = 1.4;
 
-    oc.panSpeed = 0.5
+    oc.panSpeed = 0.1
     oc.keyPanSpeed = 2
     oc.rotateSpeed = 0.05;
 
     oc.panBound = true
-    oc.panBoundRectangle = new THREE.Vector4(-10, 10, -10, 10)
+    // oc.panBoundRectangle = new THREE.Vector4(-10, 10, -10, 10)
 
     // TODO: might need to be scaled to height
     oc.zoomSensitivity = 150 // number of pixels needed to be considered zoom

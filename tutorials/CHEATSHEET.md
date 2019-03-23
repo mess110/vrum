@@ -294,6 +294,8 @@ this.rtsCam.toggle()
 // bound the panning to an area
 this.rtsCam.oc.panBound = true
 this.rtsCam.oc.panBoundRectangle = new THREE.Vector4(-10, 10, -10, 10)
-// x,y top left coordinate
-// z, w bottom right coordinate
+// x - left most point
+// y - right most point
+// z - top most point
+// w - bottom most point
 ```

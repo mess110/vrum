@@ -11,10 +11,10 @@ class Scene extends THREE.Scene {
   }
 
   _fullInit(options) {
-    this.initialized = true
     this.intervals = []
     this.timeouts = []
     this.init(options)
+    this.initialized = true
   }
 
   uninit() {
