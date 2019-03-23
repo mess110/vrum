@@ -1,0 +1,204 @@
+{
+    "accessors" : [
+        {
+            "bufferView" : 0,
+            "componentType" : 5123,
+            "count" : 240,
+            "max" : [
+                41
+            ],
+            "min" : [
+                0
+            ],
+            "type" : "SCALAR"
+        },
+        {
+            "bufferView" : 1,
+            "componentType" : 5126,
+            "count" : 42,
+            "max" : [
+                1.3944364786148071,
+                1.7254419326782227,
+                1.016563892364502
+            ],
+            "min" : [
+                -1.41496741771698,
+                0.0,
+                -1.013496994972229
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 2,
+            "componentType" : 5126,
+            "count" : 42,
+            "max" : [
+                0.9493087530136108,
+                0.9528794288635254,
+                0.9952696561813354
+            ],
+            "min" : [
+                -0.9354838728904724,
+                -1.0,
+                -0.9840693473815918
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 3,
+            "componentType" : 5126,
+            "count" : 42,
+            "max" : [
+                1.0,
+                0.0,
+                -0.0,
+                -1.0
+            ],
+            "min" : [
+                1.0,
+                0.0,
+                -0.0,
+                -1.0
+            ],
+            "type" : "VEC4"
+        },
+        {
+            "bufferView" : 4,
+            "componentType" : 5126,
+            "count" : 42,
+            "max" : [
+                0.0,
+                1.0
+            ],
+            "min" : [
+                0.0,
+                1.0
+            ],
+            "type" : "VEC2"
+        }
+    ],
+    "asset" : {
+        "generator" : "Khronos Blender glTF 2.0 exporter",
+        "version" : "2.0"
+    },
+    "bufferViews" : [
+        {
+            "buffer" : 0,
+            "byteLength" : 480,
+            "byteOffset" : 0,
+            "target" : 34963
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 504,
+            "byteOffset" : 480,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 504,
+            "byteOffset" : 984,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 672,
+            "byteOffset" : 1488,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 336,
+            "byteOffset" : 2160,
+            "target" : 34962
+        }
+    ],
+    "buffers" : [
+        {
+            "byteLength" : 2496,
+            "uri" : "rock-001.bin"
+        }
+    ],
+    "materials" : [
+        {
+            "name" : "leaf.003",
+            "pbrMetallicRoughness" : {
+                "baseColorFactor" : [
+                    0.02624122053384781,
+                    0.24620139598846436,
+                    0.02624122053384781,
+                    1.0
+                ],
+                "metallicFactor" : 0.0
+            }
+        },
+        {
+            "name" : "rock.003",
+            "pbrMetallicRoughness" : {
+                "baseColorFactor" : [
+                    0.10224173218011856,
+                    0.17788845300674438,
+                    0.2195262312889099,
+                    1.0
+                ],
+                "metallicFactor" : 0.0
+            }
+        },
+        {
+            "name" : "wood-inner.003",
+            "pbrMetallicRoughness" : {
+                "baseColorFactor" : [
+                    0.3864295184612274,
+                    0.2015562802553177,
+                    0.07818741351366043,
+                    1.0
+                ],
+                "metallicFactor" : 0.0
+            }
+        },
+        {
+            "name" : "wood.003",
+            "pbrMetallicRoughness" : {
+                "baseColorFactor" : [
+                    0.18447501957416534,
+                    0.07227185368537903,
+                    0.023153362795710564,
+                    1.0
+                ],
+                "metallicFactor" : 0.0
+            }
+        }
+    ],
+    "meshes" : [
+        {
+            "name" : "Cylinder.003",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "NORMAL" : 2,
+                        "POSITION" : 1,
+                        "TANGENT" : 3,
+                        "TEXCOORD_0" : 4
+                    },
+                    "indices" : 0,
+                    "material" : 1
+                }
+            ]
+        }
+    ],
+    "nodes" : [
+        {
+            "mesh" : 0,
+            "name" : "Cylinder.002"
+        }
+    ],
+    "scene" : 0,
+    "scenes" : [
+        {
+            "name" : "Scene",
+            "nodes" : [
+                0
+            ]
+        }
+    ]
+}
