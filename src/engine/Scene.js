@@ -57,7 +57,21 @@ class Scene extends THREE.Scene {
 
   tick(tpf) {}
 
+  _doMouseEvent(event, raycaster) {
+    if (!this.initialized) {
+      return
+    }
+    this.doMouseEvent(event, raycaster)
+  }
+
   doMouseEvent(event, raycaster) {}
+
+  _doKeyboardEvent(event) {
+    if (!this.initialized) {
+      return
+    }
+    this.doKeyboardEvent(event)
+  }
 
   doKeyboardEvent(event) {}
 

@@ -47,14 +47,13 @@ class InputManager {
   mouseHandler(event) {
     const raycaster = InputManager._parseMouseEvent(event)
     if (raycaster != null) {
-      var scene = Hodler.get('scene')
-      scene.doMouseEvent(event, raycaster)
+      Hodler.get('scene')._doMouseEvent(event, raycaster)
     }
   }
 
   // @nodoc
   keyboardHandler(event) {
-    Hodler.get('scene').doKeyboardEvent(event)
+    Hodler.get('scene')._doKeyboardEvent(event)
   }
 
   // @nodoc
