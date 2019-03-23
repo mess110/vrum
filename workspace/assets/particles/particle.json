@@ -1,12 +1,13 @@
 {
+  "kind": "particle",
   "textures": [
     {
-      "libPath": "workspace/lib/textures/sprite-explosion2.png",
+      "libPath": "/workspace/assets/textures/sprite-explosion2.png",
       "destPath": "assets/sprite-explosion2.png",
       "type": "texture"
     },
     {
-      "libPath": "workspace/lib/textures/smokeparticle.png",
+      "libPath": "/workspace/assets/textures/smokeparticle.png",
       "destPath": "assets/smokeparticle.png",
       "type": "texture"
     }

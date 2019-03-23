@@ -1,13 +1,14 @@
 {
+  "kind": "terrain",
   "width": 10,
   "height": 10,
   "scale": 20,
   "texture": {
-    "libPath": "workspace/lib/textures/grass.png",
+    "libPath": "/workspace/assets/textures/grass.png",
     "destPath": "grass.png"
   },
   "heightmap": {
-    "libPath": "workspace/lib/textures/heightmap.png",
+    "libPath": "/workspace/assets/textures/heightmap3.png",
     "destPath": "heightmap3.png"
   }
 }

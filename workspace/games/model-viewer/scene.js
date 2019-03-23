@@ -97,7 +97,7 @@ class MainScene extends Scene {
   loadModel(path, scale) {
     AssetManager.loadAssets([
       { type: 'model', path: path },
-    ], function () {
+    ], () => {
       let scene = Hodler.get('scene')
       scene.addModelToScene(path, scale)
     })

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+
+        <link rel="icon" href="/workspace/games/project/assets/favicon.ico">
+
+        <title>vrum.js scene-editor</title>
+        <style type="text/css" media="all">
+            html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background-color: #000; }
+            canvas { width: 100%; height: 100%; }
+
+            #scene-input {
+                display: none;
+            }
+
+            #add-items {
+                position: absolute;
+                right: 0px;
+                top: 0px;
+                background-color: black;
+                color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <input type="file" id="scene-input" />
+
+        <div id="add-items" style="display: none">
+            <div style="padding-left: 16px; padding-right: 16px">
+                <div id="asset-panel">
+                </div>
+            </div>
+        </div>
+
+        <script src="/src/tools/dependencies.dev.js"></script>
+        <!-- <script src="/vrum.min.js"></script> -->
+        <script>
+            loadVrumScripts([
+                'GameScene.js',
+                'Cinematic.js',
+                'game.js',
+            ])
+        </script>
+    </body>
+</html>

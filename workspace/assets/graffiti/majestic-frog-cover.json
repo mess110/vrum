@@ -23,7 +23,7 @@
       "font": "40px Helvetica",
       "asset": {
         "key": "vrum.png",
-        "libPath": "workspace/lib/textures/vrum.png"
+        "libPath": "/workspace/assets/textures/vrum.png"
       },
       "key": "vrum",
       "angle": 0
@@ -39,7 +39,7 @@
       "strokeLineWidth": 7,
       "asset": {
         "key": "black-faded-border.png",
-        "libPath": "workspace/lib/textures/black-faded-border.png"
+        "libPath": "/workspace/assets/textures/black-faded-border.png"
       },
       "key": "black-faded-border",
       "angle": 0
