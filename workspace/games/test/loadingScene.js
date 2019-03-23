@@ -9,7 +9,7 @@ class LoadingScene extends Scene {
     camera.position.set(0, 10, 15)
     camera.lookAt(new THREE.Vector3(0,0,0))
 
-    Engine.switch(Hodler.get('scene1'), [
+    Engine.switch(Hodler.get('scene4'), [
       { type: 'font',  path: '/workspace/assets/fonts/luckiest-guy' },
       { type: 'model', path: '/workspace/assets/models/chicken.gltf' },
       { type: 'model', path: '/workspace/assets/models/chicken.gltf' },
@@ -29,6 +29,7 @@ class LoadingScene extends Scene {
       { type: 'json',  path: '/workspace/assets/shaders/basic_shader.json' },
       { type: 'json',  path: '/workspace/assets/shaders/dissolve_shader.json' },
       { type: 'json',  path: '/workspace/assets/terrains/terrain.json' },
+      { type: 'json',  path: '/workspace/assets/scenes/boat-scene.json' },
       { type: 'sound', path: '/workspace/assets/sounds/hit.wav' },
       { type: 'sound', path: '/workspace/assets/sounds/SuperHero_original.ogg' },
     ])

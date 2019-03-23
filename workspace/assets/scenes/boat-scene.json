@@ -1,0 +1,282 @@
+{
+  "assets": [
+    {
+      "type": "font",
+      "path": "/workspace/assets/fonts/luckiest-guy"
+    },
+    {
+      "type": "image",
+      "path": "/workspace/assets/textures/waternormals.jpg"
+    },
+    {
+      "type": "model",
+      "path": "/workspace/assets/models/boat.gltf"
+    },
+    {
+      "type": "model",
+      "path": "/workspace/assets/models/panda.glb"
+    },
+    {
+      "type": "model",
+      "path": "/workspace/assets/models/tree-002.gltf"
+    },
+    {
+      "type": "model",
+      "path": "/workspace/assets/models/tree-001.gltf"
+    },
+    {
+      "type": "model",
+      "path": "/workspace/assets/models/tree-003.gltf"
+    },
+    {
+      "type": "model",
+      "path": "/workspace/assets/models/tree-004.gltf"
+    },
+    {
+      "type": "model",
+      "path": "/workspace/assets/models/rock-002.gltf"
+    },
+    {
+      "type": "model",
+      "path": "/workspace/assets/models/rock-001.gltf"
+    },
+    {
+      "type": "model",
+      "path": "/workspace/assets/models/grass.gltf"
+    },
+    {
+      "type": "model",
+      "path": "/workspace/assets/models/trunk-002.gltf"
+    },
+    {
+      "type": "model",
+      "path": "/workspace/assets/models/trunk-001.gltf"
+    },
+    {
+      "type": "model",
+      "path": "/workspace/assets/models/chicken.gltf"
+    }
+  ],
+  "items": [
+    {
+      "type": "water",
+      "map": "waternormals.jpg",
+      "width": 500,
+      "height": 500,
+      "water": {
+        "alpha": 0.8,
+        "textureWidth": 512,
+        "textureHeight": 512,
+        "sunColor": "#ffffff",
+        "waterColor": "#001e0f",
+        "betaVersion": 0,
+        "side": 2,
+        "waterNormals": {
+          "metadata": {
+            "version": 4.5,
+            "type": "Texture",
+            "generator": "Texture.toJSON"
+          },
+          "uuid": "44DDD583-BDD4-429A-842D-31FBDD4E940F",
+          "name": "",
+          "mapping": 300,
+          "repeat": [
+            1,
+            1
+          ],
+          "offset": [
+            0,
+            0
+          ],
+          "center": [
+            0,
+            0
+          ],
+          "rotation": 0,
+          "wrap": [
+            1000,
+            1000
+          ],
+          "format": 1022,
+          "type": 1009,
+          "encoding": 3000,
+          "minFilter": 1008,
+          "magFilter": 1006,
+          "anisotropy": 1,
+          "flipY": true,
+          "premultiplyAlpha": false,
+          "unpackAlignment": 4,
+          "image": "521A6206-151A-4F22-A2CE-323575D2F92D"
+        }
+      },
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": -0.5478457186898051
+      },
+      "rotation": {
+        "x": -1.5881850077685251,
+        "y": 0,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "wSegments": 10,
+      "hSegments": 10
+    },
+    {
+      "type": "sky",
+      "distance": 400,
+      "inclination": 0.4,
+      "azimuth": 0.205
+    },
+    {
+      "key": "boat.gltf",
+      "type": "model",
+      "position": {
+        "x": 0,
+        "y": -0.05719198133904424,
+        "z": -0.17190498856269176
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      }
+    },
+    {
+      "type": "pointLight",
+      "color": "white",
+      "intensity": 1,
+      "distance": 0,
+      "decay": 1,
+      "position": {
+        "x": 0,
+        "y": 7.91706815516601,
+        "z": 10.317943638291865
+      }
+    },
+    {
+      "key": "panda.glb",
+      "type": "model",
+      "position": {
+        "x": 0,
+        "y": 0.5867275095820479,
+        "z": -0.22727831974671542
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": {
+        "x": 0.333991861864203,
+        "y": 0.333991861864203,
+        "z": 0.333991861864203
+      }
+    },
+    {
+      "key": "tree-001.gltf",
+      "type": "model",
+      "position": {
+        "x": -7.468060362876352,
+        "y": -0.07982541468160775,
+        "z": -3.448195759205964
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      }
+    },
+    {
+      "key": "tree-004.gltf",
+      "type": "model",
+      "position": {
+        "x": 7.038712231994958,
+        "y": 0,
+        "z": -5.469280393640532
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      }
+    },
+    {
+      "key": "trunk-001.gltf",
+      "type": "model",
+      "position": {
+        "x": -4.646795803355618,
+        "y": 0,
+        "z": 5.16728908397705
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      }
+    },
+    {
+      "key": "grass.gltf",
+      "type": "model",
+      "position": {
+        "x": 5.535565742508246,
+        "y": -0.08222407167655454,
+        "z": 1.610337653002011
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      }
+    },
+    {
+      "key": "chicken.gltf",
+      "type": "model",
+      "position": {
+        "x": 0,
+        "y": 1.5926410171870917,
+        "z": 4.199238258676797
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": {
+        "x": 2.753635013887295,
+        "y": 2.753635013887295,
+        "z": 2.753635013887295
+      }
+    }
+  ]
+}

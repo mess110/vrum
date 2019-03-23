@@ -8,6 +8,7 @@ class GameScene extends Scene {
     . to save a scene
     / load asset
     t toggle shadow helpers
+    y toggle grid
 
   navigation mode:
 
@@ -45,7 +46,8 @@ class GameScene extends Scene {
     this.orbit = orbit
     this.attached = undefined
 
-    this.add( new THREE.GridHelper( 1000, 100 ) );
+    this.grid = new THREE.GridHelper( 1000, 100 )
+    this.add(this.grid);
 
     this.cinematic.addToScene()
   }
@@ -139,7 +141,7 @@ class GameScene extends Scene {
     let skyRow = this.makeMenuRow('sky', 'sky', { type: 'sky', distance: 400, inclination: 0.4, azimuth: 0.205 })
     assetPanel.append(skyRow)
 
-    let waterRow = this.makeMenuRow('water', 'water', { type: 'water', map: 'waternormals.jpg', width: 9, height: 9, water: { alpha: 0.8 } })
+    let waterRow = this.makeMenuRow('water', 'water', { type: 'water', map: 'waternormals.jpg', width: 9, height: 9, water: { alpha: 0.8 }, position: { x: 0, y: 0, z: 0}, rotation: { x: 0, y: 0, z: 0 }, scale: { x: 1, y: 1, z: 1} })
     assetPanel.append(waterRow)
   }
 
@@ -178,7 +180,7 @@ class GameScene extends Scene {
         return
     }
 
-    if (event.type == 'mousedown') {
+    if (event.type == 'mousedown' && isBlank(this.attached)) {
       let intersects = raycaster.intersectObjects( this.cinematic.getAssetModels(), true );
       if (intersects.any()) {
         let intersection = intersects.first()
@@ -282,12 +284,15 @@ class GameScene extends Scene {
     if (event.code == 'KeyT') {
       Utils.toggleShadowCameraHelpers()
     }
+    if (event.code == 'KeyY') {
+      this.grid.visible = !this.grid.visible
+    }
     if (event.code == 'Escape') {
       this.hideAddItemPanel()
     }
     if (event.code == 'Slash') {
       this.hideAddItemPanel()
-      let assetFolderAndName = prompt(`Load asset from ${basePath}`);
+      let assetFolderAndName = prompt(`Load asset from ${this.basePath}`);
       this.loadDependencies(this.basePath, assetFolderAndName)
     }
     console.log(`${event.type} ${event.code} (${event.which})`)

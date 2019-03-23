@@ -8,3 +8,10 @@ vrum.min.js
 
 cert.pem
 key.pem
+workspace/assets/models/*.blend
+workspace/assets/models/*.blend1
+workspace/assets/models/*.blend2
+workspace/assets/models/*-preview.*
+workspace/assets/models/*.tar.gz
+workspace/assets/models/toexport
+workspace/assets/models/LICENSE
