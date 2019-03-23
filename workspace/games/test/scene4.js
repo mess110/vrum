@@ -9,4 +9,10 @@ class Scene4 extends Scene {
   }
 
   tick(tpf) {}
+
+  doKeyboardEvent(event) {
+    if (event.type == 'keydown' && event.which == 32) {
+      Engine.switch(Hodler.get('scene1'))
+    }
+  }
 }

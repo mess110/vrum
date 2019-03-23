@@ -55,6 +55,18 @@
     {
       "type": "model",
       "path": "/workspace/assets/models/chicken.gltf"
+    },
+    {
+      "type": "json",
+      "path": "/workspace/assets/terrains/terrain.json"
+    },
+    {
+      "type": "image",
+      "path": "/workspace/assets/textures/grass.png"
+    },
+    {
+      "type": "image",
+      "path": "/workspace/assets/textures/heightmap3.png"
     }
   ],
   "items": [
@@ -77,7 +89,7 @@
             "type": "Texture",
             "generator": "Texture.toJSON"
           },
-          "uuid": "44DDD583-BDD4-429A-842D-31FBDD4E940F",
+          "uuid": "24DE72D9-5F6E-4504-95E9-03173193028B",
           "name": "",
           "mapping": 300,
           "repeat": [
@@ -106,7 +118,7 @@
           "flipY": true,
           "premultiplyAlpha": false,
           "unpackAlignment": 4,
-          "image": "521A6206-151A-4F22-A2CE-323575D2F92D"
+          "image": "9A6733E0-07C6-4ED9-9D90-4D5713175407"
         }
       },
       "position": {
@@ -187,9 +199,9 @@
       "key": "tree-001.gltf",
       "type": "model",
       "position": {
-        "x": -7.468060362876352,
-        "y": -0.07982541468160775,
-        "z": -3.448195759205964
+        "x": 0.6701083677638708,
+        "y": -0.18572162656805613,
+        "z": -8.768585961194873
       },
       "rotation": {
         "x": 0,
@@ -206,9 +218,9 @@
       "key": "tree-004.gltf",
       "type": "model",
       "position": {
-        "x": 7.038712231994958,
-        "y": 0,
-        "z": -5.469280393640532
+        "x": 10.392245864151601,
+        "y": 1.3096743448872532,
+        "z": 0.7087673444833369
       },
       "rotation": {
         "x": 0,
@@ -225,12 +237,12 @@
       "key": "trunk-001.gltf",
       "type": "model",
       "position": {
-        "x": -4.646795803355618,
-        "y": 0,
-        "z": 5.16728908397705
+        "x": 8.565995584859165,
+        "y": 0.5048823916849194,
+        "z": 2.80167933368561
       },
       "rotation": {
-        "x": 0,
+        "x": 0.5002574155488978,
         "y": 0,
         "z": 0
       },
@@ -276,6 +288,82 @@
         "x": 2.753635013887295,
         "y": 2.753635013887295,
         "z": 2.753635013887295
+      }
+    },
+    {
+      "key": "rock-001.gltf",
+      "type": "model",
+      "position": {
+        "x": 5.859851073345403,
+        "y": -0.48881411239872996,
+        "z": -0.33414427323183915
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      }
+    },
+    {
+      "key": "rock-002.gltf",
+      "type": "model",
+      "position": {
+        "x": 5.639485791527907,
+        "y": -0.9026382359116383,
+        "z": -1.9274829288662916
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      }
+    },
+    {
+      "key": "terrain.json",
+      "type": "json",
+      "position": {
+        "x": 10.638119707377447,
+        "y": 1.4107727729527881,
+        "z": 0
+      },
+      "rotation": {
+        "x": 1.5633953356370742,
+        "y": 0,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      }
+    },
+    {
+      "key": "grass.gltf",
+      "type": "model",
+      "position": {
+        "x": -5.4403365178647904,
+        "y": -0.1020433559197036,
+        "z": 0
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
       }
     }
   ]
