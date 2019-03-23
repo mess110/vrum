@@ -62,6 +62,8 @@ THREE.CustomOrbitControls = function ( object, domElement ) {
 	// Set to false to disable panning
 	this.enablePan = true;
 	this.panSpeed = 1.0;
+  this.panBound = false;
+  this.panBoundRectangle = new THREE.Vector4(-10, 10, -10, 10)
 	this.screenSpacePanning = false; // if true, pan in screen-space
 	this.keyPanSpeed = 7.0;	// pixels moved per arrow key push
 
@@ -337,7 +339,15 @@ THREE.CustomOrbitControls = function ( object, domElement ) {
 		var v = new THREE.Vector3();
 
 		return function panLeft( distance, objectMatrix ) {
-
+      if (scope.panBound) {
+        let camPos = Hodler.get('camera').position
+        if (camPos.x < scope.panBoundRectangle.x && distance > 0) {
+          return
+        }
+        if (camPos.x > scope.panBoundRectangle.y && distance < 0) {
+          return
+        }
+      }
 			v.setFromMatrixColumn( objectMatrix, 0 ); // get X column of objectMatrix
 			v.multiplyScalar( - distance );
 
@@ -352,6 +362,17 @@ THREE.CustomOrbitControls = function ( object, domElement ) {
 		var v = new THREE.Vector3();
 
 		return function panUp( distance, objectMatrix ) {
+
+      if (scope.panBound) {
+        let camPos = Hodler.get('camera').position
+        console.log(camPos)
+        if (camPos.z < scope.panBoundRectangle.z && distance > 0) {
+          return
+        }
+        if (camPos.z > scope.panBoundRectangle.w && distance < 0) {
+          return
+        }
+      }
 
 			if ( scope.screenSpacePanning === true ) {
 

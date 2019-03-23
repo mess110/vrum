@@ -289,4 +289,11 @@ this.rtsCam = new RTSCamera()
 this.rtsCam.tick(tpf)
 this.rtsCam.doMouseEvent(event)
 this.rtsCam.isStatic() // returns true if camera is not doing anything
+this.rtsCam.toggle()
+
+// bound the panning to an area
+this.rtsCam.oc.panBound = true
+this.rtsCam.oc.panBoundRectangle = new THREE.Vector4(-10, 10, -10, 10)
+// x,y top left coordinate
+// z, w bottom right coordinate
 ```

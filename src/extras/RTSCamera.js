@@ -12,32 +12,37 @@ class RTSCamera {
     this.touch = Utils.isMobileOrTablet()
 
     let oc = Utils.toggleOrbitControls(THREE.CustomOrbitControls)
-    oc.enableDamping = true
+
     oc.minDistance = 3
     oc.maxDistance = 50
-    oc.minPolarAngle = 0.2;
-    oc.maxPolarAngle = 1.4;
+
+    oc.enableDamping = true
     oc.dampingFactor = 0.07;
     oc.zoomDampingFactor = 0.1;
-    oc.rotateSpeed = 0.05;
+
+    oc.enableRotate = false
+    oc.minPolarAngle = 0.2;
+    oc.maxPolarAngle = 1.4;
+
     oc.panSpeed = 0.5
     oc.keyPanSpeed = 5
-    oc.enableRotate = false
+    oc.rotateSpeed = 0.05;
+
+    oc.panBound = true
+    oc.panBoundRectangle = new THREE.Vector4(-10, 10, -10, 10)
 
     // TODO: might need to be scaled to height
     oc.zoomSensitivity = 150 // number of pixels needed to be considered zoom
 
-    this.enabled = true
     this.oc = oc
+    this.enabled = true
 
-    this.percentOfWidthPan = 10
-    this.percentOfHeightPan = 10
+    this.percentOfWidthPan = 5
+    this.percentOfHeightPan = 5
 
     this.size = this.getSize()
     this.lastX = this.size.width / 2
     this.lastY = this.size.height / 2
-
-    this.delaySeconds = 0.05
   }
 
   toggle() {
