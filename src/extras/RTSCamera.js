@@ -12,6 +12,7 @@ class RTSCamera {
     this.touch = Utils.isMobileOrTablet()
 
     let oc = Utils.toggleOrbitControls(THREE.CustomOrbitControls)
+    oc.touch = this.touch
 
     oc.minDistance = 3
     oc.maxDistance = 50
@@ -25,7 +26,7 @@ class RTSCamera {
     oc.maxPolarAngle = 1.4;
 
     oc.panSpeed = 0.5
-    oc.keyPanSpeed = 5
+    oc.keyPanSpeed = 2
     oc.rotateSpeed = 0.05;
 
     oc.panBound = true

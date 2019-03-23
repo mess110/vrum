@@ -339,12 +339,14 @@ THREE.CustomOrbitControls = function ( object, domElement ) {
 		var v = new THREE.Vector3();
 
 		return function panLeft( distance, objectMatrix ) {
+      let panSpeedZ = scope.touch ? scope.panSpeed : scope.keyPanSpeed
+
       if (scope.panBound) {
         let camPos = Hodler.get('camera').position
-        if (camPos.x < scope.panBoundRectangle.x && distance > 0) {
+        if (camPos.x - panSpeedZ < scope.panBoundRectangle.x && distance > 0) {
           return
         }
-        if (camPos.x > scope.panBoundRectangle.y && distance < 0) {
+        if (camPos.x + panSpeedZ > scope.panBoundRectangle.y && distance < 0) {
           return
         }
       }
@@ -362,14 +364,14 @@ THREE.CustomOrbitControls = function ( object, domElement ) {
 		var v = new THREE.Vector3();
 
 		return function panUp( distance, objectMatrix ) {
+      let panSpeedZ = scope.touch ? scope.panSpeed : scope.keyPanSpeed
 
       if (scope.panBound) {
         let camPos = Hodler.get('camera').position
-        console.log(camPos)
-        if (camPos.z < scope.panBoundRectangle.z && distance > 0) {
+        if (camPos.z - panSpeedZ < scope.panBoundRectangle.z && distance > 0) {
           return
         }
-        if (camPos.z > scope.panBoundRectangle.w && distance < 0) {
+        if (camPos.z + panSpeedZ > scope.panBoundRectangle.w && distance < 0) {
           return
         }
       }
