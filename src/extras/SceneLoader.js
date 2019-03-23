@@ -1,4 +1,4 @@
-class Cinematic {
+class SceneLoader {
   constructor(json) {
     if (isBlank(json)) {
       json = {}
@@ -12,7 +12,7 @@ class Cinematic {
   setDefaultValues() {
     let json = this.json
     if (isBlank(json.assets)) { json.assets = [] }
-    if (isBlank(json.assets)) { json.items = [] }
+    if (isBlank(json.items)) { json.items = [] }
   }
 
   addToScene() {

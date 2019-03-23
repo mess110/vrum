@@ -148,8 +148,8 @@ class GameScene extends Scene {
 
     let ambientLightRow = document.createElement('p')
     ambientLightRow.addEventListener('click', (event) => {
-        let scene = Hodler.get('scene')
-        scene.newModel(obj)
+      let scene = Hodler.get('scene')
+      scene.newModel(obj)
     })
     ambientLightRow.appendChild(ambientLightIconSpan)
     ambientLightRow.appendChild(ambientLightNameSpan)
@@ -196,8 +196,7 @@ class GameScene extends Scene {
 
     // if (this.keyboard.pressed('ctrl+s')) {
     if (event.code == 'Period') {
-      let cinematic = Hodler.get('cinematic')
-      Utils.saveFile(cinematic.toJSON(), 'scene.json')
+      Utils.saveFile(this.cinematic.toJSON(), 'scene.json')
       return
     }
 

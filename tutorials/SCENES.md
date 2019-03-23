@@ -136,3 +136,22 @@ Utils.fade({type: 'out'})}
 ```
 
 It can be customised in `Config` variables.
+
+
+## SceneEditor
+
+We have a scene editor which is a WYSIWYG editor for scenes. They are saved
+as json objects. See developer tools (F12) for a list of keyboard shortcuts.
+
+Create a scene in the editor, save it and in your code:
+
+```
+let json = AssetManager.get('scene.json')
+let sceneLoader = new SceneLoader(json)
+
+// to load the assets
+AssetManager.loadAssets(sceneLoader.getAssets(), () => {})
+
+// to populate the current scene
+sceneLoader.addToScene()
+```

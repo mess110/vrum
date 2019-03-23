@@ -76,6 +76,7 @@ let VRUM_DEPENDS = [
   "../../../src/extras/ShaderMaterial.js",
   "../../../src/extras/VideoRecorderManager.js",
   "../../../src/extras/VirtualController.js",
+  "../../../src/extras/SceneLoader.js",
 
   "../../../src/objects/BaseParticle.js",
   "../../../src/objects/LightningBolt.js",

@@ -10,7 +10,7 @@ function readSingleFile(e) {
   reader.onload = function(e) {
     let contents = e.target.result;
     let json = JSON.parse(contents)
-    let cinematic = new Cinematic(json)
+    let cinematic = new SceneLoader(json)
     Hodler.add('cinematic', cinematic)
 
     Engine.switch(new GameScene(), cinematic.getAssets())
@@ -22,11 +22,10 @@ function readSingleFile(e) {
 document.querySelector('#scene-input')
   .addEventListener('change', readSingleFile, false);
 
-Hodler.add('cinematic', new Cinematic({
+Hodler.add('cinematic', new SceneLoader({
   assets: [
     { type: 'font', path: '/workspace/assets/fonts/luckiest-guy' },
-  ],
-  items: []
+  ]
 }))
 
 Engine.start(new GameScene(), Hodler.get('cinematic').getAssets())

@@ -22,6 +22,7 @@ yarn http
        * [Input](tutorials/SCENES.md#Input)
        * [Scene management](tutorials/SCENES.md#SceneManagement)
        * [Fade](tutorials/SCENES.md#Fade)
+       * [SceneEditor](tutorials/SCENES.md#SceneEditor)
    * [Cheatsheet](tutorials/CHEATSHEET.md)
        * [No WebGL](tutorials/CHEATSHEET.md#NoWebGL)
        * [Config](tutorials/CHEATSHEET.md#Config)
@@ -115,6 +116,7 @@ yarn http
 * [x] load gltf models
 * [x] load glb models
 * [x] volumetric spotlight
+* [x] scene editor
 
 ## Undocumented features
 
