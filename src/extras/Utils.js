@@ -155,6 +155,11 @@ class Utils {
       if (obj instanceof Sky) {
         obj.light.castShadow = !obj.light.castShadow
       }
+      [THREE.DirectionalLight, THREE.PointLight, THREE.HemisphereLight].forEach((light) => {
+        if (obj instanceof light) {
+          obj.castShadow = !obj.castShadow
+        }
+      })
     })
   }
 
@@ -164,6 +169,23 @@ class Utils {
       if (obj instanceof SpotLight || obj instanceof Sky) {
         obj.cameraHelper.visible = !obj.cameraHelper.visible
       }
+      [
+        { type: THREE.DirectionalLight, helper: THREE.DirectionalLightHelper},
+        { type: THREE.PointLight, helper: THREE.PointLightHelper},
+        { type: THREE.HemisphereLight, helper: THREE.HemisphereLightHelper},
+      ].forEach((light) => {
+        if (obj instanceof light.type) {
+          if (isBlank(obj.cameraHelper)) {
+            let helper = new light.helper( obj, 5 );
+            obj.cameraHelper = helper
+            obj.add(helper)
+          } else {
+            let helper = obj.cameraHelper
+            obj.cameraHelper = undefined
+            obj.remove(helper)
+          }
+        }
+      })
     })
   }
 

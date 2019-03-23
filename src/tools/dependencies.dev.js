@@ -23,6 +23,7 @@ let VRUM_DEPENDS = [
 
   "/node_modules/three/examples/js/controls/OrbitControls.js",
   "/node_modules/three/examples/js/controls/PointerLockControls.js",
+  "/node_modules/three/examples/js/controls/TransformControls.js",
 
   "/node_modules/three/examples/js/objects/Sky.js",
   "/node_modules/three/examples/js/objects/Reflector.js",
