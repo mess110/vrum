@@ -11,7 +11,8 @@ class MainScene extends Scene {
     plane.rotation.x = -Math.PI / 2
     this.add(plane)
 
-    this.add(Utils.grid({ step: 5 }))
+    this.grid = Utils.grid({ step: 5 })
+    this.add(this.grid)
 
     this.sky = new Sky();
     this.sky.addToScene(this)

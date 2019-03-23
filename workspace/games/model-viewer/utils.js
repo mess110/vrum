@@ -17,14 +17,14 @@ class LoadingScene extends MainScene {
   }
 }
 
-const stopPropagation = function (event) {
+const stopPropagation = (event) => {
   let stopIt = (event) => { event.stopPropagation() }
   document.querySelectorAll('input[type=text]').forEach((e) => {
     e.addEventListener('keydown', stopIt)
   })
 }
 
-const loadModel = function (url) {
+const loadModel = (url) => {
   let inputUrl = document.querySelector('#inputUrl')
   let scale = parseFloat(document.querySelector('#scale').value)
   if (!isBlank(url)) {
@@ -56,7 +56,12 @@ const updateLastModels = () => {
   })
 }
 
-const toggleWireframe = function () {
+const toggleWireframe = () => {
   wireframe = !wireframe
   Utils.setWireframe(wireframe)
+}
+
+const toggleGird = () => {
+  let grid = Hodler.get('scene').grid
+  grid.visible = !grid.visible
 }
