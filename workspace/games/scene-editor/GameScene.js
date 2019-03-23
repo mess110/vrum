@@ -33,6 +33,7 @@ class GameScene extends Scene {
 
     this.keyboard = Hodler.get('engine').inputManager.keyboard
     this.cinematic = Hodler.get('cinematic')
+    this.basePath = '/workspace/assets/'
 
     let orbit = Utils.toggleOrbitControls()
 
@@ -90,7 +91,7 @@ class GameScene extends Scene {
     if (['model', 'json'].includes(asset.type)) {
       let assetKey = AssetManager.getAssetKey(asset)
       item = { key: assetKey, type: asset.type, position: { x: 0, y: 0, z: 0}, rotation: { x: 0, y: 0, z: 0 }, scale: { x: 1, y: 1, z: 1} }
-    } else if (['sky', 'directionalLight', 'ambientLight', 'pointLight', 'hemisphereLight'].includes(asset.type)) {
+    } else if (['water', 'sky', 'directionalLight', 'ambientLight', 'pointLight', 'hemisphereLight'].includes(asset.type)) {
       item = asset
     } else {
       console.error(`dunno what to doooo with ${asset.type}`)
@@ -137,6 +138,9 @@ class GameScene extends Scene {
 
     let skyRow = this.makeMenuRow('sky', 'sky', { type: 'sky', distance: 400, inclination: 0.4, azimuth: 0.205 })
     assetPanel.append(skyRow)
+
+    let waterRow = this.makeMenuRow('water', 'water', { type: 'water', map: 'waternormals.jpg', width: 9, height: 9, water: { alpha: 0.8 } })
+    assetPanel.append(waterRow)
   }
 
   makeMenuRow(icon, label, obj) {
@@ -148,6 +152,9 @@ class GameScene extends Scene {
 
     let ambientLightRow = document.createElement('p')
     ambientLightRow.addEventListener('click', (event) => {
+      if (obj.type == 'water') {
+        this.loadDependencies(this.basePath, 'textures/waternormals.jpg')
+      }
       let scene = Hodler.get('scene')
       scene.newModel(obj)
     })
@@ -184,6 +191,63 @@ class GameScene extends Scene {
         })
       }
     }
+  }
+
+  loadDependencies(basePath, assetFolderAndName) {
+    let path = `${basePath}${assetFolderAndName}`
+
+    let assetType
+    if (isBlank(assetFolderAndName)) { return }
+    if (assetFolderAndName.startsWith('textures/')) { assetType = 'image' }
+    if (assetFolderAndName.startsWith('models/')) { assetType = 'model' }
+    if (assetFolderAndName.startsWith('sounds/')) { assetType = 'sound' }
+    if (assetFolderAndName.startsWith('graffiti/')) { assetType = 'json' }
+    if (assetFolderAndName.startsWith('particles/')) { assetType = 'json' }
+    if (assetFolderAndName.startsWith('shaders/')) { assetType = 'json' }
+    if (assetFolderAndName.startsWith('terrains/')) { assetType = 'json' }
+    if (isBlank(assetType)) {
+      console.error(`unknown asset type ${assetType}`)
+      return
+    }
+    let assetHash = { type: assetType, path: path }
+    AssetManager.loadAssets([assetHash], () => {
+      // recursively load assets from json models
+      let dependentAssets = []
+      let assetKey = AssetManager.getAssetKey(assetHash)
+      if (assetHash.type == 'json') {
+        let json = AssetManager.get(assetKey)
+        if (isBlank(json.kind)) {
+          console.error(`missing kind for ${assetKey}`)
+        } else if (json.kind == 'graffiti') {
+          json.items.forEach((item) => {
+            if (!isBlank(item.asset)) {
+              let newAsset = {
+                type: 'image',
+                path: item.asset.libPath,
+              }
+              dependentAssets.push(newAsset)
+            }
+          })
+        } else if (json.kind == 'particle' || json.kind == 'shader') {
+          json.textures.forEach((texture) => {
+            let newAsset = {
+              type: 'image',
+              path: texture.libPath
+            }
+            dependentAssets.push(newAsset)
+          })
+        } else if (json.kind == 'terrain') {
+          dependentAssets.push({ type: 'image', 'path': json.texture.libPath })
+          dependentAssets.push({ type: 'image', 'path': json.heightmap.libPath })
+        }
+        AssetManager.loadAssets(dependentAssets, () => {
+          dependentAssets.forEach((dependentAsset) => {
+            this.cinematic.addAsset(dependentAsset)
+          })
+        })
+      }
+      this.cinematic.addAsset(assetHash)
+    })
   }
 
   doKeyboardEvent(event) {
@@ -223,60 +287,8 @@ class GameScene extends Scene {
     }
     if (event.code == 'Slash') {
       this.hideAddItemPanel()
-      let assetType
-      let basePath = '/workspace/assets/'
       let assetFolderAndName = prompt(`Load asset from ${basePath}`);
-      if (isBlank(assetFolderAndName)) { return }
-      if (assetFolderAndName.startsWith('textures/')) { assetType = 'image' }
-      if (assetFolderAndName.startsWith('models/')) { assetType = 'model' }
-      if (assetFolderAndName.startsWith('sounds/')) { assetType = 'sound' }
-      if (assetFolderAndName.startsWith('graffiti/')) { assetType = 'json' }
-      if (assetFolderAndName.startsWith('particles/')) { assetType = 'json' }
-      if (assetFolderAndName.startsWith('shaders/')) { assetType = 'json' }
-      if (assetFolderAndName.startsWith('terrains/')) { assetType = 'json' }
-      if (isBlank(assetType)) {
-        console.error(`unknown asset type ${assetType}`)
-        return
-      }
-      let assetHash = { type: assetType, path: `${basePath}${assetFolderAndName}`}
-      AssetManager.loadAssets([assetHash], () => {
-        // recursively load assets from json models
-        let dependentAssets = []
-        let assetKey = AssetManager.getAssetKey(assetHash)
-        if (assetHash.type == 'json') {
-          let json = AssetManager.get(assetKey)
-          if (isBlank(json.kind)) {
-            console.error(`missing kind for ${assetKey}`)
-          } else if (json.kind == 'graffiti') {
-            json.items.forEach((item) => {
-              if (!isBlank(item.asset)) {
-                let newAsset = {
-                  type: 'image',
-                  path: item.asset.libPath,
-                }
-                dependentAssets.push(newAsset)
-              }
-            })
-          } else if (json.kind == 'particle' || json.kind == 'shader') {
-            json.textures.forEach((texture) => {
-              let newAsset = {
-                type: 'image',
-                path: texture.libPath
-              }
-              dependentAssets.push(newAsset)
-            })
-          } else if (json.kind == 'terrain') {
-            dependentAssets.push({ type: 'image', 'path': json.texture.libPath })
-            dependentAssets.push({ type: 'image', 'path': json.heightmap.libPath })
-          }
-          AssetManager.loadAssets(dependentAssets, () => {
-            dependentAssets.forEach((dependentAsset) => {
-              this.cinematic.addAsset(dependentAsset)
-            })
-          })
-        }
-        this.cinematic.addAsset(assetHash)
-      })
+      this.loadDependencies(this.basePath, assetFolderAndName)
     }
     console.log(`${event.type} ${event.code} (${event.which})`)
   }

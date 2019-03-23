@@ -9,7 +9,6 @@
 // })
 // this.add(this.water)
 //
-// this.water.tick(tpf)
 // this.water.setSunDirection(this.sky.light)
 class Water extends THREE.Mesh {
   constructor(options) {

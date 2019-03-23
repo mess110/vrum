@@ -46,6 +46,9 @@ class Scene extends THREE.Scene {
       if (obj.animations instanceof Animations) {
         obj.animations.tick(tpf)
       }
+      if (obj instanceof Water) {
+        obj.tick(tpf)
+      }
     })
   }
 

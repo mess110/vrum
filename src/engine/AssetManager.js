@@ -202,7 +202,7 @@ class AssetManager {
         try {
           data = JSON.parse(request.responseText);
         } catch (error) {
-          console.log(`invalid json ${value}`);
+          console.error(`invalid json ${value}`);
           return;
         }
 

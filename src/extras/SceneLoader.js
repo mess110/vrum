@@ -39,6 +39,8 @@ class SceneLoader {
     } else if (item.type == 'sky') {
       model = new Sky()
       model.updateSun(item.distance, item.inclination, item.azimuth)
+    } else if (item.type == 'water') {
+      model = new Water(item)
     } else if (item.type == 'json') {
       let json = AssetManager.get(item.key)
       if (isBlank(json.kind)) {

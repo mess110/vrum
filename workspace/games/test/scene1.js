@@ -196,7 +196,6 @@ class Scene1 extends Scene {
     this.explosion.tick(tpf)
     this.treeMaterial.tick(tpf)
     this.material.tick(tpf)
-    this.water.tick(tpf)
   }
 
   doMouseEvent(event, raycaster) {

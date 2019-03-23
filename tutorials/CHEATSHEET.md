@@ -246,6 +246,21 @@ scene.add(grid)
 
 See [/src/objects/Water.js](/src/objects/Water.js) for details
 
+```
+ this.water = new Water({
+   width: 100,
+   height: 100,
+   map: 'waternormals.jpg',
+   water: {
+     alpha: 0.8,
+     waterColor: 0x001e0f
+   }
+ })
+ this.add(this.water)
+
+ this.water.setSunDirection(this.sky.light)
+```
+
 ## Tree
 
 See [/src/objects/Tree.js](/src/objects/Tree.js) for details
