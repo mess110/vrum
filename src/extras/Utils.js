@@ -757,46 +757,32 @@ display: none; \
     window._info = console.info;
     window._error = console.error;
 
-    window._ceOutput = 'coffee-engine console >';
+    window._ceOutput = 'console >';
 
-    console.log = function(message) {
-      window._ceOutput += `\n${message}`;
-      const html = document.querySelector('.ce-console-text');
+    let genericLog = (message, which) => {
+      window._ceOutput += `\n${message}`
+      const html = document.querySelector('.ce-console-text')
       if (html != null) {
-        html.innerHTML = window._ceOutput;
-        html.scrollTop = html.scrollHeight;
+        html.innerHTML = window._ceOutput
+        html.scrollTop = html.scrollHeight
       }
-      window._log.apply(console, arguments);
+      window[which].apply(console, arguments)
+    }
+
+    console.log = (message) => {
+      genericLog(message, '_log')
     };
 
     console.info = function(message) {
-      window._ceOutput += `\n${message}`;
-      const html = document.querySelector('.ce-console-text');
-      if (html != null) {
-        html.innerHTML = window._ceOutput;
-        html.scrollTop = html.scrollHeight;
-      }
-      window._info.apply(console, arguments);
+      genericLog(message, '_info')
     };
 
     console.warn = function(message) {
-      window._ceOutput += `\n${message}`;
-      const html = document.querySelector('.ce-console-text');
-      if (html != null) {
-        html.innerHTML = window._ceOutput;
-        html.scrollTop = html.scrollHeight;
-      }
-      window._warn.apply(console, arguments);
+      genericLog(message, '_warn')
     };
 
     return console.error = function(message) {
-      window._ceOutput += `\n${message}`;
-      const html = document.querySelector('.ce-console-text');
-      if (html != null) {
-        html.innerHTML = window._ceOutput;
-        html.scrollTop = html.scrollHeight;
-      }
-      window._error.apply(console, arguments);
+      genericLog(message, '_error')
     };
   }
 

@@ -55,11 +55,11 @@ class MainScene extends Scene {
       throw `Asset ${path} with key ${key} is blank`
     }
 
-    console.log(newModel)
     newModel.shadowCastAndNotReceive()
     scene.model = newModel
     scene.add(newModel)
     newModel.scale.setScalar(scale)
+    console.info(`Model ${key} added`)
 
     // var central = Utils.getCenterPoint(newModel.skinnedMesh)
     // scene.orbit.center.set(central.x, central.y, central.z)

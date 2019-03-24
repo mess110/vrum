@@ -35,10 +35,6 @@ See [/src/extras/HighScoreManager.js](/src/extras/HighScoreManager.js) for more 
 
 See [/src/extras/MeshNetwork.js](/src/extras/MeshNetwork.js) for more info.
 
-## VirtualJoystick
-
-See [/src/extras/VirtualController.js](/src/extras/VirtualController.js) for more info.
-
 ## Sound
 
 Once sounds are loaded, you can use the `SoundManager` class to play sounds.
@@ -291,6 +287,31 @@ This will add wireframe objects around lights so they can be seen better.
 
 ## VirtualController
 
+VirtualJoystick allows emulating a game controller on the display. It is
+customizable but tries to have sane defaults. The jist of it is instantiating
+the object and adding listeners:
+
+```
+let vc = new VirtualController()
+let joystick1 = vc.joystick1
+
+joystick1.addEventListener('touchStart', function () {
+  // do something
+})
+
+joystick1.addEventListener('touchEnd', function () {
+  // do something else. or not, I am just a comment
+})
+
+// check the state of the joystick with:
+joystick1.deltaX()
+joystick1.deltaY()
+joystick1.up()
+joystick1.down()
+joystick1.left()
+joystick1.right()
+```
+
 Checkout [/workspace/games/controller/](/workspace/games/controller) for example usage.
 
 See [/src/extras/VirtualController.js](/src/extras/VirtualController.js) for details
@@ -371,4 +392,13 @@ Art generator or graffiti
 ```
 this.art = Utils.graffiti(AssetManager.get('majestic-frog-cover.json'))
 this.add(this.art)
+```
+
+## Console
+
+An on screen console is provided. It needs an update. It can be used to inspect
+logs on mobile devices.
+
+```
+Utils.console() // toggles the console
 ```

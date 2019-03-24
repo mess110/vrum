@@ -35,7 +35,6 @@ yarn http
        * [QRCode](tutorials/CHEATSHEET.md#QRCode)
        * [Highscores](tutorials/CHEATSHEET.md#Highscores)
        * [MeshNetwork](tutorials/CHEATSHEET.md#MeshNetwork)
-       * [Virtual Joystick](tutorials/CHEATSHEET.md#VirtualJoystick)
        * [Sound](tutorials/CHEATSHEET.md#Sound)
        * [Sky](tutorials/CHEATSHEET.md#Sky)
        * [Text](tutorials/CHEATSHEET.md#Text)
@@ -67,6 +66,7 @@ yarn http
        * [Particles](tutorials/CHEATSHEET.md#Particles)
        * [Shaders](tutorials/CHEATSHEET.md#Shaders)
        * [Graffiti](tutorials/CHEATSHEET.md#Graffiti)
+       * [Console](tutorials/CHEATSHEET.md#Console)
    * [Blender](tutorials/BLENDER.md)
    * [Distribute](tutorials/DISTRIBUTE.md)
       * [Webserver](tutorials/DISTRIBUTE.md#Executable)
@@ -136,6 +136,7 @@ yarn http
 * [x] light helpers
 * [x] terrain with heightmap
 * [x] qr code generator
+* [x] on screen console
 
 ## Undocumented features
 
@@ -145,7 +146,6 @@ yarn http
 * [x] bundle assets
 * [x] shadows
 * [x] mirror
-* [x] on screen console
 * [x] forest generator
 * [x] fine animation controls
 * [x] game pad controller game
