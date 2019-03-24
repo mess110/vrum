@@ -10,7 +10,7 @@ const ncp = require('ncp').ncp
 const fs = require('fs')
 const common = require('./common')
 const path = require('path')
-const rl = require('./common').readline
+const readline = require('./common').readline
 
 const argv = process.argv.slice(2)
 
@@ -55,7 +55,7 @@ const newGame = (name, callback) => {
 }
 
 if (argv.length == 0) {
-  rl()
+  const rl = readline()
   rl.question('Game name: '.yellow, (name) => {
     newGame(name, () => {
       rl.close()

@@ -5,11 +5,11 @@ const colors = require('colors');
 const fs = require('fs')
 const path = require('path')
 const common = require('./common')
-const rl = require('./common').readline;
+const readline = require('./common').readline;
 
 console.log('Welcome to vrum.js gh-pages publisher!'.green)
 
-rl()
+const rl = readline()
 rl.question('Game full path: '.yellow, (gamePath) => {
   let dotConfigPath = path.join(gamePath, '.git', 'config')
   let vrumRepoPath = path.join(__dirname, '..', '..')

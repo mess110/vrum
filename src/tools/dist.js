@@ -21,7 +21,7 @@ const ncp = require('ncp').ncp;
 const path = require('path')
 const glob = require('glob');
 const common = require('./common')
-const rl = common.readline
+const readline = common.readline
 
 let packageJson = {
   "name": "vrum",
@@ -66,7 +66,7 @@ const getAssetList = (srcPath, callback) => {
 const ENABLE_LAUNCHER = false
 
 console.log('Welcome to vrum.js game distributor!'.green)
-rl()
+const rl = readline()
 rl.question('Game full path: '.yellow, (gamePath) => {
   let gameName = gamePath.split('/')[gamePath.split('/').length-1]
   let vrumRepoPath = path.join(__dirname, '..', '..')
