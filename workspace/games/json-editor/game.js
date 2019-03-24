@@ -34,9 +34,9 @@ class GameScene extends Scene {
 
   setJSONFromKey(key) {
     let json = AssetManager.get(key)
-    this.editor.setValue(JSON.stringify(json, null, 2))
+    let s = JSON.stringify(json, null, 2)
+    this.editor.setValue(s)
     this.editor.clearSelection()
-    this.setJSON(json)
     document.querySelector('#panel-text').textContent = key
   }
 
@@ -62,6 +62,7 @@ class GameScene extends Scene {
       scene.editor = ace.edit('editor');
       scene.editor.getSession().setMode('ace/mode/json');
       scene.editor.setTheme('ace/theme/monokai');
+      scene.editor.getSession().setUseWrapMode(true);
       scene.editor.session.on('change', function(delta) {
         scene.onJSONChange()
         scene.setTimeout(() => {

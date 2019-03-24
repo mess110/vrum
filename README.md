@@ -138,6 +138,7 @@ yarn http
 
 ## Undocumented features
 
+* [ ] add shader support to json-editor similar to particle
 * [x] tween objects around
 * [x] modifiers - predefined tweens
 * [x] attach object to bone (scale support)
