@@ -36,6 +36,68 @@ class Utils {
     window.vrumPingerInterval = setInterval(window.vrumPinger, 14000)
   }
 
+  static loadDependencies(basePath, assetFolderAndName, callbackMain, callbackDepend) {
+    if (isBlank(callbackMain)) { callbackMain = () => {} }
+    if (isBlank(callbackDepend)) { callbackDepend = callbackMain }
+
+    let path = `${basePath}${assetFolderAndName}`
+
+    let assetType
+    if (isBlank(assetFolderAndName)) { return }
+    if (assetFolderAndName.startsWith('textures/')) { assetType = 'image' }
+    if (assetFolderAndName.startsWith('models/')) { assetType = 'model' }
+    if (assetFolderAndName.startsWith('sounds/')) { assetType = 'sound' }
+    if (assetFolderAndName.startsWith('graffiti/')) { assetType = 'json' }
+    if (assetFolderAndName.startsWith('particles/')) { assetType = 'json' }
+    if (assetFolderAndName.startsWith('shaders/')) { assetType = 'json' }
+    if (assetFolderAndName.startsWith('terrains/')) { assetType = 'json' }
+    if (isBlank(assetType)) {
+      console.error(`unknown asset type ${assetType}`)
+      return
+    }
+    let assetHash = { type: assetType, path: path }
+    AssetManager.loadAssets([assetHash], () => {
+      // recursively load assets from json models
+      let dependentAssets = []
+      let assetKey = AssetManager.getAssetKey(assetHash)
+      if (assetHash.type == 'json') {
+        let json = AssetManager.get(assetKey)
+        if (isBlank(json.kind)) {
+          console.error(`missing kind for ${assetKey}`)
+        } else if (json.kind == 'graffiti') {
+          json.items.forEach((item) => {
+            if (!isBlank(item.asset)) {
+              let newAsset = {
+                type: 'image',
+                path: item.asset.libPath,
+              }
+              dependentAssets.push(newAsset)
+            }
+          })
+        } else if (json.kind == 'particle' || json.kind == 'shader') {
+          json.textures.forEach((texture) => {
+            let newAsset = {
+              type: 'image',
+              path: texture.libPath
+            }
+            dependentAssets.push(newAsset)
+          })
+        } else if (json.kind == 'terrain') {
+          dependentAssets.push({ type: 'image', 'path': json.texture.libPath })
+          dependentAssets.push({ type: 'image', 'path': json.heightmap.libPath })
+        }
+        AssetManager.loadAssets(dependentAssets, () => {
+          dependentAssets.forEach((dependentAsset) => {
+            callbackDepend(dependentAsset)
+            // this.cinematic.addAsset(dependentAsset)
+          })
+        })
+      }
+      callbackMain(assetHash)
+      // this.cinematic.addAsset(assetHash)
+    })
+  }
+
   // When back button is pressed, reload the page
   static initPopStateReload() {
     window.onpopstate = (e) => {
