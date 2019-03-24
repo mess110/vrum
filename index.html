@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+
+        <link rel="icon" href="/workspace/games/project/assets/favicon.ico">
+
+        <title>vrum.js engine</title>
+        <style type="text/css" media="all">
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'luckiest-guy', sans-serif;
+}
+
+.flex-item {
+    cursor: pointer;
+    padding: 10px;
+    margin: 10px;
+    line-height: 20px;
+    font-size: 2em;
+    text-align: center;
+}
+
+.flex-container {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.row {
+    width: auto;
+}
+        </style>
+    </head>
+    <body>
+        <div class="flex-container">
+            <div class="row">
+                <div class="flex-item" onclick="goTo('https://github.com/mess110/vrum')" style="padding-bottom: 50px;">
+                    <img src="/workspace/games/project/assets/favicon.ico" />
+                    <br />
+                    vrum.js engine
+                </div>
+                <div class="flex-item" onclick="goTo('https://github.com/mess110/vrum/blob/master/README.md')">
+                    tutorials
+                </div>
+                <div class="flex-item" onclick="goTo('https://github.com/mess110/vrum/blob/master/tutorials/CHEATSHEET.md')">
+                    cheatsheet
+                </div>
+                <div class="flex-item" onclick="goTo('/workspace/games/')">
+                    workspace/games
+                </div>
+            </div>
+        </div>
+
+        <!-- <script src="/src/tools/dependencies.dev.js"></script> -->
+        <script src="/vrum.min.js"></script>
+
+        <script>
+const goTo = (url) => {
+    window.location.href = url
+}
+
+loadVrumScripts([], () => {
+    AssetManager.loadAssets([
+        { type: 'font', path: '/workspace/assets/fonts/luckiest-guy' },
+    ])
+})
+        </script>
+    </body>
+</html>

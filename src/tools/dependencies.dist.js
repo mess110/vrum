@@ -5,7 +5,13 @@
 let VRUM_DEPENDS = [
 ]
 
-const loadVrumScriptsWithDepends = (items) => {
+const loadVrumScriptsWithDepends = (items, finishedCallback) => {
+  if (items.length == 0) {
+    if (finishedCallback instanceof Function) {
+      finishedCallback()
+    }
+    return
+  }
   const loadScript = (url, callback) => {
     var element = document.body;
     var script = document.createElement('script');
@@ -21,12 +27,11 @@ const loadVrumScriptsWithDepends = (items) => {
 
   items.reverse()
   loadScript(items.pop(), () => {
-    if (items.length != 0) {
-      loadVrumScriptsWithDepends(items.reverse())
-    }
+    loadVrumScriptsWithDepends(items.reverse(), finishedCallback)
   })
 }
 
-const loadVrumScripts = (items) => {
-  loadVrumScriptsWithDepends(VRUM_DEPENDS.concat(items))
+const loadVrumScripts = (items, finishedCallback) => {
+  depends = VRUM_DEPENDS.concat(items)
+  loadVrumScriptsWithDepends(depends, finishedCallback)
 }

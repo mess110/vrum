@@ -1,3 +1,12 @@
+// NOTE: this file is used by the build tool to compile everything into
+// one big js file.
+//
+// Make sure you:
+//
+//  1. have "" for the DEPENDS you want in the build process
+//  2. have '' for the DEPENDS you don't want in the build process
+//  3. comma at the end of each DEPEND string or it will be ignored
+//
 let VRUM_DEPENDS = [
   "/node_modules/three/build/three.js",
   "/node_modules/three/examples/js/WebGL.js",
@@ -101,12 +110,20 @@ let VRUM_DEPENDS = [
   "../../../src/engine/Engine.js", // last element needs a comma
 ]
 
+// These are not picked up by the build system, make sure you don't change
+// ' to ". This is the difference :)
 let VRUM_DEV_ONLY_DEPENDS = [
-  "../../../src/vendor/brace.js",
-  "../../../src/vendor/live.js", // this needs to be the last script or it won't live reload
+  '../../../src/vendor/brace.js',
+  '../../../src/vendor/live.js', // this needs to be the last script or it won't live reload
 ]
 
-const loadVrumScriptsWithDepends = (items) => {
+const loadVrumScriptsWithDepends = (items, finishedCallback) => {
+  if (items.length == 0) {
+    if (finishedCallback instanceof Function) {
+      finishedCallback()
+    }
+    return
+  }
   const loadScript = (url, callback) => {
     var element = document.body;
     var script = document.createElement('script');
@@ -122,12 +139,11 @@ const loadVrumScriptsWithDepends = (items) => {
 
   items.reverse()
   loadScript(items.pop(), () => {
-    if (items.length != 0) {
-      loadVrumScriptsWithDepends(items.reverse())
-    }
+    loadVrumScriptsWithDepends(items.reverse(), finishedCallback)
   })
 }
 
-const loadVrumScripts = (items) => {
-  loadVrumScriptsWithDepends(VRUM_DEPENDS.concat(items).concat(VRUM_DEV_ONLY_DEPENDS))
+const loadVrumScripts = (items, finishedCallback) => {
+  let depends = VRUM_DEPENDS.concat(items).concat(VRUM_DEV_ONLY_DEPENDS)
+  loadVrumScriptsWithDepends(depends, finishedCallback)
 }

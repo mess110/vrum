@@ -83,14 +83,33 @@ to be opened in the browser and a game.js file which is included by index.html.
 In index.html, the main noteworthy thing is how vrum.js is imported.
 There are 2 ways:
 
-* load /src/tools/dependencies.dev.js
-* load vrum.min.js which is a "compiled" version of all the files loaded from
-/src/tools/dependencies.dev.js
+* dev
+* prod
+
+```
+<!-- switching between dev/prod is as easy. just pick one: -->
+<script src="/src/tools/dependencies.dev.js"></script>
+<!-- <script src="/vrum.min.js"></script> -->
+
+<script>
+    // In this example, if we are in dev, we load all scripts one by one
+    // plus 'scene.js' and 'main.js'
+    // However, if we are in prod, we only load 'scene.js' and 'main.js'
+    // because all the vrum js scripts are loaded with 'vrum.min.js'
+    loadVrumScripts([
+        'scene.js',
+        'main.js',
+    ])
+</script>
+```
 
 You should only use one of these methods as they do the same thing. When
 deploying, you NEED to use the 2nd one. Main reasoning for this is that we
-don't want to deploy all the source code of vrum.js as several files.
-One is enough.
+don't want to deploy all the source code of vrum.js as several files. Also,
+we don't want to live reload assets in production because they don't change.
+
+Regardless of dev/prod, don't include js files though script tags. Instead,
+use:
 
 ```
 loadVrumScripts([
@@ -98,11 +117,9 @@ loadVrumScripts([
 ])
 ```
 
-Makes sure all the assets are loaded in order. In the case of
-dependencies.dev.js, it loads each source file in order.
-
-Open `http://127.0.0.1:8080/workspace/games/YOUR_GAME_NAME` in a browser to
-test your game.
+This makes sure all the assets are loaded in order. In `dev` mode, this
+loads each js script dynamically, while in `prod`, it only loads the scripts
+mentioned by you. vrum.js scripts are already loaded in `vrum.min.js`
 
 ## Tools
 

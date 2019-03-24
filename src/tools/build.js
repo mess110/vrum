@@ -37,7 +37,18 @@ var dependencies = fs.readFileSync('src/tools/dependencies.dev.js', 'utf-8')
       return e.substr(9)
     }
   })
+
+// inject dependencies.dist.js at the top of the dependency list. This will
+// make sure the function loadVrumScripts works as expected
 dependencies.splice(0, 0, 'src/tools/dependencies.dist.js')
+
+// make sure live.js is not included in the build process.because
+// we don't want js scripts auto reloading in production
+dependencies.forEach((e) => {
+  if (e.includes('/live.js')) {
+    throw 'There might be a bug in the build process, live.js should not be included'
+  }
+})
 
 if (!fs.existsSync(common.distFolder)){
     fs.mkdirSync(common.distFolder);

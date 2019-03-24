@@ -4,8 +4,7 @@ Game engine based on three.js
 
 ```
 yarn install
-yarn help
-yarn http
+yarn h // prints help
 ```
 
 ## Tutorial

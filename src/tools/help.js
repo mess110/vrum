@@ -9,6 +9,7 @@ Example usage:
 
 Commands:
 
+  * h         - prints this help
   * build     - prepares vrum.js and vrum.min.js
 
   * http      - starts a http server
@@ -16,6 +17,6 @@ Commands:
   * genkey    - generates https self signed certificates
 
   * new_game  - create a new game
-  * dist      - compiles a game to linux/mac/windows executable
-  * publish   - publish a repo with gh-pages
+  * dist:exe  - compiles a game to linux/mac/windows executable
+  * dist:web  - publish a repo with gh-pages
 `)

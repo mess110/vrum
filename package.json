@@ -13,7 +13,8 @@
     "dist:web": "yarn build && node src/tools/publish.js",
     "clean:tmp": "rm -rf ./tmp",
     "new_game": "node src/tools/newGame.js",
-    "start": "node src/tools/help.js"
+    "start": "node src/tools/help.js",
+    "h": "yarn start"
   },
   "dependencies": {
     "@tweenjs/tween.js": "^17.2.0",
