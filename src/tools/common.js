@@ -3,10 +3,12 @@
 const readline = require('readline');
 const fs = require('fs')
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
+const rl = () => {
+  return readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
+}
 
 const injectHTML = (htmlPath, injectString) => {
   // TODO check for index.html

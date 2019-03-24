@@ -9,6 +9,7 @@ const rl = require('./common').readline;
 
 console.log('Welcome to vrum.js gh-pages publisher!'.green)
 
+rl()
 rl.question('Game full path: '.yellow, (gamePath) => {
   let dotConfigPath = path.join(gamePath, '.git', 'config')
   let vrumRepoPath = path.join(__dirname, '..', '..')

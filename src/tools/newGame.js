@@ -9,8 +9,8 @@ const colors = require('colors')
 const ncp = require('ncp').ncp
 const fs = require('fs')
 const common = require('./common')
-const rl = require('./common').readline
 const path = require('path')
+const rl = require('./common').readline
 
 const argv = process.argv.slice(2)
 
@@ -23,7 +23,7 @@ if (!fs.existsSync(vrumMinJsPath)) {
   process.exit(1)
 }
 
-const newGame = (name) => {
+const newGame = (name, callback) => {
   var targetDir = 'workspace/games/'
   var fullPath = `${targetDir}${name}`
 
@@ -49,14 +49,18 @@ const newGame = (name) => {
     }
     common.cp(vrumMinJsPath, `${fullPath}/vrum.min.js`)
     console.log(`Game '${name}' sucessfully created in '${fullPath}'`.green)
+
+    callback()
   })
 }
 
 if (argv.length == 0) {
+  rl()
   rl.question('Game name: '.yellow, (name) => {
-    newGame(name)
-    rl.close()
+    newGame(name, () => {
+      rl.close()
+    })
   })
 } else {
-  newGame(argv[0])
+  newGame(argv[0], () => {})
 }

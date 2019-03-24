@@ -66,6 +66,7 @@ const getAssetList = (srcPath, callback) => {
 const ENABLE_LAUNCHER = false
 
 console.log('Welcome to vrum.js game distributor!'.green)
+rl()
 rl.question('Game full path: '.yellow, (gamePath) => {
   let gameName = gamePath.split('/')[gamePath.split('/').length-1]
   let vrumRepoPath = path.join(__dirname, '..', '..')
