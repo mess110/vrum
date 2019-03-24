@@ -424,17 +424,6 @@ THREE.Object3D.prototype.removeAllChildren = function () {
   }
 }
 
-traverseBones = function (boneName, mesh) {
-  let added = false
-  this.traverse(function(object) {
-      if (added) { return }
-      if (object instanceof THREE.Bone && (object.name === boneName)) {
-        added = true
-        object.add(mesh)
-      }
-  })
-  return added
-}
 
 THREE.Object3D.prototype.getBoneNames = function () {
   let bones = []
@@ -450,6 +439,7 @@ THREE.Object3D.prototype.getBoneNames = function () {
 //
 // @param [String] boneName
 // @param [Mesh] mesh
+// @param [int] scale - defaults to one
 //
 // between 71 and 72, for some reason there is always another bone
 // with the same name. That is why we keep track of added,
@@ -458,7 +448,7 @@ THREE.Object3D.prototype.attachToBone = function (boneName, mesh, scale) {
   if (isBlank(scale)) { scale = 1 }
   if (isBlank(mesh)) { throw 'mesh to attach is blank' }
   let added = false;
-  return this.traverse(function(object) {
+  this.traverse(function(object) {
     if (added) { return; }
     if (object instanceof THREE.Bone && (object.name === boneName)) {
       added = true;
@@ -466,6 +456,8 @@ THREE.Object3D.prototype.attachToBone = function (boneName, mesh, scale) {
       return object.add(mesh);
     }
   });
+  if (!added) { console.warn('mesh not added to bone ${boneName}') }
+  return added
 }
 
 // detach a mesh from a bone

@@ -47,7 +47,7 @@ play sounds though [SoundManager](/tutorials/CHEATSHEET.md#Sound).
 
 ## Models
 
-Models should use the clone method so they can be moved independently.
+Models should use the `clone` method so they can be moved independently.
 
 ```
 let hat = AssetManager.clone('hat.gltf')
@@ -55,7 +55,8 @@ hat.position.set(0, 0.9, 0)
 
 let model = AssetManager.clone('mole.gltf')
 model.position.set(0, 0.5, 4)
-model.attachToBone('mole-skeleton_Head', hat)
+// boneName, mesh, scale (default 1)
+model.attachToBone('mole-skeleton_Head', hat, 1)
 
 model.animations.play('taunt3', { stopAll: true})
 console.log(model.animations)

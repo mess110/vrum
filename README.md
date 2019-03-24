@@ -141,13 +141,12 @@ yarn http
 * [x] on screen console
 * [x] forest generator
 * [x] mirror
+* [x] attach object to bone (scale support)
 
 ## Undocumented features
 
 * [x] tween objects around
 * [x] modifiers - predefined tweens
-* [x] attach object to bone (scale support)
-* [x] bundle assets
 * [x] shadows
 * [x] fine animation controls
 * [x] game pad controller game
