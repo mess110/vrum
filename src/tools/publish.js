@@ -7,10 +7,32 @@ const path = require('path')
 const common = require('./common')
 const readline = require('./common').readline;
 
+const argv = process.argv.slice(2)
+
 console.log('Welcome to vrum.js gh-pages publisher!'.green)
 
-const rl = readline()
-rl.question('Game full path: '.yellow, (gamePath) => {
+const repoUrl2GhPagesUrl = (repoUrl) => {
+  let username
+  let repoName
+
+  if (repoUrl.startsWith('git@')) {
+    let urlParts = repoUrl.split(':')[1].split('/')
+    username = urlParts[0]
+    repoName = urlParts[1].split('.')
+    repoName.splice(-1, 1)
+    repoName = repoName[0]
+  } else {
+    // https urls
+    let urlParts = repoUrl.split('.')
+    urlParts.pop()
+    urlParts = urlParts[1].split('/')
+    username = urlParts[1]
+    repoName = urlParts[2]
+  }
+  return `https://${username}.github.io/${repoName}`
+}
+
+const publish = (gamePath, callback) => {
   let dotConfigPath = path.join(gamePath, '.git', 'config')
   let vrumRepoPath = path.join(__dirname, '..', '..')
 
@@ -42,7 +64,19 @@ rl.question('Game full path: '.yellow, (gamePath) => {
     repo: repoUrl
   }
   ghpages.publish(gamePath, options, function(err) {
-    console.log('done')
-    rl.close()
+    let publishUrl = repoUrl2GhPagesUrl(repoUrl)
+    console.log(`done. visit ${publishUrl}`.green)
+    callback()
   });
-})
+}
+
+if (argv.length == 0) {
+  const rl = readline()
+  rl.question('Game full path: '.yellow, (gamePath) => {
+    publish(gamePath, () => {
+      rl.close()
+    })
+  })
+} else {
+  publish(argv[0], () => {})
+}
