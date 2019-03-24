@@ -60,6 +60,7 @@ yarn http
        * [LightningBolt](tutorials/CHEATSHEET.md#LightningBolt)
        * [SpotLight](tutorials/CHEATSHEET.md#SpotLight)
        * [Mirror](tutorials/CHEATSHEET.md#Mirror)
+       * [Shadows](tutorials/CHEATSHEET.md#Shadows)
        * [LightHelpers](tutorials/CHEATSHEET.md#LightHelpers)
        * [VirtualController](tutorials/CHEATSHEET.md#VirtualController)
        * [PoolManager](tutorials/CHEATSHEET.md#PoolManager)
@@ -142,12 +143,12 @@ yarn http
 * [x] forest generator
 * [x] mirror
 * [x] attach object to bone (scale support)
+* [x] shadows
 
 ## Undocumented features
 
 * [x] tween objects around
 * [x] modifiers - predefined tweens
-* [x] shadows
 * [x] fine animation controls
 * [x] game pad controller game
 * [ ] set shadowMap.width and height of all lights

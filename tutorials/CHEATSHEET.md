@@ -307,13 +307,32 @@ this.add(mirror)
 
 See [/src/objects/Mirror.js][/src/objects/Mirror.js] for more info.
 
+## Shadows
+
+To enable shadows, you need to toggle them.
+
+```
+Utils.toggleShadows()
+```
+
+Shadow behaviour can be controlled per object basis with the help of:
+
+```
+let bunny = AssetManager.clone('bunny.gltf')
+bunny.shadowCastAndNotReceive()
+
+let ground = AssetManager.clone('ground.gltf')
+ground.shadowReceive()
+```
+
 ## LightHelpers
+
+To help debug lights, you can add wireframe objects around lights so they can
+be seen better.
 
 ```
 Utils.toggleShadowCameraHelpers()
 ```
-
-This will add wireframe objects around lights so they can be seen better.
 
 ## VirtualController
 
