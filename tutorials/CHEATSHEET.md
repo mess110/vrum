@@ -298,6 +298,15 @@ spotLight.lookAt(new (THREE.Vector3)(0, 0, 0))
 spotLight.setColor('white')
 ```
 
+## Mirror
+
+```
+let mirror = new Mirror({width: 5, height: 5})
+this.add(mirror)
+```
+
+See [/src/objects/Mirror.js][/src/objects/Mirror.js] for more info.
+
 ## LightHelpers
 
 ```

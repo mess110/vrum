@@ -59,6 +59,7 @@ yarn http
        * [Forest](tutorials/CHEATSHEET.md#Forest)
        * [LightningBolt](tutorials/CHEATSHEET.md#LightningBolt)
        * [SpotLight](tutorials/CHEATSHEET.md#SpotLight)
+       * [Mirror](tutorials/CHEATSHEET.md#Mirror)
        * [LightHelpers](tutorials/CHEATSHEET.md#LightHelpers)
        * [VirtualController](tutorials/CHEATSHEET.md#VirtualController)
        * [PoolManager](tutorials/CHEATSHEET.md#PoolManager)
@@ -139,6 +140,7 @@ yarn http
 * [x] qr code generator
 * [x] on screen console
 * [x] forest generator
+* [x] mirror
 
 ## Undocumented features
 
@@ -147,7 +149,6 @@ yarn http
 * [x] attach object to bone (scale support)
 * [x] bundle assets
 * [x] shadows
-* [x] mirror
 * [x] fine animation controls
 * [x] game pad controller game
 * [ ] set shadowMap.width and height of all lights
