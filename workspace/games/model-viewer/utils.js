@@ -7,7 +7,7 @@ class LoadingScene extends MainScene {
     this.add(this.model)
 
     Engine.switch(Hodler.get('mainScene'), [
-      { type: 'image', path: 'vrum.png' },
+      { type: 'image', path: '/workspace/assets/textures/vrum.png' },
     ])
   }
 

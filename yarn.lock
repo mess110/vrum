@@ -54,6 +54,11 @@ brace-expansion@^1.1.7:
     balanced-match "^1.0.0"
     concat-map "0.0.1"
 
+brace@^0.11.1:
+  version "0.11.1"
+  resolved "https://registry.yarnpkg.com/brace/-/brace-0.11.1.tgz#4896fcc9d544eef45f4bb7660db320d3b379fe58"
+  integrity sha1-SJb8ydVE7vRfS7dmDbMg07N5/lg=
+
 camera-controls@yomotsu/camera-controls:
   version "1.11.1"
   resolved "https://codeload.github.com/yomotsu/camera-controls/tar.gz/98746a7e0f060052b2e4b15b6c34169723ef78a5"

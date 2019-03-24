@@ -100,6 +100,7 @@ let VRUM_DEPENDS = [
 ]
 
 let VRUM_DEV_ONLY_DEPENDS = [
+  "../../../src/vendor/brace.js",
   "../../../src/vendor/live.js", // this needs to be the last script or it won't live reload
 ]
 
