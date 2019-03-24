@@ -2,11 +2,7 @@ class BaseParticle extends THREE.Object3D {
   constructor(input) {
     super()
 
-    if (Array.isArray(input)) {
-      input = input.join('\n')
-    } else if (!isString(input)) {
-      throw 'invalid input for particle'
-    }
+    input = arrayOrStringToString(input)
 
     let jsonInput;
     this.groups = [];

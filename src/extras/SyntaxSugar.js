@@ -298,6 +298,16 @@ const whichAnimationEvent = function() {
   }
 }
 
+const arrayOrStringToString = (input) => {
+  if (Array.isArray(input)) {
+    return input.join('\n')
+  } else if (isString(input)) {
+    return input
+  } else {
+    throw 'invalid input'
+  }
+}
+
 // Used for continously looping sounds from the SoundManager
 class Playlist {
   // @param [Array] keys

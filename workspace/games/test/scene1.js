@@ -11,12 +11,7 @@ class Scene1 extends Scene {
   init(options) {
     let dissolveJson = AssetManager.get('dissolve_shader.json')
     var geometry = new THREE.BoxGeometry( 1, 1, 1 )
-    var material = new ShaderMaterial(dissolveJson, function (tpf) {
-      if (this.uniforms.dissolve.value > 1) {
-        this.uniforms.dissolve.value = 0
-      }
-      this.uniforms.dissolve.value += tpf
-    })
+    var material = new ShaderMaterial(dissolveJson)
 
     this.cube = new THREE.Mesh( geometry, material )
     this.material = material
@@ -25,7 +20,7 @@ class Scene1 extends Scene {
 
     let basicJson = AssetManager.get('basic_shader.json')
     this.treeMaterial = new ShaderMaterial(basicJson, function (tpf) {
-      this.uniforms.time.value += tpf * 2
+      this.uniforms.time.value += tpf * 4
     })
 
     this.tree = new Tree(this.treeMaterial, 0.1)

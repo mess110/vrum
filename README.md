@@ -129,6 +129,7 @@ yarn http
 * [x] volumetric spotlight
 * [x] scene editor
 * [x] load json files (terrain/particles/shaders/graffiti)
+* [x] json editor
 * [x] load shaders
 * [x] particle system
 * [x] graffiti generator (layered painting)
@@ -138,7 +139,7 @@ yarn http
 
 ## Undocumented features
 
-* [ ] add shader support to json-editor similar to particle
+* [ ] switch test scene with 1, 2, 3, 4
 * [x] tween objects around
 * [x] modifiers - predefined tweens
 * [x] attach object to bone (scale support)

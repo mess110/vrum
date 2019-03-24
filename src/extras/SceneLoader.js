@@ -82,8 +82,9 @@ class SceneLoader {
     } else if (json.kind === 'particle') {
       model = new BaseParticle(json.particle)
     } else if (json.kind === 'shader') {
-      console.error("Shaders can only be loaded, not added")
-      return undefined
+      let geometry = new THREE.BoxGeometry( 1, 1, 1 )
+      let material = new ShaderMaterial(json)
+      model = new THREE.Mesh( geometry, material )
     } else if (json.kind === 'terrain') {
       model = Terrain.fromJson(json)
     } else {

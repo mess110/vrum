@@ -16,25 +16,36 @@
 //
 class ShaderMaterial extends THREE.ShaderMaterial {
   constructor(json, customTick) {
-    if (customTick === undefined || customTick === null) { customTick = function() {} }
-    var evalUniforms
-    let shader = json
+    if (isBlank(json)) { throw "shader is blank, missing json param" }
 
-    if (!('uniforms' in shader)) { throw `missing uniforms for ${assetName}` }
-    if (!('vertex' in shader)) { throw `missing uniforms for ${assetName}` }
-    if (!('fragment' in shader)) { throw `missing uniforms for ${assetName}` }
+    if (!('tick' in json)) { throw `missing tick for shader` }
+    if (!('uniforms' in json)) { throw `missing uniforms for shader` }
+    if (!('vertex' in json)) { throw `missing uniforms for shader` }
+    if (!('fragment' in json)) { throw `missing uniforms for shader` }
 
-    eval("evalUniforms = " + shader.uniforms)
+    let evalUniforms
+    eval("evalUniforms = " + arrayOrStringToString(json.uniforms))
+
+    let evalTick
+    if (isBlank(customTick)) {
+      eval("evalTick = " + arrayOrStringToString(json.tick))
+    } else {
+      if (customTick instanceof Function) {
+        evalTick = customTick
+      } else {
+        eval("evalTick = " + arrayOrStringToString(customTick))
+      }
+    }
 
     super({
       morphTargets: true, // TODO: do we want this all the time?
       uniforms: evalUniforms,
-      vertexShader: shader.vertex,
-      fragmentShader: shader.fragment,
+      vertexShader: arrayOrStringToString(json.vertex),
+      fragmentShader: arrayOrStringToString(json.fragment),
       flatShading: THREE.SmoothShading // TODO: do we want this all the time?
     })
 
-    this.customTick = customTick
+    this.customTick = evalTick
   }
 
   tick(tpf) {

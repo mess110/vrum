@@ -207,12 +207,11 @@ class AssetManager {
         let data;
         try {
           data = JSON.parse(request.responseText);
+          AssetManager.set(key, data)
         } catch (error) {
           console.error(`invalid json ${value}`);
-          return;
         }
 
-        AssetManager.set(key, data)
         AssetManager.instance.loadingManager.itemEnd(value)
       } else {
         // We reached our target server, but it returned an error

@@ -80,6 +80,10 @@ class GameScene extends Scene {
   }
 
   tick(tpf) {
+    if (isBlank(this.model)) { return }
+    if (this.model.material instanceof ShaderMaterial) {
+      this.model.material.tick(tpf)
+    }
   }
 
   doMouseEvent(event, raycaster) {

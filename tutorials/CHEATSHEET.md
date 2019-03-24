@@ -345,7 +345,10 @@ this.explosion.tick(tpf)
 ## Shaders
 
 ```
-let material = new ShaderMaterial('basic_shader.json', function (tpf) {
+let json = AssetManager.get('basic_shader.json')
+let material = new ShaderMaterial(json)
+let material = new ShaderMaterial(json, "function (tpf) { this.uniforms.time.value += tpf * 2 }")
+let material = new ShaderMaterial(json, function (tpf) {
   this.uniforms.time.value += tpf * 2
 })
 material.tick(tpf)

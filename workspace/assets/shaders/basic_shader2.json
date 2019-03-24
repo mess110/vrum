@@ -1,0 +1,7 @@
+{
+  "kind": "shader",
+  "uniforms": "{ time: { type: 'f', value: 0 }, resolution: { type: 'v2', value: new THREE.Vector2() } }",
+  "fragment": "uniform float time;\nvarying vec2 vUv;\n\nvoid main() {\n  vec2 position = -1.0 + 2.0 * vUv;\n\n  float red = abs(sin(position.x * position.y + time / 5.0));\n  float green = abs(sin(position.x * position.y + time / 4.0));\n  float blue = abs(sin(position.x * position.y + time / 3.0 ));\n  gl_FragColor = vec4(red, green, blue, 1.0);\n}",
+  "vertex": "varying vec2 vUv;\n\nvoid main() {\n  vUv = uv;\n  gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );\n}",
+  "textures": []
+}
