@@ -22,6 +22,7 @@ yarn http
    * [Assets](tutorials/ASSETS.md)
        * [AssetManager](tutorials/ASSETS.md#AssetManager)
        * [Models](tutorials/ASSETS.md#Models)
+       * [Animations](tutorials/ASSETS.md#Animations)
        * [JSON](tutorials/ASSETS.md#JSON)
        * [Engine helpers](tutorials/ASSETS.md#EngineHelpers)
    * [Scenes](tutorials/SCENES.md)
@@ -70,6 +71,8 @@ yarn http
        * [Shaders](tutorials/CHEATSHEET.md#Shaders)
        * [Graffiti](tutorials/CHEATSHEET.md#Graffiti)
        * [Console](tutorials/CHEATSHEET.md#Console)
+       * [Tweens](tutorials/CHEATSHEET.md#Tweens)
+       * [Modifiers](tutorials/CHEATSHEET.md#Modifiers)
    * [Blender](tutorials/BLENDER.md)
    * [Distribute](tutorials/DISTRIBUTE.md)
       * [Webserver](tutorials/DISTRIBUTE.md#Executable)
@@ -144,12 +147,12 @@ yarn http
 * [x] mirror
 * [x] attach object to bone (scale support)
 * [x] shadows
+* [x] tween objects around
+* [x] modifiers - predefined tweens
+* [x] animations
 
 ## Undocumented features
 
-* [x] tween objects around
-* [x] modifiers - predefined tweens
-* [x] fine animation controls
 * [x] game pad controller game
 * [ ] set shadowMap.width and height of all lights
 * [ ] VR

@@ -451,3 +451,39 @@ logs on mobile devices.
 ```
 Utils.console() // toggles the console
 ```
+
+## Tweens
+
+Tweens are used to smoothly transform object properties.
+
+To read about them check [this](https://github.com/tweenjs/tween.js/blob/master/docs/user_guide.md)
+and the [list of smoothing curves](http://tweenjs.github.io/tween.js/examples/03_graphs.html)
+
+A base implementation of tweens can be found [here](src/extras/Modifiers.js)
+
+## Modifiers
+
+* BaseModifier
+* FadeModifier (chaining bugged)
+* ScaleModifier
+* WeightModifier (used to ease into animations)
+
+```
+var up = new BaseModifier(text.position, { x: '+1' }, 1000, TWEEN.Easing.Linear.None)
+var down = new BaseModifier(text.position, { x: '-1' }, 1000)
+up.chain(down)
+down.chain(up)
+up.start()
+```
+
+```
+// chaining is bugged with the fade modifier, do this instead
+let duration = 3000
+this.setInterval(() => {
+  let fadeOut = new FadeModifier(text, 1, 0.1, duration)
+  let fadeIn = new FadeModifier(text, 0.1, 1, duration)
+    .delay(duration)
+  fadeOut.start()
+  fadeIn.start()
+}, duration * 2)
+```

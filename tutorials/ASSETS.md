@@ -52,22 +52,64 @@ Models should use the `clone` method so they can be moved independently.
 ```
 let hat = AssetManager.clone('hat.gltf')
 hat.position.set(0, 0.9, 0)
+```
 
+Use the attachToBone method to attach an object to a bone. This can be used
+for grabbing or moving objets together.
+
+```
 let model = AssetManager.clone('mole.gltf')
 model.position.set(0, 0.5, 4)
 // boneName, mesh, scale (default 1)
 model.attachToBone('mole-skeleton_Head', hat, 1)
+```
 
-model.animations.play('taunt3', { stopAll: true})
-console.log(model.animations)
+## Animations
 
-model.animations.fadeAnimation('hit', 'idle')
+Animations are done with the help of [/src/extras/Animations.js](/src/extras/Animations.js)
 
+Use the `play` method to play an animation.
+
+```
+model.animations.names()
+
+model.animations.play(0)
+model.animations.play('taunt3')
+model.animations.play({ name: 'taunt3' })
+// with options and default values
+model.animations.play('taunt3', {
+  name: 'taunt3',
+  loop: true,
+  reverse: false,
+  timeScale: 1,
+  stopAll: true,
+  stopAllExceptions: []
+})
+```
+
+Fading between animations instead of an instant switch. The fade happens
+by adjusting the weights so the targeted animations needs to be playing.
+An animation could have weight 0 which means it has no visual influence on
+the model.
+
+The animation starts from a certain position. Think of that position as the
+`from` animation, or the animation from which the new animation transitions
+from.
+
+```
+// set the from animation to idle
 model.animations.from = 'idle'
+
+// play idle and walk
 model.animations.play('idle', { stopAll: false })
 model.animations.play('walk', { stopAll: false, weight: 0 })
+
+// play unlrelated animations if you want to
 model.animations.play('wiggle', { stopAll: false })
 model.animations.play('tongue', { stopAll: false })
+
+// from idle switch to hit and go back to idle
+model.animations.fadeAnimation('hit', 'idle')
 ```
 
 ## ModelViewer

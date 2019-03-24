@@ -63,14 +63,29 @@ class Animations {
     return animation
   }
 
-  // Hodler.get('scene').model.animations.fadeAnimation('hit', 'idle')
+  // Fading between animations instead of an instant switch. The fade happens
+  // by adjusting the weights so the targeted animations needs to be playing.
+  // An animation could have weight 0 which means it has no visual influence on
+  // the model.
   //
-  // model.animations.from = 'idle'
-  // model.animations.play('idle', { stopAll: false })
-  // model.animations.play('walk', { stopAll: false, weight: 0 })
-  // model.animations.play('wiggle', { stopAll: false })
-  // model.animations.play('tongue', { stopAll: false })
+  // The animation starts from a certain position. Think of that position as the
+  // `from` animation, or the animation from which the new animation transitions
+  // from.
   //
+  // Example:
+  //
+  //    // set the from animation to idle
+  //    model.animations.from = 'idle'
+  //
+  //    // play idle and walk
+  //    model.animations.play('idle', { stopAll: false })
+  //    model.animations.play('walk', { stopAll: false, weight: 0 })
+  //
+  //    // play unrelated animations
+  //    model.animations.play('wiggle', { stopAll: false })
+  //    model.animations.play('tongue', { stopAll: false })
+  //
+  //   Hodler.get('scene').model.animations.fadeAnimation('hit', 'idle')
   fadeAnimation(to, after) {
     if (isBlank(after)) { after = this.from }
 
