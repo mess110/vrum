@@ -193,7 +193,6 @@ class Scene1 extends Scene {
 
     // this.lightning.strike()
 
-    this.explosion.tick(tpf)
     this.treeMaterial.tick(tpf)
     this.material.tick(tpf)
   }

@@ -80,8 +80,7 @@ class SceneLoader {
     if (json.kind === 'graffiti') {
       model = Utils.graffiti(json)
     } else if (json.kind === 'particle') {
-      console.error("Particles can only be loaded, not added")
-      return undefined
+      model = new BaseParticle(json.particle)
     } else if (json.kind === 'shader') {
       console.error("Shaders can only be loaded, not added")
       return undefined

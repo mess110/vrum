@@ -49,6 +49,9 @@ class Scene extends THREE.Scene {
       if (obj instanceof Water) {
         obj.tick(tpf)
       }
+      if (obj instanceof BaseParticle) {
+        obj.tick(tpf)
+      }
     })
   }
 
