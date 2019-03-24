@@ -15,10 +15,10 @@
 // material.tick(tpf)
 //
 class ShaderMaterial extends THREE.ShaderMaterial {
-  constructor(assetName, customTick) {
+  constructor(json, customTick) {
     if (customTick === undefined || customTick === null) { customTick = function() {} }
     var evalUniforms
-    let shader = AssetManager.get(assetName)
+    let shader = json
 
     if (!('uniforms' in shader)) { throw `missing uniforms for ${assetName}` }
     if (!('vertex' in shader)) { throw `missing uniforms for ${assetName}` }
