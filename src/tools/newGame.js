@@ -5,12 +5,14 @@
 // 1. copies the template to the destination folder
 // 2. copies vrum.js
 
-const colors = require('colors');
-const ncp = require('ncp').ncp;
+const colors = require('colors')
+const ncp = require('ncp').ncp
 const fs = require('fs')
 const common = require('./common')
 const rl = require('./common').readline
 const path = require('path')
+
+const argv = process.argv.slice(2)
 
 console.log('Welcome to vrum.js new game creator!')
 
@@ -21,9 +23,7 @@ if (!fs.existsSync(vrumMinJsPath)) {
   process.exit(1)
 }
 
-rl.question('Game name: '.yellow, (name) => {
-  rl.close();
-
+const newGame = (name) => {
   var targetDir = 'workspace/games/'
   var fullPath = `${targetDir}${name}`
 
@@ -49,5 +49,14 @@ rl.question('Game name: '.yellow, (name) => {
     }
     common.cp(vrumMinJsPath, `${fullPath}/vrum.min.js`)
     console.log(`Game '${name}' sucessfully created in '${fullPath}'`.green)
-  });
-});
+  })
+}
+
+if (argv.length == 0) {
+  rl.question('Game name: '.yellow, (name) => {
+    newGame(name)
+    rl.close()
+  })
+} else {
+  newGame(argv[0])
+}

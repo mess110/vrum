@@ -63,6 +63,8 @@ const getAssetList = (srcPath, callback) => {
   })
 }
 
+const ENABLE_LAUNCHER = false
+
 console.log('Welcome to vrum.js game distributor!'.green)
 rl.question('Game full path: '.yellow, (gamePath) => {
   let gameName = gamePath.split('/')[gamePath.split('/').length-1]
@@ -73,6 +75,7 @@ rl.question('Game full path: '.yellow, (gamePath) => {
   let sandboxIndexPath = path.join(sandboxPath, 'index.html')
   let indexPath = path.join(destPath, 'index.html')
   let gameIndexPath = path.join(destPath, 'index_game.html')
+  if (!ENABLE_LAUNCHER) { gameIndexPath = indexPath }
 
   common.existsCheck(gamePath)
   common.isDirectoryCheck(gamePath)
@@ -90,16 +93,25 @@ rl.question('Game full path: '.yellow, (gamePath) => {
       console.log('cp vrum.js destPath')
       common.cp(path.join(vrumRepoPath, common.distFolder, 'vrum.min.js'), path.join(destPath, 'vrum.min.js'))
 
+      let iconPath = path.join(vrumRepoPath, 'workspace', 'games', 'project', 'assets', 'favicon.ico')
+      let destIconPath = path.join(destPath, 'workspace/games/project/assets')
+      fs.mkdirSync(destIconPath, { recursive: true });
+
+      console.log('cp iconPath destIconPath')
+      common.cp(iconPath, path.join(destIconPath, 'favicon.ico'))
+
       console.log('cp sandbox/http.js destPath')
       common.cp(vrumHttpPath, path.join(destPath, 'http.js'))
 
       common.checkForLinkImportDependencies(indexPath)
 
-      console.log('cp index.html game_index.html')
-      common.cp(indexPath, gameIndexPath)
+      if (ENABLE_LAUNCHER) {
+        console.log('cp index.html game_index.html')
+        common.cp(indexPath, gameIndexPath)
 
-      console.log('cp sandbox/index.html index.html')
-      common.cp(sandboxIndexPath, indexPath)
+        console.log('cp sandbox/index.html index.html')
+        common.cp(sandboxIndexPath, indexPath)
+      }
 
       // all scripts are included as assets
       console.log('creating scripts and assets list')
@@ -110,11 +122,15 @@ rl.question('Game full path: '.yellow, (gamePath) => {
         console.log('injecting pinger')
         let pinger = '<script charset="utf-8">Utils.initSandboxPinger()</script>'
         common.injectHTML(indexPath, pinger)
-        common.injectHTML(gameIndexPath, pinger)
+        if (ENABLE_LAUNCHER) {
+          common.injectHTML(gameIndexPath, pinger)
+        }
 
-        console.log('injecting popStarter')
-        let popStater = '<script charset="utf-8">Utils.initPopStateReload()</script>'
-        common.injectHTML(gameIndexPath, popStater)
+        if (ENABLE_LAUNCHER) {
+          console.log('injecting popStarter')
+          let popStater = '<script charset="utf-8">Utils.initPopStateReload()</script>'
+          common.injectHTML(gameIndexPath, popStater)
+        }
 
         packageJson.name = gameName
         packageJson.pkg.assets = assets
