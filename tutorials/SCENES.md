@@ -85,6 +85,12 @@ class GameScene extends Scene {
 }
 ```
 
+Several controls are implemented to help get you started:
+
+* [OrbitControls](tutorials/CHEATSHEET.md#OrbitControls)
+* [RTSCamera](tutorials/CHEATSHEET.md#RTSCamera)
+* [VirtualController](tutorials/CHEATSHEET.md#VirtualController)
+
 ## SceneManagement
 
 Scene loading/management. Load assets. Once loading is done, start the
