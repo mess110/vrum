@@ -73,10 +73,14 @@ class Config {
       zIndex: {
         noWebGL:     1000000,
         dom:           10000,
+        video:         10100,
         fade:          20000,
         orientation:   30000,
         stats:        100000,
         console:      200000
+      },
+      video: {
+        containerKey: 'videoContainer'
       }
     }
     // Video recorder settings

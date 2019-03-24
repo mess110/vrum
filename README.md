@@ -76,6 +76,7 @@ yarn h // prints help
            * [Console](tutorials/CHEATSHEET.md#Console)
            * [Tweens](tutorials/CHEATSHEET.md#Tweens)
            * [Modifiers](tutorials/CHEATSHEET.md#Modifiers)
+           * [Video](tutorials/CHEATSHEET#Video)
            * [No WebGL](tutorials/CHEATSHEET.md#NoWebGL)
    * [Blender](tutorials/BLENDER.md)
    * [Distribute](tutorials/DISTRIBUTE.md)

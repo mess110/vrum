@@ -584,6 +584,54 @@ class Utils {
     }
   }
 
+  static playVideo(path, sceneKey) {
+    let videoContainerKey = Config.instance.ui.video.containerKey
+    if (Hodler.has(videoContainerKey)) {
+      console.error('video already playing')
+      return
+    }
+    console.info("Playing video")
+
+    let videoContainer = document.createElement("div")
+    videoContainer.style.position = 'absolute'
+    videoContainer.style.left = 0
+    videoContainer.style.top = 0
+    videoContainer.style.width = '100%'
+    videoContainer.style.height = '100%'
+    videoContainer.style.display = 'flex'
+    videoContainer.style['z-index'] = Config.instance.ui.zIndex.video
+    Hodler.add(videoContainerKey, videoContainer)
+
+    let video = document.createElement("video")
+    video.style.width = '100%'
+    video.style.height = 'auto'
+    video.setAttribute("src", path);
+
+    videoContainer.appendChild(video)
+
+    video.play()
+
+    video.addEventListener('ended', () => {
+      Utils.removeVideo(videoContainerKey, sceneKey)
+    },false);
+
+    document.body.appendChild(videoContainer)
+  }
+
+  static removeVideo(sceneKey) {
+    console.info("Removing video")
+    let videoContainerKey = Config.instance.ui.video.containerKey
+    let scene = Hodler.get(sceneKey)
+    if (!isBlank(scene.pendingRemoval)) { return }
+    scene.pendingRemoval = true
+    Engine.switch(scene)
+    scene.setTimeout(() => {
+      document.body.removeChild(Hodler.get(videoContainerKey))
+      Hodler.add(videoContainerKey, undefined)
+      delete scene.pendingRemoval
+    }, Config.instance.fade.duration)
+  }
+
   // Fade a scene with a div above it
   // Utils.fade({type: 'in'})}
   // Utils.fade({type: 'out'})}

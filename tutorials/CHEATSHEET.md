@@ -483,3 +483,18 @@ this.setInterval(() => {
   fadeIn.start()
 }, duration * 2)
 ```
+
+## Video
+
+Playing a video works by creating a fullscreen div and adding a scalable
+video element to it.
+
+```
+// name added to Hodler
+sceneWhenFinished = 'gameScene'
+// switched to scene when video finishes playing
+Utils.playVideo("assets/agent.mp4", sceneWhenFinished)
+
+// or when removeVideo is called.
+Utils.removeVideo(sceneWhenFinished)
+```
