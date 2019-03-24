@@ -235,6 +235,9 @@ String.prototype.capitalizeFirstLetter = function() {
 // Check if value is a number
 const isNumeric = n => !isNaN(parseFloat(n)) && isFinite(n)
 
+// Check if a value is a string
+const isString = value => typeof value === 'string' || value instanceof String
+
 // Checks if a number ends with a char sequence
 Number.prototype.endsWith = function(s) {
   return this.toString().endsWith(s)

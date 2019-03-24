@@ -150,10 +150,16 @@ class AssetManager {
   }
 
   static getAssetKey(asset) {
-    if (isBlank(asset.path)) {
-      throw 'missing asset.path'
+    let path
+    if (isString(asset)) {
+      path = asset
+    } else {
+      path = asset.path
+      if (isBlank(path)) {
+        throw 'missing asset.path'
+      }
     }
-    return asset.path.split('/').last()
+    return path.split('/').last()
   }
 
   loadFont(key, value) {
