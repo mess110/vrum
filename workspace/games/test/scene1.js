@@ -52,11 +52,8 @@ class Scene1 extends Scene {
     })
     this.forest.position.set(5, -3, -7)
     this.forest.traverse(function (e) {
-      if (e instanceof THREE.SkinnedMesh) {
-        // e.animations.play(Utils.random(0, 7))
-      }
       if (e instanceof THREE.Scene) {
-        e.animations.play(Utils.random(0, 7))
+        e.animations.playRandom()
       }
     })
     this.add(this.forest)

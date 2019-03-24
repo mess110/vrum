@@ -261,6 +261,27 @@ See [/src/objects/Water.js](/src/objects/Water.js) for details
 
 See [/src/objects/Tree.js](/src/objects/Tree.js) for details
 
+## Forest
+
+See [Utils.forest()](/src/extras/Utils.js) for more details
+
+```
+let forest = Utils.forest({
+  items: [
+    {
+      type: 'chicken.gltf',
+      count: 20,
+    }
+  ]
+})
+forest.traverse(function (e) {
+  if (e instanceof THREE.Scene) {
+    e.animations.playRandom()
+  }
+})
+this.add(forest)
+```
+
 ## LightningBolt
 
 See [/src/objects/LightningBolt.js](/src/objects/LightningBolt.js) for details

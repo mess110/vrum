@@ -37,6 +37,10 @@ class Animations {
     return this.get(target).isRunning()
   }
 
+  playRandom(options) {
+    this.play(this.names().shuffle().first(), options)
+  }
+
   play(name, options) {
     options = this._parseOptions(name, options)
 

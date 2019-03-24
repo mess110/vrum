@@ -56,6 +56,7 @@ yarn http
        * [Grid](tutorials/CHEATSHEET.md#Grid)
        * [Water](tutorials/CHEATSHEET.md#Water)
        * [Tree](tutorials/CHEATSHEET.md#Tree)
+       * [Forest](tutorials/CHEATSHEET.md#Forest)
        * [LightningBolt](tutorials/CHEATSHEET.md#LightningBolt)
        * [SpotLight](tutorials/CHEATSHEET.md#SpotLight)
        * [LightHelpers](tutorials/CHEATSHEET.md#LightHelpers)
@@ -137,6 +138,7 @@ yarn http
 * [x] terrain with heightmap
 * [x] qr code generator
 * [x] on screen console
+* [x] forest generator
 
 ## Undocumented features
 
@@ -146,7 +148,6 @@ yarn http
 * [x] bundle assets
 * [x] shadows
 * [x] mirror
-* [x] forest generator
 * [x] fine animation controls
 * [x] game pad controller game
 * [ ] set shadowMap.width and height of all lights
