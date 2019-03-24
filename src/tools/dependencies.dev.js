@@ -57,6 +57,8 @@ let VRUM_DEPENDS = [
 
   "../../../src/extras/jnorthpole.js",
   "../../../src/extras/SyntaxSugar.js",
+  "../../../src/extras/CyclicArray.js",
+  "../../../src/extras/Playlist.js",
   "../../../src/extras/MeshNetwork.js",
   "../../../src/extras/Modifiers.js",
   "../../../src/extras/StatsManager.js",

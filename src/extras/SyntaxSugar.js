@@ -254,35 +254,6 @@ console.ce = function(message) {
   console.log(message)
 }
 
-// Used for next() and prev()
-class CyclicArray {
-  constructor(items) {
-    if (items == null) { items = [] }
-    this.items = items
-    this.index = 0
-  }
-
-  get() {
-    return this.items[this.index]
-  }
-
-  next() {
-    this.index += 1
-    if (this.index > (this.items.size() - 1)) { this.index = 0 }
-    return this.get()
-  }
-
-  prev() {
-    this.index -= 1
-    if (this.index < 0) { this.index = this.items.size() - 1 }
-    return this.get()
-  }
-
-  size() {
-    return this.items.size()
-  }
-}
-
 const whichAnimationEvent = function() {
   const el = document.createElement('fakeelement')
   const animations = {
@@ -305,67 +276,6 @@ const arrayOrStringToString = (input) => {
     return input
   } else {
     throw 'invalid input'
-  }
-}
-
-// Used for continously looping sounds from the SoundManager
-class Playlist {
-  // @param [Array] keys
-  constructor(keys) {
-    if (!(keys instanceof Array)) { throw new Error('keys needs to be an array') }
-    for (let key of Array.from(keys)) {
-      if (!SoundManager.has(key)) {
-        throw new Error(`key '${key}' not loaded in SoundManager`)
-      }
-    }
-    this.items = new CyclicArray(keys)
-  }
-
-  // start playing the playlist
-  //
-  // @example
-  //   playlist = new Playlist(['shotgun', 'hit'])
-  //   playlist.play()
-  //
-  // @see getPlayingKey
-  cmd(options){
-    let audio
-    options.key = this.items.get()
-    if (options.type === 'volumeAll') {
-      options.type = 'volume'
-      for (let item of Array.from(this.items.items)) {
-        options.key = item
-        SoundManager.cmd(options)
-      }
-    } else {
-      audio = SoundManager.cmd(options)
-    }
-    if (['play', 'fadeIn'].includes(options.type)) {
-      audio._onend = []
-      return audio.on('end', data => {
-        this.items.next()
-        return this.cmd(options)
-      })
-    } else if (['volume', 'volumeAll'].includes(options.type)) {
-      // do nothing
-    } else {
-      return audio._onend = []
-    }
-  }
-
-  // Get the key of the sound currently playing
-  //
-  // @example
-  //   playlist = new Playlist(['shotgun', 'hit'])
-  //   playlist.play()
-  //   SoundManager.pause(playlist.getPlayingKey())
-  getPlayingKey() {
-    return this.items.get()
-  }
-
-  // Get the audio object which is currently playing
-  getPlayingAudio() {
-    return SoundManager.get().items[this.getPlayingKey()]
   }
 }
 
