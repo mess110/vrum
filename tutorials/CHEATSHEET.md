@@ -11,8 +11,8 @@ Happens automatically with the help of [/src/extras/PolyfillRenderer.js](src/ext
 See [/src/engine/Config.js](/src/engine/Config.js) comments for details
 
 ```
-Config.window.resize = true
-Config.renderer.alpha = false
+Config.instance.window.resize = true
+Config.instance.renderer.alpha = false
 ```
 
 ## QRCode
@@ -425,12 +425,8 @@ material.tick(tpf)
 ```
 
 ```
-let material = new ShaderMaterial('dissolve_shader.json', function (tpf) {
-  if (this.uniforms.dissolve.value > 1) {
-    this.uniforms.dissolve.value = 0
-  }
-  this.uniforms.dissolve.value += tpf
-})
+let json = AssetManager.get('dissolve_shader.json')
+let material = new ShaderMaterial(json)
 material.tick(tpf)
 ```
 
