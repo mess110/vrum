@@ -9,9 +9,7 @@ class GameScene extends Scene {
     let sky = new Sky()
     this.add(sky)
 
-    this.json = AssetManager.get('majestic-frog-cover.json')
-    this.art = Utils.graffiti(this.json)
-    this.add(this.art)
+    this.model = undefined
 
     Utils.toggleOrbitControls()
 
@@ -20,11 +18,42 @@ class GameScene extends Scene {
     this.tryInitEditor()
   }
 
-  setJSON(key) {
+  setJSON(json) {
+    if (!isBlank(this.model)) {
+      this.remove(this.model)
+    }
+
+    let model = SceneLoader.jsonToModel(json)
+    if (isBlank(model)) {
+      console.warn('no model')
+      return
+    }
+    this.add(model)
+    this.model = model
+  }
+
+  setJSONFromKey(key) {
     let json = AssetManager.get(key)
     this.editor.setValue(JSON.stringify(json, null, 2))
     this.editor.clearSelection()
+    this.setJSON(json)
     document.querySelector('#panel-text').textContent = key
+  }
+
+  onJSONChange() {
+    let scene = Hodler.get('scene')
+    try {
+      let jsonString = scene.editor.getValue()
+      let json = JSON.parse(jsonString)
+      scene.setJSON(json)
+    } catch (e){
+      if (e instanceof SyntaxError) {
+        console.error('invalid json')
+        // console.error(e)
+      } else {
+        throw e
+      }
+    }
   }
 
   tryInitEditor() {
@@ -33,7 +62,13 @@ class GameScene extends Scene {
       scene.editor = ace.edit('editor');
       scene.editor.getSession().setMode('ace/mode/json');
       scene.editor.setTheme('ace/theme/monokai');
-      scene.setJSON('majestic-frog-cover.json')
+      scene.editor.session.on('change', function(delta) {
+        scene.onJSONChange()
+        scene.setTimeout(() => {
+          scene.onJSONChange()
+        }, 2000)
+      });
+      load('graffiti/majestic-frog-cover.json')
       document.querySelectorAll('.panel').forEach((e) => {
         e.style.display = 'flex'
       })
@@ -51,7 +86,7 @@ class GameScene extends Scene {
   }
 
   doKeyboardEvent(event) {
-  // console.log(`${event.type} ${event.code} (${event.which})`)
+    // console.log(`${event.type} ${event.code} (${event.which})`)
   }
 }
 
@@ -66,21 +101,25 @@ const stopPropagation = (event) => {
 }
 
 const save = () => {
-  console.log('save')
   let editor = Hodler.get('scene').editor
   let s = editor.getValue()
-  Utils.saveFile(JSON.parse(s), 'object.json')
+  let outputName = document.querySelector('#panel-text').textContent
+  Utils.saveFile(JSON.parse(s), outputName)
 }
 
-const load = () => {
+const load = (assetFolderAndName) => {
+  let scene = Hodler.get('scene')
   let basePath = '/workspace/assets/'
-  let assetFolderAndName = prompt(`Load asset from ${basePath}`);
-  console.log('load')
+  if (isBlank(assetFolderAndName)) {
+    assetFolderAndName = prompt(`Load asset from ${basePath}`);
+  }
+  Utils.loadDependencies(basePath, assetFolderAndName, (asset) => {
+    let key = AssetManager.getAssetKey(asset)
+    scene.setJSONFromKey(key)
+  }, (asset) => {
+  })
 }
 
 Engine.start(new GameScene(), [
   { type: 'font', path: '/workspace/assets/fonts/luckiest-guy' },
-  { type: 'json', path: '/workspace/assets/graffiti/majestic-frog-cover.json' },
-  { type: 'image', path: '/workspace/assets/textures/vrum.png' },
-  { type: 'image', path: '/workspace/assets/textures/black-faded-border.png' },
 ])

@@ -42,23 +42,9 @@ class SceneLoader {
     } else if (item.type == 'water') {
       model = new Water(item)
     } else if (item.type == 'json') {
-      let json = AssetManager.get(item.key)
-      if (isBlank(json.kind)) {
-        console.error(`missing kind for ${item.key}`)
+      model = SceneLoader.keyToModel(item.key)
+      if (isBlank(model)) {
         return false
-      }
-      if (json.kind === 'graffiti') {
-        model = Utils.graffiti(json)
-      } else if (json.kind === 'particle') {
-        console.error("Particles can only be loaded, not added")
-        return false
-      } else if (json.kind === 'shader') {
-        console.error("Shaders can only be loaded, not added")
-        return false
-      } else if (json.kind === 'terrain') {
-        model = Terrain.fromJson(json)
-      } else {
-        console.error(`unknown kind ${json.kind} for ${item.key}`)
       }
     } else {
       console.error('model not defined')
@@ -83,6 +69,34 @@ class SceneLoader {
     }
 
     return true
+  }
+
+  static jsonToModel(json) {
+    let model
+    if (isBlank(json.kind)) {
+      console.error(`missing kind`)
+      return undefined
+    }
+    if (json.kind === 'graffiti') {
+      model = Utils.graffiti(json)
+    } else if (json.kind === 'particle') {
+      console.error("Particles can only be loaded, not added")
+      return undefined
+    } else if (json.kind === 'shader') {
+      console.error("Shaders can only be loaded, not added")
+      return undefined
+    } else if (json.kind === 'terrain') {
+      model = Terrain.fromJson(json)
+    } else {
+      console.error(`unknown kind ${json.kind}`)
+      return undefined
+    }
+    return model
+  }
+
+  static keyToModel(key) {
+    let json = AssetManager.get(key)
+    return SceneLoader.jsonToModel(json)
   }
 
   toJSON() {
