@@ -155,3 +155,10 @@ AssetManager.loadAssets(sceneLoader.getAssets(), () => {})
 // to populate the current scene
 sceneLoader.addToScene()
 ```
+
+To start the scene-editor:
+
+```
+yarn http
+google-chrome http://127.0.0.1:8080/workspace/games/scene-editor/
+```

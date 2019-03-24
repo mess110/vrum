@@ -101,3 +101,11 @@ dependencies.dev.js, it loads each source file in order.
 
 Open `http://127.0.0.1:8080/workspace/games/YOUR_GAME_NAME` in a browser to
 test your game.
+
+## Tools
+
+There are a few tools which can aid you during development:
+
+* [model-viewer](tutorials/ASSETS.md#ModelViewer)
+* [json-editor](tutorials/ASSETS.md#JSONEditor)
+* [scene-editor](tutorials/SCENES.md#SceneEditor)

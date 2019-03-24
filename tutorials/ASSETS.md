@@ -69,6 +69,16 @@ model.animations.play('wiggle', { stopAll: false })
 model.animations.play('tongue', { stopAll: false })
 ```
 
+## ModelViewer
+
+You also have a model-viewer which can help you view your models. To
+start it:
+
+```
+yarn http
+google-chrome http://127.0.0.1:8080/workspace/games/model-viewer/
+```
+
 ## JSON
 
 You can load JSON files. Some JSON files contain metadata to help you build
@@ -82,7 +92,16 @@ different objects like particles, shaders, terrain and paintings. Look into
 
 ```
 let json = AssetManager.clone('terrain.json')
-// with
+```
+
+## JSONEditor
+
+You also have a json-editor which can help you create particles/graffiti. To
+start it:
+
+```
+yarn http
+google-chrome http://127.0.0.1:8080/workspace/games/json-editor/
 ```
 
 ## EngineHelpers
