@@ -63,6 +63,8 @@ of vrum.js features. It should look something like this:
 
 ![should look like](/workspace/games/project/assets/vrum.png)
 
+You can switch between different tests by pressing 1,2,3 etc.
+
 ## NewGame
 
 Create a new game. The template from which the game is built can be found in

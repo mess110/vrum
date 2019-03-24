@@ -139,7 +139,6 @@ yarn http
 
 ## Undocumented features
 
-* [ ] switch test scene with 1, 2, 3, 4
 * [x] tween objects around
 * [x] modifiers - predefined tweens
 * [x] attach object to bone (scale support)

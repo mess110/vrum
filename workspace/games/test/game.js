@@ -26,14 +26,10 @@ HighScoreManager.get().responseHandler = function (data) {
 HighScoreManager.getScores(20)
 
 
-var scene1 = new Scene1()
-Hodler.add('scene1', scene1)
-var scene2 = new Scene2()
-Hodler.add('scene2', scene2)
-var scene3 = new Scene3()
-Hodler.add('scene3', scene3)
-var scene4 = new Scene4()
-Hodler.add('scene4', scene4)
+Hodler.add('scene1', new Scene1())
+Hodler.add('scene2', new Scene2())
+Hodler.add('scene3', new Scene3())
+Hodler.add('scene4', new Scene4())
 var loadingScene = new LoadingScene()
 
 Persist.default('name', 'player1')

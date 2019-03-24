@@ -60,4 +60,8 @@ class Scene3 extends Scene {
       // console.log('space pressed')
     // }
   }
+
+  doKeyboardEvent(event) {
+    LoadingScene.switch(event)
+  }
 }

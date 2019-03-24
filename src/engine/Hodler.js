@@ -12,7 +12,7 @@ class Hodler {
   }
 
   has(key) {
-    return isBlank(this.get(key))
+    return !isBlank(this.get(key))
   }
 
   static add(key, value) {
