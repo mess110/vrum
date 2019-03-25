@@ -25,9 +25,11 @@ class LoadingScene extends Scene {
 
   init(options) {
     var geometry = new THREE.BoxGeometry( 1, 1, 1 )
-    var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } )
+    var material = new THREE.MeshBasicMaterial( { color: 0x4d4d4d } )
     var cube = new THREE.Mesh( geometry, material )
+    cube.setWireframe(true)
     this.add(cube)
+    this.cube = cube
 
     let camera = Hodler.get('camera');
     camera.position.set(0, 10, 15)
@@ -37,5 +39,10 @@ class LoadingScene extends Scene {
       console.info(`loadingScene started loading ${this.assetsToLoad.length} assets`)
     }
     Engine.switch(this.callbackScene, this.assetsToLoad)
+  }
+
+  tick(tpf) {
+    this.cube.rotation.x += tpf
+    this.cube.rotation.y += tpf
   }
 }

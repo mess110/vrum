@@ -11,9 +11,12 @@ Persist.defaultJson('lastModels', [
 updateLastModels()
 stopPropagation()
 
-var loadingScene = new LoadingScene()
-var mainScene = new MainScene()
+let mainScene = new MainScene()
 Hodler.add('mainScene', mainScene)
+
+let loadingScene = new LoadingScene(mainScene, [
+  { type: 'image', path: '/workspace/assets/textures/vrum.png' },
+])
 
 Engine.start(loadingScene)
 

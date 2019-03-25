@@ -1,22 +1,3 @@
-class LoadingScene extends MainScene {
-  init(options) {
-    let geometry = new THREE.BoxGeometry( 1, 1, 1 )
-    let material = new THREE.MeshBasicMaterial({ color: 'red' })
-    this.model = new THREE.Mesh(geometry, material)
-    this.model.setWireframe(true)
-    this.add(this.model)
-
-    Engine.switch(Hodler.get('mainScene'), [
-      { type: 'image', path: '/workspace/assets/textures/vrum.png' },
-    ])
-  }
-
-  tick(tpf) {
-    this.model.rotation.x += tpf
-    this.model.rotation.y += tpf
-  }
-}
-
 const stopPropagation = (event) => {
   let stopIt = (event) => { event.stopPropagation() }
   document.querySelectorAll('input[type=text]').forEach((e) => {
