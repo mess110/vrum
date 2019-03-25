@@ -498,7 +498,30 @@ video element to it. The video removes itself by calling `removeVideo`
 automatically when the video finishes playing.
 
 ```
-Utils.playVideo("assets/agent.mp4")
+Utils.playVideo("assets/agent.mp4", () => {
+  // optional, called when video has finished playing
+  // at this point, removeVideo was automatically called with
+  // no callback and the video tag is gone.
+})
+
 Utils.isPlayingVideo()
-Utils.removeVideo()
+
+// if you want to fade the scene before removing the video, you can set
+// a delay on the removeVideo()
+let delay = Config.instance.fade.duration // defaults to 1000 ms
+Utils.removeVideo(() => {
+  // optional, called when the video tag is removed
+}, delay)
+
+Utils.removeVideo(undefined, 0)
+```
+
+A cinematic can be played with the help of the [VideoScene](/src/extra/scenes/VideoScene.js)
+
+```
+let skippable = true
+let gameScene = new GameScene()
+let videoScene = new VideoScene(gameScene, "assets/agent.mp4", skippable)
+
+Engine.start(videoScene)
 ```

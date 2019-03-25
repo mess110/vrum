@@ -604,7 +604,8 @@ class Utils {
     }
   }
 
-  static playVideo(path) {
+  static playVideo(path, callback) {
+    if (isBlank(callback)) { callback = () => {} }
     let videoContainerKey = Config.instance.ui.video.containerKey
     if (Hodler.has(videoContainerKey)) {
       console.error('video already playing')
@@ -641,6 +642,7 @@ class Utils {
 
     video.addEventListener('ended', () => {
       Utils.removeVideo()
+      callback()
     },false);
 
     document.body.appendChild(videoContainer)
@@ -650,8 +652,9 @@ class Utils {
     return Hodler.has(Config.instance.ui.video.containerKey)
   }
 
-  static removeVideo(callback) {
+  static removeVideo(callback, delay) {
     if (isBlank(callback)) { callback = () => {} }
+    if (isBlank(delay)) { delay = Config.instance.fade.duration }
 
     let videoContainerKey = Config.instance.ui.video.containerKey
     let pendingRemovalKey = Config.instance.ui.video.pendingRemovalKey
@@ -674,7 +677,7 @@ class Utils {
         console.info("video tag removed")
       }
       callback()
-    }, Config.instance.fade.duration)
+    }, delay)
   }
 
   // Fade a scene with a div above it

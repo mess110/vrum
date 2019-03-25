@@ -13,6 +13,8 @@ class Engine {
   // Load specified assets, once that is done start the engine
   // and run init for the scene
   static start(scene, assets) {
+    if (isBlank(scene)) { throw 'scene is blank' }
+
     Hodler.add('scene', scene)
 
     var renderer = RenderManager.initRenderer()
@@ -39,9 +41,8 @@ class Engine {
   // Loads specified assets, once that is done, uninits the current scene,
   // and witches to the specified scene
   static switch(scene, assets) {
-    if (isBlank(scene)) {
-      throw 'scene is blank'
-    }
+    if (isBlank(scene)) { throw 'scene is blank' }
+
     AssetManager.loadAssets(assets, () => {
       var duration = Config.instance.fade.duration
       var engine = Hodler.get('engine')

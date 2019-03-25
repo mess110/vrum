@@ -33,18 +33,23 @@ class VideoScene extends Scene {
     this.skippable = skippable
   }
 
-  init(options) {
-    Utils.playVideo(this.videoUrl)
-  }
-
   safeRemoveVideo() {
     if (this.finished) { return }
     this.finished = true
     if (Config.instance.engine.debug) {
-      console.info('videoScene.safeRemoveVideo')
+      console.info('videoScene.safeRemoveVideo() called')
     }
+    // video could already be removed at this point, but that is ok
+    // delay is automatically configured to the same time it takes
+    // to fade the scene
     Utils.removeVideo()
     Engine.switch(this.callbackScene)
+  }
+
+  init(options) {
+    Utils.playVideo(this.videoUrl, () => {
+      Hodler.get('scene').safeRemoveVideo()
+    })
   }
 
   doMouseEvent(event, raycaster) {
