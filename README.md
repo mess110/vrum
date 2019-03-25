@@ -161,15 +161,14 @@ yarn h // prints help
 * [x] play movie on demand, VideoScene
 * [x] preloading screen, show logos, multiple images, skippable etc
 * [x] gamepad-api
+* [x] set shadowMap.width and height of all lights
 
 ## Undocumented features
 
 * [ ] toon outline
 * [x] mesh game pad controller game
-* [ ] set shadowMap.width and height of all lights
 * [ ] VR
 * [ ] walker
-* [ ] a lot of points geometry
 * [ ] tween between animation weights
 * [ ] generate load_assets_file.json
 * [ ] physics

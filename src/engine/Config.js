@@ -44,6 +44,14 @@ class Config {
       // Amount of transparency
       clearAlpha: 1,
     }
+    this.shadow = {
+      details: {
+        low: 'low',
+        medium: 'medium',
+        high: 'high',
+        ultra: 'ultra'
+      }
+    }
     this.camera = {
       // Default camera
       type: 'THREE.PerspectiveCamera',

@@ -202,7 +202,7 @@ class Utils {
     return node;
   }
 
-  static toggleShadows() {
+  static toggleShadows(shadowMapSize) {
     let renderer = Hodler.get('renderer')
     renderer.shadowMap.enabled = !renderer.shadowMap.enabled
     renderer.shadowMap.soft = true
@@ -211,17 +211,68 @@ class Utils {
 
     let scene = Hodler.get('scene')
     scene.traverse((obj) => {
-      if (obj instanceof SpotLight) {
-        obj.spotLight.castShadow = !obj.spotLight.castShadow
+      let isSpotlight = obj instanceof SpotLight
+      let isSky = obj instanceof Sky
+      let isLight = obj instanceof THREE.DirectionalLight ||
+        obj instanceof THREE.PointLight ||
+        obj instanceof THREE.HemisphereLight
+
+      let target
+      if (isSpotlight) { target = obj.spotLight }
+      if (isSky) { target = obj.light }
+      if (isLight) { target = obj }
+
+      if (isLight || isSky || isSpotlight) {
+        target.castShadow = !target.castShadow
       }
-      if (obj instanceof Sky) {
-        obj.light.castShadow = !obj.light.castShadow
+    })
+  }
+
+  // Example usage
+  //
+  //  Utils.setShadowDetails(512, 512)
+  //  Utils.setShadowDetails('low')
+  //  Utils.setShadowDetails('medium')
+  //  Utils.setShadowDetails('high')
+  //  Utils.setShadowDetails('ultra')
+  //
+  static setShadowDetails(x, y) {
+    if (isString(x)) {
+      const shadow = Config.instance.shadow.details
+      if (x == shadow.low) {
+        x = 128
+      } else if (x == shadow.medium) {
+        x = 512
+      } else if (x == shadow.high) {
+        x = 1024
+      } else if (x == shadow.ultra) {
+        x = 2048
+      } else {
+        throw `invalid shadow detail ${x}`
       }
-      [THREE.DirectionalLight, THREE.PointLight, THREE.HemisphereLight].forEach((light) => {
-        if (obj instanceof light) {
-          obj.castShadow = !obj.castShadow
-        }
-      })
+      y = x
+    }
+    if (isBlank(x) || isBlank(y)) {
+      console.error('missing params')
+      return
+    }
+    let scene = Hodler.get('scene')
+    scene.traverse((obj) => {
+      let isSpotlight = obj instanceof SpotLight
+      let isSky = obj instanceof Sky
+      let isLight = obj instanceof THREE.DirectionalLight ||
+        obj instanceof THREE.PointLight ||
+        obj instanceof THREE.HemisphereLight
+
+      let target
+      if (isSpotlight) { target = obj.spotLight }
+      if (isSky) { target = obj.light }
+      if (isLight) { target = obj }
+
+      if (!isBlank(target)) {
+        target.shadow.mapSize.width = x
+        target.shadow.mapSize.height = y
+      }
     })
   }
 

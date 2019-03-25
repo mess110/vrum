@@ -322,6 +322,16 @@ To enable shadows, you need to toggle them.
 Utils.toggleShadows()
 ```
 
+You can configure shadow details with:
+
+```
+Utils.setShadowDetails(512, 512)
+Utils.setShadowDetails(Config.instance.shadow.details.low)
+Utils.setShadowDetails('medium')
+Utils.setShadowDetails('high')
+Utils.setShadowDetails('ultra')
+```
+
 Shadow behaviour can be controlled per object basis with the help of:
 
 ```
