@@ -35,9 +35,10 @@ const switchScene = (event) => {
   Engine.switch(Hodler.get(sceneKey))
 }
 
-const resetCamPosition = () => {
+const resetCamPosition = (distance) => {
+  if (isBlank(distance)) { distance = 20 }
   let camera = Hodler.get('camera')
-  camera.position.set(0, 20, 20)
+  camera.position.set(0, distance, distance)
   camera.lookAt(new THREE.Vector3(0, 0, 0))
 }
 

@@ -544,3 +544,39 @@ Or an example with a lot of points.
 let starfield = new Starfield()
 this.add(starfield)
 ```
+
+## ToonOutline
+
+There are a few helper methods to help you get started with giving a toon
+outline effect. It works is by overlaying the same shaped object with an outline
+material to a target. The outline object has its scaled increase by the
+specified percent.
+
+```
+let thickness = 0.002 // increase/decrease to change outline width
+// let outlineMaterial = Utils.outlineMaterial(thickness)
+let outlineMaterial = Utils.outlineMaterial() // defaults to 0.002
+
+let geometry = new THREE.BoxGeometry( 1, 1, 1 )
+let material = new THREE.MeshBasicMaterial( { color: 0x4d4d4d } )
+let cube = new THREE.Mesh( geometry, material )
+
+let outlineGeometry = new THREE.BoxGeometry( 1, 1, 1 )
+let outlineCube = new THREE.Mesh( outlineGeometry, outlineMaterial )
+
+Utils.addOutlineTo(cube, outlineCube)
+// Utils.addOutlineTo(cube, outlineCube, 3)
+// Utils.addOutlineTo(cube, outlineCube, undefined, outlineMaterial)
+
+this.add(cube)
+```
+
+If you want to add an outline to a model, there is a helper:
+
+```
+let scalePercent = 3 // as in outline is 3% bigger than the model
+
+AssetManager.cloneWithOutline('chicken.gltf')
+// AssetManager.cloneWithOutline('chicken.gltf', scalePercent)
+// AssetManager.cloneWithOutline('chicken.gltf', scalePercent, outlineMaterial)
+```

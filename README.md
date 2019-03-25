@@ -64,6 +64,7 @@ yarn h // prints help
            * [RTSCamera](tutorials/CHEATSHEET.md#RTSCamera)
            * [VirtualController](tutorials/CHEATSHEET.md#VirtualController)
        * Misc
+           * [Toon outline](tutorials/CHEATSHEET.md#ToonOutline)
            * [Config](tutorials/CHEATSHEET.md#Config)
            * [Sound](tutorials/CHEATSHEET.md#Sound)
            * [QRCode](tutorials/CHEATSHEET.md#QRCode)
@@ -162,10 +163,10 @@ yarn h // prints help
 * [x] preloading screen, show logos, multiple images, skippable etc
 * [x] gamepad-api
 * [x] set shadowMap.width and height of all lights
+* [x] toon outline
 
 ## Undocumented features
 
-* [ ] toon outline
 * [x] mesh game pad controller game
 * [ ] VR
 * [ ] walker

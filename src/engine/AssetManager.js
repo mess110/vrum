@@ -98,6 +98,13 @@ class AssetManager {
     return this._hack(target)
   }
 
+  static cloneWithOutline(key, scalePercent, outlineMaterial) {
+    let mesh = AssetManager.clone(key)
+    let outline = AssetManager.clone(key)
+    Utils.addOutlineTo(mesh, outline, scalePercent, outlineMaterial)
+    return mesh
+  }
+
   static hasKey(key) {
     return key in AssetManager.instance.data
   }

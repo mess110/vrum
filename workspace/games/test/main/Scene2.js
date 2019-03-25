@@ -1,27 +1,51 @@
 class Scene2 extends Scene {
+
   init(options) {
-    resetCamPosition()
+    resetCamPosition(5)
+    Utils.toggleOrbitControls()
+    this.add(new THREE.AmbientLight())
+    this.add(new Sky())
 
-    var geometry = new THREE.BoxGeometry( 1, 1, 1 )
-    var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } )
-    var cube = new THREE.Mesh( geometry, material )
+    let outlineMaterial = Utils.outlineMaterial()
+    this.outlineMaterial = outlineMaterial
+
+    let geometry = new THREE.BoxGeometry( 1, 1, 1 )
+    let material = new THREE.MeshBasicMaterial( { color: 0x4d4d4d } )
+    let cube = new THREE.Mesh( geometry, material )
+
+    let outlineGeometry = new THREE.BoxGeometry( 1, 1, 1 )
+    let outlineCube = new THREE.Mesh( outlineGeometry, outlineMaterial )
+
+    Utils.addOutlineTo(cube, outlineCube, 3, outlineMaterial)
+    cube.position.y = 2
     this.add(cube)
-    this.cube = cube
 
-    var geometry2 = new THREE.BoxGeometry( 1, 1, 1 )
-    var material2 = new THREE.MeshBasicMaterial( { color: 0x00ffff } )
-    var cube2 = new THREE.Mesh( geometry2, material2 )
-    cube2.position.x = 1
-    cube.add(cube2)
+    let chicken = AssetManager.cloneWithOutline('chicken.gltf', 3, outlineMaterial)
+    chicken.position.set(1, 0, 0)
+    this.add(chicken)
+
+    let torus = this.torus()
+    let torusOutline = this.torus(true)
+    Utils.addOutlineTo(torus, torusOutline, 3, outlineMaterial)
+    torus.position.set(-1, 0 ,0)
+    this.add(torus)
   }
 
-  tick(tpf) {
-    this.cube.rotation.x += 0.01
-    this.cube.rotation.y += 0.01
+  uninit() {
+    Utils.toggleOrbitControls()
+  }
 
-    if (Hodler.get('engine').inputManager.keyboard.pressed('space')) {
-      console.log('space pressed')
+  torus(isOutline) {
+    let material
+    if (isBlank(isOutline)) {
+      material = new THREE.MeshPhongMaterial({
+        color: 'yellow',
+        side: THREE.FrontSide
+      })
+    } else {
+      material = this.outlineMaterial
     }
+    return new THREE.Mesh(new THREE.TorusKnotBufferGeometry(0.6,0.1), material)
   }
 
   doKeyboardEvent(event) {

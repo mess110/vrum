@@ -105,6 +105,44 @@ class Utils {
     }
   }
 
+  // https://blog.mozvr.com/cartoon-outline-effect/
+  // the lower the thickness the thinner the outline
+  static outlineMaterial(thickness) {
+    if (isBlank(thickness)) { thickness = 0.002 }
+    const outlineMaterial = new THREE.MeshLambertMaterial({
+        color: 'black',
+        side: THREE.BackSide
+    })
+    outlineMaterial.onBeforeCompile = (shader) => {
+        const token = '#include <begin_vertex>'
+        const customTransform = `vec3 transformed = position + objectNormal * ${thickness};`
+        shader.vertexShader = shader.vertexShader.replace(token,customTransform)
+    }
+    return outlineMaterial
+  }
+
+  static addOutlineTo(mesh, outline, scalePercent, outlineMaterial) {
+    if (isBlank(outlineMaterial)) {
+      outlineMaterial = Utils.outlineMaterial()
+    }
+    if (isBlank(scalePercent)) { scalePercent = 3 }
+    mesh.traverse((obj) => {
+      if (obj instanceof THREE.SkinnedMesh) {
+        obj.material.side = THREE.FrontSide
+      }
+    })
+    let scale = (mesh.scale.x + mesh.scale.y + mesh.scale.z) / 3
+    outline.scale.setScalar(scale + ((scale * scalePercent) / 100))
+    outline.position.setScalar(0)
+    outline.rotation.set(0, 0, 0)
+    outline.traverse((obj) => {
+      if (obj instanceof THREE.SkinnedMesh) {
+        obj.material = outlineMaterial
+      }
+    })
+    mesh.add(outline)
+  }
+
   // generate a forest of JsonModelManager
   //
   // @example
