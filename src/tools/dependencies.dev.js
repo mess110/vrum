@@ -122,7 +122,8 @@ let VRUM_DEV_ONLY_DEPENDS = [
   '../../../src/vendor/live.js', // this needs to be the last script or it won't live reload
 ]
 
-const loadVrumScriptsWithDepends = (items, finishedCallback) => {
+const loadVrumScriptsWithDepends = (items, finishedCallback, relativeTo) => {
+  if (relativeTo === undefined || relativeTo === null) { relativeTo = '' }
   if (items.length == 0) {
     if (finishedCallback instanceof Function) {
       finishedCallback()
@@ -143,12 +144,17 @@ const loadVrumScriptsWithDepends = (items, finishedCallback) => {
   }
 
   items.reverse()
-  loadScript(items.pop(), () => {
-    loadVrumScriptsWithDepends(items.reverse(), finishedCallback)
+  let url = items.pop()
+  if (url.startsWith("../") && relativeTo !== '') {
+    url = `${relativeTo}/${url}`
+  }
+  url = new URL(url, window.location.href).href
+  loadScript(url, () => {
+    loadVrumScriptsWithDepends(items.reverse(), finishedCallback, relativeTo)
   })
 }
 
-const loadVrumScripts = (items, finishedCallback) => {
+const loadVrumScripts = (items, finishedCallback, relativeTo) => {
   let depends = VRUM_DEPENDS.concat(items).concat(VRUM_DEV_ONLY_DEPENDS)
-  loadVrumScriptsWithDepends(depends, finishedCallback)
+  loadVrumScriptsWithDepends(depends, finishedCallback, relativeTo)
 }

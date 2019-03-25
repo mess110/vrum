@@ -5,7 +5,8 @@
 let VRUM_DEPENDS = [
 ]
 
-const loadVrumScriptsWithDepends = (items, finishedCallback) => {
+const loadVrumScriptsWithDepends = (items, finishedCallback, relativeTo) => {
+  if (relativeTo === undefined || relativeTo === null) { relativeTo = '' }
   if (items.length == 0) {
     if (finishedCallback instanceof Function) {
       finishedCallback()
@@ -26,12 +27,17 @@ const loadVrumScriptsWithDepends = (items, finishedCallback) => {
   }
 
   items.reverse()
-  loadScript(items.pop(), () => {
-    loadVrumScriptsWithDepends(items.reverse(), finishedCallback)
+  let url = items.pop()
+  if (url.startsWith("../") && relativeTo !== '') {
+    url = `${relativeTo}/${url}`
+  }
+  url = new URL(url, window.location.href).href
+  loadScript(url, () => {
+    loadVrumScriptsWithDepends(items.reverse(), finishedCallback, relativeTo)
   })
 }
 
-const loadVrumScripts = (items, finishedCallback) => {
-  depends = VRUM_DEPENDS.concat(items)
-  loadVrumScriptsWithDepends(depends, finishedCallback)
+const loadVrumScripts = (items, finishedCallback, relativeTo) => {
+  let depends = VRUM_DEPENDS.concat(items)
+  loadVrumScriptsWithDepends(depends, finishedCallback, relativeTo)
 }

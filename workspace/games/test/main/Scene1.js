@@ -28,7 +28,7 @@ class Scene1 extends Scene {
 
     var armor = new Box()
 
-    Utils.setCursor('../../assets/textures/hand.png')
+    Utils.setCursor('/workspace/assets/textures/hand.png')
 
     let mesh = AssetManager.clone('chicken.gltf')
     mesh.setSkin('chicken_black.jpeg')

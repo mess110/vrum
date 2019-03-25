@@ -11,15 +11,6 @@
         </style>
     </head>
     <body>
-        <script src="/src/tools/dependencies.dev.js"></script>
-        <!-- <script src="vrum.min.js"></script> -->
-
-        <script>
-            loadVrumScripts([
-                'networking.js'
-            ])
-        </script>
-
         <center>
             <br>
             <div id="qrcode"></div>
@@ -30,5 +21,14 @@
         <center>
             <div id="peers"></div>
         </center>
+
+        <script src="/src/tools/dependencies.dev.js"></script>
+        <!-- <script src="/vrum.min.js"></script> -->
+        <script>
+            loadVrumScripts([
+                'Networking.js'
+            // ]) // if you want to deploy tests, you need to uncomment this line
+            ], undefined, '..')
+        </script>
     </body>
 </html>
