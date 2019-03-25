@@ -80,7 +80,8 @@ class Config {
         console:      200000
       },
       video: {
-        containerKey: 'videoContainer'
+        containerKey: 'vrum.video.container',
+        pendingRemovalKey: 'vrum.video.pendingRemoval'
       }
     }
     // Video recorder settings

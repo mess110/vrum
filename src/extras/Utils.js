@@ -620,15 +620,22 @@ class Utils {
 
   static removeVideo(sceneKey) {
     console.info("Removing video")
-    let videoContainerKey = Config.instance.ui.video.containerKey
+
     let scene = Hodler.get(sceneKey)
-    if (!isBlank(scene.pendingRemoval)) { return }
-    scene.pendingRemoval = true
+    let pendingRemovalKey = Config.instance.ui.video.pendingRemovalKey
+    let videoContainerKey = Config.instance.ui.video.containerKey
+
+    if (!isBlank(Hodler.get(pendingRemovalKey))) {
+      return
+    }
+
+    Hodler.add(pendingRemovalKey, true)
     Engine.switch(scene)
+
     scene.setTimeout(() => {
       document.body.removeChild(Hodler.get(videoContainerKey))
       Hodler.add(videoContainerKey, undefined)
-      delete scene.pendingRemoval
+      Hodler.add(pendingRemovalKey)
     }, Config.instance.fade.duration)
   }
 
