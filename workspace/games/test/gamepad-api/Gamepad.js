@@ -15,8 +15,44 @@ class GameScene extends Scene {
     cube.setWireframe(true)
     this.add(cube)
     this.cube = cube
+
+    this.lastVibration = 0
   }
 
+  vibrate(gamepad) {
+    if (this.lastVibration + 2 > this.uptime) { return }
+    this.lastVibration = this.uptime
+    gamepad.vibrationActuator.playEffect("dual-rumble", {
+      startDelay: 0,
+      duration: 1000,
+      weakMagnitude: 1.0,
+      strongMagnitude: 1.0
+    });
+  }
+
+  // event looks like
+  //
+  // [
+  //   type: 'gamepadtick-vrum
+  //   {
+  //     axes: [0.01, 0.01, 0.02, 0.04],
+  //     buttons: [
+  //       { pressed: true, value: 1 },
+  //       { pressed: false, value: 0 },
+  //       { pressed: false, value: 0 },
+  //       { pressed: false, value: 0 },
+  //       [...]
+  //     ],
+  //     connected: true,
+  //     id: "Xbox 360 Controller (XInput STANDARD GAMEPAD)",
+  //     index: 0,
+  //     mapping: "standard",
+  //     timestamp: 177550
+  //   },
+  //   null,
+  //   null,
+  //   null
+  // ]
   doGamepadEvent(event) {
     // console.log(event.type)
     if (event.type !== 'gamepadtick-vrum') { return }
@@ -26,7 +62,6 @@ class GameScene extends Scene {
       if (isBlank(gamepad)) { continue }
       gamepad.axes.forEach((axe, index) => {
         if (index == 0) {
-          // console.log(event)
           this.cube.position.x += axe
         } else if (index == 1) {
           this.cube.position.z += axe
@@ -39,6 +74,9 @@ class GameScene extends Scene {
       gamepad.buttons.forEach((button, index) => {
         if (button.pressed) {
           console.log(`button index ${index} pressed`)
+          if (index == 0) {
+            this.vibrate(gamepad)
+          }
         }
       })
     }
@@ -46,5 +84,4 @@ class GameScene extends Scene {
 }
 
 let gameScene = new GameScene()
-Engine.start(gameScene, [
-])
+Engine.start(gameScene)
