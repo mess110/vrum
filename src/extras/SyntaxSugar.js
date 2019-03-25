@@ -238,6 +238,8 @@ const isNumeric = n => !isNaN(parseFloat(n)) && isFinite(n)
 // Check if a value is a string
 const isString = value => typeof value === 'string' || value instanceof String
 
+const isArray = value => Array.isArray(value)
+
 // Checks if a number ends with a char sequence
 Number.prototype.endsWith = function(s) {
   return this.toString().endsWith(s)
@@ -270,7 +272,7 @@ const whichAnimationEvent = function() {
 }
 
 const arrayOrStringToString = (input) => {
-  if (Array.isArray(input)) {
+  if (isArray(input)) {
     return input.join('\n')
   } else if (isString(input)) {
     return input
@@ -384,7 +386,7 @@ THREE.Object3D.prototype.detachFromBone = function (boneName, mesh) {
 }
 
 setSkinHelper = function (material, key) {
-  if (Array.isArray(material)) {
+  if (isArray(material)) {
     material[0].map = AssetManager.get(key)
     material[0].needsUpdate = true
   } else {

@@ -11,7 +11,7 @@
  *  let addsScene = new AddsScene(gameScene, ["vrum.png"])
  *
  *  Engine.start(addsScene, [
- *    { type: "image", path: "assets/vrump.png
+ *    { type: "image", path: "assets/vrum.png
  *  ])
  */
 class AddsScene extends Scene {
@@ -21,7 +21,7 @@ class AddsScene extends Scene {
     if (isBlank(callbackScene)) {
       throw 'callbackScene missing'
     }
-    if (!Array.isArray(itemKeys)) {
+    if (!isArray(itemKeys)) {
       throw 'itemKeys needs to be an array of keys'
     }
     if (itemKeys.isEmpty()) {
