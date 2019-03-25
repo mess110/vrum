@@ -96,6 +96,8 @@ class MenuScene extends Scene {
     if (event.type != 'mousedown') { return }
     if (raycaster.intersectObject(this.playButton).any()) {
       this.startGame()
+    } else {
+      SoundManager.play('hit.wav')
     }
   }
 }
@@ -133,6 +135,7 @@ Hodler.add('gameLoadingScene', gameLoadingScene)
 // load assets needed for menu and switch to menu when finished
 let loadingScene = new LoadingScene(menuScene, [
   { type: 'image', path: '/workspace/assets/textures/play.png' },
+  { type: 'sound', path: '/workspace/assets/sounds/hit.wav' },
 ])
 
 // play video and switch to loadingScene when finished

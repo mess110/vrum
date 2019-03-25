@@ -9,6 +9,8 @@
 //
 class Scene1 extends Scene {
   init(options) {
+    resetCamPosition()
+
     let dissolveJson = AssetManager.get('dissolve_shader.json')
     var geometry = new THREE.BoxGeometry( 1, 1, 1 )
     var material = new ShaderMaterial(dissolveJson)

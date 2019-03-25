@@ -1,5 +1,7 @@
 class Scene4 extends Scene {
   init(options) {
+    resetCamPosition()
+
     let json = AssetManager.get('boat-scene.json')
     let sceneLoader = new SceneLoader(json)
 

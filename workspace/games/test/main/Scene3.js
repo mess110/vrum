@@ -1,5 +1,7 @@
 class Scene3 extends Scene {
   init(options) {
+    resetCamPosition()
+
     // let mesh = AssetManager.clone('chicken.gltf')
     // this.add(mesh)
 

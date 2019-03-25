@@ -163,10 +163,8 @@ yarn h // prints help
 
 ## Undocumented features
 
-* [ ] fix bug with moving camera during switch scene in tests. solution is to disable rts camera
-* [ ] resume howerler context AudioContext
 * [ ] toon outline
-* [x] game pad controller game
+* [x] mesh game pad controller game
 * [ ] set shadowMap.width and height of all lights
 * [ ] VR
 * [ ] walker
