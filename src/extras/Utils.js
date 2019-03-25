@@ -664,12 +664,15 @@ class Utils {
       console.info("Removing video")
     }
 
-    Hodler.add(pendingRemovalKey, { hello: 'world' })
+    Hodler.add(pendingRemovalKey, 'videoPendingRemoval')
 
     setTimeout(() => {
       document.body.removeChild(Hodler.get(videoContainerKey))
       Hodler.add(videoContainerKey, undefined)
       Hodler.add(pendingRemovalKey, undefined)
+      if (Config.instance.engine.debug) {
+        console.info("video tag removed")
+      }
       callback()
     }, Config.instance.fade.duration)
   }
