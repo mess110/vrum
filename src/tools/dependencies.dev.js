@@ -108,8 +108,9 @@ let VRUM_DEPENDS = [
   "../../../src/engine/InputManager.js",
   "../../../src/engine/RenderManager.js",
 
-  "../../../src/extras/scenes/VideoScene.js",
   "../../../src/extras/scenes/AddsScene.js",
+  "../../../src/extras/scenes/LoadingScene.js",
+  "../../../src/extras/scenes/VideoScene.js",
 
   "../../../src/engine/Engine.js", // last element needs a comma
 ]
