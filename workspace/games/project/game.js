@@ -20,6 +20,10 @@ class GameScene extends Scene {
   doKeyboardEvent(event) {
     console.log(`${event.type} ${event.code} (${event.which})`)
   }
+
+  doGamepadEvent(event) {
+    // console.log(event.type)
+  }
 }
 
 let gameScene = new GameScene()

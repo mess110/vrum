@@ -159,6 +159,7 @@ yarn h // prints help
 * [x] animations
 * [x] play movie on demand, VideoScene
 * [x] preloading screen, show logos, multiple images, skippable etc
+* [x] gamepad-api
 
 ## Undocumented features
 

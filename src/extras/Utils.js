@@ -255,6 +255,10 @@ class Utils {
     return WEBGL.isWebGLAvailable()
   }
 
+  static gamepad() {
+    return navigator.getGamepads ? true : (navigator.webkitGamepads ? true : false)
+  }
+
   // Sets the cursor
   //
   // param [String] url of the new cursor

@@ -59,6 +59,16 @@ object is also given which can be used to find the intersection of objects.
 Keyboard events are also fired. You can also access the keyboard state from
 `engine.inputManager`
 
+If HTML GamepadAPI is supported, gamepad events are also fired. The events are:
+
+* gamepadconnected
+* gamepaddisconnected
+* gamepadtick-vrum - a custom event, which is the result of `navigator.getGamepads()`
+
+See [/workspace/games/test/gamepad-api/](/workspace/games/test/gamepad-api/) for more
+details.
+
+
 ```
 class GameScene extends Scene {
   init(options) {
@@ -81,6 +91,10 @@ class GameScene extends Scene {
 
   doKeyboardEvent(event) {
     console.log(`${event.type} ${event.code} (${event.which})`)
+  }
+
+  doGamepadEvent(event) {
+    // console.log(event.type)
   }
 }
 ```

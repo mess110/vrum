@@ -9,6 +9,9 @@ class Scene extends THREE.Scene {
     this.finished = false
     this.intervals = []
     this.timeouts = []
+    // does not need to be refrehsed, support for gamepad can't change
+    // on the same device
+    this.gamepadSupported = Utils.gamepad()
   }
 
   init(options) {
@@ -45,6 +48,9 @@ class Scene extends THREE.Scene {
     this.uptime += tpf
     this._tickAnimations(tpf)
     this.tick(tpf)
+    if (this.gamepadSupported) {
+      this._doGamepadEvent(navigator.getGamepads())
+    }
   }
 
   _tickAnimations(tpf) {
@@ -86,6 +92,32 @@ class Scene extends THREE.Scene {
   }
 
   doKeyboardEvent(event) {}
+
+  _doGamepadEvent(event) {
+    if (!this.initialized) {
+      return
+    }
+    if (!(event.type == 'gamepaddisconnected' || event.type == 'gamepadconnected')) {
+      event.type = 'gamepadtick-vrum'
+    }
+    this.doGamepadEvent(event)
+  }
+
+  /*
+   * Called if gamepad is supported each frame. Also handles connect/disconnect
+   *
+   * All events have a type:
+   *
+   *  - gamepaddisconnected
+   *  - gamepadconnected
+   *  - gamepadtick-vrum  - custom, added by the engine to GamepadList
+   *
+   *  All events are streamlined into this method. Depending on what you need
+   *  take the appropriate action. Keep in mind, the scene could not yet be
+   *  initialized when the gamepad is initialized so don't count on getting
+   *  the gamepadconnected event every time the scene starts.
+   */
+  doGamepadEvent(event) {}
 
   setInterval(func, time) {
     this.intervals.push(setInterval(func, time))

@@ -61,11 +61,16 @@ class InputManager {
     Hodler.get('engine').inputManager.mouseHandler(event)
   }
 
+  gamepadHandler(event) {
+    Hodler.get('scene')._doGamepadEvent(event)
+  }
+
   _changeEventListener(which) {
     var renderer = Hodler.get('renderer')
     renderer.domElement[which + "EventListener"]("mouseup", this.mouseHandler, false)
     renderer.domElement[which + "EventListener"]("mousedown", this.mouseHandler, false)
     renderer.domElement[which + "EventListener"]("mousemove", this.mouseHandler, false)
+    renderer.domElement[which + "EventListener"]("wheel", this.wheelHandler, false)
 
     document[which + "EventListener"]("keydown", this.keyboardHandler, false)
     document[which + "EventListener"]("keyup", this.keyboardHandler, false)
@@ -75,7 +80,14 @@ class InputManager {
     renderer.domElement[which + "EventListener"]("touchend", this.touchHandler, false)
     renderer.domElement[which + "EventListener"]("touchcancel", this.touchHandler, false)
 
-    renderer.domElement[which + "EventListener"]("wheel", this.wheelHandler, false)
+    let gamepadSupported = Utils.gamepad()
+    if (Config.instance.engine.debug) {
+      console.log(`Gamepad support: ${gamepadSupported}`)
+    }
+    if (gamepadSupported) {
+      window[which + "EventListener"]("gamepadconnected", this.gamepadHandler, false)
+      window[which + "EventListener"]("gamepaddisconnected", this.gamepadHandler, false)
+    }
   }
 
   // @nodoc
