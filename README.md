@@ -33,6 +33,7 @@ yarn h // prints help
    * [Cheatsheet](tutorials/CHEATSHEET.md)
        * Objects
            * [Sky](tutorials/CHEATSHEET.md#Sky)
+           * [Starfield](tutorials/CHEATSHEET.md#Starfield)
            * [Text](tutorials/CHEATSHEET.md#Text)
            * [Fog](tutorials/CHEATSHEET.md#Fog)
            * [Grid](tutorials/CHEATSHEET.md#Grid)

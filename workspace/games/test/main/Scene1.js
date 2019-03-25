@@ -64,6 +64,8 @@ class Scene1 extends Scene {
     this.water.position.set(9.5, -3, 0)
     this.add(this.water)
 
+    this.add(new Starfield())
+
     this.terrain = Terrain.fromJson(AssetManager.get('terrain.json'))
     this.terrain.shadowReceive()
     this.terrain.position.set(10, -4, 0)

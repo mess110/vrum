@@ -525,3 +525,12 @@ let videoScene = new VideoScene(gameScene, "assets/agent.mp4", skippable)
 
 Engine.start(videoScene)
 ```
+
+## Starfield
+
+Or an example with a lot of points.
+
+```
+let starfield = new Starfield()
+this.add(starfield)
+```

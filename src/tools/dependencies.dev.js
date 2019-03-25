@@ -96,6 +96,7 @@ let VRUM_DEPENDS = [
   "../../../src/objects/Sky.js",
   "../../../src/objects/Mirror.js",
   "../../../src/objects/SpotLight.js",
+  "../../../src/objects/Starfield.js",
   "../../../src/objects/Tree.js",
   "../../../src/objects/Water.js",
   "../../../src/objects/BaseText.js",
