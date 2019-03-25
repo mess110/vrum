@@ -303,7 +303,7 @@ class Utils {
     let material;
     if (isBlank(options)) { options = {}; }
     if (options.keepProportions == true && !isBlank(options.map)) {
-      props = props = Utils.getTextureSize(options.map)
+      let props = Utils.getTextureSize(options.map)
       options.size.width = props.width
       options.size.height = props.height
     }

@@ -50,8 +50,7 @@ class AddsScene extends Scene {
 
     let queue = []
     this.itemKeys.forEach((key) => {
-      let size = Utils.getTextureSize(key)
-      let item = Utils.plane({ map: key, width: size.width, height: size.height })
+      let item = Utils.plane({ map: key, keepProportions: true })
       item.setOpacity(0)
       queue.push(item)
     })
