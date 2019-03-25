@@ -118,6 +118,13 @@ VideoRecorderManager.isRunning()
 VideoRecorderManager.stop()
 ```
 
+## SaveFile
+
+```
+dict = { hello: 'world' }
+Utils.saveFile(dict, 'fileName.json')
+```
+
 ## Fullscreen
 
 Note: requires an event started by a user action not a script. It is a browser

@@ -139,11 +139,10 @@ let loadingScene = new LoadingScene(menuScene, [
 let videoScene = new VideoScene(loadingScene, "/workspace/assets/textures/sintel.mp4")
 
 // go to video once logos are finished
-let logosScene = new AddsScene(videoScene, ["vrum.png", "heightmap3.png", "hand.png"])
+let logosScene = new AddsScene(videoScene, ["vrum.png", "vrum-screenshot.png"])
 
 // start with the logos scene, load logo assets
 Engine.start(logosScene, [
   { type: 'image', path: '/workspace/assets/textures/vrum.png' },
-  { type: 'image', path: '/workspace/assets/textures/heightmap3.png' },
-  { type: 'image', path: '/workspace/assets/textures/hand.png' },
+  { type: 'image', path: '/workspace/assets/textures/vrum-screenshot.png' },
 ])

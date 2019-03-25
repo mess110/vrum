@@ -52,6 +52,7 @@ yarn h // prints help
            * [Wireframe](tutorials/CHEATSHEET.md#Wireframe)
            * [Screenshot](tutorials/CHEATSHEET.md#Screenshot)
            * [Record video](tutorials/CHEATSHEET.md#RecordVideo)
+           * [Save file](tutorials/CHEATSHEET.md#SaveFile)
            * [Debug Stats](tutorials/CHEATSHEET.md#DebugStats)
            * [Adjust renderer size](tutorials/CHEATSHEET.md#AdjustRendererSize)
            * [Orientation](tutorials/CHEATSHEET.md#Orientation)
