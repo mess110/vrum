@@ -33,6 +33,9 @@ class LoadingScene extends Scene {
     camera.position.set(0, 10, 15)
     camera.lookAt(new THREE.Vector3(0,0,0))
 
+    if (Config.instance.engine.debug) {
+      console.info(`loadingScene started loading ${this.assetsToLoad.length} assets`)
+    }
     Engine.switch(this.callbackScene, this.assetsToLoad)
   }
 }

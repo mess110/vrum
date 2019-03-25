@@ -304,15 +304,15 @@ class Utils {
     if (isBlank(options)) { options = {}; }
     if (options.keepProportions == true && !isBlank(options.map)) {
       let props = Utils.getTextureSize(options.map)
-      options.size.width = props.width
-      options.size.height = props.height
+      options.width = props.width
+      options.height = props.height
     }
-    if (options.size != null) {
+    if (!isBlank(options.size)) {
       options.width = options.size;
       options.height = options.size;
     } else {
-      if (options.width == null) { options.width = Utils.PLANE_DEFAULT_WIDTH; }
-      if (options.height == null) { options.height = Utils.PLANE_DEFAULT_HEIGHT; }
+      if (isBlank(options.width)) { options.width = Utils.PLANE_DEFAULT_WIDTH; }
+      if (isBlank(options.height)) { options.height = Utils.PLANE_DEFAULT_HEIGHT; }
     }
     if (options.transparent == null) { options.transparent = false }
     if (options.side == null) { options.side = THREE.DoubleSide }
@@ -614,7 +614,9 @@ class Utils {
     if (!supportedFormats.includes(path.split('.').last())) {
       throw `unsupported video format for ${path}`
     }
-    console.info("Playing video")
+    if (Config.instance.engine.debug) {
+      console.info("Playing video")
+    }
 
     let videoContainer = document.createElement("div")
     videoContainer.style.position = 'absolute'
@@ -657,7 +659,10 @@ class Utils {
     if (Hodler.has(pendingRemovalKey) || !Utils.isPlayingVideo()) {
       return
     }
-    console.info("Removing video")
+
+    if (Config.instance.engine.debug) {
+      console.info("Removing video")
+    }
 
     Hodler.add(pendingRemovalKey, { hello: 'world' })
 

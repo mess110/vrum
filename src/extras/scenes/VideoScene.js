@@ -40,6 +40,9 @@ class VideoScene extends Scene {
   safeRemoveVideo() {
     if (this.finished) { return }
     this.finished = true
+    if (Config.instance.engine.debug) {
+      console.info('videoScene.safeRemoveVideo')
+    }
     Utils.removeVideo()
     Engine.switch(this.callbackScene)
   }

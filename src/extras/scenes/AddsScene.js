@@ -67,8 +67,14 @@ class AddsScene extends Scene {
     if (isBlank(nextObj)) {
       if (this.finished) { return }
       this.finished = true
+      if (Config.instance.engine.debug) {
+        console.info("addsScene finished, switching to callbackScene")
+      }
       Engine.switch(this.callbackScene)
     } else {
+      if (Config.instance.engine.debug) {
+        console.info("addsScene showing next image")
+      }
       this.remove(this.item)
       this.item = nextObj
       this.add(nextObj)
