@@ -1,8 +1,12 @@
 class Scene extends THREE.Scene {
   constructor() {
     super()
+    // automatically incremented if the scene is ticking
     this.uptime = 0
     this.initialized = false
+    // use this to prevent double actions like double load when the scene is
+    // finished
+    this.finished = false
     this.intervals = []
     this.timeouts = []
   }
@@ -15,6 +19,7 @@ class Scene extends THREE.Scene {
     this.timeouts = []
     this.init(options)
     this.initialized = true
+    this.finished = false
   }
 
   uninit() {
@@ -30,6 +35,7 @@ class Scene extends THREE.Scene {
       clearTimeout(timeout)
     })
     this.uninit()
+    this.finished = false
   }
 
   _fullTick(tpf) {

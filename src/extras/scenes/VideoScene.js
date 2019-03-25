@@ -38,10 +38,10 @@ class VideoScene extends Scene {
   }
 
   safeRemoveVideo() {
-    if (Utils.isPlayingVideo()) {
-      Engine.switch(this.callbackScene)
-      Utils.removeVideo()
-    }
+    if (this.finished) { return }
+    this.finished = true
+    Utils.removeVideo()
+    Engine.switch(this.callbackScene)
   }
 
   doMouseEvent(event, raycaster) {

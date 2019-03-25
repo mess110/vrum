@@ -175,6 +175,7 @@ There are some pre-built scenes to help you with common game related things:
 
 * [VideoScene](/src/extra/scenes/VideoScene.js)
 * [AddsScene](/src/extra/scenes/AddsScene.js)
+* [LoadingScene](/src/extra/scenes/LoadingScene.js)
 
 Lets say you want a to make a tripple-A game, which shows some company logos,
 plays a video, loads assets, switches to the menu. player input. switch to a
@@ -184,9 +185,15 @@ show credits scene, go the menu.
 To code that we could:
 
 ```
+// on init adds chicken model
 let gameScene = new GameScene()
-let menuScene = new MenuScene() // <-- you write this
+// on finish game event play credits:
 let creditsScene = new AddsScene(menuScene, ["cred1.png", "cred2.png"])
+
+// on init adds menu-button
+let menuScene = new MenuScene()
+// on start game event switch instantly to gameLoadingScene
+Engine.switch(gameLoadingScene)
 
 let gameLoadingScene = new LoadingScene(gameScene, [
   { type: 'model', path: '/workspace/assets/models/chicken.glb' },
@@ -197,7 +204,7 @@ let menuLoadingScene = new LoadingScene(menuScene, [
   { type: 'image', path: '/workspace/assets/textures/cred1.png' },
   { type: 'image', path: '/workspace/assets/textures/cred2.png' },
 ])
-let videoScene = new VideoScene(menuLoadingScene)
+let videoScene = new VideoScene(menuLoadingScene, "assets/agent.mp4")
 let logosScene = new AddsScene(videoScene, ["vrum.png"])
 
 Engine.start(logosScene, [

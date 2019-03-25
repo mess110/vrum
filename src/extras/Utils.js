@@ -281,12 +281,32 @@ class Utils {
     return new THREE.Plane(new THREE.Vector3(0, 0, 1), -1);
   }
 
+  static getTextureSize(key, scaleFactor) {
+    if (isBlank(scaleFactor)) {
+      scaleFactor = Config.instance.ui.addsScene.scaleFactor
+    }
+    let texture = AssetManager.get(key)
+    if (!(texture instanceof THREE.Texture)) {
+      throw 'not a texture'
+    }
+    let params = {
+      width: texture.image.width * scaleFactor,
+      height: texture.image.height * scaleFactor,
+    }
+    return params
+  }
+
   // Creates a plane
   //
   // @param [Object] options
   static plane(options) {
     let material;
-    if (options == null) { options = {}; }
+    if (isBlank(options)) { options = {}; }
+    if (options.keepProportions == true && !isBlank(options.map)) {
+      props = props = Utils.getTextureSize(options.map)
+      options.size.width = props.width
+      options.size.height = props.height
+    }
     if (options.size != null) {
       options.width = options.size;
       options.height = options.size;
@@ -604,11 +624,13 @@ class Utils {
     videoContainer.style.height = '100%'
     videoContainer.style.display = 'flex'
     videoContainer.style['z-index'] = Config.instance.ui.zIndex.video
+    videoContainer.style['pointer-events'] = 'none'
     Hodler.add(videoContainerKey, videoContainer)
 
     let video = document.createElement("video")
     video.style.width = '100%'
     video.style.height = 'auto'
+    video.style['pointer-events'] = 'none'
     video.setAttribute("src", path);
 
     videoContainer.appendChild(video)

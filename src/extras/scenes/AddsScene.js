@@ -38,7 +38,6 @@ class AddsScene extends Scene {
     this.itemKeys = itemKeys
     this.skippable = skippable
 
-    this.scaleFactor = addsConfig.scaleFactor
     this.cameraDistanceZ = addsConfig.cameraDistanceZ
     this.itemDisplayDurationSeconds = addsConfig.itemDisplayDurationSeconds
     this.fadeDurationMS = addsConfig.fadeDurationMS
@@ -51,37 +50,24 @@ class AddsScene extends Scene {
 
     let queue = []
     this.itemKeys.forEach((key) => {
-      let item = Utils.plane(this.mkImageParams(key))
+      let size = Utils.getTextureSize(key)
+      let item = Utils.plane({ map: key, width: size.width, height: size.height })
       item.setOpacity(0)
       queue.push(item)
     })
 
     this.lastChange = 0
-    this.alreadySwitching = false
     this.queue = queue.reverse()
     this.item = undefined
 
     this.next()
   }
 
-  mkImageParams(key) {
-    let texture = AssetManager.get(key)
-    if (!(texture instanceof THREE.Texture)) {
-      throw 'not a texture'
-    }
-    let params = {
-      map: key,
-      width: texture.image.width * this.scaleFactor,
-      height: texture.image.height * this.scaleFactor,
-    }
-    return params
-  }
-
   next() {
     let nextObj = this.queue.pop()
     if (isBlank(nextObj)) {
-      if (this.alreadySwitching) { return }
-      this.alreadySwitching = true
+      if (this.finished) { return }
+      this.finished = true
       Engine.switch(this.callbackScene)
     } else {
       this.remove(this.item)

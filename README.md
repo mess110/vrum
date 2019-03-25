@@ -156,11 +156,12 @@ yarn h // prints help
 * [x] tween objects around
 * [x] modifiers - predefined tweens
 * [x] animations
+* [x] play movie on demand, VideoScene
 
 ## Undocumented features
 
+* [ ] fix bug with moving camera during switch scene in tests. solution is to disable rts camera
 * [x] preloading screen, show logos, multiple images, skippable etc
-* [x] play movie on demand, VideoScene
 * [ ] resume howerler context AudioContext
 * [ ] toon outline
 * [x] game pad controller game
