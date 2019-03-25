@@ -159,7 +159,7 @@ yarn h // prints help
 ## Undocumented features
 
 * [x] preloading screen, show logos, multiple images, skippable etc
-* [x] play movie on demand, include fade, as scene
+* [x] play movie on demand, VideoScene
 * [ ] toon outline
 * [x] game pad controller game
 * [ ] set shadowMap.width and height of all lights

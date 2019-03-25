@@ -487,14 +487,11 @@ this.setInterval(() => {
 ## Video
 
 Playing a video works by creating a fullscreen div and adding a scalable
-video element to it.
+video element to it. The video removes itself by calling `removeVideo`
+automatically when the video finishes playing.
 
 ```
-// name added to Hodler
-sceneWhenFinished = 'gameScene'
-// switched to scene when video finishes playing
-Utils.playVideo("assets/agent.mp4", sceneWhenFinished)
-
-// or when removeVideo is called.
-Utils.removeVideo(sceneWhenFinished)
+Utils.playVideo("assets/agent.mp4")
+Utils.isPlayingVideo()
+Utils.removeVideo()
 ```

@@ -584,7 +584,7 @@ class Utils {
     }
   }
 
-  static playVideo(path, sceneKey) {
+  static playVideo(path) {
     let videoContainerKey = Config.instance.ui.video.containerKey
     if (Hodler.has(videoContainerKey)) {
       console.error('video already playing')
@@ -612,30 +612,34 @@ class Utils {
     video.play()
 
     video.addEventListener('ended', () => {
-      Utils.removeVideo(videoContainerKey, sceneKey)
+      Utils.removeVideo()
     },false);
 
     document.body.appendChild(videoContainer)
   }
 
-  static removeVideo(sceneKey) {
-    console.info("Removing video")
+  static isPlayingVideo() {
+    return Hodler.has(Config.instance.ui.video.containerKey)
+  }
 
-    let scene = Hodler.get(sceneKey)
-    let pendingRemovalKey = Config.instance.ui.video.pendingRemovalKey
+  static removeVideo(callback) {
+    if (isBlank(callback)) { callback = () => {} }
+
     let videoContainerKey = Config.instance.ui.video.containerKey
+    let pendingRemovalKey = Config.instance.ui.video.pendingRemovalKey
 
-    if (!isBlank(Hodler.get(pendingRemovalKey))) {
+    if (Hodler.has(pendingRemovalKey) || !Utils.isPlayingVideo()) {
       return
     }
+    console.info("Removing video")
 
-    Hodler.add(pendingRemovalKey, true)
-    Engine.switch(scene)
+    Hodler.add(pendingRemovalKey, { hello: 'world' })
 
-    scene.setTimeout(() => {
+    setTimeout(() => {
       document.body.removeChild(Hodler.get(videoContainerKey))
       Hodler.add(videoContainerKey, undefined)
-      Hodler.add(pendingRemovalKey)
+      Hodler.add(pendingRemovalKey, undefined)
+      callback()
     }, Config.instance.fade.duration)
   }
 
