@@ -80,8 +80,33 @@ class Config {
         console:      200000
       },
       video: {
+        // used internaly to hold the video container element
         containerKey: 'vrum.video.container',
-        pendingRemovalKey: 'vrum.video.pendingRemoval'
+
+        // used internally to lock one video at a time
+        pendingRemovalKey: 'vrum.video.pendingRemoval',
+
+        supportedFormats: ['mp4', 'ogg', 'ogv'],
+      },
+      addsScene: {
+        // if the AddsScene is skippable by default
+        skippable: true,
+
+        // distance to center of the screen, where the panels are located
+        cameraDistanceZ: 15,
+
+        // how much the images are scaled, 1 img pixel to 1 three.js unit
+        scaleFactor: 0.01,
+
+        // the total time the item is displayed, including fade duration
+        itemDisplayDurationSeconds: 5,
+
+        // how long the fade in/out takes of the specific item
+        fadeDurationMS: 1000,
+      },
+      videoScene: {
+        // if the VideoScene is skippable by default
+        skippable: true,
       }
     }
     // Video recorder settings

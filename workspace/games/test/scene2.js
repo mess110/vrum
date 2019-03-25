@@ -23,6 +23,6 @@ class Scene2 extends Scene {
   }
 
   doKeyboardEvent(event) {
-    LoadingScene.switch(event)
+    switchScene(event)
   }
 }

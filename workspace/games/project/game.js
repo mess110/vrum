@@ -22,7 +22,9 @@ class GameScene extends Scene {
   }
 }
 
-Engine.start(new GameScene(), [
+let gameScene = new GameScene()
+
+Engine.start(gameScene, [
   { type: 'font', path: 'assets/luckiest-guy' },
   { type: 'image', path: 'assets/vrum.png' },
 ])

@@ -10,6 +10,8 @@ class Engine {
     this.tick = this.tick.bind(this)
   }
 
+  // Load specified assets, once that is done start the engine
+  // and run init for the scene
   static start(scene, assets) {
     Hodler.add('scene', scene)
 
@@ -34,6 +36,8 @@ class Engine {
     return engine
   }
 
+  // Loads specified assets, once that is done, uninits the current scene,
+  // and witches to the specified scene
   static switch(scene, assets) {
     AssetManager.loadAssets(assets, () => {
       var duration = Config.instance.fade.duration
@@ -43,7 +47,7 @@ class Engine {
       Utils.fade({ type: 'in', duration: duration })
       Utils.delay(function () {
         var oldScene = Hodler.get('scene')
-        if (oldScene !== null) {
+        if (Hodler.has('scene')) {
           oldScene._fullUninit()
         }
         Hodler.add('scene', scene)

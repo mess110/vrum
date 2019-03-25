@@ -29,6 +29,7 @@ yarn h // prints help
        * [Scene management](tutorials/SCENES.md#SceneManagement)
        * [Fade](tutorials/SCENES.md#Fade)
        * [SceneEditor](tutorials/SCENES.md#SceneEditor)
+       * [Custom scenes](tutorials/SCENES.md#CustomScenes)
    * [Cheatsheet](tutorials/CHEATSHEET.md)
        * Objects
            * [Sky](tutorials/CHEATSHEET.md#Sky)
@@ -160,6 +161,7 @@ yarn h // prints help
 
 * [x] preloading screen, show logos, multiple images, skippable etc
 * [x] play movie on demand, VideoScene
+* [ ] resume howerler context AudioContext
 * [ ] toon outline
 * [x] game pad controller game
 * [ ] set shadowMap.width and height of all lights
@@ -170,3 +172,4 @@ yarn h // prints help
 * [ ] generate load_assets_file.json
 * [ ] physics
 * [ ] pause rendering on blur (implement own timeout affected by rendering)
+* [ ] auto generating documentation/cheatsheet from top level block comment

@@ -87,7 +87,7 @@ let VRUM_DEPENDS = [
   "../../../src/extras/ShaderMaterial.js",
   "../../../src/extras/VideoRecorderManager.js",
   "../../../src/extras/VirtualController.js",
-  "../../../src/extras/SceneLoader.js",
+  "../../../src/extras/scenes/SceneLoader.js",
 
   "../../../src/objects/BaseParticle.js",
   "../../../src/objects/LightningBolt.js",
@@ -105,9 +105,12 @@ let VRUM_DEPENDS = [
 
   "../../../src/engine/AssetManager.js",
   "../../../src/engine/Scene.js",
-  "../../../src/extras/VideoScene.js",
   "../../../src/engine/InputManager.js",
   "../../../src/engine/RenderManager.js",
+
+  "../../../src/extras/scenes/VideoScene.js",
+  "../../../src/extras/scenes/AddsScene.js",
+
   "../../../src/engine/Engine.js", // last element needs a comma
 ]
 

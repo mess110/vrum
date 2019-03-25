@@ -34,14 +34,4 @@ class LoadingScene extends Scene {
       { type: 'sound', path: '/workspace/assets/sounds/SuperHero_original.ogg' },
     ])
   }
-
-  static switch(event) {
-    if (event.type != 'keydown') { return }
-    if (!event.code.startsWith('Digit')) { return }
-    let digit = parseInt(event.code[5])
-    if (!(0 <= digit && digit < 10)) { return }
-    let sceneKey = `scene${digit}`
-    if (!Hodler.has(sceneKey)) { return }
-    Engine.switch(Hodler.get(sceneKey))
-  }
 }

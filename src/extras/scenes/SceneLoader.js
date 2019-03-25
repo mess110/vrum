@@ -1,3 +1,18 @@
+/*
+ * Populates a scene from a saved json scene.
+ *
+ * Scenes can be created with the help of the scene-editor
+ *
+ * Example usage:
+ *
+ *  let json = AssetManager.get('scene.json')
+ *  let sceneLoader = new SceneLoader(json)
+ *  // to load the assets
+ *  AssetManager.loadAssets(sceneLoader.getAssets(), () => {})
+ *
+ *  // to populate the current scene
+ *  sceneLoader.addToScene()
+ */
 class SceneLoader {
   constructor(json) {
     if (isBlank(json)) {

@@ -25,6 +25,15 @@ HighScoreManager.get().responseHandler = function (data) {
 }
 HighScoreManager.getScores(20)
 
+const switchScene = (event) => {
+  if (event.type != 'keydown') { return }
+  if (!event.code.startsWith('Digit')) { return }
+  let digit = parseInt(event.code[5])
+  if (!(0 <= digit && digit < 10)) { return }
+  let sceneKey = `scene${digit}`
+  if (!Hodler.has(sceneKey)) { return }
+  Engine.switch(Hodler.get(sceneKey))
+}
 
 Hodler.add('scene1', new Scene1())
 Hodler.add('scene2', new Scene2())

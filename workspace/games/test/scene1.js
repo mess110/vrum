@@ -200,7 +200,7 @@ class Scene1 extends Scene {
   }
 
   doKeyboardEvent(event) {
-    LoadingScene.switch(event)
+    switchScene(event)
     console.log(`${event.type} ${event.code} (${event.which})`)
     if (event.type == 'keydown' && event.which == 32) {
       SoundManager.play('hit.wav')

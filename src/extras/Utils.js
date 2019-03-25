@@ -590,6 +590,10 @@ class Utils {
       console.error('video already playing')
       return
     }
+    let supportedFormats = Config.instance.ui.video.supportedFormats
+    if (!supportedFormats.includes(path.split('.').last())) {
+      throw `unsupported video format for ${path}`
+    }
     console.info("Playing video")
 
     let videoContainer = document.createElement("div")

@@ -168,3 +168,47 @@ To start the scene-editor:
 yarn http
 google-chrome http://127.0.0.1:8080/workspace/games/scene-editor/
 ```
+
+## CustomScenes
+
+There are some pre-built scenes to help you with common game related things:
+
+* [VideoScene](/src/extra/scenes/VideoScene.js)
+* [AddsScene](/src/extra/scenes/AddsScene.js)
+
+Lets say you want a to make a tripple-A game, which shows some company logos,
+plays a video, loads assets, switches to the menu. player input. switch to a
+loading screen, loads other assets, switches to the game scene. player input.
+show credits scene, go the menu.
+
+To code that we could:
+
+```
+let gameScene = new GameScene()
+let menuScene = new MenuScene() // <-- you write this
+let creditsScene = new AddsScene(menuScene, ["cred1.png", "cred2.png"])
+
+let gameLoadingScene = new LoadingScene(gameScene, [
+  { type: 'model', path: '/workspace/assets/models/chicken.glb' },
+])
+
+let menuLoadingScene = new LoadingScene(menuScene, [
+  { type: 'image', path: '/workspace/assets/textures/menu-button.png' },
+  { type: 'image', path: '/workspace/assets/textures/cred1.png' },
+  { type: 'image', path: '/workspace/assets/textures/cred2.png' },
+])
+let videoScene = new VideoScene(menuLoadingScene)
+let logosScene = new AddsScene(videoScene, ["vrum.png"])
+
+Engine.start(logosScene, [
+  { type: 'font', path: 'assets/luckiest-guy' },
+  { type: 'image', path: '/workspace/assets/textures/vrum.png' },
+])
+```
+
+
+
+
+
+
+
