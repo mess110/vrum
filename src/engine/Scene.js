@@ -98,7 +98,16 @@ class Scene extends THREE.Scene {
       return
     }
     if (!(event.type == 'gamepaddisconnected' || event.type == 'gamepadconnected')) {
+      // set as a custom type to make it easier to work with
       event.type = 'gamepadtick-vrum'
+
+      let isConnected = false
+      for (var i = 0; i < event.length; i++) {
+        isConnected = isConnected || !isBlank(event[i])
+      }
+      if (!isConnected) {
+        return
+      }
     }
     this.doGamepadEvent(event)
   }

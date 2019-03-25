@@ -19,7 +19,6 @@ class GameScene extends Scene {
 
   doGamepadEvent(event) {
     // console.log(event.type)
-
     if (event.type !== 'gamepadtick-vrum') { return }
 
     for (var i = 0; i < event.length; i++) {
