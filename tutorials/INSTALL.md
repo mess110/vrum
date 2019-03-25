@@ -58,7 +58,8 @@ yarn http
 ```
 
 Now open `http://127.0.0.1:8080/workspace/games/test/` in a decent browser.
-You should see quite a chaotic scene with a log going on. Its testing a bunch
+You will see a list of tests to choose from. If you click on the main tests
+you should see quite a chaotic scene with a lot going on. Its testing a bunch
 of vrum.js features. It should look something like this:
 
 ![should look like](/workspace/games/project/assets/vrum.png)

@@ -6,23 +6,72 @@
 
         <link rel="icon" href="/workspace/games/project/assets/favicon.ico">
 
-        <title>vrum</title>
-        <style>
-            html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden }
-            canvas { width: 100%; height: 100% }
+        <title>vrum.js tests</title>
+        <style type="text/css" media="all">
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'luckiest-guy', sans-serif;
+}
+
+.flex-item {
+    cursor: pointer;
+    padding: 10px;
+    margin: 10px;
+    line-height: 20px;
+    font-size: 2em;
+    text-align: center;
+}
+
+.flex-container {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.row {
+    width: auto;
+}
         </style>
     </head>
     <body>
-        <script src="/src/tools/dependencies.dev.js"></script>
-        <!-- <script src="vrum.min.js"></script> -->
+        <div class="flex-container">
+            <div class="row">
+                <div class="flex-item" onclick="goTo('/workspace/games/test/main.html')">
+                    main tests
+                </div>
+                <div class="flex-item" onclick="goTo('/workspace/games/test/scene_setup.html')">
+                    scene setup test
+                </div>
+                <div class="flex-item" onclick="goTo('/workspace/games/test/networking.html')" style="padding-bottom: 50px;">
+                    networking test
+                </div>
+            </div>
+        </div>
+
+        <!-- <script src="/src/tools/dependencies.dev.js"></script> -->
+        <script src="/vrum.min.js"></script>
+
         <script>
-            loadVrumScripts([
-                'scene1.js',
-                'scene2.js',
-                'scene3.js',
-                'scene4.js',
-                'game.js',
-            ])
+const goTo = (url) => {
+    window.location.href = url
+}
+
+loadVrumScripts([], () => {
+    AssetManager.loadAssets([
+        { type: 'font', path: '/workspace/assets/fonts/luckiest-guy' },
+    ])
+})
         </script>
     </body>
 </html>

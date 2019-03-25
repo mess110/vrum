@@ -314,21 +314,21 @@ class Utils {
       if (isBlank(options.width)) { options.width = Utils.PLANE_DEFAULT_WIDTH; }
       if (isBlank(options.height)) { options.height = Utils.PLANE_DEFAULT_HEIGHT; }
     }
-    if (options.transparent == null) { options.transparent = false }
-    if (options.side == null) { options.side = THREE.DoubleSide }
-    if (options.opacity == null) { options.opacity = 1 }
-    if (options.wSegments == null) { options.wSegments = Utils.PLANE_DEFAULT_W_SEGMENTS; }
-    if (options.hSegments == null) { options.hSegments = Utils.PLANE_DEFAULT_H_SEGMENTS; }
-    if (options.color == null) { options.color = Utils.PLANE_DEFAULT_COLOR; }
-    if (options.class == null) { options.class = 'PlaneBufferGeometry'; }
+    if (isBlank(options.transparent)) { options.transparent = false }
+    if (isBlank(options.side)) { options.side = THREE.DoubleSide }
+    if (isBlank(options.opacity)) { options.opacity = 1 }
+    if (isBlank(options.wSegments)) { options.wSegments = Utils.PLANE_DEFAULT_W_SEGMENTS; }
+    if (isBlank(options.hSegments)) { options.hSegments = Utils.PLANE_DEFAULT_H_SEGMENTS; }
+    if (isBlank(options.color)) { options.color = Utils.PLANE_DEFAULT_COLOR; }
+    if (isBlank(options.class)) { options.class = 'PlaneBufferGeometry'; }
 
-    if (options.map != null) {
+    if (!isBlank(options.map)) {
       material = new (THREE.MeshBasicMaterial)({
         map: AssetManager.get(options.map),
         transparent: options.transparent,
         opacity: options.opacity,
         side: options.side});
-    } else if (options.material != null) {
+    } else if (!isBlank(options.material)) {
       material = options.material
     } else {
       material = new (THREE.MeshBasicMaterial)({
