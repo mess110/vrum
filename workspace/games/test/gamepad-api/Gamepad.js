@@ -16,7 +16,22 @@ class GameScene extends Scene {
     this.add(cube)
     this.cube = cube
 
+    this.connectedGamepads = 0
     this.lastVibration = 0
+
+    let text = new BaseText({
+      text: '0 connected', fillStyle: 'gray',
+      canvasW: 1024, canvasH: 1024,
+      font: '64px luckiest-guy'})
+    text.position.set(0, 0, 4)
+    text.scale.set(5, 5, 5)
+    text.lookAt(camera.position)
+    this.text = text
+    this.add(text)
+  }
+
+  tick(tpf) {
+    this.text.setText(`${this.connectedGamepads} connected`)
   }
 
   vibrate(gamepad) {
@@ -57,9 +72,11 @@ class GameScene extends Scene {
     // console.log(event.type)
     if (event.type !== 'gamepadtick-vrum') { return }
 
+    let connectedGamepads = 0
     for (var i = 0; i < event.length; i++) {
       let gamepad = event[i]
       if (isBlank(gamepad)) { continue }
+      connectedGamepads += 1
       gamepad.axes.forEach((axe, index) => {
         if (index == 0) {
           this.cube.position.x += axe
@@ -80,8 +97,12 @@ class GameScene extends Scene {
         }
       })
     }
+
+    this.connectedGamepads = connectedGamepads
   }
 }
 
 let gameScene = new GameScene()
-Engine.start(gameScene)
+Engine.start(gameScene, [
+  { type: 'font',  path: '/workspace/assets/fonts/luckiest-guy' },
+])
