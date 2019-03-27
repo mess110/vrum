@@ -20,7 +20,7 @@ class Scene2 extends Scene {
     this.add(cube)
 
     let torus = this.torus()
-    let torusOutline = this.torus(true)
+    let torusOutline = this.torus()
     Utils.addMeshOutlineTo(torus, torusOutline, 3, outlineMaterial)
     torus.position.set(-1, 0 ,0)
     this.add(torus)
@@ -42,16 +42,11 @@ class Scene2 extends Scene {
     Utils.toggleOrbitControls()
   }
 
-  torus(isOutline) {
-    let material
-    if (isBlank(isOutline)) {
-      material = new THREE.MeshPhongMaterial({
-        color: 'yellow',
-        side: THREE.FrontSide
-      })
-    } else {
-      material = this.outlineMaterial
-    }
+  torus() {
+    let material = new THREE.MeshPhongMaterial({
+      color: 'yellow',
+      side: THREE.FrontSide
+    })
     return new THREE.Mesh(new THREE.TorusKnotBufferGeometry(0.6,0.1), material)
   }
 
