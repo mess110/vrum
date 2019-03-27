@@ -13,8 +13,7 @@ class Scene2 extends Scene {
     let material = new THREE.MeshBasicMaterial( { color: 0x4d4d4d } )
     let cube = new THREE.Mesh( geometry, material )
 
-    let outlineGeometry = new THREE.BoxGeometry( 1, 1, 1 )
-    let outlineCube = new THREE.Mesh( outlineGeometry, outlineMaterial )
+    let outlineCube = new THREE.Mesh( geometry, material)
 
     Utils.addMeshOutlineTo(cube, outlineCube, 3, outlineMaterial)
     cube.position.y = 2

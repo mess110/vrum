@@ -144,14 +144,17 @@ class Utils {
         obj.material.side = THREE.FrontSide
       }
     })
-    let scale = (mesh.scale.x + mesh.scale.y + mesh.scale.z) / 3
-    meshOutline.scale.setScalar(scale + ((scale * scalePercent) / 100))
+
+    // because we attach the meshOutline to the mesh, the meshOutline
+    // will also be affected by the scale of the mesh, so an increase
+    // from an initial scale of 1 is needed
+    let newScale = 1 + (1 * scalePercent) / 100
+    meshOutline.scale.setScalar(newScale)
     meshOutline.position.setScalar(0)
     meshOutline.rotation.set(0, 0, 0)
     meshOutline.traverse((obj) => {
-      if (obj instanceof THREE.SkinnedMesh) {
-        obj.material = outlineMaterial
-        obj.material = AssetManager.updateMaterialAndMap(obj.material)
+      if (obj instanceof THREE.Object3D) {
+        obj.material = AssetManager.updateMaterialAndMap(outlineMaterial)
       }
     })
     mesh.add(meshOutline)

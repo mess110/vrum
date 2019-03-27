@@ -553,14 +553,11 @@ material to a target. The outline object has its scaled increase by the
 specified percent.
 
 ```
-// create cube mesh
 let geometry = new THREE.BoxGeometry( 1, 1, 1 )
 let material = new THREE.MeshBasicMaterial( { color: 0x4d4d4d } )
-let cube = new THREE.Mesh( geometry, material )
 
-// create outline mesh
-let outlineGeometry = new THREE.BoxGeometry( 1, 1, 1 )
-let outlineCube = new THREE.Mesh( outlineGeometry, outlineMaterial )
+let cube = new THREE.Mesh( geometry, material )
+let outlineCube = new THREE.Mesh( geometry, material )
 
 Utils.addMeshOutlineTo(cube, outlineCube)
 

@@ -33,11 +33,11 @@ class Scene1 extends Scene {
     Utils.setCursor('/workspace/assets/textures/hand.png')
 
     let mesh = AssetManager.clone('chicken.gltf')
-    mesh.setSkin('chicken_black.jpeg')
     mesh.scale.set(4, 4, 4)
     mesh.position.set(2, 2, -2)
-    mesh.animations.play('die')
+    Utils.addOutline(mesh)
     mesh.shadowCastAndNotReceive()
+    mesh.animations.play('die')
     this.add(mesh)
 
     mesh.attachToBone('chicken-skeleton_Neck', armor)

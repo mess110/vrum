@@ -11,6 +11,9 @@ class Box extends THREE.Mesh {
 }
 
 PoolManager.on('spawn', Box, function (item) {
+  if (isBlank(item.outline)) {
+    Utils.addMeshOutlineTo(item, new Box())
+  }
   item.position.set(-2, 5, 0)
   Hodler.get('scene').add(item)
 })
