@@ -107,21 +107,34 @@ class Utils {
 
   // https://blog.mozvr.com/cartoon-outline-effect/
   // the lower the thickness the thinner the outline
-  static outlineMaterial(thickness) {
+  static outlineMaterial(color, thickness) {
     if (isBlank(thickness)) { thickness = 0.002 }
+    if (isBlank(color)) { color = 'black' }
     const outlineMaterial = new THREE.MeshLambertMaterial({
-        color: 'black',
-        side: THREE.BackSide
+        color: color, side: THREE.BackSide
     })
     outlineMaterial.onBeforeCompile = (shader) => {
         const token = '#include <begin_vertex>'
         const customTransform = `vec3 transformed = position + objectNormal * ${thickness};`
         shader.vertexShader = shader.vertexShader.replace(token,customTransform)
     }
+    outlineMaterial.skinning = true
     return outlineMaterial
   }
 
-  static addOutlineTo(mesh, outline, scalePercent, outlineMaterial) {
+  static addOutline(mesh, scalePercent, outlineMaterial) {
+    if (isBlank(mesh) || isBlank(mesh.vrumCloneKey)) {
+      console.error('can only use addOutline with objects from AssetManager.clone(); try Utils.addMeshOutlineTo instead')
+      return mesh
+    }
+    let outline = AssetManager.clone(mesh.vrumCloneKey)
+    Utils.addMeshOutlineTo(mesh, outline, scalePercent, outlineMaterial)
+  }
+
+  static addMeshOutlineTo(mesh, meshOutline, scalePercent, outlineMaterial) {
+    if (isBlank(mesh)) { throw 'mesh can\'t be blank' }
+    if (isBlank(meshOutline)) { throw 'mesh outline can\'t be blank' }
+    if (isBlank(scalePercent)) { scalePercent = 3 }
     if (isBlank(outlineMaterial)) {
       outlineMaterial = Utils.outlineMaterial()
     }
@@ -132,15 +145,17 @@ class Utils {
       }
     })
     let scale = (mesh.scale.x + mesh.scale.y + mesh.scale.z) / 3
-    outline.scale.setScalar(scale + ((scale * scalePercent) / 100))
-    outline.position.setScalar(0)
-    outline.rotation.set(0, 0, 0)
-    outline.traverse((obj) => {
+    meshOutline.scale.setScalar(scale + ((scale * scalePercent) / 100))
+    meshOutline.position.setScalar(0)
+    meshOutline.rotation.set(0, 0, 0)
+    meshOutline.traverse((obj) => {
       if (obj instanceof THREE.SkinnedMesh) {
         obj.material = outlineMaterial
+        obj.material = AssetManager.updateMaterialAndMap(obj.material)
       }
     })
-    mesh.add(outline)
+    mesh.add(meshOutline)
+    mesh.outline = meshOutline
   }
 
   // generate a forest of JsonModelManager

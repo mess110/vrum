@@ -16,19 +16,27 @@ class Scene2 extends Scene {
     let outlineGeometry = new THREE.BoxGeometry( 1, 1, 1 )
     let outlineCube = new THREE.Mesh( outlineGeometry, outlineMaterial )
 
-    Utils.addOutlineTo(cube, outlineCube, 3, outlineMaterial)
+    Utils.addMeshOutlineTo(cube, outlineCube, 3, outlineMaterial)
     cube.position.y = 2
     this.add(cube)
 
-    let chicken = AssetManager.cloneWithOutline('chicken.gltf', 3, outlineMaterial)
+    let torus = this.torus()
+    let torusOutline = this.torus(true)
+    Utils.addMeshOutlineTo(torus, torusOutline, 3, outlineMaterial)
+    torus.position.set(-1, 0 ,0)
+    this.add(torus)
+
+    let chicken = AssetManager.clone('chicken.gltf')
+    Utils.addOutline(chicken, 3, outlineMaterial)
     chicken.position.set(1, 0, 0)
     this.add(chicken)
 
-    let torus = this.torus()
-    let torusOutline = this.torus(true)
-    Utils.addOutlineTo(torus, torusOutline, 3, outlineMaterial)
-    torus.position.set(-1, 0 ,0)
-    this.add(torus)
+    chicken.animations.play('walk')
+
+    let bear = AssetManager.clone('panda.glb')
+    Utils.addOutline(bear, 3, Utils.outlineMaterial('green', 0.001))
+    bear.position.set(3, 0, 0)
+    this.add(bear)
   }
 
   uninit() {

@@ -43,8 +43,14 @@ class Animations {
 
   play(name, options) {
     options = this._parseOptions(name, options)
-
     let animation = this.get(options.name)
+
+    // if it has an outline, play the outline animation as well
+    let outline = animation._mixer._root.outline
+    if (!isBlank(outline)) {
+      outline.animations.play(name, options)
+    }
+
     animation.setEffectiveTimeScale(options.timeScale)
     animation.setEffectiveWeight(options.weight)
 
@@ -58,8 +64,22 @@ class Animations {
 
     let duration = this.getDuration(options.name)
     if (options.stopAll) { this.stopAll(options.stopAllExceptions) }
-    animation.play()
 
+    animation.play()
+    return animation
+  }
+
+  stop(name, options) {
+    options = this._parseOptions(name, options)
+    let animation = this.get(options.name)
+
+    // if it has an outline, stop the outline animation as well
+    let outline = animation._mixer._root.outline
+    if (!isBlank(outline)) {
+      outline.animations.stop(name, options)
+    }
+
+    animation.stop()
     return animation
   }
 

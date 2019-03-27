@@ -553,30 +553,38 @@ material to a target. The outline object has its scaled increase by the
 specified percent.
 
 ```
-let thickness = 0.002 // increase/decrease to change outline width
-// let outlineMaterial = Utils.outlineMaterial(thickness)
-let outlineMaterial = Utils.outlineMaterial() // defaults to 0.002
-
+// create cube mesh
 let geometry = new THREE.BoxGeometry( 1, 1, 1 )
 let material = new THREE.MeshBasicMaterial( { color: 0x4d4d4d } )
 let cube = new THREE.Mesh( geometry, material )
 
+// create outline mesh
 let outlineGeometry = new THREE.BoxGeometry( 1, 1, 1 )
 let outlineCube = new THREE.Mesh( outlineGeometry, outlineMaterial )
 
-Utils.addOutlineTo(cube, outlineCube)
-// Utils.addOutlineTo(cube, outlineCube, 3)
-// Utils.addOutlineTo(cube, outlineCube, undefined, outlineMaterial)
+Utils.addMeshOutlineTo(cube, outlineCube)
 
 this.add(cube)
 ```
 
-If you want to add an outline to a model, there is a helper:
+For `Utils.addMeshOutlineTo` you can pass optional params `scalePercent` to
+change the size of the outline (default 3) and outlineMaterial if you want to
+use a different material.
+
+To create an outline material use `Utils.outlineMaterial()`. It has 2 params,
+`color` and `thickness`. Defaults are black and 0.002
 
 ```
-let scalePercent = 3 // as in outline is 3% bigger than the model
+let outlineMaterial = Utils.outlineMaterial('black', 0.002)
+```
 
-AssetManager.cloneWithOutline('chicken.gltf')
-// AssetManager.cloneWithOutline('chicken.gltf', scalePercent)
-// AssetManager.cloneWithOutline('chicken.gltf', scalePercent, outlineMaterial)
+Adding an outline to meshes cloned with AssetManager is super simple, it even
+takes care of animating the outline object. Use `Utils.addOutline()` which
+takes the mesh, scalePercent and outlineMaterial as params
+
+```
+let chicken = AssetManager.clone('chicken.gltf')
+Utils.addOutline(chicken)
+chicken.animations.play('walk')
+this.add(chicken)
 ```

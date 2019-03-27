@@ -95,14 +95,8 @@ class AssetManager {
       target = model.clone()
       Animations.init(target)
     }
+    target.vrumCloneKey = key
     return this._hack(target)
-  }
-
-  static cloneWithOutline(key, scalePercent, outlineMaterial) {
-    let mesh = AssetManager.clone(key)
-    let outline = AssetManager.clone(key)
-    Utils.addOutlineTo(mesh, outline, scalePercent, outlineMaterial)
-    return mesh
   }
 
   static hasKey(key) {
