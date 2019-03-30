@@ -240,6 +240,10 @@ const isString = value => typeof value === 'string' || value instanceof String
 
 const isArray = value => Array.isArray(value)
 
+const isFunction = (functionToCheck) => {
+ return functionToCheck && {}.toString.call(functionToCheck) === '[object Function]';
+}
+
 // Checks if a number ends with a char sequence
 Number.prototype.endsWith = function(s) {
   return this.toString().endsWith(s)

@@ -171,6 +171,7 @@ yarn h // prints help
 * [ ] wind effect with blowing leaves partciles
 * [ ] smoke effect for wheels when they hit the edge particles
 * [ ] small explosion effect particles
+* [ ] next/prev button
 * [ ] VR
 * [ ] walker
 * [ ] tween between animation weights

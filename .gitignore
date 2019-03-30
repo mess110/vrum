@@ -15,3 +15,5 @@ workspace/assets/models/*-preview.*
 workspace/assets/models/*.tar.gz
 workspace/assets/models/toexport
 workspace/assets/models/LICENSE
+
+workspace/assets/**/*.glb

@@ -24,16 +24,11 @@ class LoadingScene extends Scene {
   }
 
   init(options) {
-    var geometry = new THREE.BoxGeometry( 1, 1, 1 )
-    var material = new THREE.MeshBasicMaterial( { color: 0x4d4d4d } )
-    var cube = new THREE.Mesh( geometry, material )
-    cube.setWireframe(true)
-    this.add(cube)
-    this.cube = cube
-
     let camera = Hodler.get('camera');
     camera.position.set(0, 10, 15)
     camera.lookAt(new THREE.Vector3(0,0,0))
+
+    this.initCallback()
 
     if (Config.instance.engine.debug) {
       console.info(`loadingScene started loading ${this.assetsToLoad.length} assets`)
@@ -41,8 +36,19 @@ class LoadingScene extends Scene {
     Engine.switch(this.callbackScene, this.assetsToLoad)
   }
 
+  initCallback() {
+    var geometry = new THREE.BoxGeometry( 1, 1, 1 )
+    var material = new THREE.MeshBasicMaterial( { color: 0x4d4d4d } )
+    var cube = new THREE.Mesh( geometry, material )
+    cube.setWireframe(true)
+    this.add(cube)
+    this.cube = cube
+  }
+
   tick(tpf) {
-    this.cube.rotation.x += tpf
-    this.cube.rotation.y += tpf
+    if (!isBlank(this.cube)) {
+      this.cube.rotation.x += tpf
+      this.cube.rotation.y += tpf
+    }
   }
 }
