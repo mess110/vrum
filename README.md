@@ -168,6 +168,9 @@ yarn h // prints help
 ## Undocumented features
 
 * [x] mesh game pad controller game
+* [ ] wind effect with blowing leaves partciles
+* [ ] smoke effect for wheels when they hit the edge particles
+* [ ] small explosion effect particles
 * [ ] VR
 * [ ] walker
 * [ ] tween between animation weights

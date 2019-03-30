@@ -49,7 +49,7 @@ let scene1 = new Scene1()
 let scene2 = new Scene2()
 let scene3 = new Scene3()
 let scene4 = new Scene4()
-let loadingScene = new LoadingScene(scene1, [
+let loadingScene = new LoadingScene(scene3, [
   { type: 'font',  path: '/workspace/assets/fonts/luckiest-guy' },
   { type: 'model', path: '/workspace/assets/models/chicken.gltf' },
   { type: 'model', path: '/workspace/assets/models/chicken.gltf' },
