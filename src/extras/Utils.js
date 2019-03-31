@@ -383,6 +383,25 @@ class Utils {
     return (angle * Math.PI) / 180
   }
 
+  static radiansToDeg(radians) {
+    return radians * (180 / Math.PI)
+  }
+
+  static normalizeDegrees(angle) {
+    if (angle >= 0) {
+      var tempAngle = angle % 360;
+      return tempAngle == 360 ? 0 : tempAngle;
+    }
+    else {
+      return 360 - (-1 * angle) % 360;
+    }
+  }
+
+  static noramlizeRadians(radians) {
+    // there is a better way
+    return Utils.degToRadians(Utils.normalizeDegrees(Utils.radiansToDeg(radians)))
+  }
+
   // An intersection plane
   //
   // @example
