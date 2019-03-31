@@ -51,11 +51,7 @@ class AddsScene extends Scene {
 
     let queue = []
     this.itemKeys.forEach((key) => {
-      let item = Utils.plane({
-        map: key,
-        keepProportions: true,
-        transparent: true,
-      })
+      let item = this.buildItem(key)
       item.setOpacity(0)
       queue.push(item)
     })
@@ -65,6 +61,25 @@ class AddsScene extends Scene {
     this.item = undefined
 
     this.next()
+  }
+
+  buildItem(key) {
+    let item
+    if (isString(key)) {
+      if (!AssetManager.has(key)) {
+        throw `key ${key} for AddsScene not loaded`
+      }
+      item = Utils.plane({
+        map: key,
+        keepProportions: true,
+        transparent: true,
+      })
+    }
+    // TODO: maybe support different formats: art generator, text etc
+    if (isBlank(item)) {
+      throw `can't build item ${item} in AddsScene`
+    }
+    return item
   }
 
   next() {

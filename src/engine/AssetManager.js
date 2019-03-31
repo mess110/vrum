@@ -45,7 +45,7 @@ class AssetManager {
   }
 
   static get(key) {
-    if (!this.hasKey(key)) { throw `key ${key} not loaded` }
+    if (!AssetManager.has(key)) { throw `key ${key} not loaded` }
     return AssetManager.instance.data[key]
   }
 
@@ -99,7 +99,7 @@ class AssetManager {
     return this._hack(target)
   }
 
-  static hasKey(key) {
+  static has(key) {
     return key in AssetManager.instance.data
   }
 

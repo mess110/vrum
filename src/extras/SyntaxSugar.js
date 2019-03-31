@@ -400,7 +400,7 @@ setSkinHelper = function (material, key) {
 }
 
 THREE.Object3D.prototype.setSkin = function (key) {
-  if (!AssetManager.hasKey(key)) {
+  if (!AssetManager.has(key)) {
     throw 'key ' + key + ' not found'
   }
   if (!isBlank(this.material)) {
