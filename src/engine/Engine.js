@@ -14,6 +14,7 @@ class Engine {
   // and run init for the scene
   static start(scene, assets) {
     if (isBlank(scene)) { throw 'scene is blank' }
+    if (!(scene instanceof Scene)) { throw 'scene param must be an instance of Scene' }
 
     Hodler.add('scene', scene)
 
@@ -42,6 +43,7 @@ class Engine {
   // and witches to the specified scene
   static switch(scene, assets) {
     if (isBlank(scene)) { throw 'scene is blank' }
+    if (!(scene instanceof Scene)) { throw 'scene param must be an instance of Scene' }
 
     AssetManager.loadAssets(assets, () => {
       var duration = Config.instance.fade.duration
