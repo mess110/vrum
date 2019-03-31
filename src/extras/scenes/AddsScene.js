@@ -41,6 +41,7 @@ class AddsScene extends Scene {
     this.cameraDistanceZ = addsConfig.cameraDistanceZ
     this.itemDisplayDurationSeconds = addsConfig.itemDisplayDurationSeconds
     this.fadeDurationMS = addsConfig.fadeDurationMS
+    this.lastGamepadEventTime = 0
   }
 
   init(options) {
@@ -98,19 +99,27 @@ class AddsScene extends Scene {
   }
 
   doMouseEvent(event, raycaster) {
-    if (!this.skippable) {
-      return
-    }
+    if (!this.skippable) { return }
     if (event.type == 'mousedown') {
       this.next()
     }
   }
 
   doKeyboardEvent(event) {
-    if (!this.skippable) {
-      return
-    }
+    if (!this.skippable) { return }
     if (event.type == 'keydown') {
+      this.next()
+    }
+  }
+
+  doGamepadEvent(event) {
+    if (!this.skippable) { return }
+    if (event.type !== 'gamepadtick-vrum') { return }
+    if (this.lastGamepadEventTime + 0.2 > this.uptime) { return }
+    if (isBlank(event[0]) || isBlank(event[0].buttons)) { return }
+    let buttonsPressed = event[0].buttons.filter((e) => e.pressed == true)
+    if (buttonsPressed.any()) {
+      this.lastGamepadEventTime = this.uptime
       this.next()
     }
   }

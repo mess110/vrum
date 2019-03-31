@@ -24,9 +24,9 @@ class LoadingScene extends Scene {
   }
 
   init(options) {
-    let camera = Hodler.get('camera');
+    let camera = Hodler.get('camera')
     camera.position.set(0, 10, 15)
-    camera.lookAt(new THREE.Vector3(0,0,0))
+    camera.lookAt(new THREE.Vector3(0, 0, 0))
 
     this.initCallback()
 
