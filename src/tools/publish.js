@@ -61,7 +61,8 @@ const publish = (gamePath, callback) => {
   console.log(`Found ${repoUrl}`)
   options = {
     branch: 'gh-pages',
-    repo: repoUrl
+    repo: repoUrl,
+    message: 'Auto-generated commit'
   }
   ghpages.publish(gamePath, options, function(err) {
     let publishUrl = repoUrl2GhPagesUrl(repoUrl)
