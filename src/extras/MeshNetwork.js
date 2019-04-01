@@ -8,23 +8,30 @@
  *
  * Example usage:
  *
- *    let mn = MeshNetwork.instance
+ *   let mn = new MeshNetwork()
  *
- *    mn.connect('https://mesh.opinie-publica.ro', 'room', { audio: false, video: false })
- *    mn.onData = function(peer, data) {
- *      console.log(`${data.from}: ${JSON.stringify(data)}`)
- *    }
- *    mn.onClose = function (peer) {
- *        console.log('closed')
- *    }
+ *   mn.connect('https://mesh.opinie-publica.ro', 'room', { audio: false, video: false })
  *
+ *   mn.onConnect = (peer) => {
+ *     console.log(`connected with peer ${peer.cmKey}`)
+ *   }
+ *   mn.onData = (peer, data) => {
+ *     console.log(`${data.from}: ${JSON.stringify(data)}`)
+ *   }
+ *   mn.onError = (peer, error) => {
+ *     console.error(error)
+ *   }
+ *   mn.onClose = function (peer) => {
+ *     console.log(`disconnected from peer ${peer.cmKey}`)
+ *   }
  */
 class MeshNetwork {
   constructor() {
     this.container = document.body
     this.cm = new discoveryClient.Mesh(
       this.handlePeer,
-      [ { url: 'stun:stun.l.google.com:19302' } ]
+      [ { url: 'stun:stun.l.google.com:19302' } ],
+      this
     )
   }
 
@@ -38,7 +45,7 @@ class MeshNetwork {
     if (isBlank(options.dcCallback)) { options.dcCallback = function () {} }
     this.options = options
 
-    let mn = MeshNetwork.instance
+    let mn = this
 
     if (options.video || options.audio) {
       navigator.mediaDevices.getUserMedia(options).then(function(stream) {
@@ -125,8 +132,8 @@ class MeshNetwork {
     return discoveryClient.getParameterByName(roomName)
   }
 
-  handlePeer(peer) {
-    let mn = MeshNetwork.instance
+  handlePeer(peer, context) {
+    let mn = context
 
     peer.on('connect', function () {
       mn.onConnect(peer)
@@ -169,5 +176,3 @@ class MeshNetwork {
   onClose(peer) {
   }
 }
-
-MeshNetwork.instance = new MeshNetwork()

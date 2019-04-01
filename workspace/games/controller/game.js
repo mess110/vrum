@@ -107,6 +107,7 @@ document.querySelector('#input').addEventListener('input', function (evt) {
   Persist.set('username', this.value)
 });
 
+MeshNetwork.instance = new MeshNetwork()
 Utils.orientation('landscape')
 let connected = false
 let slider = document.getElementById('slider');

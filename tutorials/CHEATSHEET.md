@@ -33,6 +33,24 @@ See [/src/extras/HighScoreManager.js](/src/extras/HighScoreManager.js) for more 
 
 ## MeshNetwork
 
+```
+let mn = new MeshNetwork()
+
+mn.connect('https://mesh.opinie-publica.ro', 'room', { audio: false, video: false })
+mn.onConnect = (peer) => {
+  console.log(`connected with peer ${peer.cmKey}`)
+}
+mn.onData = (peer, data) => {
+  console.log(`${data.from}: ${JSON.stringify(data)}`)
+}
+mn.onError = (peer, error) => {
+  console.error(error)
+}
+mn.onClose = function (peer) => {
+  console.log(`disconnected from peer ${peer.cmKey}`)
+}
+```
+
 See [/src/extras/MeshNetwork.js](/src/extras/MeshNetwork.js) for more info.
 
 ## Sound
