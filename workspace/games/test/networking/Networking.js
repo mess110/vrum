@@ -8,7 +8,19 @@ document.querySelector('#client-link').href = `/workspace/games/controller/?room
 let mn = MeshNetwork.instance
 let socket = mn.connect('https://mesh.opinie-publica.ro', room, { audio: false, video: false })
 
-mn.onData = function (peer, data) {
+mn.onConnect = (peer) => {
+  let element = document.createElement('p')
+  element.setAttribute('id', `peer-${peer.cmKey}`)
+  element.innerHTML = peer.cmKey
+  element.appendChild(document.createElement('br'))
+  element.appendChild(document.createElement('span'))
+  element.appendChild(document.createElement('br'))
+  element.appendChild(document.createElement('span'))
+
+  document.querySelector('#peers').appendChild(element)
+}
+
+mn.onData = (peer, data) => {
   element = document.querySelector(`#peer-${peer.cmKey}`)
   if (isBlank(element)) {
     console.error(`Could not find #peer-${peer.cmKey}`)
@@ -25,11 +37,11 @@ mn.onData = function (peer, data) {
   }
 }
 
-setInterval(function () {
-  let content = ''
-  let peers = MeshNetwork.instance.getPeers()
-  peers.forEach(function (peer) {
-    content += `<p id="peer-${peer.cmKey}">${peer.cmKey}<br /><span></span><br /><span></span></p>`
-  })
-  document.querySelector('#peers').innerHTML = content
-}, 1000)
+mn.onError = (peer, error) => {
+  console.error(error)
+}
+
+mn.onClose = (peer) => {
+  let row = document.querySelector(`#peer-${peer.cmKey}`)
+  document.querySelector('#peers').removeChild(row)
+}

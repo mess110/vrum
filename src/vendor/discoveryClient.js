@@ -13254,6 +13254,12 @@ class Mesh {
     }
   }
 
+  static log(s) {
+    if (Mesh.DEBUG) {
+      console.info(`DiscoveryServer: ${s}`)
+    }
+  }
+
   // Send data to one peer. Takes care of formatting
   send(data, peer) {
     if (data instanceof Object) {
@@ -13363,7 +13369,7 @@ class Mesh {
     var cm = this;
 
     socket.on('connect', function() {
-      console.info('Connected - ' + socket.id);
+      Mesh.log('Connected - ' + socket.id);
       cCallback()
       socket.emit('joinRoom', { roomId: roomId })
     });
@@ -13377,7 +13383,7 @@ class Mesh {
       let initiator = signBy === 'initiator';
       let other = initiator ? 'signer' : 'initiator';
 
-      console.info('Add new peer ' + data[other]);
+      Mesh.log('Add new peer ' + data[other]);
       var peer = cm.initPeer(initiator, function (signal) {
         socket.emit('sign', {
           initiator: data.initiator,
@@ -13406,7 +13412,7 @@ class Mesh {
 
     socket.on('removePeer', function (data) {
       let cmKey = [socket.id, data.id].sort().join(Mesh.CM_KEY_SPLIT_CHAR);
-      console.info('Removing peer ' + cmKey);
+      Mesh.log('Removing peer ' + cmKey);
       cm.peers = cm.peers.filter(function (peer) { return peer.cmKey != cmKey });
     });
 
@@ -13415,6 +13421,7 @@ class Mesh {
 }
 
 Mesh.CM_KEY_SPLIT_CHAR = '_'
+Mesh.DEBUG = false
 
 module.exports = Mesh
 
