@@ -393,11 +393,11 @@ class Utils {
       return tempAngle == 360 ? 0 : tempAngle;
     }
     else {
-      return 360 - (-1 * angle) % 360;
+      return (360 - (-1 * angle)) % 360;
     }
   }
 
-  static noramlizeRadians(radians) {
+  static normalizeRadians(radians) {
     // there is a better way
     return Utils.degToRadians(Utils.normalizeDegrees(Utils.radiansToDeg(radians)))
   }

@@ -35,6 +35,10 @@ class MeshNetwork {
     )
   }
 
+  setSignalingDebug(value) {
+    discoveryClient.Mesh.DEBUG = value
+  }
+
   connect(host, room, options) {
     this.host = host
     this.room = room

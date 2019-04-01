@@ -5,8 +5,8 @@ new QRCode("qrcode", { text: room, width: 128, height: 128 })
 document.querySelector('#qrcode-text').innerHTML = room
 document.querySelector('#client-link').href = `/workspace/games/controller/?room=${room}`
 
-discoveryClient.Mesh.DEBUG = true
 let mn = new MeshNetwork()
+mn.setSignalingDebug(true)
 let socket = mn.connect('https://mesh.opinie-publica.ro', room, { audio: false, video: false })
 
 mn.onConnect = (peer) => {
