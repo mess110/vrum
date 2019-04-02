@@ -6,6 +6,7 @@ const fs = require('fs')
 const path = require('path')
 const common = require('./common')
 const readline = require('./common').readline;
+const open = require('open');
 
 const argv = process.argv.slice(2)
 
@@ -66,7 +67,8 @@ const publish = (gamePath, callback) => {
   }
   ghpages.publish(gamePath, options, function(err) {
     let publishUrl = repoUrl2GhPagesUrl(repoUrl)
-    console.log(`done. visit ${publishUrl}`.green)
+    console.log(`Done. Opening ${publishUrl}`.green)
+    open(publishUrl);
     callback()
   });
 }
