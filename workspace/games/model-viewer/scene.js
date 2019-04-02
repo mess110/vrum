@@ -61,7 +61,7 @@ class MainScene extends Scene {
     newModel.scale.setScalar(scale)
     console.info(`Model ${key} added`)
 
-    // var central = Utils.getCenterPoint(newModel.skinnedMesh)
+    // var central = Measure.getCenterPoint(newModel.skinnedMesh)
     // scene.orbit.center.set(central.x, central.y, central.z)
 
     var animationsHTML = document.querySelector('#animations')

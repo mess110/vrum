@@ -86,7 +86,7 @@ class Bolt extends THREE.Line {
 
     const tangent = dest.clone().sub(src.clone());
     const normal = new THREE.Vector3(tangent.y, -tangent.x, tangent.z).normalize();
-    const length = Utils.distanceTo(src, dest);
+    const length = Measure.distanceBetween(src, dest);
 
     let positions = [0];
     for (i = 0, end = ((length / 4)) * density, asc = 0 <= end; asc ? i < end : i > end; asc ? i++ : i--) {

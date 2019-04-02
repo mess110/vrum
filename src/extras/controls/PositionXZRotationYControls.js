@@ -65,14 +65,14 @@ class PositionXZRotationYControls {
   tickRotation(tpf) {
     let diff = Math.abs(this.rotationY - this.targetRotationY)
     if (diff >= this.rotationSpeed * tpf) {
-      let tankR = Utils.radiansToDeg(this.rotationY)
-      let targetR = Utils.radiansToDeg(this.targetRotationY)
-      if (Utils.calcShortestRotDirection(tankR, targetR)) {
+      let tankR = Measure.radiansToDeg(this.rotationY)
+      let targetR = Measure.radiansToDeg(this.targetRotationY)
+      if (Measure.calcShortestRotDirection(tankR, targetR)) {
         this.rotationY += this.rotationSpeed * tpf
       } else {
         this.rotationY -= this.rotationSpeed * tpf
       }
-      this.rotationY = Utils.normalizeRadians(this.rotationY)
+      this.rotationY = Measure.normalizeRadians(this.rotationY)
     } else {
       this.rotationY = this.targetRotationY
     }

@@ -82,6 +82,7 @@ let VRUM_DEPENDS = [
   "../../../src/extras/AfterEffects.js",
   "../../../src/extras/Animations.js",
   "../../../src/extras/Utils.js",
+  "../../../src/extras/Measure.js",
   "../../../src/extras/ShaderMaterial.js",
   "../../../src/extras/VideoRecorderManager.js",
   "../../../src/extras/scenes/SceneLoader.js",
