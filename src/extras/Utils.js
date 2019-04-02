@@ -534,6 +534,7 @@ class Utils {
     head.appendChild(style);
   }
 
+  // Utils.lerpCamera(this.tank, new THREE.Vector3(0, 35, 25))
   static lerpCamera(target, distance, speed) {
     if (isBlank(speed)) { speed = 0.05 }
     target = Measure._toPoint(target)
