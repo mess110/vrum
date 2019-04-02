@@ -168,6 +168,10 @@ yarn h // prints help
 ## Undocumented features
 
 * [x] mesh game pad controller game
+* [x] RayScanner
+* [x] Player control PositionXZRotationYControls
+* [x] Button3D
+* [x] Measure
 * [ ] wind effect with blowing leaves partciles
 * [ ] smoke effect for wheels when they hit the edge particles
 * [ ] small explosion effect particles
