@@ -172,6 +172,7 @@ yarn h // prints help
 * [x] Player control PositionXZRotationYControls
 * [x] Button3D
 * [x] Measure
+* [x] Utils.lerpCamera(target, distance, speed)
 * [ ] wind effect with blowing leaves partciles
 * [ ] smoke effect for wheels when they hit the edge particles
 * [ ] small explosion effect particles

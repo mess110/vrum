@@ -534,6 +534,21 @@ class Utils {
     head.appendChild(style);
   }
 
+  static lerpCamera(target, distance, speed) {
+    if (isBlank(speed)) { speed = 0.05 }
+    target = Measure._toPoint(target)
+    distance = Measure._toPoint(distance)
+
+    let camera = Hodler.get('camera')
+    let normCamPos = camera.position.clone()
+
+    normCamPos.sub(distance)
+    normCamPos.lerp(target, speed)
+    normCamPos.add(distance)
+
+    camera.position.copy(normCamPos)
+  }
+
   static toggleOrbitControls(target) {
     if (![THREE.OrbitControls, THREE.CustomOrbitControls].includes(target)) { target = THREE.OrbitControls }
 
