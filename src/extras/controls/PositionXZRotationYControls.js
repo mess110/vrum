@@ -14,8 +14,8 @@
  *  this.control.doMobileEvent() // only if you want mobile support
  *  this.control.tick(tpf)
  *
- *  this.tank.position.x += this.control.velX
- *  this.tank.position.z += this.control.velZ
+ *  this.tank.position.x += this.control.velocity.x
+ *  this.tank.position.z += this.control.velocity.z
  *
  *  if (this.control.isMoving()) {
  *    // spin wheels
@@ -39,8 +39,7 @@ class PositionXZRotationYControls {
     this.vj = vj
 
     this.isMobileOrTablet = Utils.isMobileOrTablet()
-    this.velX = 0
-    this.velZ = 0
+    this.velocity = new THREE.Vector3(0, 0, 0)
     this.speed = 5
     this.acceleration = 1
     this.friction = 0.9
@@ -80,29 +79,29 @@ class PositionXZRotationYControls {
 
   tick(tpf) {
     if (this.is('Forward')) {
-      if (this.velZ > -this.speed) {
-        this.velZ -= tpf * this.acceleration
+      if (this.velocity.z > -this.speed) {
+        this.velocity.z -= tpf * this.acceleration
       }
       this.targetRotationY = Math.PI
     }
 
     if (this.is('Backward')) {
-      if (this.velZ < this.speed) {
-        this.velZ += tpf * this.acceleration
+      if (this.velocity.z < this.speed) {
+        this.velocity.z += tpf * this.acceleration
       }
       this.targetRotationY = 0
     }
 
     if (this.is('Left')) {
-      if (this.velX > -this.speed) {
-        this.velX -= tpf * this.acceleration
+      if (this.velocity.x > -this.speed) {
+        this.velocity.x -= tpf * this.acceleration
       }
       this.targetRotationY = Math.PI / 2 * 3
     }
 
     if (this.is('Right')) {
-      if (this.velX < this.speed) {
-        this.velX += tpf * this.acceleration
+      if (this.velocity.x < this.speed) {
+        this.velocity.x += tpf * this.acceleration
       }
       this.targetRotationY = Math.PI / 2
     }
@@ -120,8 +119,8 @@ class PositionXZRotationYControls {
       this.targetRotationY = (0 + Math.PI / 2) / 2
     }
 
-    this.velX *= this.friction
-    this.velZ *= this.friction
+    this.velocity.x *= this.friction
+    this.velocity.z *= this.friction
 
     this.tickRotation(tpf)
   }

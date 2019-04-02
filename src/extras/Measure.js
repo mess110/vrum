@@ -110,7 +110,7 @@ class Measure {
     return new THREE.Plane(new THREE.Vector3(0, 0, 1), -1);
   }
 
-  static intersects(raycaster, objects) {
+  static getIntersections(raycaster, objects) {
     if (isBlank(raycaster)) {
       console.error('raycaster can not be blank')
       return
@@ -123,13 +123,21 @@ class Measure {
       objects = [objects]
     }
     // true because we want to check for children as well
-    let intersects = raycaster.intersectObjects(objects, true)
-    return intersects
+    return raycaster.intersectObjects(objects, true)
   }
 
-  inter(raycaster, startPoint, direction, target) {
+  static intersectsFrom(raycaster, objects, startPoint, direction, far) {
+    if (isBlank(raycaster)) {
+      console.error('raycaster can not be blank')
+      return
+    }
+    if (isBlank(far)) { far = Infinity }
+    startPoint = Measure._toPoint(startPoint)
+    direction = Measure._toPoint(direction)
+
     raycaster.set(startPoint, direction)
-    return this.intersects(raycaster, target)
+    raycaster.far = far
+    return Measure.getIntersections(raycaster, objects).any()
   }
 
   sensor(pointA, direction, distance) {
