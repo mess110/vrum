@@ -62,7 +62,7 @@ You will see a list of tests to choose from. If you click on the main tests
 you should see quite a chaotic scene with a lot going on. Its testing a bunch
 of vrum.js features. It should look something like this:
 
-![should look like](/workspace/games/project/assets/vrum.png)
+![should look like](/workspace/assets/textures/vrum-screenshot.png)
 
 You can switch between different tests by pressing 1,2,3 etc.
 

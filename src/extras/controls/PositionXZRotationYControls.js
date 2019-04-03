@@ -34,6 +34,10 @@ class PositionXZRotationYControls {
       'Left': 'KeyA',
       'Right': 'KeyD',
     }
+    this.gamepadbindings = {
+      'StickLeftRight': 0,
+      'StickUpDown': 1,
+    }
 
     let vj = new VirtualController()
     this.vj = vj
@@ -135,25 +139,25 @@ class PositionXZRotationYControls {
     let gamepad = event[0]
     if (isBlank(gamepad)) { return }
 
-    if (gamepad.axes[0] > 0.5) {
-      this.doKeyboardEvent({type: 'keydown', code: 'KeyD'})
+    if (gamepad.axes[this.gamepadbindings['StickLeftRight']] > 0.5) {
+      this.doKeyboardEvent({type: 'keydown', code: this.keybindings['Right']})
     } else {
-      this.doKeyboardEvent({type: 'keyup', code: 'KeyD'})
+      this.doKeyboardEvent({type: 'keyup', code: this.keybindings['Right']})
     }
-    if (gamepad.axes[0] < -0.5) {
-      this.doKeyboardEvent({type: 'keydown', code: 'KeyA'})
+    if (gamepad.axes[this.gamepadbindings['StickLeftRight']] < -0.5) {
+      this.doKeyboardEvent({type: 'keydown', code: this.keybindings['Left']})
     } else {
-      this.doKeyboardEvent({type: 'keyup', code: 'KeyA'})
+      this.doKeyboardEvent({type: 'keyup', code: this.keybindings['Left']})
     }
-    if (gamepad.axes[1] > 0.5) {
-      this.doKeyboardEvent({type: 'keydown', code: 'KeyS'})
+    if (gamepad.axes[this.gamepadbindings['StickUpDown']] > 0.5) {
+      this.doKeyboardEvent({type: 'keydown', code: this.keybindings['Backward']})
     } else {
-      this.doKeyboardEvent({type: 'keyup', code: 'KeyS'})
+      this.doKeyboardEvent({type: 'keyup', code: this.keybindings['Backward']})
     }
-    if (gamepad.axes[1] < -0.5) {
-      this.doKeyboardEvent({type: 'keydown', code: 'KeyW'})
+    if (gamepad.axes[this.gamepadbindings['StickUpDown']] < -0.5) {
+      this.doKeyboardEvent({type: 'keydown', code: this.keybindings['Forward']})
     } else {
-      this.doKeyboardEvent({type: 'keyup', code: 'KeyW'})
+      this.doKeyboardEvent({type: 'keyup', code: this.keybindings['Forward']})
     }
   }
 
@@ -164,24 +168,24 @@ class PositionXZRotationYControls {
 
     let joy = this.vj.joystick1
     if (joy.right()) {
-      this.doKeyboardEvent({type: 'keydown', code: 'KeyD'})
+      this.doKeyboardEvent({type: 'keydown', code: this.keybindings['Right']})
     } else {
-      this.doKeyboardEvent({type: 'keyup', code: 'KeyD'})
+      this.doKeyboardEvent({type: 'keyup', code: this.keybindings['Right']})
     }
     if (joy.left()) {
-      this.doKeyboardEvent({type: 'keydown', code: 'KeyA'})
+      this.doKeyboardEvent({type: 'keydown', code: this.keybindings['Left']})
     } else {
-      this.doKeyboardEvent({type: 'keyup', code: 'KeyA'})
+      this.doKeyboardEvent({type: 'keyup', code: this.keybindings['Left']})
     }
     if (joy.down()) {
-      this.doKeyboardEvent({type: 'keydown', code: 'KeyS'})
+      this.doKeyboardEvent({type: 'keydown', code: this.keybindings['Backward']})
     } else {
-      this.doKeyboardEvent({type: 'keyup', code: 'KeyS'})
+      this.doKeyboardEvent({type: 'keyup', code: this.keybindings['Backward']})
     }
     if (joy.up()) {
-      this.doKeyboardEvent({type: 'keydown', code: 'KeyW'})
+      this.doKeyboardEvent({type: 'keydown', code: this.keybindings['Forward']})
     } else {
-      this.doKeyboardEvent({type: 'keyup', code: 'KeyW'})
+      this.doKeyboardEvent({type: 'keyup', code: this.keybindings['Forward']})
     }
   }
 }
