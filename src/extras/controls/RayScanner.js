@@ -1,40 +1,43 @@
 /*
  * Example usage:
  *
+ *  let rayScanner = new RayScanner([this.island, this.barrel, this.wall])
+ *  // rayScanner.collidables = [...]
+ *  // rayScanner.drawLines = true
+ *  this.rayScanner = rayScanner
+ *
+ *  // in tick(tpf)
  *  let fromPosition = this.tank.position.clone()
  *  fromPosition.y += 2
- *
- *  this.rayScanner.scan(
- *    [this.island, this.barrel, this.wall],
- *    fromPosition, this.control.velocity
- *  )
+ *  this.rayScanner.scan(fromPosition, this.control.velocity)
  *
  *  if (this.rayScanner.addX) { this.tank.position.x += this.control.velocity.x }
  *  if (this.rayScanner.addZ) { this.tank.position.z += this.control.velocity.z }
  *
  */
 class RayScanner {
-  constructor() {
+  constructor(collidables) {
     this.raycaster = new THREE.Raycaster()
     this.addX = true
     this.addZ = true
     this.drawLines = false
+    this.collidables = collidables
   }
 
-  scan(objects, fromPosition, velocity) {
+  scan(fromPosition, velocity) {
     this.addX = true
     this.addZ = true
 
-    if (this.drawLine(fromPosition, new THREE.Vector3(1, 0, 0), objects) && velocity.x > 0) {
+    if (this.drawLine(fromPosition, new THREE.Vector3(1, 0, 0)) && velocity.x > 0) {
       this.addX = false
     }
-    if (this.drawLine(fromPosition, new THREE.Vector3(-1, 0, 0), objects) && velocity.x < 0) {
+    if (this.drawLine(fromPosition, new THREE.Vector3(-1, 0, 0)) && velocity.x < 0) {
       this.addX = false
     }
-    if (this.drawLine(fromPosition, new THREE.Vector3(0, 0, 1), objects) && velocity.z > 0) {
+    if (this.drawLine(fromPosition, new THREE.Vector3(0, 0, 1)) && velocity.z > 0) {
       this.addZ = false
     }
-    if (this.drawLine(fromPosition, new THREE.Vector3(0, 0, -1), objects) && velocity.z < 0) {
+    if (this.drawLine(fromPosition, new THREE.Vector3(0, 0, -1)) && velocity.z < 0) {
       this.addZ = false
     }
     // if (this.drawLine(fromPosition, new THREE.Vector3(1, 0, 1)) && (velocity.x > 0 && velocity.z > 0)) {
@@ -55,9 +58,9 @@ class RayScanner {
     // }
   }
 
-  drawLine(fromPosition, direction, objects) {
+  drawLine(fromPosition, direction) {
     let length = 4
-    let color = Measure.intersectsFrom(this.raycaster, objects, fromPosition, direction, length) ? 'red' : 'green'
+    let color = Measure.intersectsFrom(this.raycaster, this.collidables, fromPosition, direction, length) ? 'red' : 'green'
     if (this.drawLines) {
       Measure.addLineDirection(fromPosition, direction, length, color)
     }
