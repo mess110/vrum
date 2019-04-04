@@ -10,12 +10,12 @@
 //
 // @example
 //
-//   PoolManager.on('spawn', Pillar, (item) => {
+//   PoolManager.on('spawn', Pillar, (item, options) => {
 //     item.position.set(0, 0, 0)
 //     Hodler.get('scene').add(item)
 //   })
 //
-//   PoolManager.on('release', Pillar, (item) => {
+//   PoolManager.on('release', Pillar, (item, options) => {
 //     Hodler.get('scene').remove(item)
 //   })
 //
@@ -33,42 +33,42 @@ var PoolManager = (function() {
   let instance = undefined;
   PoolManager = class PoolManager {
     static initClass() {
-  
+
       instance = null;
-  
+
       const Cls = (Singleton.PoolManager = class PoolManager {
         static initClass() {
           this.prototype.validEvents = ['spawn', 'release'];
-    
+
           this.prototype.items = {};
           this.prototype.itemsInUse = {};
-    
+
           this.prototype.spawnEvents = {};
           this.prototype.releaseEvents = {};
         }
-  
+
         // @param [BaseModel Class] type
         spawn(type, options) {
           let item;
-          if (options == null) { options = {}; }
+          if (isBlank(options)) { options = {} }
           this._validation(type);
-  
+
           if (this.items[type].isEmpty()) {
             item = new type();
           } else {
             item = this.items[type].shift();
           }
-  
+
           this.itemsInUse[type].push(item);
           if (this.spawnEvents[type] != null) { this.spawnEvents[type](item, options); }
           return item;
         }
-  
+
         spawnSpecific(item, options) {
           if (options == null) { options = {}; }
           const type = item.constructor;
           this._validation(type);
-  
+
           if (!this.itemsInUse[type].includes(item)) {
             const removed = this.items[type].remove(item);
             if (removed === null) {
@@ -76,26 +76,26 @@ var PoolManager = (function() {
             }
             this.itemsInUse[type].push(item);
           }
-  
+
           if (this.spawnEvents[type] != null) { this.spawnEvents[type](item, options); }
           return item;
         }
-  
+
         // @param [BaseModel] item
         release(item, options) {
           if (options == null) { options = {}; }
           if ((typeof item !== 'object') || (item.constructor == null)) {
             throw new Error(`item ${item} can not be released. wront type`);
           }
-  
+
           const type = this._validation(item.constructor);
-  
+
           if (this.itemsInUse[type].indexOf(item) === -1) {
             if (this.items[type].indexOf(item) === -1) {
               throw new Error(`item (${type}) was not spawned from the pool`);
             }
           }
-  
+
           if (this.itemsInUse[type].indexOf(item) !== -1) {
             this.itemsInUse[type].remove(item);
           }
@@ -104,32 +104,29 @@ var PoolManager = (function() {
           }
           if (this.releaseEvents[type] != null) { this.releaseEvents[type](item, options); }
         }
-  
+
         on(which, type, func) {
           if (!(typeof this.validEvents.includes === 'function' ? this.validEvents.includes(which) : undefined)) {
             throw new Error(`${which} invalid. Allowed: ${this.validEvents.join(', ')}`);
           }
           return this[`${which}Events`][type] = func;
         }
-  
+
         onSpawn(type, func) {
           return this.on('spawn', type, func);
         }
-  
+
         onRelease(type, func) {
           return this.on('release', type, func);
         }
-  
+
         _validation(type) {
-          // if (!(type.prototype instanceof BaseModel)) {
-            // throw new Error(`type ${type} not instance of base model`);
-          // }
-  
-          if (this.items[type] == null) { this.items[type] = []; }
-          if (this.itemsInUse[type] == null) { this.itemsInUse[type] = []; }
+          if (!isArray(this.items[type])) { this.items[type] = [] }
+          if (!isArray(this.itemsInUse[type])) { this.itemsInUse[type] = [] }
+
           return type;
         }
-  
+
         _count(items) {
           let count = 0;
           for (let key in items) {
@@ -137,18 +134,33 @@ var PoolManager = (function() {
           }
           return count;
         }
-  
+
         toString() {
           const inUse = this._count(this.itemsInUse);
           const inPool = this._count(this.items);
-  
+
           return `${inUse} items in use\n${inPool} items waiting in all pools\n${inUse + inPool} total items`;
         }
-  
+
+        stats() {
+          let result = {}
+          let itemTypes = Object.keys(this.items)
+          itemTypes.forEach((itemType) => {
+            let inPool = this.items[itemType].size()
+            let inUse = this.itemsInUse[itemType].size()
+            result[itemType.split(' ')[1]] = {
+              total: inPool + inUse,
+              inPool: inPool,
+              inUse: inUse
+            }
+          })
+          return result
+        }
+
         releaseAll() {
           let item;
           const toRelease = [];
-  
+
           for (let key in this.itemsInUse) {
             for (item of Array.from(this.itemsInUse[key])) {
               toRelease.push(item);
@@ -157,10 +169,10 @@ var PoolManager = (function() {
           for (item of Array.from(toRelease)) {
             this.release(item);
           }
-  
+
           return toRelease;
         }
-  
+
         getAll() {
           const allItems = [];
           for (let itemSet of [this.items, this.itemsInUse]) {
@@ -216,6 +228,10 @@ var PoolManager = (function() {
         }
         return results;
       }
+    }
+
+    static stats() {
+      return this.get().stats()
     }
 
     static itemsInUse(targetType) {

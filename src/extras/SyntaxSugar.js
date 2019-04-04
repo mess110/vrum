@@ -287,14 +287,20 @@ const arrayOrStringToString = (input) => {
 
 // TODO: use traverse
 THREE.Object3D.prototype.setOpacity = function (amount, recursive) {
-  if (recursive === null || recursive === undefined) { recursive = true }
+  if (isBlank(recursive)) { recursive = true }
 
   if (recursive) {
-    this.children.forEach(function (child) {
-      child.setOpacity(amount)
+    this.traverse((child) => {
+      if (child.uuid !== this.uuid) {
+        child.setOpacity(amount, recursive)
+      }
     })
   }
-  Array.from([].concat(this.material)).forEach(function (material) {
+  if (isBlank(this.material)) {
+    return
+  }
+
+  Array.from([].concat(this.material)).forEach((material) => {
     material.transparent = true
     material.opacity = amount
   })
