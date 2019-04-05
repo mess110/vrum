@@ -23,6 +23,10 @@ class Config {
       showStatsOnStart: false,
     }
     this.renderer = {
+      // The id added the the canvas element used for drawing. Should not
+      // start with #
+      domElementId: 'vrum-dom',
+
       // Should objects be sorted by the renderer depending on the POV?
       sortObjects: true,
 

@@ -38,8 +38,20 @@ class PositionXZRotationYControls {
       'StickLeftRight': 0,
       'StickUpDown': 1,
     }
+    // to change which joystick is used in doMobileEvent change the value
+    // of TargetJoystick
+    this.vjbindings = {
+      'TargetJoystick': 'joystickLeft',
+    }
 
-    let vj = new VirtualController()
+    let vj = new VirtualController({
+      joystickLeft: {
+        stickRadius: 60
+      },
+      joystickRight: {
+        stickRadius: 60
+      }
+    })
     this.vj = vj
 
     this.isMobileOrTablet = Utils.isMobileOrTablet()
@@ -166,7 +178,7 @@ class PositionXZRotationYControls {
       return
     }
 
-    let joy = this.vj.joystick1
+    let joy = this.vj[this.vjbindings['TargetJoystick']]
     if (joy.right()) {
       this.doKeyboardEvent({type: 'keydown', code: this.keybindings['Right']})
     } else {

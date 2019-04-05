@@ -29,7 +29,7 @@ class RenderManager {
     if (!Utils.webgl() && rendererType == THREE.WebGLRenderer) { rendererType = PolyfillRenderer }
 
     var renderer = new rendererType(Config.instance.renderer)
-    renderer.domElement.setAttribute('id', 'vrum-dom')
+    renderer.domElement.setAttribute('id', Config.instance.renderer.domElementId)
     renderer.domElement.style['z-index'] = Config.instance.ui.zIndex.dom
     renderer.gammaOutput = Config.instance.renderer.gammaOutput
     renderer.setClearColor(Config.instance.renderer.clearColor, Config.instance.renderer.clearAlpha)
