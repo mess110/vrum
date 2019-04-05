@@ -12,7 +12,7 @@ class Engine {
 
   // Load specified assets, once that is done start the engine
   // and run init for the scene
-  static start(scene, assets) {
+  static start(scene, assets, options) {
     if (isBlank(scene)) { throw 'scene is blank' }
     if (!(scene instanceof Scene)) { throw 'scene param must be an instance of Scene' }
 
@@ -33,7 +33,7 @@ class Engine {
 
     AssetManager.loadAssets(assets, () => {
       Utils.fade({ type: 'out', duration: 1000})
-      scene._fullInit()
+      scene._fullInit(options)
       engine.start()
     })
     return engine
@@ -41,7 +41,7 @@ class Engine {
 
   // Loads specified assets, once that is done, uninits the current scene,
   // and witches to the specified scene
-  static switch(scene, assets) {
+  static switch(scene, assets, options) {
     if (isBlank(scene)) { throw 'scene is blank' }
     if (!(scene instanceof Scene)) { throw 'scene param must be an instance of Scene' }
 
@@ -57,7 +57,7 @@ class Engine {
           oldScene._fullUninit()
         }
         Hodler.add('scene', scene)
-        scene._fullInit()
+        scene._fullInit(options)
         Hodler.get('afterEffects').updateCamAndScene()
         Utils.fade({ type: 'out', duration: duration })
         engine.inputManager.enable()
