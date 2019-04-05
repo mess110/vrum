@@ -151,34 +151,40 @@ class PositionXZRotationYControls {
     let gamepad = event[0]
     if (isBlank(gamepad)) { return }
 
-    if (gamepad.axes[this.gamepadbindings['StickLeftRight']] > 0.5) {
+    if (this.getGamepadDeltaX(gamepad) > 0.5) {
       this.doKeyboardEvent({type: 'keydown', code: this.keybindings['Right']})
     } else {
       this.doKeyboardEvent({type: 'keyup', code: this.keybindings['Right']})
     }
-    if (gamepad.axes[this.gamepadbindings['StickLeftRight']] < -0.5) {
+    if (this.getGamepadDeltaX(gamepad) < -0.5) {
       this.doKeyboardEvent({type: 'keydown', code: this.keybindings['Left']})
     } else {
       this.doKeyboardEvent({type: 'keyup', code: this.keybindings['Left']})
     }
-    if (gamepad.axes[this.gamepadbindings['StickUpDown']] > 0.5) {
+    if (this.getGamepadDeltaY(gamepad) > 0.5) {
       this.doKeyboardEvent({type: 'keydown', code: this.keybindings['Backward']})
     } else {
       this.doKeyboardEvent({type: 'keyup', code: this.keybindings['Backward']})
     }
-    if (gamepad.axes[this.gamepadbindings['StickUpDown']] < -0.5) {
+    if (this.getGamepadDeltaY(gamepad) < -0.5) {
       this.doKeyboardEvent({type: 'keydown', code: this.keybindings['Forward']})
     } else {
       this.doKeyboardEvent({type: 'keyup', code: this.keybindings['Forward']})
     }
   }
 
-  doMobileEvent() {
-    if (!this.isVirtualControllerAvailable) {
-      return
-    }
+  getGamepadDeltaX(gamepad) {
+    return gamepad.axes[this.gamepadbindings['StickLeftRight']]
+  }
 
-    let joy = this.vj[this.vjbindings['TargetJoystick']]
+  getGamepadDeltaY(gamepad) {
+    return gamepad.axes[this.gamepadbindings['StickUpDown']]
+  }
+
+  doMobileEvent() {
+    if (!this.isVirtualControllerAvailable) { return }
+
+    let joy = this.getMobileTargetJoystick()
     if (joy.right()) {
       this.doKeyboardEvent({type: 'keydown', code: this.keybindings['Right']})
     } else {
@@ -199,5 +205,10 @@ class PositionXZRotationYControls {
     } else {
       this.doKeyboardEvent({type: 'keyup', code: this.keybindings['Forward']})
     }
+  }
+
+  getMobileTargetJoystick() {
+    if (!this.isVirtualControllerAvailable) { return }
+    return this.vj[this.vjbindings['TargetJoystick']]
   }
 }
