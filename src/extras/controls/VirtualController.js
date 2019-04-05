@@ -67,7 +67,7 @@ class VirtualController {
         }
       }
     })
-    getMainDomElement().style['touch-action'] = this.oldTouchActionValue
+    this.getMainDomElement().style['touch-action'] = this.oldTouchActionValue
   }
 
   getMainDomElement() {
