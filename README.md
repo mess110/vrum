@@ -173,6 +173,7 @@ yarn h // prints help
 * [x] Button3D
 * [x] Measure
 * [x] Utils.lerpCamera(target, distance, speed)
+* [x] Utils.addCEButton
 * [ ] wind effect with blowing leaves partciles
 * [ ] smoke effect for wheels when they hit the edge particles
 * [ ] small explosion effect particles
