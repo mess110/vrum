@@ -54,7 +54,7 @@ class PositionXZRotationYControls {
     })
     this.vj = vj
 
-    this.isMobileOrTablet = Utils.isMobileOrTablet()
+    this.isVirtualControllerAvailable = VirtualController.isAvailable()
     this.velocity = new THREE.Vector3(0, 0, 0)
     this.speed = 5
     this.acceleration = 1
@@ -174,7 +174,7 @@ class PositionXZRotationYControls {
   }
 
   doMobileEvent() {
-    if (!this.isMobileOrTablet) {
+    if (!this.isVirtualControllerAvailable) {
       return
     }
 

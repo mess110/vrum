@@ -32,8 +32,15 @@ class VirtualController {
     this.init(options)
   }
 
+  log(s) {
+    if (Config.instance.engine.debug) {
+      console.log(s)
+    }
+  }
+
   // override this method for a different behaviour
   init(options) {
+    if (!VirtualController.isAvailable()) { return }
     options = this._defaultOptions(options)
 
     this.joystickLeft = new VirtualJoystick(options.joystickLeft)
@@ -48,12 +55,13 @@ class VirtualController {
   }
 
   uninit() {
+    if (!VirtualController.isAvailable()) { return }
     [this.joystickLeft, this.joystickRight].forEach((joystick) => {
       try {
         joystick.destroy()
       } catch (e) {
         if (e instanceof DOMException) {
-          console.log('joystick already removed')
+          this.log('VirtualController: joystick already removed')
         } else {
           throw e
         }
@@ -67,8 +75,8 @@ class VirtualController {
   }
 
   // Checks if touch screen is available
-  isAvailable() {
-    return VirtualJoystick.touchScreenAvailable()
+  static isAvailable() {
+    return VirtualJoystick.touchScreenAvailable() || Utils.isMobileOrTablet()
   }
 
   // @nodoc
