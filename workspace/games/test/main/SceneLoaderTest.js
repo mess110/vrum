@@ -1,4 +1,4 @@
-class Scene4 extends Scene {
+class SceneLoaderTest extends Scene {
   init(options) {
     resetCamPosition()
 

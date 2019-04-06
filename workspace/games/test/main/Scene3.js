@@ -14,8 +14,6 @@ class Scene3 extends Scene {
     this.add(mesh)
     this.chicken = mesh
 
-    this.control = new Control(this.chicken)
-
     this.velY = 0
     this.velX = 0
     this.speed = 2
@@ -103,6 +101,5 @@ class Scene3 extends Scene {
   doKeyboardEvent(event) {
     switchScene(event)
     this.keys[event.keyCode] = event.type == "keydown"
-    this.control.doKeyboardEvent(event)
   }
 }

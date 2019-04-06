@@ -45,10 +45,10 @@ const resetCamPosition = (distance) => {
   camera.lookAt(new THREE.Vector3(0, 0, 0))
 }
 
-let scene1 = new Scene1()
+let scene1 = new FeaturesTest()
 let scene2 = new Scene2()
 let scene3 = new Scene3()
-let scene4 = new Scene4()
+let scene4 = new SceneLoaderTest()
 let loadingScene = new LoadingScene(scene3, [
   { type: 'font',  path: '/workspace/assets/fonts/luckiest-guy' },
   { type: 'model', path: '/workspace/assets/models/chicken.gltf' },

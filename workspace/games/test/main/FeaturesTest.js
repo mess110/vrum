@@ -7,7 +7,7 @@
 // * a tree changing color should be visible
 // * a disolving cube should be visible
 //
-class Scene1 extends Scene {
+class FeaturesTest extends Scene {
   init(options) {
     resetCamPosition()
 
