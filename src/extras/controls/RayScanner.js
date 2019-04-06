@@ -22,6 +22,7 @@ class RayScanner {
     this.addZ = true
     this.drawLines = false
     this.collidables = collidables
+    this.lineLength = 3
   }
 
   scan(fromPosition, velocity) {
@@ -31,15 +32,19 @@ class RayScanner {
     if (this.drawLine(fromPosition, new THREE.Vector3(1, 0, 0)) && velocity.x > 0) {
       this.addX = false
     }
+
     if (this.drawLine(fromPosition, new THREE.Vector3(-1, 0, 0)) && velocity.x < 0) {
       this.addX = false
     }
+
     if (this.drawLine(fromPosition, new THREE.Vector3(0, 0, 1)) && velocity.z > 0) {
       this.addZ = false
     }
+
     if (this.drawLine(fromPosition, new THREE.Vector3(0, 0, -1)) && velocity.z < 0) {
       this.addZ = false
     }
+
     // if (this.drawLine(fromPosition, new THREE.Vector3(1, 0, 1)) && (velocity.x > 0 && velocity.z > 0)) {
       // this.addX = false
       // this.addZ = false
@@ -58,9 +63,18 @@ class RayScanner {
     // }
   }
 
+  addCollidable(obj) {
+    if (isBlank(obj.boundingCube)) {
+      this.collidables.push(obj)
+    } else {
+      this.collidables.push(obj.boundingCube)
+    }
+  }
+
   drawLine(fromPosition, direction) {
-    let length = 4
-    let color = Measure.intersectsFrom(this.raycaster, this.collidables, fromPosition, direction, length) ? 'red' : 'green'
+    let length = this.lineLength
+    let inters = Measure.intersectsFrom(this.raycaster, this.collidables, fromPosition, direction, length)
+    let color = inters ? 'red' : 'green'
     if (this.drawLines) {
       Measure.addLineDirection(fromPosition, direction, length, color)
     }

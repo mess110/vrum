@@ -37,10 +37,7 @@ class LoadingScene extends Scene {
   }
 
   initCallback() {
-    var geometry = new THREE.BoxGeometry( 1, 1, 1 )
-    var material = new THREE.MeshBasicMaterial( { color: 0x4d4d4d } )
-    var cube = new THREE.Mesh( geometry, material )
-    cube.setWireframe(true)
+    let cube = Utils.box({ size: 1 })
     this.add(cube)
     this.cube = cube
   }

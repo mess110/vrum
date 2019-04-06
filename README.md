@@ -169,6 +169,7 @@ yarn h // prints help
 
 * [x] mesh game pad controller game
 * [x] RayScanner
+* [x] Utils.boundingBox and RayScanner.addCollidable
 * [x] Player control PositionXZRotationYControls
 * [x] Button3D
 * [x] Measure
