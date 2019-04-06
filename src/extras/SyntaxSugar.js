@@ -179,7 +179,7 @@ String.prototype.endsWith = function(suffix) {
   return this.indexOf(suffix, this.length - (suffix.length)) !== -1
 }
 
-// Checks if an array ends with any of the prefixes
+// Checks if an array ends with any of the suffixes
 //
 // @param [Array] suffixes
 String.prototype.endsWithAny = function(suffixes) {

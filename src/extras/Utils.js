@@ -366,11 +366,14 @@ class Utils {
     return navigator.getGamepads ? true : (navigator.webkitGamepads ? true : false)
   }
 
-  // Sets the cursor
-  //
-  // param [String] url of the new cursor
   static setCursor(url) {
-    document.body.style.cursor = `url('${url}'), auto`
+    if (isBlank(url)) {
+      document.body.style.cursor = 'pointer'
+    } else if (url.endsWithAny('.png', '.jpeg', '.jpg')) {
+      document.body.style.cursor = `url('${url}'), auto`
+    } else if (url === 'hidden' || url === 'none') {
+      document.body.style.cursor = 'none'
+    }
   }
 
   // Convert RGB value to Hex
