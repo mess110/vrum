@@ -7,7 +7,14 @@ class GameScene extends Scene {
     camera.lookAt(new THREE.Vector3(0, 0, 0))
 
     let sky = new Sky()
+    sky.visible = false
+    this.sky = sky
     this.add(sky)
+
+    let grid = Utils.grid({ step: 5 })
+    grid.visible = false
+    this.grid = grid
+    this.add(this.grid)
 
     this.model = undefined
 
@@ -123,6 +130,22 @@ const load = (assetFolderAndName) => {
     scene.setJSONFromKey(key)
   }, (asset) => {
   })
+}
+
+let wireframe = false
+const toggleWireframe = () => {
+  wireframe = !wireframe
+  Utils.setWireframe(wireframe)
+}
+
+const toggleGird = () => {
+  let grid = Hodler.get('scene').grid
+  grid.visible = !grid.visible
+}
+
+const toggleSky = () => {
+  let sky = Hodler.get('scene').sky
+  sky.visible = !sky.visible
 }
 
 Engine.start(new GameScene(), [

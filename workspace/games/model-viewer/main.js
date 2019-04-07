@@ -1,8 +1,6 @@
 Config.instance.window.showStatsOnStart = true
 Config.instance.engine.debug = true
 
-let wireframe = false
-
 Persist.defaultJson('lastModels', [
   '/workspace/assets/models/chicken.gltf',
   '/workspace/assets/models/panda.glb',

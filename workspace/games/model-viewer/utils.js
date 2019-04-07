@@ -37,6 +37,7 @@ const updateLastModels = () => {
   })
 }
 
+let wireframe = false
 const toggleWireframe = () => {
   wireframe = !wireframe
   Utils.setWireframe(wireframe)
@@ -45,4 +46,9 @@ const toggleWireframe = () => {
 const toggleGird = () => {
   let grid = Hodler.get('scene').grid
   grid.visible = !grid.visible
+}
+
+const toggleSky = () => {
+  let sky = Hodler.get('scene').sky
+  sky.visible = !sky.visible
 }
