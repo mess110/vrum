@@ -1,0 +1,51 @@
+{
+  "kind": "particle",
+  "textures": [
+    {
+      "libPath": "/workspace/assets/textures/spe_bubble.png"
+    }
+  ],
+  "particle": [
+"[",
+"  {",
+"    texture: {",
+"      value: AssetManager.get('spe_bubble.png')",
+"    },",
+"    depthTest: true,",
+"    depthWrite: false,",
+"    blending: THREE.NormalBlending,",
+"    emitters: [",
+"      {",
+"        type: SPE.distributions.CUBE,",
+"        particleCount: 40,",
+"        maxAge: {",
+"          value: 2,",
+"          spread: 1.5",
+"        },",
+"        position: {",
+"           value: new THREE.Vector3(0, 0, 0),",
+"           spread: new THREE.Vector3(10, 0, 1)",
+"        },",
+"        acceleration: {",
+"          value: new THREE.Vector3(0, 0.5, 0),",
+"          spread: new THREE.Vector3(0.1, 0.1, 0.1)",
+"        },",
+"        velocity: {",
+"          value: new THREE.Vector3(0, 1, 0),",
+"          spread: new THREE.Vector3(0.8, 0.8, 0.8)",
+"        },",
+"        size: {",
+"          value: [2,5,5]",
+"        },",
+"        color: {",
+"          value: [new THREE.Color('#67baca'), new THREE.Color('#FFFFFF')]",
+"        },",
+"        opacity: {",
+"          value: [0.5, 0.9, 0.9, 0.9, 0.1]",
+"        }",
+"      }",
+"    ]",
+"  }",
+"]"
+  ]
+}

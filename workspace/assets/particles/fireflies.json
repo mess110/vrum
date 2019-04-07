@@ -1,0 +1,51 @@
+{
+  "kind": "particle",
+  "textures": [
+    {
+      "libPath": "/workspace/assets/textures/spe_star.png"
+    }
+  ],
+  "particle": [
+"[",
+"  {",
+"    texture: {",
+"      value: AssetManager.get('spe_star.png'),",
+"    },",
+"    depthTest: true,",
+"    depthWrite: false,",
+"    blending: THREE.AdditiveBlending,",
+"    emitters: [",
+"      {",
+"        type: SPE.distributions.SPHERE,",
+"        particleCount: 200,",
+"        maxAge: {",
+"          value: 2,",
+"          spread: 1",
+"        },",
+"        acceleration: {",
+"          spread: new THREE.Vector3(1, 1, 1)",
+"        },",
+"        velocity: {",
+"          spread: new THREE.Vector3(3, 3, 3)",
+"        },",
+"        position: {",
+"          radius: 10,",
+"          radiusScale: new THREE.Vector3(1, 1, 1),",
+"          randomise: true",
+"        },",
+"        size: {",
+"          value: [0.5, 2, 0.5],",
+"          spread: [1, 1, 1]",
+"        },",
+"        color: {",
+"          value: [new THREE.Color('#DAA520'), new THREE.Color('#FFD700'), new THREE.Color('#DAA520')]",
+"        },",
+"        opacity: {",
+"          value: [0, 0.5, 0]",
+"        }",
+"      }",
+"    ]",
+"  }",
+"]"
+  ]
+}

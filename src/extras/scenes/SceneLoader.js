@@ -88,6 +88,10 @@ class SceneLoader {
 
   static jsonToModel(json) {
     let model
+    if (isBlank(json)) {
+      console.error(`json is blank`)
+      return undefined
+    }
     if (isBlank(json.kind)) {
       console.error(`missing kind`)
       return undefined
@@ -103,7 +107,7 @@ class SceneLoader {
     } else if (json.kind === 'terrain') {
       model = Terrain.fromJson(json)
     } else {
-      console.error(`unknown kind ${json.kind}`)
+      console.error(`unknown kind '${json.kind}'`)
       return undefined
     }
     return model

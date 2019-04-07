@@ -438,6 +438,27 @@ this.add(this.terrain)
 
 ## Particles
 
+[ShaderParticleEngine](https://github.com/squarefeet/ShaderParticleEngine/)
+[GroupOptions](https://squarefeet.github.io/ShaderParticleEngine/docs/api/global.html#GroupOptions)
+[EmitterOptions](https://squarefeet.github.io/ShaderParticleEngine/docs/api/global.html#EmitterOptions)
+
+The structure for the saved json is:
+
+```
+{
+  "kind": "particle",                 // this is mandatory
+  "textures": [                       // array of images used
+    { "libPath": "/path/to/img.png" } // libPath - where the image is loaded from
+  ]
+  "particle": [                       // the actual particle
+  ]
+}
+```
+
+"particle" can be a string or an array of strings which will be joined. It
+should form a valid array of obects. Each object represents a `Group` and
+each group can have an array of emitters under the `emitters` key.
+
 ```
 let jsonParticleData = AssetManager.get('particle.json').particle
 this.explosion = new BaseParticle(jsonParticleData)

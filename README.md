@@ -175,6 +175,7 @@ yarn h // prints help
 * [x] Measure
 * [x] Utils.lerpCamera(target, distance, speed)
 * [x] Utils.addCEButton
+* [ ] test all SceneLoader features
 * [ ] wind effect with blowing leaves partciles
 * [ ] smoke effect for wheels when they hit the edge particles
 * [ ] small explosion effect particles

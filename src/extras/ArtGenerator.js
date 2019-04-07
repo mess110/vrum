@@ -145,16 +145,20 @@ class ArtGenerator {
   //   @drawImage(key: 'template')
   //
   drawImage(options) {
-    if (options == null) { options = {}; }
-    if (options.key == null) { throw 'key not found'; }
-    if (options.x == null) { options.x = 0; }
-    if (options.y == null) { options.y = 0; }
-    if (options.angle == null) { options.angle = 0; }
+    if (isBlank(options)) { options = {}; }
+    if (isBlank(options.key)) { throw 'key not found'; }
+    if (isBlank(options.x)) { options.x = 0; }
+    if (isBlank(options.y)) { options.y = 0; }
+    if (isBlank(options.angle)) { options.angle = 0; }
 
     let { x } = options;
     let { y } = options;
 
-    const { image } = AssetManager.get(options.key);
+    let texture = AssetManager.get(options.key);
+    if (isBlank(texture)) {
+      throw `texture '${options.key}' not loaded`
+    }
+    const { image } = texture
 
     if (options.angle !== 0) {
       this.ctx.save();

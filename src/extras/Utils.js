@@ -62,7 +62,9 @@ class Utils {
       let assetKey = AssetManager.getAssetKey(assetHash)
       if (assetHash.type == 'json') {
         let json = AssetManager.get(assetKey)
-        if (isBlank(json.kind)) {
+        if (isBlank(json)) {
+          console.error(`asset not loaded ${assetKey}`)
+        } else if (isBlank(json.kind)) {
           console.error(`missing kind for ${assetKey}`)
         } else if (json.kind == 'graffiti') {
           json.items.forEach((item) => {
