@@ -144,6 +144,11 @@ Array.prototype.insert = function(index, item) {
   this.splice(index, 0, item)
 }
 
+Array.prototype.pushUnique = function (item) {
+  if (this.indexOf(item) !== -1) { return item }
+  return this.push(item)
+}
+
 Array.prototype.toCyclicArray = function() {
   return new CyclicArray(this)
 }

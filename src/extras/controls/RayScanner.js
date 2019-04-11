@@ -65,9 +65,17 @@ class RayScanner {
 
   addCollidable(obj) {
     if (isBlank(obj.boundingCube)) {
-      this.collidables.push(obj)
+      this.collidables.pushUnique(obj)
     } else {
-      this.collidables.push(obj.boundingCube)
+      this.collidables.pushUnique(obj.boundingCube)
+    }
+  }
+
+  removeCollidable(obj) {
+    if (isBlank(obj.boundingCube)) {
+      this.collidables.remove(obj)
+    } else {
+      this.collidables.remove(obj.boundingCube)
     }
   }
 
