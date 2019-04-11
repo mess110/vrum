@@ -24,6 +24,7 @@
  *  // within each of their respective methods
  *  this.control.doKeyboardEvent(event)
  *  this.control.doGamepadEvent(event)
+ *  this.control.doMobileEvent(joystick) // from VirtualController
 */
 class PositionXZRotationYControls {
   constructor() {
@@ -38,23 +39,7 @@ class PositionXZRotationYControls {
       'StickLeftRight': 0,
       'StickUpDown': 1,
     }
-    // to change which joystick is used in doMobileEvent change the value
-    // of TargetJoystick
-    this.vjbindings = {
-      'TargetJoystick': 'joystickLeft',
-    }
 
-    let vj = new VirtualController({
-      joystickLeft: {
-        stickRadius: 60
-      },
-      joystickRight: {
-        stickRadius: 60
-      }
-    })
-    this.vj = vj
-
-    this.isVirtualControllerAvailable = VirtualController.isAvailable()
     this.velocity = new THREE.Vector3(0, 0, 0)
     this.speed = 5
     this.acceleration = 1
@@ -181,10 +166,7 @@ class PositionXZRotationYControls {
     return gamepad.axes[this.gamepadbindings['StickUpDown']]
   }
 
-  doMobileEvent() {
-    if (!this.isVirtualControllerAvailable) { return }
-
-    let joy = this.getMobileTargetJoystick()
+  doMobileEvent(joy) {
     if (joy.right()) {
       this.doKeyboardEvent({type: 'keydown', code: this.keybindings['Right']})
     } else {
@@ -205,10 +187,5 @@ class PositionXZRotationYControls {
     } else {
       this.doKeyboardEvent({type: 'keyup', code: this.keybindings['Forward']})
     }
-  }
-
-  getMobileTargetJoystick() {
-    if (!this.isVirtualControllerAvailable) { return }
-    return this.vj[this.vjbindings['TargetJoystick']]
   }
 }

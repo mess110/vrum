@@ -40,7 +40,7 @@ class VirtualController {
 
   // override this method for a different behaviour
   init(options) {
-    if (!VirtualController.isAvailable()) { return }
+    // if (!VirtualController.isAvailable()) { return }
     options = this._defaultOptions(options)
 
     this.joystickLeft = new VirtualJoystick(options.joystickLeft)
@@ -55,7 +55,7 @@ class VirtualController {
   }
 
   uninit() {
-    if (!VirtualController.isAvailable()) { return }
+    // if (!VirtualController.isAvailable()) { return }
     [this.joystickLeft, this.joystickRight].forEach((joystick) => {
       try {
         joystick.destroy()
