@@ -28,7 +28,7 @@
     "qrcodejs": "davidshimjs/qrcodejs",
     "shader-particle-engine": "squarefeet/ShaderParticleEngine",
     "stats.js": "mrdoob/stats.js",
-    "three": "^0.102.0",
+    "three": "^0.103.0",
     "threex.dynamictexture": "jeromeetienne/threex.dynamictexture",
     "threex.keyboardstate": "jeromeetienne/threex.keyboardstate",
     "threex.volumetricspotlight": "jeromeetienne/threex.volumetricspotlight",
