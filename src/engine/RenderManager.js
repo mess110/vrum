@@ -38,12 +38,17 @@ class RenderManager {
   }
 
   static initCamera() {
-    const size = Hodler.get('renderer').getSize()
-    var camera = new THREE.PerspectiveCamera(Config.instance.camera.fov, size.width / size.height, Config.instance.camera.near, Config.instance.camera.far)
+    let size = new THREE.Vector2()
+    Hodler.get('renderer').getSize(size)
+    var camera = new THREE.PerspectiveCamera(Config.instance.camera.fov, size.x / size.y, Config.instance.camera.near, Config.instance.camera.far)
     return camera
   }
 
   setWidthHeight(size) {
+    if (isBlank(size)) { throw 'size can not be blank' }
+    if (isBlank(size.width)) { throw 'size.width can not be blank' }
+    if (isBlank(size.height)) { throw 'size.width can not be blank' }
+
     var renderer = Hodler.get('renderer')
     var camera = Hodler.get('camera')
 

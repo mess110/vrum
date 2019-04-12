@@ -60,9 +60,9 @@ class FeaturesTest extends Scene {
     })
     this.add(this.forest)
 
-    this.water = new Water({ map: 'waternormals.jpg', width: 9, height: 9, water: { alpha: 0.8 } })
-    this.water.position.set(9.5, -3, 0)
-    this.add(this.water)
+    // this.water = new Water({ map: 'waternormals.jpg', width: 9, height: 9, water: { alpha: 0.8 } })
+    // this.water.position.set(9.5, -3, 0)
+    // this.add(this.water)
 
     this.add(new Starfield())
 

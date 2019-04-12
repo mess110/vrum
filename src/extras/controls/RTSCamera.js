@@ -42,8 +42,8 @@ class RTSCamera {
     this.percentOfHeightPan = 5
 
     this.size = this.getSize()
-    this.lastX = this.size.width / 2
-    this.lastY = this.size.height / 2
+    this.lastX = this.size.x / 2
+    this.lastY = this.size.y / 2
   }
 
   toggle() {
@@ -79,28 +79,28 @@ class RTSCamera {
       return
     }
 
-    if (this.lastY < (this.size.height * this.percentOfHeightPan) / 100) {
+    if (this.lastY < (this.size.y * this.percentOfHeightPan) / 100) {
       this.oc.handleKeyDown({
         'keyCode': this.oc.keys.UP,
         'preventDefault': () => {
         }
       })
     }
-    if (this.lastY > (this.size.height - (this.size.height * this.percentOfHeightPan) / 100)) {
+    if (this.lastY > (this.size.y - (this.size.y * this.percentOfHeightPan) / 100)) {
       this.oc.handleKeyDown({
         'keyCode': this.oc.keys.BOTTOM,
         'preventDefault': () => {
         }
       })
     }
-    if (this.lastX < (this.size.width * this.percentOfWidthPan) / 100) {
+    if (this.lastX < (this.size.x * this.percentOfWidthPan) / 100) {
       this.oc.handleKeyDown({
         'keyCode': this.oc.keys.LEFT,
         'preventDefault': () => {
         }
       })
     }
-    if (this.lastX > (this.size.width - (this.size.width * this.percentOfWidthPan) / 100)) {
+    if (this.lastX > (this.size.x - (this.size.x * this.percentOfWidthPan) / 100)) {
       this.oc.handleKeyDown({
         'keyCode': this.oc.keys.RIGHT,
         'preventDefault': () => {
@@ -110,7 +110,9 @@ class RTSCamera {
   }
 
   getSize() {
-    return Hodler.get('renderer').getSize()
+    let size = new THREE.Vector2()
+    Hodler.get('renderer').getSize(size)
+    return size
   }
 
   getState() {

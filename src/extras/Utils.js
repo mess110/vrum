@@ -600,7 +600,9 @@ class Utils {
     } else {
       Hodler.add('renderer', engine.renderManager.stereoEffect)
     }
-    engine.renderManager.setWidthHeight(rendererDefault.getSize())
+    let size = new THREE.Vector2()
+    rendererDefault.getSize(size)
+    engine.renderManager.setWidthHeight({ width: size.x, height: size.y })
   }
 
   static toggleAnaglyphEffect() {
@@ -613,7 +615,9 @@ class Utils {
     } else {
       Hodler.add('renderer', engine.renderManager.anaglyphEffect)
     }
-    engine.renderManager.setWidthHeight(rendererDefault.getSize())
+    let size = new THREE.Vector2()
+    rendererDefault.getSize(size)
+    engine.renderManager.setWidthHeight({ width: size.x, height: size.y })
   }
 
   static screenshotContents(canvas, withMeta) {

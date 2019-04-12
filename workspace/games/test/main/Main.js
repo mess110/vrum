@@ -49,7 +49,7 @@ let scene1 = new FeaturesTest()
 let scene2 = new Scene2()
 let scene3 = new Scene3()
 let scene4 = new SceneLoaderTest()
-let loadingScene = new LoadingScene(scene3, [
+let loadingScene = new LoadingScene(scene1, [
   { type: 'font',  path: '/workspace/assets/fonts/luckiest-guy' },
   { type: 'model', path: '/workspace/assets/models/chicken.gltf' },
   { type: 'model', path: '/workspace/assets/models/chicken.gltf' },
@@ -59,8 +59,8 @@ let loadingScene = new LoadingScene(scene3, [
   { type: 'image', path: '/workspace/assets/textures/hand.png' },
   { type: 'image', path: '/workspace/assets/textures/heightmap3.png' },
   { type: 'image', path: '/workspace/assets/textures/waternormals.jpg' },
-  { type: 'image', path: '/workspace/assets/textures/smokeparticle.png' },
-  { type: 'image', path: '/workspace/assets/textures/sprite-explosion2.png' },
+  { type: 'image', path: '/workspace/assets/textures/spe_smokeparticle.png' },
+  { type: 'image', path: '/workspace/assets/textures/spe_sprite-explosion2.png' },
   { type: 'image', path: '/workspace/assets/textures/black-faded-border.png' },
   { type: 'image', path: '/workspace/assets/textures/vrum.png' },
   { type: 'image', path: '/workspace/assets/textures/grass.png' },

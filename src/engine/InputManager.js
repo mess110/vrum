@@ -97,9 +97,10 @@ class InputManager {
     if (event.target !== renderer.domElement) { return }
 
     // could need event.clientX or event.clientY
-    const size = renderer.getSize()
-    const mouseX = ((event.layerX / size.width) * 2) - 1
-    const mouseY = (-(event.layerY / size.height) * 2) + 1
+    let size = new THREE.Vector2()
+    renderer.getSize(size)
+    const mouseX = ((event.layerX / size.x) * 2) - 1
+    const mouseY = (-(event.layerY / size.y) * 2) + 1
     const vector = new THREE.Vector3(mouseX, mouseY, 0.5)
     var camera = Hodler.get('camera')
     vector.unproject(camera)
