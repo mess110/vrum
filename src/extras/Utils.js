@@ -260,11 +260,14 @@ class Utils {
     return node;
   }
 
-  static toggleShadows(shadowMapSize) {
+  static toggleShadows(value) {
+    if (isBlank(value)) { value = true }
     let renderer = Hodler.get('renderer')
-    renderer.shadowMap.enabled = !renderer.shadowMap.enabled
+    renderer.shadowMap.enabled = value
     renderer.shadowMap.soft = true
-    renderer.shadowMap.type = THREE.PCFShadowMap
+    renderer.shadowMap.type = THREE.BasicShadowMap
+    // renderer.shadowMap.type = THREE.PCFShadowMap
+    // renderer.shadowMap.type = THREE.PCFSoftShadowMap
     renderer.shadowMap.autoUpdate = true
 
     let scene = Hodler.get('scene')
@@ -273,7 +276,8 @@ class Utils {
       let isSky = obj instanceof Sky
       let isLight = obj instanceof THREE.DirectionalLight ||
         obj instanceof THREE.PointLight ||
-        obj instanceof THREE.HemisphereLight
+        obj instanceof THREE.HemisphereLight ||
+        obj instanceof THREE.SpotLight
 
       let target
       if (isSpotlight) { target = obj.spotLight }
@@ -281,7 +285,33 @@ class Utils {
       if (isLight) { target = obj }
 
       if (isLight || isSky || isSpotlight) {
-        target.castShadow = !target.castShadow
+        target.castShadow = value
+      }
+    })
+  }
+
+  // value between 0 and 1
+  static setShadowStrength(value) {
+    if (isBlank(value)) { value = 1 }
+
+    let scene = Hodler.get('scene')
+    scene.traverse((obj) => {
+      let isSpotlight = obj instanceof SpotLight
+      let isSky = obj instanceof Sky
+      let isLight = obj instanceof THREE.DirectionalLight ||
+        obj instanceof THREE.PointLight ||
+        obj instanceof THREE.HemisphereLight ||
+        obj instanceof THREE.SpotLight
+
+      let target
+      if (isSpotlight) { target = obj.spotLight }
+      if (isSky) { target = obj.light }
+      if (isLight) { target = obj }
+
+      if (!isBlank(target)) {
+        // console.log(target.shadow)
+        // target.shadow.darkness = value
+        // target.shadow.darkness
       }
     })
   }
@@ -297,14 +327,16 @@ class Utils {
   static setShadowDetails(x, y) {
     if (isString(x)) {
       const shadow = Config.instance.shadow.details
-      if (x == shadow.low) {
-        x = 128
-      } else if (x == shadow.medium) {
+      if (x == shadow.tiny) {
+        x = 256
+      } else if (x == shadow.low) {
         x = 512
-      } else if (x == shadow.high) {
+      } else if (x == shadow.medium) {
         x = 1024
-      } else if (x == shadow.ultra) {
+      } else if (x == shadow.high) {
         x = 2048
+      } else if (x == shadow.ultra) {
+        x = 4096
       } else {
         throw `invalid shadow detail ${x}`
       }
@@ -320,7 +352,8 @@ class Utils {
       let isSky = obj instanceof Sky
       let isLight = obj instanceof THREE.DirectionalLight ||
         obj instanceof THREE.PointLight ||
-        obj instanceof THREE.HemisphereLight
+        obj instanceof THREE.HemisphereLight ||
+        obj instanceof THREE.SpotLight
 
       let target
       if (isSpotlight) { target = obj.spotLight }
@@ -330,6 +363,13 @@ class Utils {
       if (!isBlank(target)) {
         target.shadow.mapSize.width = x
         target.shadow.mapSize.height = y
+
+        // for shadows to update they need to be disposed
+        // https://stackoverflow.com/a/35855529
+        if (!isBlank(target.shadow.map)) {
+          target.shadow.map.dispose()
+          target.shadow.map = null
+        }
       }
     })
   }
@@ -452,7 +492,8 @@ class Utils {
     } else if (!isBlank(options.material)) {
       material = options.material
     } else {
-      material = new (THREE.MeshBasicMaterial)({
+      if (![THREE.MeshBasicMaterial, THREE.MeshLambertMaterial].includes(options.materialType)) { options.materialType = THREE.MeshBasicMaterial }
+      material = new (options.materialType)({
         color: options.color,
         transparent: options.transparent,
         opacity: options.opacity,

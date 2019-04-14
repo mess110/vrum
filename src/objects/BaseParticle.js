@@ -36,6 +36,15 @@ class BaseParticle extends THREE.Object3D {
     return max
   }
 
+  setActiveMultiplier(value) {
+    if (isBlank(value)) { value = 1 }
+    if (value === this.lastActiveMultiplier) { return }
+    this.lastActiveMultiplier = value
+    this.emitters.forEach((e) => {
+      e.activeMultiplier = value
+    })
+  }
+
   enable() {
     this.emitters.forEach((e) => {
       e.enable()

@@ -54,8 +54,8 @@ class BaseModifier extends TWEEN.Tween {
 
 // NOTE: chaining does not work with fade modifier
 class FadeModifier extends BaseModifier {
-  constructor(subject, fromAlpha, toAlpha, duration) {
-    super({ x: fromAlpha}, { x: toAlpha }, duration, TWEEN.Easing.Linear.None)
+  constructor(subject, fromAlpha, toAlpha, duration, easing) {
+    super({ x: fromAlpha}, { x: toAlpha }, duration, easing)
     this.onUpdate(function (obj) {
       subject.setOpacity(obj.x)
     })
@@ -63,8 +63,8 @@ class FadeModifier extends BaseModifier {
 }
 
 class WeightModifier extends BaseModifier {
-  constructor(subject, fromWeight, toWeight, duration) {
-    super({ x: fromWeight }, { x: toWeight }, duration, TWEEN.Easing.Exponential.Out)
+  constructor(subject, fromWeight, toWeight, duration, easing) {
+    super({ x: fromWeight }, { x: toWeight }, duration, easing)
     this.onUpdate(function (obj) {
       subject.setEffectiveWeight(obj.x)
     })
@@ -72,10 +72,8 @@ class WeightModifier extends BaseModifier {
 }
 
 class ScaleModifier extends BaseModifier {
-  constructor(subject, fromScale, toScale, duration) {
-    subject.x = fromScale
-    subject.y = fromScale
-    subject.z = fromScale
-    super(subject, { x: toScale, y: toScale, z: toScale}, duration, TWEEN.Easing.Exponential.Out)
+  constructor(subject, fromScale, toScale, duration, easing) {
+    subject.scale.setScalar(fromScale)
+    super(subject.scale, { x: toScale, y: toScale, z: toScale}, duration, easing)
   }
 }

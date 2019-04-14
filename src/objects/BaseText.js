@@ -6,12 +6,16 @@
 // text.position.set(0, 0, 4)
 class BaseText extends THREE.Mesh {
   constructor(options) {
-    if (options == null) { options = {}; }
+    if (isBlank(options)) { options = {}; }
     var canvasW = options.canvasW || 512;
     var canvasH = options.canvasH || 512;
 
     var w = options.w || 4;
     var h = options.h || 4;
+
+    if (!([THREE.MeshBasicMaterial, THREE.MeshLambertMaterial].includes(options.material))) {
+      options.material = THREE.MeshBasicMaterial
+    }
 
     var margin = options.margin;
     var lineHeight = options.lineHeight;
@@ -28,7 +32,7 @@ class BaseText extends THREE.Mesh {
     var dynamicTexture = new THREEx.DynamicTexture(canvasW, canvasH)
 
     const geom = new THREE.PlaneGeometry(w, h);
-    const material  = new THREE.MeshBasicMaterial({
+    const material  = new options.material({
       map: dynamicTexture.texture,
       transparent: true
     });

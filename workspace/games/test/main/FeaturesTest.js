@@ -165,7 +165,7 @@ class FeaturesTest extends Scene {
   uninit() {
     Utils.toggleOrbitControls()
     Utils.toggleShadowCameraHelpers()
-    Utils.toggleShadows()
+    Utils.toggleShadows(false)
   }
 
   tick(tpf) {

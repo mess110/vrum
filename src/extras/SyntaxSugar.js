@@ -425,8 +425,21 @@ THREE.Object3D.prototype.setSkin = function (key) {
   }
 }
 
+THREE.Object3D.prototype.shadowCast = function () {
+  this.traverse(function (obj) {
+    obj.castShadow = true
+  })
+}
+
 THREE.Object3D.prototype.shadowReceive = function () {
   this.traverse(function (obj) {
+    obj.receiveShadow = true
+  })
+}
+
+THREE.Object3D.prototype.shadowCastAndReceive = function () {
+  this.traverse(function (obj) {
+    obj.castShadow = true
     obj.receiveShadow = true
   })
 }
@@ -434,6 +447,13 @@ THREE.Object3D.prototype.shadowReceive = function () {
 THREE.Object3D.prototype.shadowCastAndNotReceive = function () {
   this.traverse(function (obj) {
     obj.castShadow = true
+    obj.receiveShadow = false
+  })
+}
+
+THREE.Object3D.prototype.shadowNone = function () {
+  this.traverse(function (obj) {
+    obj.castShadow = false
     obj.receiveShadow = false
   })
 }

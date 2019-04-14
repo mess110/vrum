@@ -50,6 +50,7 @@ class Config {
     }
     this.shadow = {
       details: {
+        tiny: 'tiny',
         low: 'low',
         medium: 'medium',
         high: 'high',
