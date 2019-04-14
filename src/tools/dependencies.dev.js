@@ -23,7 +23,6 @@ let VRUM_DEPENDS = [
   "/node_modules/threex.windowresize/threex.windowresize.js",
   "/node_modules/threex.volumetricspotlight/threex.volumetricspotlightmaterial.js",
   "/node_modules/threex.keyboardstate/threex.keyboardstate.js",
-  "/node_modules/threex.dynamictexture/threex.dynamictexture.js",
   "/node_modules/virtualjoystick.js/virtualjoystick.js",
   "/node_modules/shader-particle-engine/build/SPE.js",
 
@@ -59,6 +58,7 @@ let VRUM_DEPENDS = [
   "/node_modules/three/examples/js/effects/AnaglyphEffect.js",
   "/node_modules/three/examples/js/effects/StereoEffect.js",
 
+  "../../../src/vendor/threex.dynamictexture.js",
   "../../../src/vendor/threex.rendererstats.js",
   "../../../src/vendor/discoveryClient.js",
   "../../../src/vendor/water-material.js",
