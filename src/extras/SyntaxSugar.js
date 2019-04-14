@@ -56,15 +56,15 @@ Array.prototype.includes = function(e) {
 }
 
 // https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
-Array.prototype.shuffle = function() {
-  const array = this
+Array.prototype.shuffle = function(modifySelf = false) {
+  const array = modifySelf ? this : this.slice(0)
   let m = array.length
   let t = undefined
   let i = undefined
 
   // While there remain elements to shuffle…
   while (m) {
-    // Pick a remaining element…
+    // Pick a remaining element...
     i = Math.floor(Math.random() * m--)
 
     // And swap it with the current element.
