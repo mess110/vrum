@@ -84,6 +84,8 @@ THREEx.DynamicTexture.prototype.drawTextCooked = function(options){
 		lineHeight	: options.lineHeight !== undefined ? options.lineHeight : 0.1,
 		align		: options.align !== undefined ? options.align : 'left',
 		fillStyle	: options.fillStyle !== undefined ? options.fillStyle : 'black',
+		strokeStyle: options.strokeStyle !== undefined ? options.strokeStyle : 'black',
+		strokeLineWidth: options.strokeLineWidth !== undefined ? options.strokeLineWidth: 0,
 		font		: options.font !== undefined ? options.font : "bold "+(0.2*512)+"px Arial",
 	}
 	// sanity check
@@ -91,6 +93,10 @@ THREEx.DynamicTexture.prototype.drawTextCooked = function(options){
 
 	context.save()
 	context.fillStyle	= params.fillStyle;
+  if (params.strokeLineWidth !== 0) {
+    context.strokeStyle = params.strokeStyle;
+    context.lineWidth = params.strokeLineWidth;
+  }
 	context.font		= params.font;
 
 	var y	= (params.lineHeight + params.margin)*canvas.height
@@ -113,6 +119,9 @@ THREEx.DynamicTexture.prototype.drawTextCooked = function(options){
 
 		// actually draw the text at the proper position
 		this.context.fillText(maxText, x, y);
+    if (params.strokeLineWidth !== 0) {
+      this.context.strokeText(maxText, x, y);
+    }
 
 		// goto the next line
 		y	+= params.lineHeight*canvas.height

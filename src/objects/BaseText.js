@@ -1,5 +1,6 @@
 // let text = new BaseText({
 //   text: 'Press <Enter> to start', fillStyle: 'blue',
+//   strokeStyle: 'black', strokeLineWidth: 1,
 //   canvasW: 1024, canvasH: 1024,
 //   font: '64px luckiest-guy'})
 // text.position.set(0, 0, 4)

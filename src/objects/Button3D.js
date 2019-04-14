@@ -29,6 +29,7 @@ class Button3D extends THREE.Object3D {
 
     let text = new BaseText({
       text: s, fillStyle: 'white',
+      strokeStyle: 'black', strokeLineWidth: 1,
       canvasW: 512, canvasH: 512, align: 'center',
       font: '72px luckiest-guy'})
     text.position.set(0, -1.4, 0.7)
