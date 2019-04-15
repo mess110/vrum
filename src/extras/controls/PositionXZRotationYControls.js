@@ -131,9 +131,10 @@ class PositionXZRotationYControls {
     this.keys[event.code] = event.type == "keydown"
   }
 
-  doGamepadEvent(event) {
+  doGamepadEvent(event, gamepadIndex) {
     if (event.type !== 'gamepadtick-vrum') { return }
-    let gamepad = event[0]
+    if (isBlank(gamepadIndex)) { gamepadIndex = 0 }
+    let gamepad = event[gamepadIndex]
     if (isBlank(gamepad)) { return }
 
     if (this.getGamepadDeltaX(gamepad) > 0.5) {

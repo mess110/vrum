@@ -1,3 +1,4 @@
+// http://squarefeet.github.io/ShaderParticleEngine/docs/api/global.html#GroupOptions
 class BaseParticle extends THREE.Object3D {
   constructor(input) {
     super()
@@ -34,6 +35,19 @@ class BaseParticle extends THREE.Object3D {
     })
     let max = Math.max(...ages)
     return max
+  }
+
+  setEmitterInnerPosition(pos) {
+    this.emitters.forEach((e) => {
+      e.position.value = pos
+    })
+  }
+
+  setEmitterInnerRotation(axis, angle) {
+    this.emitters.forEach((e) => {
+      e.rotation.axis = axis
+      e.rotation.angle = angle
+    })
   }
 
   setActiveMultiplier(value) {

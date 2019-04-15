@@ -120,14 +120,6 @@ class Button3D extends THREE.Object3D {
     }
   }
 
-  doGamepadEvent(event) {
-    if (event.type !== 'gamepadtick-vrum') { return }
-    // console.log(event[0].axes)
-    let button = event[0].buttons[0]
-    if (button.pressed) {
-    }
-  }
-
   // Don't override this method, instead override onClick()
   click() {
     if (this.isEnabled) {
