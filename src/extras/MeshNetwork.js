@@ -76,7 +76,14 @@ class MeshNetwork {
       video.pause()
       mn.container.removeChild(video)
     }
-    this.socket.close()
+    if (!isBlank(this.socket)) {
+      this.socket.close()
+    }
+  }
+
+  isConnected() {
+    if (isBlank(this.socket)) { return false }
+    return this.socket.connected
   }
 
   reconnect() {
@@ -132,7 +139,7 @@ class MeshNetwork {
   }
 
   static getRoomId(roomName) {
-    if (isBlank(roomName)) { roomName = 'room' }
+    if (isBlank(roomName)) { roomName = Config.instance.networking.roomQueryParamName }
     return discoveryClient.getParameterByName(roomName)
   }
 

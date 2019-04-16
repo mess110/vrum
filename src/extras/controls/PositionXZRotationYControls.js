@@ -189,4 +189,28 @@ class PositionXZRotationYControls {
       this.doKeyboardEvent({type: 'keyup', code: this.keybindings['Forward']})
     }
   }
+
+  // use this to construct a joy object which can be sent to doMobileEvent
+  // the joystick param is input from `controller` app.
+  vrumControl2Jostick(joystick) {
+    let obj = {
+      left: () => {
+        if (isBlank(joystick.direction)) { return false }
+        return joystick.direction.contains('left')
+      },
+      right: () => {
+        if (isBlank(joystick.direction)) { return false }
+        return joystick.direction.contains('right')
+      },
+      down: () => {
+        if (isBlank(joystick.direction)) { return false }
+        return joystick.direction.contains('down')
+      },
+      up: () => {
+        if (isBlank(joystick.direction)) { return false }
+        return joystick.direction.contains('up')
+      }
+    }
+    return obj
+  }
 }

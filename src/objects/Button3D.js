@@ -16,24 +16,18 @@
  *  button.doMouseEvent(event, raycaster)
  */
 class Button3D extends THREE.Object3D {
-  constructor(s) {
+  constructor(s, bgKey, fgKey) {
     super()
 
-    let bg = AssetManager.clone('button.bg.001.glb')
+    let bg = AssetManager.clone(bgKey)
     this.add(bg)
     this.bg = bg
 
-    let fg = AssetManager.clone('button.fg.001.glb')
+    let fg = AssetManager.clone(fgKey)
     this.add(fg)
     this.fg = fg
 
-    let text = new BaseText({
-      text: s, fillStyle: 'white',
-      strokeStyle: 'black', strokeLineWidth: 1,
-      canvasW: 512, canvasH: 512, align: 'center',
-      font: '72px luckiest-guy'})
-    text.position.set(0, -1.4, 0.7)
-    text.scale.set(1, 1, 1)
+    let text = this.initText(s)
     fg.add(text)
     this.text = text
 
@@ -43,6 +37,16 @@ class Button3D extends THREE.Object3D {
     this.pressSpeed = 4
     this.growSpeed = 2
     this.isMobileOrTablet = Utils.isMobileOrTablet()
+  }
+
+  initText(s) {
+    let text = new BaseText({
+      text: s, fillStyle: 'white',
+      strokeStyle: 'black', strokeLineWidth: 1,
+      canvasW: 512, canvasH: 512, align: 'center',
+      font: '72px luckiest-guy'})
+    text.position.set(0, -1.4, 0.7)
+    return text
   }
 
   setText(s) {

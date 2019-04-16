@@ -28,7 +28,7 @@ class LoadingScene extends Scene {
     camera.position.set(0, 10, 15)
     camera.lookAt(new THREE.Vector3(0, 0, 0))
 
-    this.initCallback()
+    this.initCallback(options)
 
     if (Config.instance.engine.debug) {
       console.info(`loadingScene started loading ${this.assetsToLoad.length} assets`)
@@ -36,7 +36,7 @@ class LoadingScene extends Scene {
     Engine.switch(this.callbackScene, this.assetsToLoad)
   }
 
-  initCallback() {
+  initCallback(options) {
     let cube = Utils.box({ size: 1 })
     this.add(cube)
     this.cube = cube

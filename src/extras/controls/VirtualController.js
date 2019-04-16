@@ -70,6 +70,19 @@ class VirtualController {
     this.getMainDomElement().style['touch-action'] = this.oldTouchActionValue
   }
 
+  trackIsPressed() {
+    ['joystickLeft', 'joystickRight'].forEach((joystick) => {
+      this[joystick].isPressed = false
+      this[joystick].addEventListener('touchStart', () => {
+        this[joystick].isPressed = true
+      })
+
+      this[joystick].addEventListener('touchEnd', () => {
+        this[joystick].isPressed = false
+      })
+    })
+  }
+
   getMainDomElement() {
     return document.querySelector(`#${Config.instance.renderer.domElementId}`)
   }

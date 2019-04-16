@@ -33,6 +33,8 @@ See [/src/extras/HighScoreManager.js](/src/extras/HighScoreManager.js) for more 
 
 ## MeshNetwork
 
+See [/tutorials/NETWORKING.md](/tutorials/NETWORKING.md) for a full tutorial.
+
 ```
 let mn = new MeshNetwork()
 

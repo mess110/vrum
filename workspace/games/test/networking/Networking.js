@@ -10,13 +10,15 @@ mn.setSignalingDebug(true)
 let socket = mn.connect('https://mesh.opinie-publica.ro', room, { audio: false, video: false })
 
 mn.onConnect = (peer) => {
-  let element = document.createElement('p')
+  let element = document.createElement('div')
   element.setAttribute('id', `peer-${peer.cmKey}`)
-  element.innerHTML = peer.cmKey
-  element.appendChild(document.createElement('br'))
-  element.appendChild(document.createElement('span'))
-  element.appendChild(document.createElement('br'))
-  element.appendChild(document.createElement('span'))
+
+  let elementKey = document.createElement('p')
+  elementKey.innerHTML = peer.cmKey
+  element.appendChild(elementKey)
+
+  let elementAction = document.createElement('p')
+  element.appendChild(elementAction)
 
   document.querySelector('#peers').appendChild(element)
 }
@@ -28,14 +30,7 @@ mn.onData = (peer, data) => {
     return
   }
 
-  if (data.action === 'stick') {
-    var stickStatus = `${data.dX}:${data.dY} - ${data.isPressed} ${data.direction}`
-    element.children[1].innerHTML = stickStatus
-  }
-  if (data.action === 'fire') {
-    var fireStatus = `fire! ${data.isPressed}`
-    element.children[3].innerHTML = fireStatus
-  }
+  element.children[1].innerHTML = JSON.stringify(data)
 }
 
 mn.onError = (peer, error) => {

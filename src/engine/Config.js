@@ -81,6 +81,10 @@ class Config {
       // Default modifier duration
       duration: 1000
     }
+    this.networking = {
+      // the name of the query param used to get the roomName for MeshNetwork
+      roomQueryParamName: 'room'
+    }
     this.ui = {
       // Order in which html elements are layered
       zIndex: {

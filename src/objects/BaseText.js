@@ -73,6 +73,10 @@ class BaseText extends THREE.Mesh {
     });
   }
 
+  appendText(text) {
+    this.setText(`${this.text}${text}`)
+  }
+
   clear() {
     this.dynamicTexture.clear();
   }

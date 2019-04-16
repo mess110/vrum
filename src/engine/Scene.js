@@ -18,6 +18,7 @@ class Scene extends THREE.Scene {
   }
 
   _fullInit(options) {
+    if (isBlank(options)) { options = {} }
     this.intervals = []
     this.timeouts = []
     this.init(options)
