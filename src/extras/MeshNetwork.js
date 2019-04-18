@@ -60,7 +60,11 @@ class MeshNetwork {
         mn.onError(undefined, error)
       })
     } else {
-      mn.socket = mn.cm.connect(host, room, false, options.cCallback, options.dcCallback)
+      try {
+        mn.socket = mn.cm.connect(host, room, false, options.cCallback, options.dcCallback)
+      } catch (e) {
+        mn.onError(undefined, e)
+      }
     }
 
     return this.socket

@@ -80,13 +80,22 @@ class Engine {
     if (!this.running) {
       return
     }
-    var tpf = this._getTimePerFrame()
+
+    RStatsManager.startMeasure()
+
+    let tpf = this._getTimePerFrame()
     TWEEN.update()
+
+    RStatsManager.midMeasure()
+
     this.renderManager.render(tpf)
     if (this.takeScreenshot) {
       this.takeScreenshot = undefined
       Utils.saveScreenshot()
     }
+
+    RStatsManager.endMeasure()
+
     this.frameIndex = requestAnimationFrame(this.tick)
   }
 

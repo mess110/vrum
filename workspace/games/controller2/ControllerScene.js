@@ -14,6 +14,7 @@ class ControllerScene extends Scene {
   connect() {
     let mn = MeshNetwork.instance
     if (mn.isConnected()) { return }
+
     mn.connect('https://mesh.opinie-publica.ro', roomId, {
       cCallback: function () {
         Hodler.get('scene').addControls()
@@ -22,6 +23,8 @@ class ControllerScene extends Scene {
         // lost connection with socket.io
       }
     })
+
+    mn.onData = (peer, data) => {}
   }
 
   getDirection(joystick) {
@@ -53,6 +56,7 @@ class ControllerScene extends Scene {
       let scene = Hodler.get('scene')
 
       let obj = {
+        vrumKey: vrumKey,
         type: 'vrum-controller',
         joystickLeft: scene.formatJoystick(scene.vc.joystickLeft),
         joystickRight: scene.formatJoystick(scene.vc.joystickRight)

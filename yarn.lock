@@ -484,6 +484,10 @@ rimraf@^2.6.2:
   dependencies:
     glob "^7.1.3"
 
+rstats@spite/rstats:
+  version "1.0.1"
+  resolved "https://codeload.github.com/spite/rstats/tar.gz/7b10eba2c14e27b5dfa575614abbb49241427ac5"
+
 shader-particle-engine@squarefeet/ShaderParticleEngine:
   version "1.0.6"
   resolved "https://codeload.github.com/squarefeet/ShaderParticleEngine/tar.gz/ecc2886ce952d8f0ae0739f031bead671445f8a9"

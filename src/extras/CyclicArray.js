@@ -15,6 +15,14 @@ class CyclicArray {
     return this.items[this.index]
   }
 
+  setIndexByValue(item) {
+    this.index = this.items.indexOf(item)
+    if (this.index < 0) {
+      console.warn('did not find item in CyclicArray')
+      this.index = 0
+    }
+  }
+
   next() {
     this.index += 1
     if (this.index > (this.items.size() - 1)) { this.index = 0 }
@@ -31,4 +39,3 @@ class CyclicArray {
     return this.items.size()
   }
 }
-

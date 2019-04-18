@@ -7,6 +7,7 @@ Persist.default('username', 'player')
 let controllerScene = new ControllerScene()
 let landingScene = new LandingScene()
 let roomId = MeshNetwork.getRoomId()
+let vrumKey = Utils.guid()
 let username = Persist.get('username')
 
 let startScene
