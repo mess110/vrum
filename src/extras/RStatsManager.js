@@ -43,7 +43,6 @@ class RStatsManager {
     if (isBlank(RStatsManager.instance)) { return }
     let inst = RStatsManager.instance
 
-    /* Perform action #1 */
     inst.rS( 'action1' ).end();
     inst.rS( 'render' ).start();
   }

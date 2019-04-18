@@ -60,6 +60,7 @@
 }
 
 .rs-base div.rs-counter-base{
+    color: gray;
     position: relative;
     margin: 2px 0;
     height: 1em;
