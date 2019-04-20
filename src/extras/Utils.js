@@ -9,6 +9,44 @@ class Utils {
     return JSON.parse(JSON.stringify(json));
   }
 
+  static rgbToHex(r, g, b) {
+    if ((r > 255) || (g > 255) || (b > 255)) { throw "Invalid color component" }
+    return ((r << 16) | (g << 8) | b).toString(16)
+  }
+
+  static addLightHex(color, amount){
+    let cc = parseInt(color,16) + amount;
+    let c = (cc > 255) ? 255 : (cc);
+    c = (c.toString(16).length > 1 ) ? c.toString(16) : `0${c.toString(16)}`;
+    return c;
+  }
+
+  // Utils.lightenHex('red', 0.2)
+  static lightenHex(color, amount) {
+    amount *= 100
+    if (!(color instanceof THREE.Color)) { color = new THREE.Color(color) }
+    color = new THREE.Color(color).getHexString()
+    amount = parseInt((255*amount)/100);
+    return color = `#${Utils.addLightHex(color.substring(0,2), amount)}${Utils.addLightHex(color.substring(2,4), amount)}${Utils.addLightHex(color.substring(4,6), amount)}`;
+  }
+
+  static subtractLightHex(color, amount) {
+    let cc = parseInt(color,16) - amount;
+    let c = (cc < 0) ? 0 : (cc);
+    c = (c.toString(16).length > 1 ) ? c.toString(16) : `0${c.toString(16)}`;
+    return c;
+  }
+
+  // Utils.darkenHex('red', 0.2)
+  // Utils.darkenHex('#ff0000', 0.2)
+  static darkenHex(color, amount) {
+    amount *= 100
+    if (!(color instanceof THREE.Color)) { color = new THREE.Color(color) }
+    color = new THREE.Color(color).getHexString()
+    amount = parseInt((255*amount)/100);
+    return color = `#${Utils.subtractLightHex(color.substring(0,2), amount)}${Utils.subtractLightHex(color.substring(2,4), amount)}${Utils.subtractLightHex(color.substring(4,6), amount)}`;
+  }
+
   // Creates a material from what is drawn on a canvas
   static materialFromCanvas(canvas) {
     const texture = new THREE.Texture(canvas);
@@ -416,12 +454,6 @@ class Utils {
     } else if (url === 'hidden' || url === 'none') {
       document.body.style.cursor = 'none'
     }
-  }
-
-  // Convert RGB value to Hex
-  static rgbToHex(r, g, b) {
-    if ((r > 255) || (g > 255) || (b > 255)) { throw "Invalid color component" }
-    return ((r << 16) | (g << 8) | b).toString(16)
   }
 
   static getTextureSize(key, scaleFactor) {

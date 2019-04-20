@@ -49,6 +49,29 @@ class Button3D extends THREE.Object3D {
     return text
   }
 
+  setFgColor(color) {
+    if (!(color instanceof THREE.Color)) {
+      color = new THREE.Color(color)
+    }
+    this.fg.children[0].material.color = color
+  }
+
+  setBgColor(color) {
+    if (!(color instanceof THREE.Color)) {
+      color = new THREE.Color(color)
+    }
+    this.bg.children[0].material.color = color
+  }
+
+  setColor(color, percent) {
+    if (isBlank(percent)) { percent = 0.25 }
+    this.setFgColor(color)
+    // let shaded = Utils.lightenHex(color, percent)
+    let shaded = Utils.darkenHex(color, percent)
+    console.log(shaded)
+    this.setBgColor(shaded)
+  }
+
   setText(s) {
     this.text.setText(s)
   }
