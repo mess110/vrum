@@ -36,7 +36,6 @@ class TypeWriter extends THREE.Object3D {
     let lineArray = lines.map((e) => { return e.split('') })
     lineArray.push(['back', 'back', ' ', ' ', ' ', '<-', '<-', '<-', 'ok', 'ok'])
     this.lineArray = lineArray
-    console.log(lineArray)
 
     lines.forEach((line, index) => {
       this.addLetterRow(line, index * -this.buttonWidth)
@@ -250,6 +249,7 @@ class TypeWriter extends THREE.Object3D {
       this.doKeyboardEvent({type: 'keydown', code: 'ArrowRight'})
       this.lastGamepadEventTime = this.uptime
     }
+    // A on xbox
     if (gamepad.buttons[0].pressed) {
       this.clickedWithGamepad = true
       this.doKeyboardEvent({type: 'keydown', code: 'Enter'})
@@ -258,5 +258,17 @@ class TypeWriter extends THREE.Object3D {
       }, 100)
       this.lastGamepadEventTime = this.uptime
     }
+    // back button on xbox
+    if (gamepad.buttons[8].pressed) {
+      this.clickedWithGamepad = true
+      this.doKeyboardEvent({type: 'keydown', code: 'Escape'})
+      setTimeout(() => {
+        this.doKeyboardEvent({type: 'keyup', code: 'Escape'})
+      }, 100)
+      this.lastGamepadEventTime = this.uptime
+    }
+    // if (gamepad.buttons.filter((e) => { return e.pressed }).any()) {
+      // console.log(gamepad.buttons)
+    // }
   }
 }
