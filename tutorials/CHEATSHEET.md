@@ -410,7 +410,28 @@ See [/src/extras/PoolManager.js](/src/extras/PoolManager.js) for details
 
 ## Camera
 
-See [Camera](https://threejs.org/docs/#api/en/cameras/OrthographicCamera)
+The default camera is the perspective camera. If the defaults don't work for you
+checkout `Config.instance.camera`. The other camera type is ortographic. Think
+2d games.
+
+You can change the camera by changing the `type`. Make sure you set the variable
+before calling start.
+
+```
+Config.instance.camera.type = 'ortographic'
+```
+
+If you want an even finer control, you can use the helper `Utils.camera`
+or override the `initCamera` method called by the renderer.
+
+```
+RenderManager.initCamera = () => {
+  return Utils.camera({ type: 'ortographic' })
+}
+```
+
+[OrthographicCamera](https://threejs.org/docs/#api/en/cameras/OrthographicCamera):
+[PerspectiveCamera](https://threejs.org/docs/#api/en/cameras/PerspectiveCamera):
 
 ## RTSCamera
 

@@ -646,6 +646,44 @@ class Utils {
     camera.position.copy(normCamPos)
   }
 
+  // Utils.camera({ type: 'ortographic' })
+  // Utils.camera({ type: 'perspective' })
+  static camera(options) {
+    if (isBlank(options)) { options = {} }
+    if (!Config.instance.camera.validCameraTypes.includes(options.type)) { throw `invalid camera type '${options.type}'`}
+    if (isBlank(options.near)) { options.near = Config.instance.camera.near }
+    if (isBlank(options.far)) { options.far = Config.instance.camera.far }
+
+    // perspective only params
+    if (isBlank(options.fov)) { options.fov = Config.instance.camera.fov }
+
+    // ortographic only params
+    if (isBlank(options.mod)) { options.mod = 50 }
+
+    let size = new THREE.Vector2()
+    Hodler.get('renderer').getSize(size)
+
+    let width = size.x
+    let height = size.y
+
+    let camera
+
+    if (options.type == 'perspective') {
+      camera = new THREE.PerspectiveCamera(
+        options.fov, width / height, options.near, options.far
+      )
+    }
+    if (options.type == 'ortographic') {
+      let mod = options.mod
+      camera = new THREE.OrthographicCamera(
+        width / - mod, width / mod, height / mod, height / - mod,
+        options.near, options.far
+      )
+    }
+
+    return camera
+  }
+
   static toggleOrbitControls(target) {
     if (![THREE.OrbitControls, THREE.CustomOrbitControls].includes(target)) { target = THREE.OrbitControls }
 

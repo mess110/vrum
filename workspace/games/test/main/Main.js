@@ -49,7 +49,8 @@ let scene1 = new FeaturesTest()
 let scene2 = new Scene2()
 let scene3 = new Scene3()
 let scene4 = new SceneLoaderTest()
-let loadingScene = new LoadingScene(scene1, [
+let scene5 = new CameraTest()
+let loadingScene = new LoadingScene(scene5, [
   { type: 'font',  path: '/workspace/assets/fonts/luckiest-guy' },
   { type: 'model', path: '/workspace/assets/models/chicken.gltf' },
   { type: 'model', path: '/workspace/assets/models/chicken.gltf' },

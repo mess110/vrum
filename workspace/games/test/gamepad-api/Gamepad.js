@@ -102,6 +102,9 @@ class GameScene extends Scene {
   }
 }
 
+// Config.instance.camera.type = 'perspective'
+Config.instance.camera.type = 'ortographic'
+
 let gameScene = new GameScene()
 Engine.start(gameScene, [
   { type: 'font',  path: '/workspace/assets/fonts/luckiest-guy' },

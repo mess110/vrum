@@ -58,8 +58,10 @@ class Config {
       }
     }
     this.camera = {
-      // Default camera
-      type: 'THREE.PerspectiveCamera',
+      // Default camera type
+      type: 'perspective',
+      validCameraTypes: ['perspective', 'ortographic'],
+
 
       // Default camera field of view
       fov: 50,

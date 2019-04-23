@@ -38,9 +38,7 @@ class RenderManager {
   }
 
   static initCamera() {
-    let size = new THREE.Vector2()
-    Hodler.get('renderer').getSize(size)
-    var camera = new THREE.PerspectiveCamera(Config.instance.camera.fov, size.x / size.y, Config.instance.camera.near, Config.instance.camera.far)
+    let camera = Utils.camera({ type: Config.instance.camera.type })
     return camera
   }
 
