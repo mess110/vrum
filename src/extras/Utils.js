@@ -1,4 +1,25 @@
 class Utils {
+  // copy a string to clipboard
+  static copyToClipboard(str) {
+     var el = document.createElement('textarea');
+     el.value = str;
+     // Set non-editable to avoid focus and move outside of view
+     el.setAttribute('readonly', '');
+     el.style = {position: 'absolute', left: '-9999px'};
+     document.body.appendChild(el);
+     el.select();
+     document.execCommand('copy');
+     document.body.removeChild(el);
+  }
+
+  static getFullUrl() {
+    return window.location.href
+  }
+
+  static getUrlNoParams() {
+    return Utils.getFullUrl().split('?')[0]
+  }
+
   // This is here more as a reminder you can pass params to setTimeout
   static delay(fn, time, ...args) {
     return setTimeout(fn, time, ...Array.from(args))

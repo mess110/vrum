@@ -53,11 +53,16 @@ class BaseText extends THREE.Mesh {
     this.setText(text)
   }
 
-  setText(text) {
-    if ((text === '') || (text == null)) { text = ' '; }
+  setSafeText(text) {
+    if (text === this.text) { return }
+    this.setText(text)
+  }
 
-    this.text = text.toString();
-    this.clear();
+  setText(text) {
+    if ((text === '') || (isBlank(text))) { text = ' ' }
+
+    this.text = text.toString()
+    this.clear()
     return this.dynamicTexture.drawTextCooked({
       text: this.text,
       margin: this.margin,
@@ -71,6 +76,10 @@ class BaseText extends THREE.Mesh {
       y: this.y,
       font: this.font
     });
+  }
+
+  getText() {
+    return this.text
   }
 
   appendText(text) {

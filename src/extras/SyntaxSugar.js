@@ -290,7 +290,25 @@ const arrayOrStringToString = (input) => {
   }
 }
 
-// TODO: use traverse
+THREE.Object3D.prototype.setDoubleSided = function (recursive) {
+  if (isBlank(recursive)) { recursive = true }
+
+  if (recursive) {
+    this.traverse((child) => {
+      if (child.uuid !== this.uuid) {
+        child.setDoubleSided(recursive)
+      }
+    })
+  }
+  if (isBlank(this.material)) {
+    return
+  }
+
+  Array.from([].concat(this.material)).forEach((material) => {
+    material.side = THREE.DoubleSide
+  })
+}
+
 THREE.Object3D.prototype.setOpacity = function (amount, recursive) {
   if (isBlank(recursive)) { recursive = true }
 

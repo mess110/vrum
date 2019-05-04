@@ -50,7 +50,7 @@ let scene2 = new Scene2()
 let scene3 = new Scene3()
 let scene4 = new SceneLoaderTest()
 let scene5 = new CameraTest()
-let loadingScene = new LoadingScene(scene5, [
+let loadingScene = new LoadingScene(scene1, [
   { type: 'font',  path: '/workspace/assets/fonts/luckiest-guy' },
   { type: 'model', path: '/workspace/assets/models/chicken.gltf' },
   { type: 'model', path: '/workspace/assets/models/chicken.gltf' },
@@ -83,6 +83,7 @@ Hodler.add('scene4', scene4)
 Persist.default('name', 'player1')
 console.log(Persist.get('name'))
 
+// Config.instance.camera.type = 'ortographic'
 Engine.start(loadingScene)
 
 AfterEffects.prototype.effects = AfterEffects.bloomFilm
