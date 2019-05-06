@@ -7,7 +7,10 @@ class Config {
     this.engine = {
       // Enables custom logging (log msg when a model is loaded)
       // and other debug features
-      debug: false
+      debug: false,
+
+      // Valid values are number of frames per second. Example: 60
+      fixedFPS: undefined,
     }
     this.window = {
       // Automatically resize the renderer with the window
@@ -61,7 +64,6 @@ class Config {
       // Default camera type
       type: 'perspective',
       validCameraTypes: ['perspective', 'ortographic'],
-
 
       // Default camera field of view
       fov: 50,

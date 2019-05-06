@@ -674,12 +674,7 @@ class Utils {
     if (!Config.instance.camera.validCameraTypes.includes(options.type)) { throw `invalid camera type '${options.type}'`}
     if (isBlank(options.near)) { options.near = Config.instance.camera.near }
     if (isBlank(options.far)) { options.far = Config.instance.camera.far }
-
-    // perspective only params
     if (isBlank(options.fov)) { options.fov = Config.instance.camera.fov }
-
-    // ortographic only params
-    if (isBlank(options.mod)) { options.mod = 50 }
 
     let size = new THREE.Vector2()
     Hodler.get('renderer').getSize(size)
@@ -695,7 +690,7 @@ class Utils {
       )
     }
     if (options.type == 'ortographic') {
-      let mod = options.mod
+      let mod = options.fov
       camera = new THREE.OrthographicCamera(
         width / - mod, width / mod, height / mod, height / - mod,
         options.near, options.far

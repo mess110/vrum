@@ -126,7 +126,7 @@ class Measure {
     return raycaster.intersectObjects(objects, true)
   }
 
-  static intersectsFrom(raycaster, objects, startPoint, direction, far) {
+  static getIntersectionsFrom(raycaster, objects, startPoint, direction, far) {
     if (isBlank(raycaster)) {
       console.error('raycaster can not be blank')
       return
@@ -137,7 +137,11 @@ class Measure {
 
     raycaster.set(startPoint, direction)
     raycaster.far = far
-    return Measure.getIntersections(raycaster, objects).any()
+    return Measure.getIntersections(raycaster, objects)
+  }
+
+  static intersectsFrom(raycaster, objects, startPoint, direction, far) {
+    return Measure.getIntersectionsFrom(raycaster, objects, startPoint, direction, far).any()
   }
 
   sensor(pointA, direction, distance) {

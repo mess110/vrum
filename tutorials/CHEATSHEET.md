@@ -433,6 +433,12 @@ RenderManager.initCamera = () => {
 [OrthographicCamera](https://threejs.org/docs/#api/en/cameras/OrthographicCamera):
 [PerspectiveCamera](https://threejs.org/docs/#api/en/cameras/PerspectiveCamera):
 
+Adjust distance with `fov`
+
+```
+Config.instance.camera.fov = 50
+```
+
 ## RTSCamera
 
 ```
@@ -608,6 +614,10 @@ this.add(starfield)
 ```
 
 ## ToonOutline
+
+```
+Utils.addMeshOutlineTo(cube, outlineCube, 3, outlineMaterial)
+```
 
 There are a few helper methods to help you get started with giving a toon
 outline effect. It works is by overlaying the same shaped object with an outline

@@ -94,6 +94,7 @@ let VRUM_DEPENDS = [
   "../../../src/extras/controls/RTSCamera2.js",
   "../../../src/extras/controls/VirtualController.js",
   "../../../src/extras/controls/PositionXZRotationYControls.js",
+  "../../../src/extras/controls/PlatformerControls.js",
   "../../../src/extras/controls/RayScanner.js",
 
   "../../../src/objects/BaseParticle.js",

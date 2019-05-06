@@ -1,5 +1,5 @@
 /*
- * Allows controlling a mesh with keyboard/gamepad/mobile
+ * Allows platformer controls with keyboard/gamepad/mobile
  *
  * Moves the mesh in X and Z
  * Mesh always faces the direction of motion (Y axis)
@@ -7,7 +7,7 @@
  *
  * Example usage:
  *
- *  let control = new PositionXZRotationYControls()
+ *  let control = new PlatformerControls()
  *  this.control = control
  *
  *  // within the scene tick method
@@ -26,12 +26,12 @@
  *  this.control.doGamepadEvent(event, gamepadIndex)
  *  this.control.doMobileEvent(joystick) // from VirtualController
 */
-class PositionXZRotationYControls {
+class PlatformerControls {
   constructor() {
     this.keys = {}
     this.keybindings = {
-      'Forward': 'KeyW',
-      'Backward': 'KeyS',
+      'Up': 'KeyW',
+      'Down': 'KeyS',
       'Left': 'KeyA',
       'Right': 'KeyD',
     }
@@ -40,13 +40,17 @@ class PositionXZRotationYControls {
       'StickUpDown': 1,
     }
 
-    this.velocity = new THREE.Vector3(0, 0, 0)
-    this.speed = 5
-    this.acceleration = 1
+    this.jumping = true
+    this.velocity = new THREE.Vector3(0, 0)
     this.friction = 0.9
-    this.targetRotationY = 0
-    this.rotationY = 0
-    this.rotationSpeed = 12
+    this.frictionMoving = 0.7
+    this.jumpFriction = 0.99
+    this.speed = 1.25
+    this.jumpSpeed = 30
+    this.canJump = true
+    this.gravity = 1.5
+    this.jumpSaveMs = 200
+    this.jumpAt = 0
   }
 
   is(which) {
@@ -54,81 +58,59 @@ class PositionXZRotationYControls {
   }
 
   isMoving() {
-    return this.is('Forward') || this.is('Backward') || this.is('Left') || this.is('Right')
-  }
-
-  // Quaternion based rotation
-  //
-  // var quaternion = new THREE.Quaternion()
-  // quaternion.setFromAxisAngle( new THREE.Vector3( 0, 1, 0 ), this.targetRotationY)
-  // this.tank.quaternion.slerp(quaternion, (rSpeed * tpf))
-  tickRotation(tpf) {
-    let diff = Math.abs(this.rotationY - this.targetRotationY)
-    if (diff >= this.rotationSpeed * tpf) {
-      let tankR = Measure.radiansToDeg(this.rotationY)
-      let targetR = Measure.radiansToDeg(this.targetRotationY)
-      if (Measure.calcShortestRotDirection(tankR, targetR)) {
-        this.rotationY += this.rotationSpeed * tpf
-      } else {
-        this.rotationY -= this.rotationSpeed * tpf
-      }
-      this.rotationY = Measure.normalizeRadians(this.rotationY)
-    } else {
-      this.rotationY = this.targetRotationY
-    }
+    return this.is('Up') || this.is('Down') || this.is('Left') || this.is('Right')
   }
 
   tick(tpf) {
-    if (this.is('Forward')) {
-      if (this.velocity.z > -this.speed) {
-        this.velocity.z -= tpf * this.acceleration
-      }
-      this.targetRotationY = Math.PI
+    let up = this.is('Up')
+    let down = this.is('Down')
+    let left = this.is('Left')
+    let right = this.is('Right')
+
+    let now = new Date().getTime()
+
+    if (up && !this.jumping && this.canJump) {
+      this.velocity.y = this.jumpSpeed
+      this.jumping = true
+      this.canJump = false
     }
 
-    if (this.is('Backward')) {
-      if (this.velocity.z < this.speed) {
-        this.velocity.z += tpf * this.acceleration
-      }
-      this.targetRotationY = 0
+    if (left) {
+      this.velocity.x -= this.speed
     }
 
-    if (this.is('Left')) {
-      if (this.velocity.x > -this.speed) {
-        this.velocity.x -= tpf * this.acceleration
-      }
-      this.targetRotationY = Math.PI / 2 * 3
+    if (right) {
+      this.velocity.x += this.speed
     }
 
-    if (this.is('Right')) {
-      if (this.velocity.x < this.speed) {
-        this.velocity.x += tpf * this.acceleration
-      }
-      this.targetRotationY = Math.PI / 2
+    this.velocity.y -= this.gravity
+
+    if (left || right) {
+      this.velocity.x *= this.friction
+    } else {
+      this.velocity.x *= this.frictionMoving
     }
 
-    if (this.is('Forward') && this.is('Left')) {
-      this.targetRotationY = (Math.PI + Math.PI / 2 * 3) / 2
+    if (this.velocity.y < -30) {
+      this.velocity.y = -30
     }
-    if (this.is('Forward') && this.is('Right')) {
-      this.targetRotationY = (Math.PI + Math.PI / 2) / 2
+    if (this.velocity.y > 30) {
+      this.velocity.y = 30
     }
-    if (this.is('Backward') && this.is('Left')) {
-      this.targetRotationY = (Math.PI * 2 + Math.PI / 2 * 3) / 2
-    }
-    if (this.is('Backward') && this.is('Right')) {
-      this.targetRotationY = (0 + Math.PI / 2) / 2
-    }
+    this.velocity.y *= this.jumpFriction
+  }
 
-    this.velocity.x *= this.friction
-    this.velocity.z *= this.friction
-
-    this.tickRotation(tpf)
+  land() {
+    this.jumping = false
+    this.velocity.y = 0
   }
 
   doKeyboardEvent(event) {
     if (!Object.values(this.keybindings).includes(event.code)) { return }
     this.keys[event.code] = event.type == "keydown"
+    if (event.type == 'keyup' && event.code == this.keybindings['Up']) {
+      this.canJump = true
+    }
   }
 
   doGamepadEvent(event, gamepadIndex) {
@@ -148,14 +130,14 @@ class PositionXZRotationYControls {
       this.doKeyboardEvent({type: 'keyup', code: this.keybindings['Left']})
     }
     if (this.getGamepadDeltaY(gamepad) > 0.5) {
-      this.doKeyboardEvent({type: 'keydown', code: this.keybindings['Backward']})
+      this.doKeyboardEvent({type: 'keydown', code: this.keybindings['Down']})
     } else {
-      this.doKeyboardEvent({type: 'keyup', code: this.keybindings['Backward']})
+      this.doKeyboardEvent({type: 'keyup', code: this.keybindings['Down']})
     }
     if (this.getGamepadDeltaY(gamepad) < -0.5) {
-      this.doKeyboardEvent({type: 'keydown', code: this.keybindings['Forward']})
+      this.doKeyboardEvent({type: 'keydown', code: this.keybindings['Up']})
     } else {
-      this.doKeyboardEvent({type: 'keyup', code: this.keybindings['Forward']})
+      this.doKeyboardEvent({type: 'keyup', code: this.keybindings['Up']})
     }
   }
 
@@ -179,14 +161,14 @@ class PositionXZRotationYControls {
       this.doKeyboardEvent({type: 'keyup', code: this.keybindings['Left']})
     }
     if (joy.down()) {
-      this.doKeyboardEvent({type: 'keydown', code: this.keybindings['Backward']})
+      this.doKeyboardEvent({type: 'keydown', code: this.keybindings['Down']})
     } else {
-      this.doKeyboardEvent({type: 'keyup', code: this.keybindings['Backward']})
+      this.doKeyboardEvent({type: 'keyup', code: this.keybindings['Down']})
     }
     if (joy.up()) {
-      this.doKeyboardEvent({type: 'keydown', code: this.keybindings['Forward']})
+      this.doKeyboardEvent({type: 'keydown', code: this.keybindings['Up']})
     } else {
-      this.doKeyboardEvent({type: 'keyup', code: this.keybindings['Forward']})
+      this.doKeyboardEvent({type: 'keyup', code: this.keybindings['Up']})
     }
   }
 

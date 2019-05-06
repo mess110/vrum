@@ -43,6 +43,7 @@ const resetCamPosition = (distance) => {
   let camera = Hodler.get('camera')
   camera.position.set(0, distance, distance)
   camera.lookAt(new THREE.Vector3(0, 0, 0))
+  return camera
 }
 
 let scene1 = new FeaturesTest()
@@ -79,6 +80,7 @@ Hodler.add('scene1', scene1)
 Hodler.add('scene2', scene2)
 Hodler.add('scene3', scene3)
 Hodler.add('scene4', scene4)
+Hodler.add('scene5', scene5)
 
 Persist.default('name', 'player1')
 console.log(Persist.get('name'))

@@ -67,7 +67,11 @@ class Engine {
 
   start() {
     this.running = true
-    this.tick()
+    if (isBlank(Config.instance.engine.fixedFPS)) {
+      this.tick()
+    } else {
+      this.fixedTick()
+    }
   }
 
   stop() {
@@ -97,6 +101,32 @@ class Engine {
     RStatsManager.endMeasure()
 
     this.frameIndex = requestAnimationFrame(this.tick)
+  }
+
+  fixedTick() {
+    let engine = Hodler.get('engine')
+    if (!engine.running) {
+      return
+    }
+
+    RStatsManager.startMeasure()
+
+    let tpf = 1000 / Config.instance.engine.fixedFPS
+    TWEEN.update()
+
+    RStatsManager.midMeasure()
+
+    setTimeout(() => {
+      engine.frameIndex = requestAnimationFrame(engine.fixedTick)
+    }, tpf)
+    engine.renderManager.render(tpf / 1000)
+
+    if (engine.takeScreenshot) {
+      engine.takeScreenshot = undefined
+      Utils.saveScreenshot()
+    }
+
+    RStatsManager.endMeasure()
   }
 
   _getTimePerFrame() {

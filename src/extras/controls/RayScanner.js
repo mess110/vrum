@@ -19,6 +19,7 @@ class RayScanner {
   constructor(collidables) {
     this.raycaster = new THREE.Raycaster()
     this.addX = true
+    this.addY = true
     this.addZ = true
     this.drawLines = false
     this.collidables = collidables
@@ -27,40 +28,42 @@ class RayScanner {
 
   scan(fromPosition, velocity) {
     this.addX = true
+    this.addY = true
     this.addZ = true
 
-    if (this.drawLine(fromPosition, new THREE.Vector3(1, 0, 0)) && velocity.x > 0) {
+    if (this.intersects(fromPosition, new THREE.Vector3(1, 0, 0)) && velocity.x > 0) {
       this.addX = false
     }
 
-    if (this.drawLine(fromPosition, new THREE.Vector3(-1, 0, 0)) && velocity.x < 0) {
+    if (this.intersects(fromPosition, new THREE.Vector3(-1, 0, 0)) && velocity.x < 0) {
       this.addX = false
     }
 
-    if (this.drawLine(fromPosition, new THREE.Vector3(0, 0, 1)) && velocity.z > 0) {
+    if (this.intersects(fromPosition, new THREE.Vector3(0, 1, 0)) && velocity.y < 0) {
+      this.addY = false
+    }
+
+    if (this.intersects(fromPosition, new THREE.Vector3(0, -1, 0)) && velocity.y > 0) {
+      this.addY = false
+    }
+
+    if (this.intersects(fromPosition, new THREE.Vector3(0, 0, 1)) && velocity.z > 0) {
       this.addZ = false
     }
 
-    if (this.drawLine(fromPosition, new THREE.Vector3(0, 0, -1)) && velocity.z < 0) {
+    if (this.intersects(fromPosition, new THREE.Vector3(0, 0, -1)) && velocity.z < 0) {
       this.addZ = false
     }
+  }
 
-    // if (this.drawLine(fromPosition, new THREE.Vector3(1, 0, 1)) && (velocity.x > 0 && velocity.z > 0)) {
-      // this.addX = false
-      // this.addZ = false
-    // }
-    // if (this.drawLine(fromPosition, new THREE.Vector3(-1, 0, 1)) && (velocity.x < 0 && velocity.z > 0)) {
-      // this.addX = false
-      // this.addZ = false
-    // }
-    // if (this.drawLine(fromPosition, new THREE.Vector3(1, 0, -1)) && (velocity.x > 0 && velocity.z < 0)) {
-      // this.addX = false
-      // this.addZ = false
-    // }
-    // if (this.drawLine(fromPosition, new THREE.Vector3(-1, 0, -1)) && (velocity.x < 0 && velocity.z < 0)) {
-      // this.addX = false
-      // this.addZ = false
-    // }
+  scanEdgesBottom(fromPosition, halfWidth) {
+    let from1 = fromPosition.clone()
+    from1.x -= halfWidth
+    let from2 = fromPosition.clone()
+    from2.x += halfWidth
+    let interDown = this.getIntersects(from1, new THREE.Vector3(0, -1, 0))
+    let interDown2 = this.getIntersects(from2, new THREE.Vector3(0, -1, 0))
+    return interDown.concat(interDown2)
   }
 
   addCollidable(obj) {
@@ -79,13 +82,27 @@ class RayScanner {
     }
   }
 
-  drawLine(fromPosition, direction) {
+  intersects(fromPosition, direction) {
     let length = this.lineLength
     let inters = Measure.intersectsFrom(this.raycaster, this.collidables, fromPosition, direction, length)
+
     let color = inters ? 'red' : 'green'
     if (this.drawLines) {
       Measure.addLineDirection(fromPosition, direction, length, color)
     }
-    return color == 'red'
+
+    return inters
+  }
+
+  getIntersects(fromPosition, direction) {
+    let length = this.lineLength
+    let inters = Measure.getIntersectionsFrom(this.raycaster, this.collidables, fromPosition, direction, length)
+
+    let color = inters.any() ? 'red' : 'green'
+    if (this.drawLines) {
+      Measure.addLineDirection(fromPosition, direction, length, color)
+    }
+
+    return inters
   }
 }
