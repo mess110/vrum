@@ -65,6 +65,7 @@ class MainScene extends Scene {
     let cube = this.cube
     let fromPosition = cube.position.clone()
 
+    fromPosition.x += this.controls.velocity.x * tpf
     fromPosition.y += this.controls.velocity.y * tpf
 
     let beneath = this.rayscanner.scanEdgesBottom(fromPosition, 0.5)
@@ -73,10 +74,19 @@ class MainScene extends Scene {
       cube.position.y = beneath.first().object.position.y + 1
     }
 
-    if (this.controls.velocity.x > 0 && !this.rayscanner.getIntersects(cube.position, new THREE.Vector3(1, 0, 0)).any()) {
+    let hasOnRight = this.rayscanner.getIntersects(fromPosition, new THREE.Vector3(1, 0, 0)).any()
+    if (hasOnRight) {
+      this.controls.velocity.x = 0
+    }
+    if (this.controls.velocity.x > 0 && !hasOnRight) {
       cube.position.x += this.controls.velocity.x * tpf
     }
-    if (this.controls.velocity.x < 0 && !this.rayscanner.getIntersects(cube.position, new THREE.Vector3(-1, 0, 0)).any()) {
+
+    let hasOnLeft = this.rayscanner.getIntersects(fromPosition, new THREE.Vector3(-1, 0, 0)).any()
+    if (hasOnLeft) {
+      this.controls.velocity.x = 0
+    }
+    if (this.controls.velocity.x < 0 && !hasOnLeft) {
       cube.position.x += this.controls.velocity.x * tpf
     }
     cube.position.y += this.controls.velocity.y * tpf
