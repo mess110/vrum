@@ -43,14 +43,14 @@ class PlatformerControls {
     this.jumping = true
     this.velocity = new THREE.Vector3(0, 0)
     this.friction = 0.9
-    this.frictionMoving = 0.7
+    this.frictionMoving = 0.75
     this.jumpFriction = 0.99
-    this.speed = 1.25
+    this.speed = 1.5
     this.jumpSpeed = 30
     this.canJump = true
-    this.gravity = 1.5
+    this.gravity = 1.75
     this.jumpSaveMs = 200
-    this.jumpAt = 0
+    this.smallJumpDivider = 3 // set to 1 for no small jump
   }
 
   is(which) {
@@ -110,6 +110,7 @@ class PlatformerControls {
     this.keys[event.code] = event.type == "keydown"
     if (event.type == 'keyup' && event.code == this.keybindings['Up']) {
       this.canJump = true
+      this.velocity.y /= this.smallJumpDivider
     }
   }
 

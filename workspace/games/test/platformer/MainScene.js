@@ -26,7 +26,7 @@ class MainScene extends Scene {
     let geometryI2 = new THREE.BoxGeometry( 7.5, 1, 1 )
     let materialI2 = new THREE.MeshBasicMaterial( { color: groundColor } )
     let island2 = new THREE.Mesh( geometryI2, materialI2 )
-    island2.position.set(9, 2, 0)
+    island2.position.set(9, 3, 0)
     this.add(island2)
 
     let geometryI3 = new THREE.BoxGeometry( 1, 1, 1 )
