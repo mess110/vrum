@@ -1,0 +1,44 @@
+{
+  "kind": "particle",
+  "textures": [
+    {
+      "libPath": "/workspace/assets/textures/spe_smokeparticle.png"
+    }
+  ],
+  "particle": [
+    "[",
+    "  {",
+    "    texture: {",
+    "      value: AssetManager.get('spe_smokeparticle.png')",
+    "    },",
+    "    maxParticleCount: 100,",
+    "    emitters: [",
+    "      {",
+    "        particleCount: 100,",
+    "        activeMultiplier: 40,",
+    "        maxAge: {",
+    "          value: 0.5",
+    "        },",
+    "        type: SPE.distributions.SPHERE,",
+    "        position: {",
+    "          radius: 0.5",
+    "        },",
+    "        velocity: {",
+    "          value: new THREE.Vector3(6),",
+    "          spread:new THREE.Vector3(3),",
+    "        },",
+    "        size: {",
+    "          value: 3",
+    "        },",
+    "        color: {",
+    "          value: [new THREE.Color('white'), new THREE.Color('red')]",
+    "        },",
+    "        opacity: {",
+    "          value: [0.1, 0]",
+    "        }",
+    "      }",
+    "    ]",
+    "  },",
+    "]"
+  ]
+}

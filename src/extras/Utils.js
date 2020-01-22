@@ -460,7 +460,7 @@ class Utils {
   }
 
   static webgl() {
-    return WEBGL.isWebGLAvailable()
+    return THREE.WEBGL.isWebGLAvailable()
   }
 
   static gamepad() {

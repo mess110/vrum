@@ -527,10 +527,10 @@ strip-url-auth@^1.0.0:
   resolved "https://registry.yarnpkg.com/strip-url-auth/-/strip-url-auth-1.0.1.tgz#22b0fa3a41385b33be3f331551bbb837fa0cd7ae"
   integrity sha1-IrD6OkE4WzO+PzMVUbu4N/oM164=
 
-three@^0.103.0:
-  version "0.103.0"
-  resolved "https://registry.yarnpkg.com/three/-/three-0.103.0.tgz#63b3dbccc861caad93269618061a73dadebae71b"
-  integrity sha512-4WKRHTMt96sp+lX+Hx/eHtN9CWFyejDqr1ikgxZUJIkKEHVglSE7FY8n81NC6yWXqVSjUIQQppaxsoUe26Zi9g==
+three@^0.112.0:
+  version "0.112.1"
+  resolved "https://registry.yarnpkg.com/three/-/three-0.112.1.tgz#f8d8f4d0f8e5f753dac6260491b8209457fdc131"
+  integrity sha512-8I0O74hiYtKl3LgDNcPJbBGOlpekbcJ6fJnImmW3mFdeUFJ2H9Y3/UuUSW2sBdjrIlCM0gvOkaTEFlofO900TQ==
 
 three@^0.84.0:
   version "0.84.0"

@@ -7,6 +7,16 @@ yarn install
 yarn h // prints help
 ```
 
+## Thanks
+
+* [three.js](https://threejs.org/)
+* [tween.js](https://github.com/tweenjs/tween.js)
+* [ShaderParticleEngine](https://github.com/squarefeet/ShaderParticleEngine)
+* [howler.js](https://github.com/goldfire/howler.js)
+* [jeromeetienne](https://github.com/jeromeetienne/)
+
+And all the [other dependencies](/package.json) vrum.js is using
+
 ## Tutorial
 
 <!--ts-->
@@ -171,10 +181,12 @@ yarn h // prints help
 * [x] RayScanner
 * [x] Utils.boundingBox and RayScanner.addCollidable
 * [x] Player control PositionXZRotationYControls
-* [x] Button3D
+* [x] Button3D , setColor
 * [x] Measure
 * [x] Utils.lerpCamera(target, distance, speed)
 * [x] Utils.addCEButton
+* [x] TypeWriter
+* [ ] RStatsManager.toggleStats()
 * [ ] test all SceneLoader features
 * [ ] wind effect with blowing leaves partciles
 * [ ] smoke effect for wheels when they hit the edge particles
@@ -187,3 +199,11 @@ yarn h // prints help
 * [ ] physics
 * [ ] pause rendering on blur (implement own timeout affected by rendering)
 * [ ] auto generating documentation/cheatsheet from top level block comment
+
+https://www.youtube.com/watch?v=L0zzY5ZeDh8
+
+* [ ] qr code to join game top right
+* [ ] scan qr code on join game screen
+* [ ] controlled weapon position persistent. if the control moves and a player joins, the new player will see the wrong control position
+* [ ] delete player when switching to menu fix menu
+* [ ] give feedback to controller, like how much health, when dead etc.

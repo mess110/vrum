@@ -29,7 +29,6 @@ let VRUM_DEPENDS = [
   "/node_modules/shader-particle-engine/build/SPE.js",
 
   "/node_modules/three/examples/js/loaders/GLTFLoader.js",
-  "/node_modules/three/examples/js/loaders/deprecated/LegacyJSONLoader.js",
 
   "/node_modules/three/examples/js/controls/OrbitControls.js",
   "/node_modules/three/examples/js/controls/PointerLockControls.js",

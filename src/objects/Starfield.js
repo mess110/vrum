@@ -17,7 +17,6 @@ class Starfield extends THREE.Points {
       star.z = THREE.Math.randFloatSpread( 2000 );
 
       starsGeometry.vertices.push( star );
-
     }
 
     var starsMaterial = new THREE.PointsMaterial( { color: 0xFAFAD2 } );

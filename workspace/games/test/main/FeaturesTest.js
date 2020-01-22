@@ -64,7 +64,7 @@ class FeaturesTest extends Scene {
     // this.water.position.set(9.5, -3, 0)
     // this.add(this.water)
 
-    this.add(new Starfield())
+    // this.add(new Starfield())
 
     this.terrain = Terrain.fromJson(AssetManager.get('terrain.json'))
     this.terrain.shadowReceive()
@@ -93,7 +93,7 @@ class FeaturesTest extends Scene {
 
     let jsonParticleData = AssetManager.get('particle.json').particle
     this.explosion = new BaseParticle(jsonParticleData)
-    this.explosion.position.set(-30, -10, -200)
+    this.explosion.position.set(-30, 0, 0)
     this.add(this.explosion)
 
     this.art = Utils.graffiti(AssetManager.get('majestic-frog-cover.json'))
