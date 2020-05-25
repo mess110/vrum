@@ -371,6 +371,15 @@ be seen better.
 Utils.toggleShadowCameraHelpers()
 ```
 
+## Frustum
+
+If some object dissapear off the screen at certain camera angles you can try
+setting its frustum culled to false to draw it all the time.
+
+```
+Utils.setFrustumCulled(object, false);
+```
+
 ## VirtualController
 
 VirtualJoystick allows emulating a game controller on the display. It is
@@ -498,6 +507,8 @@ this.explosion.tick(tpf)
 
 
 ## Shaders
+
+https://thebookofshaders.com/
 
 ```
 let json = AssetManager.get('basic_shader.json')

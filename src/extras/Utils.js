@@ -319,6 +319,15 @@ class Utils {
     return node;
   }
 
+  static setFrustumCulled(object, value=true) {
+    // setting the value to false will draw the
+    // object all the time regardless if its on
+    // camera or not.
+    object.traverse((obj) => {
+      obj.frustumCulled = value
+    })
+  }
+
   static toggleShadows(value) {
     if (isBlank(value)) { value = true }
     let renderer = Hodler.get('renderer')

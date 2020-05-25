@@ -59,6 +59,7 @@ And all the [other dependencies](/package.json) vrum.js is using
            * [SpotLight](tutorials/CHEATSHEET.md#SpotLight)
            * [Shadows](tutorials/CHEATSHEET.md#Shadows)
            * [LightHelpers](tutorials/CHEATSHEET.md#LightHelpers)
+           * [Frustum](tutorials/CHEATSHEET.md#Frustum)
        * Dev
            * [Wireframe](tutorials/CHEATSHEET.md#Wireframe)
            * [Screenshot](tutorials/CHEATSHEET.md#Screenshot)

@@ -10,7 +10,7 @@ class Sky extends THREE.Sky {
   defaults() {
     this.distance = 400
     this.inclination = 0.40
-    this.azimuth = 0.205
+    this.azimuth = 0.20
 
     this.scale.setScalar(10000)
     this.material.uniforms.turbidity.value = 10
@@ -30,7 +30,7 @@ class Sky extends THREE.Sky {
   updateSun(distance, inclination, azimuth) {
     if (inclination < 0) { inclination = 0 }
     if (inclination > 0.5) { inclination = 0.5 }
-    if (azimuth < 0) { azimuth = 0.5 }
+    if (azimuth < 0) { azimuth = 0 }
     if (azimuth > 1) { azimuth = 1 }
 
     this.distance = distance
@@ -49,6 +49,39 @@ class Sky extends THREE.Sky {
     var position = new THREE.Vector3(x, y, z)
     this.material.uniforms.sunPosition.value = this.light.position.copy(this.light.position)
   }
+
+  setAzimuth(step = 0.20) {
+    this.updateSun(this.distance, this.inclination, step)
+    return this.azimuth
+  }
+  setInclination(step = 0.40) {
+    this.updateSun(this.distance, step, this.azimuth)
+    return this.inclination
+  }
+  setDistance(step = 400) {
+    this.updateSun(step, this.inclination, this.azimuth)
+    return this.distance
+  }
+
+  incAzimuth(step = 0.1) {
+    this.updateSun(this.distance, this.inclination, this.azimuth + step)
+    return this.azimuth
+  }
+
+  incInclination(step = 0.1) {
+    this.updateSun(this.distance, this.inclination + step, this.azimuth)
+    return this.inclination
+  }
+
+  incDistance(step = 1) {
+    this.updateSun(this.distance + step, this.inclination, this.azimuth)
+    return this.distance
+  }
+
+  toString() {
+    console.log(`${this.distance} - ${this.inclination} - ${this.azimuth}`)
+  }
+
 
   setLightShadowMapSize(width, height) {
     this.light.shadow.mapSize.width = width
