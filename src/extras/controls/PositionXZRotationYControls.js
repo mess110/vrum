@@ -17,9 +17,13 @@
  *  this.tank.position.x += this.control.velocity.x
  *  this.tank.position.z += this.control.velocity.z
  *
+ *  this.player.rotation.y = this.control.rotationY
+ *
  *  if (this.control.isMoving()) {
  *    // spin wheels
  *  }
+ *
+ *
  *
  *  // within each of their respective methods
  *  this.control.doKeyboardEvent(event)

@@ -39,9 +39,6 @@ class Config {
       // don't worry about this one and don't touch it
       logarithmicDepthBuffer: false,
 
-      // Set to true if gltf objects are dark
-      gammaOutput: false,
-
       // AKA transparent background
       alpha: true,
 
