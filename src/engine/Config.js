@@ -137,6 +137,11 @@ class Config {
       frameLimit: 0,
       autoSaveTime: 0
     }
+
+    this.measure = {
+      // width of the line drawns for debugging using Measure
+      lineWidth: 1
+    }
   }
 }
 

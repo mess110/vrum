@@ -183,7 +183,7 @@ class Measure {
     let geometry = new THREE.Geometry();
     geometry.vertices.push( startPoint );
     geometry.vertices.push( endPoint );
-    let material = new THREE.LineBasicMaterial( { color : color } );
+    let material = new THREE.LineBasicMaterial( { color : color, linewidth: Config.instance.measure.lineWidth } );
     let line = new THREE.Line( geometry, material );
     line.vrumMeasureLine = true
     Hodler.get('scene').add(line)

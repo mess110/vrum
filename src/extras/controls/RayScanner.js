@@ -57,7 +57,7 @@ class RayScanner {
   }
 
   // TODO reuse scanDirection so it doens't get created all the time
-  scanEdges(fromPosition, halfWidth, scanDirection=new THREE.Vector3(0, -1, 0)) {
+  scanEdges(fromPosition, halfWidth, scanDirection) {
     let from1 = fromPosition.clone()
     from1.x -= halfWidth
     let from2 = fromPosition.clone()
