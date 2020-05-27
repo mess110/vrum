@@ -12,7 +12,7 @@ class Measure {
     var geometry = mesh.geometry;
     geometry.computeBoundingBox();
     var center = geometry.boundingBox.getCenter();
-    mesh.localToWorld( center );
+    mesh.localToWorld(center);
     return center;
   }
 
@@ -104,7 +104,7 @@ class Measure {
   // An intersection plane
   //
   // @example
-  //   @plane = Helper.intersectPlane()
+  //   @plane = Measure.intersectPlane()
   //   pos = raycaster.ray.intersectPlane(@plane)
   static intersectPlane() {
     return new THREE.Plane(new THREE.Vector3(0, 0, 1), -1);
@@ -126,6 +126,10 @@ class Measure {
     return raycaster.intersectObjects(objects, true)
   }
 
+  static hasIntersections(raycaster, objects) {
+    return Measure.getIntersections(raycaster, objects).any()
+  }
+
   static getIntersectionsFrom(raycaster, objects, startPoint, direction, far) {
     if (isBlank(raycaster)) {
       console.error('raycaster can not be blank')
@@ -140,10 +144,11 @@ class Measure {
     return Measure.getIntersections(raycaster, objects)
   }
 
-  static intersectsFrom(raycaster, objects, startPoint, direction, far) {
+  static hasIntersectionsFrom(raycaster, objects, startPoint, direction, far) {
     return Measure.getIntersectionsFrom(raycaster, objects, startPoint, direction, far).any()
   }
 
+  // TODO: what was this for again?
   sensor(pointA, direction, distance) {
     if (isBlank(distance)) { distance = 100 }
     // let direction = new THREE.Vector3( 10, 0, 0 )

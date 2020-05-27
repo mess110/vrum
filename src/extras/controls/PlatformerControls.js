@@ -51,6 +51,7 @@ class PlatformerControls {
     this.gravity = 1.75
     this.jumpSaveMs = 200
     this.smallJumpDivider = 3 // set to 1 for no small jump
+    this.maxYVelocity = 30
   }
 
   is(which) {
@@ -66,8 +67,6 @@ class PlatformerControls {
     let down = this.is('Down')
     let left = this.is('Left')
     let right = this.is('Right')
-
-    let now = new Date().getTime()
 
     if (up && !this.jumping && this.canJump) {
       this.velocity.y = this.jumpSpeed
@@ -91,11 +90,11 @@ class PlatformerControls {
       this.velocity.x *= this.frictionMoving
     }
 
-    if (this.velocity.y < -30) {
-      this.velocity.y = -30
+    if (this.velocity.y < -this.maxYVelocity) {
+      this.velocity.y = -this.maxYVelocity
     }
-    if (this.velocity.y > 30) {
-      this.velocity.y = 30
+    if (this.velocity.y > this.maxYVelocity) {
+      this.velocity.y = this.maxYVelocity
     }
     this.velocity.y *= this.jumpFriction
   }

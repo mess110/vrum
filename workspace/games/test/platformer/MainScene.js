@@ -9,6 +9,7 @@ class MainScene extends Scene {
     this.add(new Sky())
 
     let statsPanel = new StatsPanel()
+    this.statsPanel = statsPanel
     this.add(statsPanel)
 
     let groundColor = 0x00dd00
@@ -39,7 +40,7 @@ class MainScene extends Scene {
     this.ground = ground
 
     let rayscanner = new RayScanner([ground, island1, island2, island3])
-    // rayscanner.drawLines = true
+    rayscanner.drawLines = true
     rayscanner.lineLength = 0.5
     this.rayscanner = rayscanner
 
@@ -58,23 +59,30 @@ class MainScene extends Scene {
   }
 
   tick(tpf) {
-    Measure.clearLines()
-
     this.controls.tick(tpf)
+    Measure.clearLines()
 
     let cube = this.cube
     let fromPosition = cube.position.clone()
 
-    fromPosition.x += this.controls.velocity.x * tpf
-    fromPosition.y += this.controls.velocity.y * tpf
+    let scaledVelocityY = this.controls.velocity.y * tpf
+    this.statsPanel.setText(scaledVelocityY)
 
-    let beneath = this.rayscanner.scanEdgesBottom(fromPosition, 0.5)
+    fromPosition.x += this.controls.velocity.x * tpf
+
+    let beneath = this.rayscanner.scanEdges(fromPosition, 0.5, new THREE.Vector3(0, -1, 0))
     if (beneath.any() && this.controls.velocity.y < 0) {
       this.controls.land()
       cube.position.y = beneath.first().object.position.y + 1
     }
 
-    let hasOnRight = this.rayscanner.getIntersects(fromPosition, new THREE.Vector3(1, 0, 0)).any()
+    let above = this.rayscanner.scanEdges(fromPosition, 0.5, new THREE.Vector3(0, 1, 0))
+    if (above.any() && this.controls.velocity.y > 0) {
+      this.controls.land()
+      cube.position.y = above.last().object.position.y - 1
+    }
+
+    let hasOnRight = this.rayscanner.getIntersections(fromPosition, new THREE.Vector3(1, 0, 0)).any()
     if (hasOnRight) {
       this.controls.velocity.x = 0
     }
@@ -82,14 +90,15 @@ class MainScene extends Scene {
       cube.position.x += this.controls.velocity.x * tpf
     }
 
-    let hasOnLeft = this.rayscanner.getIntersects(fromPosition, new THREE.Vector3(-1, 0, 0)).any()
+    let hasOnLeft = this.rayscanner.getIntersections(fromPosition, new THREE.Vector3(-1, 0, 0)).any()
     if (hasOnLeft) {
       this.controls.velocity.x = 0
     }
     if (this.controls.velocity.x < 0 && !hasOnLeft) {
       cube.position.x += this.controls.velocity.x * tpf
     }
-    cube.position.y += this.controls.velocity.y * tpf
+
+    cube.position.y += scaledVelocityY
 
     if (cube.position.y < -10) {
       cube.position.set(0, 20, 0)
