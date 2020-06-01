@@ -17,6 +17,15 @@ yarn h // prints help
 
 And all the [other dependencies](/package.json) vrum.js is using
 
+## Games
+
+When desining a game maybe think about
+
+* complementary colors
+* contrast
+* negative space
+* Dan Harmon Story Circle
+
 ## Tutorial
 
 <!--ts-->
