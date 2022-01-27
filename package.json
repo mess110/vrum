@@ -29,7 +29,7 @@
     "shader-particle-engine": "squarefeet/ShaderParticleEngine",
     "stats.js": "mrdoob/stats.js",
     "rstats": "spite/rstats",
-    "three": "^0.116.0",
+    "three": "^0.137.0",
     "threex.dynamictexture": "jeromeetienne/threex.dynamictexture",
     "threex.keyboardstate": "jeromeetienne/threex.keyboardstate",
     "threex.volumetricspotlight": "jeromeetienne/threex.volumetricspotlight",
